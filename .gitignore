@@ -2,8 +2,10 @@
 /node_modules
 /public/storage
 /public/css
+public/img
 Homestead.yaml
 Homestead.json
 .env
 .DS_Store
 *.lock
+npm-debug.log

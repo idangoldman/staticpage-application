@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+require('laravel-elixir-images');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +12,11 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
-    mix.sass('app.scss');
+elixir(function( mix ) {
+    mix
+        .images( null, null, {
+            sizes: [[1440]],
+            webp: false
+        } )
+        .sass('app.scss');
 });
