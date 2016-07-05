@@ -19,6 +19,12 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return "Welcome Home";
+Route::post('/subscribe', function () {
+    $email = Input::get('email');
+
+    return redirect('/thank-you');
+});
+
+Route::get('/thank-you', function () {
+    return view('thank-you');
 });

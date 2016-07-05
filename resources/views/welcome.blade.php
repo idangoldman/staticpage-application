@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html><head>
-
+    <meta charset="UTF-8" />
     <title>Welcome to StaticPages.</title>
-    <link href="css/app.css" rel="stylesheet" type="text/css">
+    <link href="css/app.css" rel="stylesheet" type="text/css" />
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
 
 </head><body>
 
@@ -27,6 +28,7 @@
         </article>
 
         <form action="subscribe" method="post" class="subscription">
+            {{ csrf_field() }}
             <input class="email" name="email" placeholder="email@domain.com" />
             <button type="submit" class="submit">Keep me posted!</button>
         </form>
@@ -35,5 +37,7 @@
 
         </footer>
     </section>
+
+    <script src="/js/app.js"></script>
 
 </body></html>

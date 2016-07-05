@@ -1,5 +1,7 @@
 var elixir = require('laravel-elixir');
+
 require('laravel-elixir-images');
+require('laravel-elixir-webpack');
 
 /*
  |--------------------------------------------------------------------------
@@ -18,5 +20,6 @@ elixir(function( mix ) {
             sizes: [[1440]],
             webp: false
         } )
-        .sass('app.scss');
+        .sass('app.scss')
+        .webpack('app.js');
 });
