@@ -1,0 +1,31 @@
+// Simple Reset
+// *, fieldset {
+//     margin: 0;
+//     padding: 0;
+//     box-sizing: border-box;
+}
+
+// img {
+//     border: none;
+// }
+
+// a {
+//     outline: none;
+// }
+
+// html, body {
+//     height: 100%;
+//     overflow: hidden;
+//     width: 100%;
+// }
+
+body, button, input[type="text"], select, textarea {
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Open Sans', 'Open Sans Hebrew', Tahoma, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+// fieldset {
+//     border: none;
+// }

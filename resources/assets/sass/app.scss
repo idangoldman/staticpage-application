@@ -1,12 +1,20 @@
 @charset "UTF-8";
 
-// Compass
-// @import "compass/utilities/general/clearfix";
+// Normalize
+@import "../../../node_modules/normalize-scss/sass/normalize/import-now";
 
 // Google Fonts
 @import url("http://fonts.googleapis.com/earlyaccess/opensanshebrew.css");
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subweset=latin,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese,latin-ext");
 
+// Font set
+body, button, input[type="text"], select, textarea {
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    font-family: 'Open Sans', 'Open Sans Hebrew', Tahoma, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
 
 .static-page {
     // align-content: center;
@@ -21,10 +29,66 @@
     right: 0;
     text-align: center;
     top: 0;
+
+    & > * {
+        width: 80%;
+    }
 }
 
 .background {
     background-image: url('/img/background-1440.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: 50% 50%;
+}
+
+.article {
+    text-shadow: 1px 1px 3px rgba(#000, 0.5);
+
+    .title {
+        font-size: 5em;
+        letter-spacing: 1px;
+        margin: 0;
+    }
+
+    .sub-title {
+        font-size: 2em;
+        font-style: italic;
+    }
+
+    .description {
+        font-size: 1.2em;
+        font-weight: 600;
+    }
+}
+
+.subscription {
+    .email, .submit {
+        background-color: transparent;
+        border-radius: 5px;
+        border: 2px solid #fff;
+        font-weight: 600;
+        outline: 0;
+        padding: 5px 10px;
+
+        &:hover, &:focus {
+            box-shadow: 1px 1px 3px rgba(#000, 0.5);
+        }
+    }
+
+    .email {
+        &, &::placeholder {
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(#000, 0.5);
+        }
+
+        &::placeholder {
+            opacity: 0.8;
+        }
+    }
+
+    .submit {
+        cursor: pointer;
+        text-shadow: 1px 1px 3px rgba(#000, 0.5);
+    }
 }
