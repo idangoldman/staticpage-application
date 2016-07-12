@@ -19,6 +19,10 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('/home', function () {
+    return view('home');
+});
+
 Route::post('/subscribe', function () {
     $email = Input::get('email');
 
@@ -27,4 +31,8 @@ Route::post('/subscribe', function () {
 
 Route::get('/thank-you', function () {
     return view('thank-you');
+});
+
+Route::get('/side-kick', function () {
+    return view('layouts.side-kick');
 });

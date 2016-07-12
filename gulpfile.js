@@ -1,4 +1,5 @@
 var elixir = require('laravel-elixir');
+var path = require('path');
 
 require('laravel-elixir-images');
 require('laravel-elixir-webpack');
@@ -15,11 +16,18 @@ require('laravel-elixir-webpack');
  */
 
 elixir(function( mix ) {
+
+    // front page
     mix
         .images( null, null, {
-            sizes: [[1440]],
+            sizes: [[ 1440 ]],
             webp: false
         } )
         .sass('app.scss')
         .webpack('app.js');
+
+    // side kick
+    mix
+        .sass('side-kick.scss')
+        .webpack('side-kick.js');
 });

@@ -1,43 +1,27 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="UTF-8" />
-    <title>Welcome to StaticPages.</title>
-    <link href="css/app.css" rel="stylesheet" type="text/css" />
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}" /> --}}
+@extends('layouts.master')
+@section('title', 'Welcome to StaticPages.')
 
-</head><body>
+@section('content')
+    <article class="article">
+        <h1 class="title">
+            StaticPages
+        </h1>
 
-    <section class="static-page background">
-        <header class="header">
-        </header>
+        <h2 class="sub-title">
+            <!-- StaticPages brand new way to build landing pages better. -->
+            Working on creating a “Coming Soon Page” shop. <br />
+            We know ironic.
+        </h2>
 
-        <article class="article">
-            <h1 class="title">
-                StaticPages
-            </h1>
+        <p class="description">
+            We are a team of keyboard kids who turned out to be good people and professionals located around the world trying to create the best product we can. Stay tuned by subscribing to our mailing list and we promise to update you with the product release.
+        </p>
+    </article>
 
-            <h2 class="sub-title">
-                <!-- StaticPages brand new way to build landing pages better. -->
-                Working on creating a “Coming Soon Page” shop. <br />
-                We know ironic.
-            </h2>
+    <form action="subscribe" method="post" class="subscription">
+        {{ csrf_field() }}
+        <input class="email" name="email" placeholder="email@domain.com" />
+        <button type="submit" class="submit">Keep me posted!</button>
+    </form>
 
-            <p class="description">
-                We are a team of keyboard kids who turned out to be good people and professionals located around the world trying to create the best product we can. Stay tuned by subscribing to our mailing list and we promise to update you with the product release.
-            </p>
-        </article>
-
-        <form action="subscribe" method="post" class="subscription">
-            {{ csrf_field() }}
-            <input class="email" name="email" placeholder="email@domain.com" />
-            <button type="submit" class="submit">Keep me posted!</button>
-        </form>
-
-        <footer class="footer">
-
-        </footer>
-    </section>
-
-    <script src="/js/app.js"></script>
-
-</body></html>
+@endsection
