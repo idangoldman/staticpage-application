@@ -29,6 +29,7 @@ body, button, input[type="text"], select, textarea {
     right: 0;
     text-align: center;
     top: 0;
+    z-index: 1;
 
     & > * {
         width: 80%;
@@ -91,4 +92,15 @@ body, button, input[type="text"], select, textarea {
         cursor: pointer;
         text-shadow: 1px 1px 3px rgba(#000, 0.5);
     }
+}
+
+.iframe-side-kick {
+    background-color: #f1f1f1;
+    box-shadow: 0 0 4px 0 rgba( #000, 0.3 );
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 300px;
+    z-index: 2;
 }

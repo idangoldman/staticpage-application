@@ -8,7 +8,7 @@
 
 </head><body>
 
-    <section id="side-kick"></section>
+    <section class="side-kick"></section>
 
     <script src="/js/side-kick.js"></script>
 
