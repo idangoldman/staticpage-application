@@ -1,8 +1,26 @@
 var elixir = require('laravel-elixir');
-var path = require('path');
 
 require('laravel-elixir-images');
 require('laravel-elixir-webpack');
+
+var webpackConfig = {
+    module: {
+        loaders: [
+            {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel',
+                query: {
+                    presets: [ 'es2015' ]
+                }
+            },
+            {
+                test: /\.html$/,
+                loader: "html"
+            }
+        ]
+    }
+};
 
 /*
  |--------------------------------------------------------------------------
@@ -17,6 +35,7 @@ require('laravel-elixir-webpack');
 
 elixir(function( mix ) {
 
+
     // front page
     mix
         .images( null, null, {
@@ -24,10 +43,10 @@ elixir(function( mix ) {
             webp: false
         } )
         .sass('app.scss')
-        .webpack('app.js');
+        .webpack('app.js', webpackConfig);
 
     // side kick
     mix
         .sass('side-kick.scss')
-        .webpack('side-kick.js');
+        .webpack('side-kick.js', webpackConfig);
 });
