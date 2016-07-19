@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head><body>
+    {!! $svg_icons !!}
 
     <section class="side-kick"></section>
 

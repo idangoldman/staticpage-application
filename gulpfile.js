@@ -1,6 +1,7 @@
 var elixir = require('laravel-elixir');
 
 require('laravel-elixir-images');
+require('laravel-elixir-svg-symbols');
 require('laravel-elixir-webpack');
 
 var webpackConfig = {
@@ -15,8 +16,8 @@ var webpackConfig = {
                 }
             },
             {
-                test: /\.html$/,
-                loader: "html"
+                test: /\.(njk|nunjucks)$/,
+                loader: 'nunjucks-loader'
             }
         ]
     }
@@ -48,5 +49,6 @@ elixir(function( mix ) {
     // side kick
     mix
         .sass('side-kick.scss')
+        .svgSprite()
         .webpack('side-kick.js', webpackConfig);
 });

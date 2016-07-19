@@ -34,5 +34,10 @@ Route::get('/thank-you', function () {
 });
 
 Route::get('/side-kick', function () {
-    return view('layouts.side-kick');
+    $svg = new DOMDocument();
+    $svg->load( public_path('svg/sprite.svg') );
+    $svg->documentElement->setAttribute( 'class', 'svg-icons' );
+    $inline_svg = $svg->saveXML( $svg->documentElement );
+
+    return view('layouts.side-kick', [ 'svg_icons' => $inline_svg ]);
 });

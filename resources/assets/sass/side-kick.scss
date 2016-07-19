@@ -16,6 +16,15 @@ body, button, input[type="text"], select, textarea {
     font-weight: 400;
 }
 
+.svg-icons {
+    display: none;
+}
+
+.mobile svg {
+    width: 16px;
+    height: 16px;
+}
+
 .footer {
     font-size: 70%;
     margin: 10px 0;
