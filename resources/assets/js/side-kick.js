@@ -15,6 +15,10 @@ var SideKick = component( function application() {
         );
 
         devicesComponent.attachTo('.devices');
+
+        // this.on(document, 'switchDeviceView', function( event, { deviceType } ) {
+        //     console.log( deviceType );
+        // });
     });
 });
 
