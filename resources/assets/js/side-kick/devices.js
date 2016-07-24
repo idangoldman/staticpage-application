@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import flight, { component } from 'imports?$=jquery!flightjs';
-import template from './../../../views/side-kick/devices.njk';
+import template from 'views/side-kick/devices.njk';
 
 var devicesComponent = component( function application() {
     this.after('initialize', function() {
@@ -24,7 +24,6 @@ var devicesComponent = component( function application() {
         this.trigger(
             document, 'switchDeviceView', { deviceType: $device.text().trim().toLowerCase() }
         );
-
     }
 });
 

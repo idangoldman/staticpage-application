@@ -1,6 +1,7 @@
 import flight, { component } from 'imports?$=jquery!flightjs';
-import template from './../../views/side-kick/master.njk';
+import template from 'views/side-kick/master.njk';
 import devicesComponent from './side-kick/devices';
+import featuresComponent from './side-kick/features';
 
 var SideKick = component( function application() {
     this.attributes({
@@ -15,6 +16,7 @@ var SideKick = component( function application() {
         );
 
         devicesComponent.attachTo('.devices');
+        featuresComponent.attachTo('.features');
 
         // this.on(document, 'switchDeviceView', function( event, { deviceType } ) {
         //     console.log( deviceType );
