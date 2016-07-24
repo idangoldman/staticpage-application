@@ -1,0 +1,20 @@
+.svg-icons {
+    display: none;
+}
+
+.icon {
+    display: inline-block;
+    height: 16px;
+    overflow: hidden;
+    pointer-events: none;
+    width: 16px;
+
+    .use {
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        left: 0;
+        top: 0;
+    }
+}
