@@ -27,11 +27,11 @@
                 right: 1px;
                 top: 1px;
                 transform: rotate( 0deg );
-                transition: transform 200ms ease-out;
+                transition: transform 400ms ease-out;
             }
 
             &.close .caret {
-                transform: rotate( 90deg );
+                transform: rotate( -180deg );
             }
         }
 
@@ -51,15 +51,18 @@
                     cursor: pointer;
                     display: inline-block;
                     font-size: 13px;
-                    margin-bottom: 5px;
+                    text-transform: capitalize;
 
                     &:after { content: "\003A"; }
                 }
 
-                .field-wrap {
+                .field-wrap,
+                .select-wrap,
+                .upload-wrap {
                     border: 1px solid #ddd;
                     box-shadow: inset 0 1px 2px 0 rgba( #000, 0.07 );
-                    margin-bottom: 5px;
+                    margin-top: 5px;
+                    position: relative;
 
                     &, .field {
                         border-radius: 5px;
@@ -70,7 +73,9 @@
                         box-shadow: 0 0 2px 0 #1e8cbe;
                     }
 
-                    .field {
+                    .field,
+                    .file-name,
+                    .selected-text {
                         background-color: transparent;
                         border: 0;
                         font-size: 15px;
@@ -87,10 +92,58 @@
                     }
                 }
 
+                .select-wrap,
+                .upload-wrap {
+                    .field {
+                        opacity: 0;
+                        position: absolute;
+                        z-index: 2;
+                    }
+
+                    .file-name,
+                    .selected-text {
+                        display: block;
+                        overflow: hidden;
+                        position: relative;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        width: 205px;
+                        z-index: 1;
+                    }
+
+                    .caret {
+                        position: absolute;
+                        top: 5px;
+                        right: 8px;
+
+                        .caret-up,
+                        .caret-down {
+                            right: 0;
+                            position: absolute;
+                        }
+
+                        .caret-up { top: 0; }
+                        .caret-down { top: 7px; }
+                    }
+                }
+
+                .upload-wrap {
+                    .icon {
+                        position: absolute;
+                        right: 8px;
+                        top: 8px;
+                    }
+                }
+
                 .message {
                     color: rgba( #000, 0.5 );
                     display: block;
                     font-size: 11px;
+                    margin-top: 5px;
+
+                    &.red {
+                        color: #ca0000;
+                    }
                 }
             }
         }

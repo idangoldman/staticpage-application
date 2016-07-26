@@ -15,8 +15,8 @@ var SideKick = component( function application() {
             template.render()
         );
 
-        devicesComponent.attachTo('.devices');
-        featuresComponent.attachTo('.features');
+        devicesComponent.attachTo( this.attr.devices );
+        featuresComponent.attachTo( this.attr.features );
 
         // this.on(document, 'switchDeviceView', function( event, { deviceType } ) {
         //     console.log( deviceType );
