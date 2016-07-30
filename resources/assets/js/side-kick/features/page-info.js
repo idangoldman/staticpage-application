@@ -1,14 +1,19 @@
 import $ from 'jquery';
 import flight, { component } from 'imports?$=jquery!flightjs';
+
+// template
 import template from 'views/side-kick/features/page-info.njk';
 
-var pageInfoComponent = component( function application() {
+// mixins
+import withImageUpload from './with/image-upload';
+import withSelectText from './with/select-text';
+
+var pageInfoComponent = component( withSelectText, withImageUpload, function application() {
     this.attributes({
         typeSelect: '.fieldset.type .select-wrap .field',
         logoUpload: '.fieldset.logo .upload-wrap .field',
         logoMessage: '.fieldset.logo .message',
         fields: '.field'
-
     });
 
     this.after('initialize', function() {
@@ -17,7 +22,7 @@ var pageInfoComponent = component( function application() {
         );
 
         // set an init selected text
-        this.selectText( this.select('typeSelect') )
+        // this.selectText( this.select('typeSelect') )
 
         // toggle feature box
         this.on('.header', 'click', function( event ) {
@@ -42,70 +47,6 @@ var pageInfoComponent = component( function application() {
         this.on( '.select-wrap .field', 'change', this.selectText );
         this.on( '.upload-wrap .field', 'change', this.uploadImage );
     });
-
-    this.selectText = function( event ) {
-
-        // event could be a dom element as well.
-        var $element = $( event.currentTarget || event[0] );
-
-        $element.parent().children('.selected-text').html(
-            $element.find('option:selected').text()
-        );
-    }
-
-    this.uploadImage = function( event ) {
-        var $element = $( event.currentTarget );
-
-        if ( !! $element[0].files.length ) {
-            var file = $element[0].files[0],
-                imageTypes = [
-                    'image/png',
-                    'image/gif',
-                    'image/jpg',
-                    'image/webp'
-                ],
-                megabyte = 1024000;
-
-            // set file name text
-            $element
-                .parent()
-                    .children('.file-name').html( file.name );
-
-            // check for image file type
-            if ( imageTypes.indexOf( file.type ) === -1 ) {
-                this.select('logoMessage')
-                    .addClass('red')
-                    .html(
-                        'File type "' + file.type + '" doesn\'t supported.'
-                    );
-
-                return false;
-            } else {
-                this.select('logoMessage')
-                    .removeClass('red')
-                    .html(
-                        'Upload gif, jpg, and png only, up to 1MB.'
-                    );
-            }
-
-            // check for image size
-            if ( file.size > megabyte ) {
-                this.select('logoMessage')
-                    .addClass('red')
-                    .html(
-                        'File size greater than 1024KB.'
-                    );
-
-                return false;
-            } else {
-                this.select('logoMessage')
-                    .removeClass('red')
-                    .html(
-                        'Upload gif, jpg, and png only, up to 1MB.'
-                    );
-            }
-        }
-    }
 });
 
 export default pageInfoComponent;
