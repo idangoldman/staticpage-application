@@ -8,7 +8,6 @@
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
-    "backbone": "^1.3.3",
     "exports-loader": "^0.6.3",
     "flightjs": "^1.5.1",
     "gulp": "^3.9.1",
