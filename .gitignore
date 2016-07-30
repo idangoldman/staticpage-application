@@ -1,5 +1,6 @@
 /vendor
-/node_modules
+/node_modules/**/*
+!/node_modules/views
 /public/**/*
 Homestead.yaml
 Homestead.json
