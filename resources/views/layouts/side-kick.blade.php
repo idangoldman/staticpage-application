@@ -11,6 +11,7 @@
 
     <section class="side-kick"></section>
 
+    <script> var initialData = {!! $initial_data !!}; </script>
     <script src="/js/side-kick.js"></script>
 
 </body></html>

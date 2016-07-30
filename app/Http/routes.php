@@ -39,5 +39,12 @@ Route::get('/side-kick', function () {
     $svg->documentElement->setAttribute( 'class', 'svg-icons' );
     $inline_svg = $svg->saveXML( $svg->documentElement );
 
-    return view('layouts.side-kick', [ 'svg_icons' => $inline_svg ]);
+    $viewData = array(
+        'svg_icons' => $inline_svg,
+        'initial_data' => json_encode( array(
+            'foo' => 'bar'
+        ) )
+    );
+
+    return view( 'layouts.side-kick', $viewData );
 });
