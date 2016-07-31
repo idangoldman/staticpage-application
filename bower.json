@@ -1,0 +1,20 @@
+{
+  "name": "static-pages",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Idan Mitrofanov (@idanm_) <idan1986@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/idanm/static-pages",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "flight-request": "^1.0.0"
+  }
+}
