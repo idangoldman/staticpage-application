@@ -42,7 +42,38 @@ Route::get('/side-kick', function () {
     $viewData = array(
         'svg_icons' => $inline_svg,
         'initial_data' => json_encode( array(
-            'foo' => 'bar'
+            'pageInfo' => array(
+                'title' => 'Page Info',
+                'fields' => array(
+                    array(
+                        'id' => 'name',
+                        'placeholder' => 'Static page example',
+                        'title' => 'name',
+                        'type' => 'text',
+                        'value' => '',
+                        'message' => ''
+                    ),
+                    array(
+                        'id' => 'type',
+                        'title' => 'type',
+                        'type' => 'select',
+                        'options' => array(
+                            array( 'key' => 'coming-soon', 'value' => 'Coming Soon' ),
+                            array( 'key' => 'thank-you', 'value' => 'Thank You' )
+                        ),
+                        'value' => '',
+                        'message' => ''
+                    ),
+                    array(
+                        'id' => 'logo',
+                        'title' => 'logo',
+                        'type' => 'image-upload',
+                        'value' => '',
+                        'fileName' => '',
+                        'message' => 'Upload gif, jpg, and png only, up to 1MB.'
+                    )
+                )
+            )
         ) )
     );
 

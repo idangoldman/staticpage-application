@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import flight, { component } from 'imports?$=jquery!flightjs';
+import { component } from 'imports?$=jquery!flightjs';
 
 // template
 import template from 'views/side-kick/features/page-info.njk';
@@ -7,31 +7,39 @@ import template from 'views/side-kick/features/page-info.njk';
 // mixins
 import withImageUpload from './with/image-upload';
 import withSelectText from './with/select-text';
+import withToggle from './with/toggle';
 
-var pageInfoComponent = component( withSelectText, withImageUpload, function application() {
+var pageInfoComponent = component( withSelectText, withImageUpload, withToggle, function application() {
+
     this.attributes({
         typeSelect: '.fieldset.type .select-wrap .field',
         logoUpload: '.fieldset.logo .upload-wrap .field',
         logoMessage: '.fieldset.logo .message',
-        fields: '.field'
+        fields: '.field',
+        url: '/page-info/'
     });
 
     this.after('initialize', function() {
-        this.$node.html(
-            template.render()
-        );
+        this.on( document, 'initial.data', function( event, { pageInfo } ) {
+            this.load( pageInfo );
+        });
+    });
 
-        // set an init selected text
-        // this.selectText( this.select('typeSelect') )
+    this.load = function( data ) {
+        this.render( data );
+        this.events();
+    };
+
+    this.render = function( data ) {
+        this.$node.html(
+            template.render( data )
+        );
+    };
+
+    this.events = function() {
 
         // toggle feature box
-        this.on('.header', 'click', function( event ) {
-            $( event.currentTarget )
-                .toggleClass('close')
-                .parent()
-                    .children('.body')
-                        .slideToggle();
-        });
+        this.on( '.header', 'click', this.toggle );
 
         // focus click
         this.on( this.attr.fields, 'focus', function( event ) {
@@ -46,7 +54,7 @@ var pageInfoComponent = component( withSelectText, withImageUpload, function app
         // set a selected text
         this.on( '.select-wrap .field', 'change', this.selectText );
         this.on( '.upload-wrap .field', 'change', this.uploadImage );
-    });
+    };
 });
 
 export default pageInfoComponent;

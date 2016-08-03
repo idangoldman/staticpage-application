@@ -1,45 +1,21 @@
+{% import "./forms.njk" as forms %}
+
 <li class="feature page-info">
     <header class="header">
-        <h3 class="title">Page Info</h3>
+        <h3 class="title">{{ title }}</h3>
         <svg class="icon caret">
             <use class="use" xlink:href="#icons--caret-up"></use>
         </svg>
     </header>
     <form class="body" action="blah.php" method="post" enctype="multipart/form-data">
-        <fieldset class="fieldset name">
-            <label class="title" for="name">Name</label>
-            <div class="field-wrap">
-                <input type="text" class="field" id="name" name="name" value="" placeholder="Static page example" />
-            </div>
-        </fieldset>
-        <fieldset class="fieldset type">
-            <label class="title" for="type">Type</label>
-            <div class="select-wrap">
-                <select id="type" name="type" class="field">
-                    <option value="coming-soon" selected>Coming Soon</option>
-                    <option value="thank-you">Thank You</option>
-                </select>
-                <span class="selected-text">Coming Soon</span>
-                <div class="caret">
-                    <svg class="icon caret-up">
-                        <use class="use" xlink:href="#icons--caret-up"></use>
-                    </svg>
-                    <svg class="icon caret-down">
-                        <use class="use" xlink:href="#icons--caret-down"></use>
-                    </svg>
-                </div>
-            </div>
-        </fieldset>
-        <fieldset class="fieldset logo">
-            <label class="title" for="logo">Logo</label>
-            <div class="upload-wrap">
-                <input id="logo" class="field" type="file" name="logo" />
-                <span class="file-name"></span>
-                <svg class="icon">
-                    <use class="use" xlink:href="#icons--upload"></use>
-                </svg>
-            </div>
-            <span class="message">Upload gif, jpg, and png only, up to 1MB.</span>
-        </fieldset>
+        {% for field in fields %}
+            {% if field.type == "text" %}
+                {{ forms.text( field ) }}
+            {% elif field.type == "select" %}
+                {{ forms.select( field ) }}
+            {% elif field.type == "image-upload" %}
+                {{ forms.uploadImage( field ) }}
+            {% endif %}
+        {% endfor %}
     </form>
 </li>

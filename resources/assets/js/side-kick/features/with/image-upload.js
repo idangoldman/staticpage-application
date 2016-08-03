@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import flight, { component } from 'imports?$=jquery!flightjs';
+import { component } from 'imports?$=jquery!flightjs';
 
 var withImageUpload = function mixin() {
     function getFileContent( file ) {
@@ -10,65 +10,60 @@ var withImageUpload = function mixin() {
                 resolve( event.target.result );
             };
 
-            fileReader.readAsDataURL( file );
+            if ( ! isImageTypeMatches( file.type ) ) {
+                reject('File type "' + file.type + '" doesn\'t supported.');
+            } else if ( ! isImageSizeMatches( file.size ) ) {
+                reject('File size greater than 1024KB.');
+            } else {
+                fileReader.readAsDataURL( file );
+            }
+
         } );
     }
 
+    // set file name text
+    function setFileName( $element, file ) {
+        $element.parent().children('.file-name').html( file.name );
+    }
+
+    // check for image file type
+    function isImageTypeMatches( imageType ) {
+        return [
+            'image/png',
+            'image/gif',
+            'image/jpg',
+            'image/webp'
+        ].indexOf( imageType ) !== -1;
+    }
+
+    // checking for image size to be greater than 1024KB.
+    function isImageSizeMatches( imageSize ) {
+        return imageSize < 1024000; // 1024KB
+    }
+
     this.uploadImage = function( event ) {
-        var $element = $( event.currentTarget );
+        var $element = $( event.currentTarget ),
+            that = this,
+            $logoMessage = this.select('logoMessage');
 
         if ( !! $element[0].files.length ) {
-            var file = $element[0].files[0],
-                imageTypes = [
-                    'image/png',
-                    'image/gif',
-                    'image/jpg',
-                    'image/webp'
-                ],
-                megabyte = 1024000;
+            var file = $element[0].files[0];
 
-            // set file name text
-            $element
-                .parent()
-                    .children('.file-name').html( file.name );
+            setFileName( $element, file );
 
-            // check for image file type
-            if ( imageTypes.indexOf( file.type ) === -1 ) {
-                this.select('logoMessage')
-                    .addClass('red')
-                    .html(
-                        'File type "' + file.type + '" doesn\'t supported.'
-                    );
+            getFileContent( file )
+                .then( function( result ) {
+                    $logoMessage
+                        .removeClass('red')
+                        .html( 'Upload gif, jpg, and png only, up to 1MB.' );
 
-                return false;
-            } else {
-                this.select('logoMessage')
-                    .removeClass('red')
-                    .html(
-                        'Upload gif, jpg, and png only, up to 1MB.'
-                    );
-            }
-
-            // check for image size
-            if ( file.size > megabyte ) {
-                this.select('logoMessage')
-                    .addClass('red')
-                    .html(
-                        'File size greater than 1024KB.'
-                    );
-
-                return false;
-            } else {
-                this.select('logoMessage')
-                    .removeClass('red')
-                    .html(
-                        'Upload gif, jpg, and png only, up to 1MB.'
-                    );
-            }
-
-            getFileContent( file ).then( function( content ) {
-                console.log( content );
-            });
+                    that.trigger( $element, 'upload_image', { imageData: result } );
+                })
+                .catch( function( reason ) {
+                    $logoMessage
+                        .addClass('red')
+                        .html( reason );
+                });
         }
     }
 };
