@@ -4,6 +4,7 @@
 !/node_modules/views
 !/node_modules/bower_components
 /public/**/*
+!/public/index.php
 Homestead.yaml
 Homestead.json
 .env

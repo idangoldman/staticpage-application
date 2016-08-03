@@ -4,7 +4,7 @@
     "prod": "gulp --production",
     "dev": "gulp watch"
   },
-  "devDependencies": {
+  "dependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
@@ -20,7 +20,6 @@
     "laravel-elixir-webpack": "^1.0.1",
     "normalize-scss": "^5.0.3",
     "nunjucks": "^2.4.2",
-    "nunjucks-loader": "^2.4.3",
-    "underscore": "^1.8.3"
+    "nunjucks-loader": "^2.4.3"
   }
 }
