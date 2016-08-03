@@ -3,13 +3,15 @@
 @setup
     $domain = "staticpages.info";
     $environment = isset( $env ) ? $env : "testing";
+
     // $release = "release_" . date("YmdHis");
     $release_current = "release_20160803032313";
     $release = $release_current;
+
     $repository = "git@github.com:idanm/static-pages.git";
 
     $base_folder = "/var/www/" . $domain;
-    $home_folder = $base_folder . "/home";
+    $current = $base_folder . "/home";
     $release_folder = $base_folder . "/releases";
 @endsetup
 
@@ -47,6 +49,6 @@
 @endtask
 
 @task('update_symlinks', ['on' => 'web'])
-    ln -nfs {{ $release_folder }}/{{ $release }} {{ $home_folder }};
-    chgrp -h www-data {{ $home_folder }};
+    ln -nfs {{ $release_folder }}/{{ $release }} {{ $current }};
+    chgrp -h www-data {{ $current }};
 @endtask
