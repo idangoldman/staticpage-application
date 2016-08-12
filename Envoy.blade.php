@@ -2,25 +2,19 @@
 
 @setup
     $domain = "staticpages.info";
-    $environment = isset( $env ) ? $env : "testing";
-
-    // $release = "release_" . date("YmdHis");
-    $release_current = "release_20160803032313";
-    $release = $release_current;
-
+    $release = "release_" . date("YmdHis");
     $repository = "git@github.com:idanm/static-pages.git";
 
     $base_folder = "/var/www/" . $domain;
-    $current = $base_folder . "/home";
+    $current = $base_folder . "/current";
     $release_folder = $base_folder . "/releases";
 @endsetup
 
 @macro('deploy')
     fetch_repository
+    compile_backend
     compile_frontend
-    {{-- update_permissions --}}
-    {{-- update_symlinks --}}
-    {{-- compile_backend --}}
+    update_symlinks
 @endmacro
 
 @task('fetch_repository', ['on' => 'web'])
@@ -32,23 +26,18 @@
 @task('compile_backend', ['on' => 'web'])
     cd {{ $release_folder }}/{{ $release }};
     composer install --prefer-dist;
+    cp .env.example .env;
+    php artisan key:generate;
 @endtask
 
 @task('compile_frontend', ['on' => 'web'])
     cd {{ $release_folder }}/{{ $release }};
-    {{-- npm install; --}}
+    npm install;
     {{-- npm install -g bower gulp; // install manually --}}
-    {{-- bower install; --}}
+    bower install;
     gulp;
-@endtask
-
-@task('update_permissions', ['on' => 'web'])
-    cd {{ $release_folder }};
-    chgrp -R www-data {{ $release }};
-    chmod -R ug+rwx {{ $release }};
 @endtask
 
 @task('update_symlinks', ['on' => 'web'])
     ln -nfs {{ $release_folder }}/{{ $release }} {{ $current }};
-    chgrp -h www-data {{ $current }};
 @endtask
