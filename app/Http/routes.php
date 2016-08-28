@@ -79,3 +79,5 @@ Route::get('/side-kick', function () {
 
     return view( 'layouts.side-kick', $viewData );
 });
+
+Route::auth();

@@ -3,7 +3,7 @@
 
     <meta charset="UTF-8" />
     <title>It's your friendly side-kick!</title>
-    <link href="css/side-kick.css" rel="stylesheet" type="text/css" />
+    <link href="{{ URL::asset('css/side-kick.css') }}" rel="stylesheet" type="text/css" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
 </head><body>
