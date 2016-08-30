@@ -1,5 +1,11 @@
 {
+  "name": "StaticPages",
+  "version": "0.0.1",
   "private": true,
+  "engines" : {
+    "node" : "5.x",
+    "npm": "3.x"
+  },
   "scripts": {
     "prod": "gulp --production",
     "dev": "gulp watch"
