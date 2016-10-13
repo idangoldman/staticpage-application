@@ -11,7 +11,7 @@
 |
 */
 use Spatie\Newsletter\NewsletterFacade as Newsletter;
-// use Illuminate\Http\Request;
+use Illuminate\Http\Request;
 
 Route::auth();
 
@@ -19,9 +19,12 @@ Route::get('/', function () {
     return redirect('/welcome');
 });
 
-Route::get('/welcome', function () {
-    // var_dump( $request->cookie('subscribed') );
-    return view('welcome');
+Route::get('/welcome', function ( Request $request ) {
+    $viewData = array(
+        'has_subscribed' => $request->cookie('subscribed')
+    );
+
+    return view( 'welcome', $viewData );
 });
 
 Route::get('/home', function () {

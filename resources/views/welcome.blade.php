@@ -17,11 +17,13 @@
         </p>
     </article>
 
-    <form action="newsletter" method="post" class="newsletter">
-        {{ csrf_field() }}
-        <input class="email" name="email" placeholder="email@domain.com" />
-        <button type="submit" class="submit">Keep me posted!</button>
-    </form>
+    @if ( ! $has_subscribed )
+        <form action="newsletter" method="post" class="newsletter">
+            {{ csrf_field() }}
+            <input class="email" name="email" placeholder="email@domain.com" />
+            <button type="submit" class="submit">Keep me posted!</button>
+        </form>
+    @endif
 
 @endsection
 
