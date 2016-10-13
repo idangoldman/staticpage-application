@@ -10,6 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use Spatie\Newsletter\NewsletterFacade as Newsletter;
+// use Illuminate\Http\Request;
 
 Route::auth();
 
@@ -18,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('/welcome', function () {
+    // var_dump( $request->cookie('subscribed') );
     return view('welcome');
 });
 
@@ -25,10 +28,17 @@ Route::get('/home', function () {
     return view('home');
 })->middleware('auth');
 
-Route::post('/subscribe', function () {
+Route::post('/newsletter', function () {
     $email = Input::get('email');
+    $subscribed = 0;
+    $five_days = ( 60 * 60 * 24 * 5 );
 
-    return redirect('/thank-you');
+    if ( filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
+        Newsletter::subscribe( $email );
+        $subscribed = 1;
+    }
+
+    return redirect('/thank-you')->withCookie( cookie( 'subscribed', $subscribed, $five_days ) );
 });
 
 Route::get('/thank-you', function () {
