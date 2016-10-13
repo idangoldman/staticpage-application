@@ -11,6 +11,8 @@
 |
 */
 
+Route::auth();
+
 Route::get('/', function () {
     return redirect('/welcome');
 });
@@ -21,7 +23,7 @@ Route::get('/welcome', function () {
 
 Route::get('/home', function () {
     return view('home');
-});
+})->middleware('auth');
 
 Route::post('/subscribe', function () {
     $email = Input::get('email');
@@ -78,6 +80,4 @@ Route::get('/side-kick', function () {
     );
 
     return view( 'layouts.side-kick', $viewData );
-});
-
-Route::auth();
+})->middleware('auth');
