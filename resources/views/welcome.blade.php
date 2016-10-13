@@ -13,7 +13,11 @@
         </h2>
 
         <p class="description">
-            We are a team of keyboard kids who turned out to be good people and professionals located around the world trying to create the best product we can. Stay tuned by subscribing to our mailing list and we promise to update you with the product release.
+            We are a team of keyboard kids who turned out to be good people and professionals located around the world trying to create the best product we can.
+
+            @if ( ! $has_subscribed )
+                Stay tuned by subscribing to our mailing list and we promise to update you with the product release.
+            @endif
         </p>
     </article>
 
