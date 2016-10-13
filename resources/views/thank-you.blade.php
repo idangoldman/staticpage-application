@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Thank you form StaticPages.')
+@section('title', 'Thank you form StaticPages! =]')
 
 @section('content')
     <article class="article">

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Welcome to StaticPages.')
+@section('title', 'Welcome to StaticPages! =]')
 
 @section('content')
     <article class="article">
@@ -8,7 +8,6 @@
         </h1>
 
         <h2 class="sub-title">
-            <!-- StaticPages brand new way to build landing pages better. -->
             Working on creating a “Coming Soon Page” shop. <br />
             We know ironic.
         </h2>
