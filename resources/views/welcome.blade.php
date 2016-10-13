@@ -25,3 +25,7 @@
     </form>
 
 @endsection
+
+@section('footer')
+    <script src="{{ URL::asset('js/app.js') }}"></script>
+@endsection
