@@ -5,9 +5,17 @@
 
 // Google Fonts
 @import url("http://fonts.googleapis.com/earlyaccess/opensanshebrew.css");
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800&subweset=latin,cyrillic-ext,cyrillic,greek-ext,greek,vietnamese,latin-ext");
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800");
 
 // Font set
+a {
+    color: #fff;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
 body, button, input[type="text"], select, textarea {
     -webkit-font-smoothing: antialiased;
     color: #fff;
@@ -37,6 +45,7 @@ body, button, input[type="text"], select, textarea {
 }
 
 .background {
+    background-color: #fff;
     background-image: url('/img/background-1440.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -75,7 +84,7 @@ body, button, input[type="text"], select, textarea {
     }
 }
 
-.subscription {
+.newsletter {
     .email, .submit {
         background-color: transparent;
         border-radius: 5px;
