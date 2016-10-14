@@ -8,7 +8,7 @@
         </h1>
 
         <h2 class="sub-title">
-            Working on creating a “Coming Soon Page” shop. <br />
+            Working on creating a "Coming Soon Page" shop. <br />
             We know ironic.
         </h2>
 
@@ -28,9 +28,9 @@
             <button type="submit" class="submit">Keep me posted!</button>
         </form>
     @endif
-
 @endsection
 
-@section('footer')
+@push('footer')
+    @include('3rd-party.google-analytics', [ 'ga_id' => $google_analytics_id ])
     <script src="{{ URL::asset('js/app.js') }}"></script>
-@endsection
+@endpush

@@ -208,7 +208,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        // Misc
         'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
     ],
+
+    // Misc
+    'google_analytics_id' => env('GOOGLE_ANALYTICS_ID', ''),
 
 ];

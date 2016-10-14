@@ -21,7 +21,8 @@ Route::get('/', function () {
 
 Route::get('/welcome', function ( Request $request ) {
     $viewData = array(
-        'has_subscribed' => $request->cookie('subscribed')
+        'has_subscribed' => $request->cookie('subscribed'),
+        'google_analytics_id' => config('app.google_analytics_id')
     );
 
     return view( 'welcome', $viewData );
@@ -45,7 +46,11 @@ Route::post('/newsletter', function () {
 });
 
 Route::get('/thank-you', function () {
-    return view('thank-you');
+    $viewData = array(
+        'google_analytics_id' => config('app.google_analytics_id')
+    );
+
+    return view( 'thank-you', $viewData );
 });
 
 Route::get('/side-kick', function () {
