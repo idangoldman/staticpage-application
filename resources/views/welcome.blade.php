@@ -8,7 +8,7 @@
         </h1>
 
         <h2 class="sub-title">
-            Working on creating a “Coming Soon Page” shop. <br />
+            Working on creating a "Coming Soon Page" shop. <br />
             We know ironic.
         </h2>
 

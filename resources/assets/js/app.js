@@ -2,8 +2,8 @@ var jQuery = require('jquery');
 
 jQuery( document ).ready(function ( $ ) {
 
-    // Fontend validation of email in subscription form.
-    $('.subscription').on('submit', function( event ) {
+    // Fontend validation of email in newsletter form.
+    $('.newsletter').on('submit', function( event ) {
         var emailAdress = $(this).children('.email').val().trim();
 
         function isEmail( address ) {
