@@ -28,9 +28,9 @@
             <button type="submit" class="submit">Keep me posted!</button>
         </form>
     @endif
-
 @endsection
 
-@section('footer')
+@push('footer')
+    @include('3rd-party.google-analytics', [ 'ga_id' => $google_analytics_id ])
     <script src="{{ URL::asset('js/app.js') }}"></script>
-@endsection
+@endpush

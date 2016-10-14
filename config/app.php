@@ -212,4 +212,7 @@ return [
         'Newsletter' => Spatie\Newsletter\NewsletterFacade::class,
     ],
 
+    // Misc
+    'google_analytics_id' => env('GOOGLE_ANALYTICS_ID', ''),
+
 ];

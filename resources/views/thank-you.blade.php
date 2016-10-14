@@ -12,3 +12,7 @@
         </h2>
     </article>
 @endsection
+
+@push('footer')
+    @include('3rd-party.google-analytics', [ 'ga_id' => $google_analytics_id ])
+@endpush
