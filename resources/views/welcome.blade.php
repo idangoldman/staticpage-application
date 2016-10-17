@@ -19,6 +19,10 @@
                 Stay tuned by subscribing to our mailing list and we promise to update you with the product release.
             @endif
         </p>
+
+        @if ( $has_subscribed )
+            @include( '3rd-party.addthis', [ 'addthis_pubid' => $addthis_pubid ] )
+        @endif
     </article>
 
     @if ( ! $has_subscribed )

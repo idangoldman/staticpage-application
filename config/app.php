@@ -213,6 +213,7 @@ return [
     ],
 
     // Misc
-    'google_analytics_id' => env('GOOGLE_ANALYTICS_ID', ''),
+    'google_analytics_id' => env( 'GOOGLE_ANALYTICS_ID', '' ),
+    'addthis_pubid' => env( 'ADDTHIS_PUBID', '' ),
 
 ];
