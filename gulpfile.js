@@ -40,7 +40,7 @@ elixir(function( mix ) {
     // front page
     mix
         .images( null, null, {
-            sizes: [[ 1440 ]],
+            sizes: [ 1440, [ 1200, 630 ], [ 280, 150 ] ],
             webp: false
         } )
         .sass('app.scss')
