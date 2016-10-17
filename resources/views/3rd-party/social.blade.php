@@ -5,9 +5,8 @@
 <link rel="shortlink" href="{{ $shortlink }}">
 
 {{-- Google+ --}}
-{{-- <html class="no-js" lang="" itemscope itemtype="http://schema.org/Article">
-<link rel="author" href="">
-<link rel="publisher" href=""> --}}
+{{-- <link rel="author" href=""> --}}
+{{-- <link rel="publisher" href=""> --}}
 <meta itemprop="name" content="{{ $name }}">
 <meta itemprop="description" content="{{ $description }}">
 <meta itemprop="image" content="{{ $google_image_link }}">

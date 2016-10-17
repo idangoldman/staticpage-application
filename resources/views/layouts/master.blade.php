@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html><head>
+<html itemscope itemtype="http://schema.org/Article"><head>
 
     <meta charset="UTF-8" />
 
