@@ -1,5 +1,4 @@
 @extends('layouts.master')
-@section('title', 'Welcome to StaticPages! =]')
 
 @section('content')
     <article class="article">

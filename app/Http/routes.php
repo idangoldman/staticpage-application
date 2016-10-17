@@ -24,6 +24,23 @@ Route::get('/welcome', function ( Request $request ) {
         'has_subscribed' => $request->cookie('subscribed'),
         'google_analytics_id' => config('app.google_analytics_id'),
         'addthis_pubid' => config('app.addthis_pubid'),
+        'meta_data' => array(
+            'name' => 'StaticPages',
+            'title' => 'Welcome to StaticPages! =]',
+            'description' => 'Working on creating a "Coming Soon Page" shop. We know ironic. We are a team of keyboard kids who turned out to be good people and professionals located around the world trying to create the best product we can.',
+            'robots' => 'INDEX, NOFOLLOW',
+            'link' => 'http://staticpages.info',
+            'shortlink' => '',
+            'local' => 'en_US',
+
+            'google_image_link' => 'http://staticpages.info/img/background-1440.jpg',
+
+            'facebook_type' => 'website',
+            'facebook_image_link' => 'http://staticpages.info/img/background-1440.jpg',
+
+            'twitter_card' => 'summary',
+            'twitter_image_link' => 'http://staticpages.info/img/background-1440.jpg',
+        ),
     );
 
     return view( 'welcome', $viewData );
@@ -34,6 +51,23 @@ Route::get('/home', function ( Request $request ) {
         'has_subscribed' => $request->cookie('subscribed'),
         'google_analytics_id' => config('app.google_analytics_id'),
         'addthis_pubid' => config('app.addthis_pubid'),
+        'meta_data' => array(
+            'name' => 'StaticPages',
+            'title' => 'Home of StaticPages! =]',
+            'description' => 'Working on creating a "Coming Soon Page" shop. We know ironic. We are a team of keyboard kids who turned out to be good people and professionals located around the world trying to create the best product we can.',
+            'robots' => 'INDEX, NOFOLLOW',
+            'link' => 'http://staticpages.info',
+            'shortlink' => '',
+            'local' => 'en_US',
+
+            'google_image_link' => 'http://staticpages.info/img/background-1440.jpg',
+
+            'facebook_type' => 'website',
+            'facebook_image_link' => 'http://staticpages.info/img/background-1440.jpg',
+
+            'twitter_card' => 'summary',
+            'twitter_image_link' => 'http://staticpages.info/img/background-1440.jpg',
+        ),
     );
 
     return view( 'home', $viewData );
@@ -56,6 +90,23 @@ Route::get('/thank-you', function () {
     $viewData = array(
         'google_analytics_id' => config('app.google_analytics_id'),
         'addthis_pubid' => config('app.addthis_pubid'),
+        'meta_data' => array(
+            'name' => 'StaticPages',
+            'title' => 'Thank you from StaticPages! =]',
+            'description' => 'Working on creating a "Coming Soon Page" shop. We know ironic. We are a team of keyboard kids who turned out to be good people and professionals located around the world trying to create the best product we can.',
+            'robots' => 'INDEX, NOFOLLOW',
+            'link' => 'http://staticpages.info',
+            'shortlink' => '',
+            'local' => 'en_US',
+
+            'google_image_link' => 'http://staticpages.info/img/background-1440.jpg',
+
+            'facebook_type' => 'website',
+            'facebook_image_link' => 'http://staticpages.info/img/background-1440.jpg',
+
+            'twitter_card' => 'summary',
+            'twitter_image_link' => 'http://staticpages.info/img/background-1440.jpg',
+        ),
     );
 
     return view( 'thank-you', $viewData );
