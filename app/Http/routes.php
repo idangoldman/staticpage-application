@@ -22,14 +22,21 @@ Route::get('/', function () {
 Route::get('/welcome', function ( Request $request ) {
     $viewData = array(
         'has_subscribed' => $request->cookie('subscribed'),
-        'google_analytics_id' => config('app.google_analytics_id')
+        'google_analytics_id' => config('app.google_analytics_id'),
+        'addthis_pubid' => config('app.addthis_pubid'),
     );
 
     return view( 'welcome', $viewData );
 });
 
-Route::get('/home', function () {
-    return view('home');
+Route::get('/home', function ( Request $request ) {
+    $viewData = array(
+        'has_subscribed' => $request->cookie('subscribed'),
+        'google_analytics_id' => config('app.google_analytics_id'),
+        'addthis_pubid' => config('app.addthis_pubid'),
+    );
+
+    return view( 'home', $viewData );
 })->middleware('auth');
 
 Route::post('/newsletter', function () {
@@ -47,7 +54,8 @@ Route::post('/newsletter', function () {
 
 Route::get('/thank-you', function () {
     $viewData = array(
-        'google_analytics_id' => config('app.google_analytics_id')
+        'google_analytics_id' => config('app.google_analytics_id'),
+        'addthis_pubid' => config('app.addthis_pubid'),
     );
 
     return view( 'thank-you', $viewData );
