@@ -1,7 +1,5 @@
 @extends('welcome')
 
-@section('title', 'Home of StaticPages')
-
 @push('footer')
     <script src="{{ URL::asset('js/app.js') }}"></script>
 
