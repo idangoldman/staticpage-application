@@ -1,32 +1,39 @@
 from flask import Flask,Blueprint
 from werkzeug.contrib.fixers import ProxyFix
-from flask import render_template
+from flask import render_template,jsonify
 import inspect, os
 
 from app.controllers.static import static_pages
+from app.controllers.general import *
+
+
 import app.controllers.admin as dashboard
-
-
-
+from app.models import *
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(os.environ['APP_SETTINGS'])
     print(os.environ['APP_SETTINGS'])
-
     #from app.models import User
-    from flask.ext.admin import Admin
+    from flask_admin import Admin
     admin = Admin(app)
+    db = MongoEngine()
+    db.init_app(app)
+    from app.models import db
     admin.add_view(dashboard.adminPage(name='Page'))
+    admin.add_view(dashboard.UserView(User))
     return app
 
 app = create_app()
-#mongo = PyMongo(app)
 app.register_blueprint(static_pages,url_prefix='/pages')
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
 app.config['root_path'] =  os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
+@app.route("/mailing/subscribe/<email>")
+def subscribe_route(email):
+    return jsonify(mailchimp_subscribe(email))
 
 @app.route("/")
 def rootIndexNameNotImportant():
