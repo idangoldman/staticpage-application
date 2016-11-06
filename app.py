@@ -4,6 +4,8 @@ from flask import render_template
 import inspect, os
 
 from app.controllers.static import static_pages
+import app.controllers.admin as dashboard
+
 
 
 
@@ -11,9 +13,15 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(os.environ['APP_SETTINGS'])
     print(os.environ['APP_SETTINGS'])
+
+    #from app.models import User
+    from flask.ext.admin import Admin
+    admin = Admin(app)
+    admin.add_view(dashboard.adminPage(name='Page'))
     return app
 
 app = create_app()
+#mongo = PyMongo(app)
 app.register_blueprint(static_pages,url_prefix='/pages')
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
