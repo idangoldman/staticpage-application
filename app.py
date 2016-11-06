@@ -7,13 +7,13 @@ from flask import request, got_request_exception,session
 from werkzeug.security import generate_password_hash
 import gevent
 import sys
-
+from app.controllers.static import static_pages
 
 
 print(os.environ['APP_SETTINGS'])
 
 app = Flask(__name__)
-#db.init_app(app)
+app.register_blueprint(static_pages,url_prefix='/pages')
 
 import inspect, os
 
