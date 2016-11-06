@@ -1,24 +1,20 @@
 from flask import Flask,Blueprint
 from werkzeug.contrib.fixers import ProxyFix
-import os
-import time
 from flask import render_template
-from flask import request, got_request_exception,session
-from werkzeug.security import generate_password_hash
-import gevent
-import sys
+import inspect, os
+
 from app.controllers.static import static_pages
 
 
-print(os.environ['APP_SETTINGS'])
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(os.environ['APP_SETTINGS'])
+    print(os.environ['APP_SETTINGS'])
+    return app
+
+app = create_app()
 app.register_blueprint(static_pages,url_prefix='/pages')
-
-import inspect, os
-
-
-app.config.from_object(os.environ['APP_SETTINGS'])
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
 app.config['root_path'] =  os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -32,11 +28,9 @@ def rootIndexNameNotImportant():
     }
     return render_template('index.html', obj=obj)
 
-
-
 if __name__ == '__main__':
+    # some stuff for debugger in pycharm
     import argparse
-
     parser = argparse.ArgumentParser(description='Development Server Help')
     parser.add_argument("-d", "--debug", action="store_true", dest="debug_mode",
                         help="run in debug mode (for use with PyCharm)", default=False)
