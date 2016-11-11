@@ -13,12 +13,11 @@ env
 env*
 start.sh
 venv/
-venv/*
 .env
 
-/bower_components/**/*
+static/
+!static/images
+
 /node_modules/**/*
 npm-debug.log
-
-!/node_modules/bower_components
-!/node_modules/views
+.sass-cache/
