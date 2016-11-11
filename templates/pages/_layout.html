@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="UTF-8" />
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% assets filters="scss, cleancss", output="page.css", "../assets/scss/page.scss" %}
+        <link href="{{ ASSET_URL }}" rel="stylesheet" type="text/css" />
+    {% endassets %}
+
+    {% block head %}{% endblock %}
+</head><body>
+
+    <section class="static-page background">
+        {% block content %}{% endblock %}
+    </section>
+
+    {% block footer %}
+        {% from 'macros/3rd-party.html' import google_analytics %}
+        {{ google_analytics('blah') }}
+    {% endblock %}
+
+</body></html>
