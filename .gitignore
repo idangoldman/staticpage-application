@@ -15,9 +15,9 @@ start.sh
 venv/
 .env
 
-static/
-!static/images
+static/**/*
+!/static/images/**/*.jpeg
 
-/node_modules/**/*
+node_modules/
 npm-debug.log
 .sass-cache/
