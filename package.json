@@ -1,0 +1,22 @@
+{
+  "name": "static-pages",
+  "version": "1.0.0",
+  "description": "## Install git clone cd static-pages",
+  "main": "Gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idanm/static-pages.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idanm/static-pages/issues"
+  },
+  "homepage": "https://github.com/idanm/static-pages#readme",
+  "dependencies": {
+    "clean-css": "^3.4.20"
+  }
+}
