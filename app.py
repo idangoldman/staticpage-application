@@ -38,9 +38,11 @@ app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspec
 class NewsletterForm(Form):
     email = StringField("Email", [validators.Required(), validators.Email("Please enter your email address.")])
 
-@app.route('/newsletter/<email>', methods=['POST'])
-def subscribe_to_newsletter(request):
-    pprint(request);
+@app.route('/newsletter', methods=['POST'])
+def subscribe_to_newsletter():
+    email = request.form.get('email')
+    pprint(email);
+    return email
     # return jsonify( mailchimp_subscribe(email))
 
 @app.route('/')
