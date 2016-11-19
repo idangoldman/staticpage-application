@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, jsonify
+from flask import Flask, Blueprint, render_template, redirect, make_response
 from flask_assets import Environment, Bundle
 from wtforms import Form, StringField, validators
 from pprint import pprint
@@ -36,20 +36,27 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
 class NewsletterForm(Form):
-    email = StringField("Email", [validators.Required(), validators.Email("Please enter your email address.")])
+    email = StringField("email", [validators.Required(), validators.Email("Please enter your email address.")])
 
-@app.route('/newsletter', methods=['POST'])
-def subscribe_to_newsletter(request):
-    form = NewsletterForm(request.POST)
-    # email = request.form.get('email')
-    # pprint(email);
-    # return email
-    # return jsonify( mailchimp_subscribe(email))
+@app.route('/welcome', methods=['GET', 'POST'])
+def welcome():
+    form = NewsletterForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        if mailchimp_subscribe(form.email.data):
+            return redirect('/thank-you')
+
+    return render_template('pages/welcome.html', form=form, ga_id=app.config['GOOGLE_ANALYTICS_ID'], pub_id=app.config['ADDTHIS_PUBID'], has_subscribed=request.cookies.get('has_subscribed'))
+
+@app.route('/thank-you')
+def thank_you():
+    response = make_response(render_template('pages/thank-you.html', pub_id=app.config['ADDTHIS_PUBID'], ga_id=app.config['GOOGLE_ANALYTICS_ID']))
+    response.set_cookie('has_subscribed', 'true')
+    return response
 
 @app.route('/')
 def index_route():
-    form = NewsletterForm()
-    return render_template('pages/home.html', form=form)
+    return redirect('/welcome')
 
 if __name__ == '__main__':
     # some stuff for debugger in pycharm
