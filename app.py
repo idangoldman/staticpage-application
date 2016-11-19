@@ -39,10 +39,11 @@ class NewsletterForm(Form):
     email = StringField("Email", [validators.Required(), validators.Email("Please enter your email address.")])
 
 @app.route('/newsletter', methods=['POST'])
-def subscribe_to_newsletter():
-    email = request.form.get('email')
-    pprint(email);
-    return email
+def subscribe_to_newsletter(request):
+    form = NewsletterForm(request.POST)
+    # email = request.form.get('email')
+    # pprint(email);
+    # return email
     # return jsonify( mailchimp_subscribe(email))
 
 @app.route('/')
