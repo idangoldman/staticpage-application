@@ -24,13 +24,12 @@
         @endif #}
     </article>
 
-{#     @if ( ! $has_subscribed )
-        <form action="newsletter" method="post" class="newsletter">
-            {{ csrf_field() }}
-            <input class="email" name="email" placeholder="email@domain.com" />
-            <button type="submit" class="submit">Keep me posted!</button>
-        </form>
-    @endif #}
+    <form action="/newsletter" method="POST" class="newsletter">
+        {# {{ form.csrf_token }} #}
+        {{ form.email(placeholder="email@domain.work") }}
+        <button type="submit" class="submit">Keep me posted!</button>
+    </form>
+
 {% endblock %}
 
 {% block footer %}

@@ -85,7 +85,7 @@ body, button, input[type="text"], select, textarea {
 }
 
 .newsletter {
-    .email, .submit {
+    #email, .submit {
         background-color: transparent;
         border-radius: 5px;
         border: 2px solid #fff;
@@ -98,7 +98,7 @@ body, button, input[type="text"], select, textarea {
         }
     }
 
-    .email {
+    #email {
         &, &::placeholder {
             color: #fff;
             text-shadow: 1px 1px 3px rgba(#000, 0.5);
