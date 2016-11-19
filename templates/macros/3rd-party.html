@@ -6,3 +6,9 @@
     </script>
     <script src="https://www.google-analytics.com/analytics.js" async defer></script>
 {%- endmacro %}
+
+
+{% macro add_this( pub_id ) -%}
+    <div class="addthis_inline_share_toolbox"></div>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid={{ pub_id }}"></script>
+{%- endmacro %}

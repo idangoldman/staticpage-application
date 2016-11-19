@@ -14,21 +14,28 @@
         <p class="description">
             We are a team of keyboard kids who turned out to be good people and professionals located around the world trying to create the best product we can.
 
-            {# @if ( ! $has_subscribed ) #}
+            {% if has_subscribed != 'true' %}
                 Stay tuned by subscribing to our mailing list and we promise to update you with the product release.
-            {# @endif #}
+            {% endif %}
         </p>
 
-{#         @if ( $has_subscribed )
-            @include( '3rd-party.addthis', [ 'addthis_pubid' => $addthis_pubid ] )
-        @endif #}
+        {% if has_subscribed == 'true' %}
+            {% from 'macros/3rd-party.html' import add_this %}
+            {{ add_this( pub_id ) }}
+        {% endif %}
+
     </article>
 
-    <form action="/newsletter" method="POST" class="newsletter">
-        {# {{ form.csrf_token }} #}
-        {{ form.email(placeholder="email@domain.work") }}
-        <button type="submit" class="submit">Keep me posted!</button>
-    </form>
+    {% if has_subscribed != 'true' %}
+        <form action="/welcome" method="POST" class="newsletter">
+            {# {{ form.csrf_token }} #}
+            {{ form.email(placeholder="email@domain.work") }}
+            <button type="submit" class="submit">Keep me posted!</button>
+            {% for message in form.email.errors %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </form>
+    {% endif %}
 
 {% endblock %}
 
