@@ -1,5 +1,7 @@
 from flask import Flask, Blueprint, render_template, jsonify
 from flask_assets import Environment, Bundle
+from wtforms import Form, StringField, validators
+from pprint import pprint
 
 from werkzeug.contrib.fixers import ProxyFix
 import inspect, os
@@ -33,13 +35,18 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 
 app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
-@app.route('/mailing/subscribe/<email>')
-def subscribe_route(email):
-    return jsonify(mailchimp_subscribe(email))
+class NewsletterForm(Form):
+    email = StringField("Email", [validators.Required(), validators.Email("Please enter your email address.")])
+
+@app.route('/newsletter/<email>', methods=['POST'])
+def subscribe_to_newsletter(request):
+    pprint(request);
+    # return jsonify( mailchimp_subscribe(email))
 
 @app.route('/')
 def index_route():
-    return render_template('pages/home.html')
+    form = NewsletterForm()
+    return render_template('pages/home.html', form=form)
 
 if __name__ == '__main__':
     # some stuff for debugger in pycharm
