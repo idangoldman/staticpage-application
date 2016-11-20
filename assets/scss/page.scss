@@ -1,14 +1,12 @@
 @charset "UTF-8";
 
-// Normalize
-// @import "node_modules/normalize-scss/sass/normalize/import-now";
-
 // Google Fonts
 // @import url("http://fonts.googleapis.com/earlyaccess/opensanshebrew.css");
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800");
 
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -126,3 +124,26 @@ body, button, input[type="text"], select, textarea {
         text-shadow: 1px 1px 3px rgba(#000, 0.5);
     }
 }
+
+
+// Smartphone
+@media ( max-width: 320px ) {}
+// Tablet
+@media ( max-width: 768px ) {}
+// Netbook
+@media ( max-width: 1024px ) {}
+// Desktop
+@media ( max-width: 1600px ) {}
+
+// - rem and em units are computed into pixel values by the browser, based on font sizes in your design.
+// - em units are based on the font size of the element they’re used on.
+// - rem units are based on the font size of the html element.
+// - em units can be influenced by font size inheritance from any parent element
+// - rem units can be influenced by font size inheritance from browser font settings.
+
+// - Use em units for sizing that should scale depending on the font size of an element other than the root.
+// - Use rem units for sizing that doesn’t need em units, and that should scale depending on browser font size settings.
+// - Use rem units unless you’re sure you need em units, including on font sizes.
+// - Use rem units on media queries
+// - Don’t use em or rem in multi column layout widths - use % instead.
+// - Don’t use em or rem if scaling would unavoidably cause a layout element to break.
