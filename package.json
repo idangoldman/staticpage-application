@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/idanm/static-pages#readme",
   "dependencies": {
-    "clean-css": "^3.4.20"
+    "autoprefixer": "^6.5.3",
+    "clean-css": "^3.4.20",
+    "postcss-cli": "^2.6.0"
   }
 }
