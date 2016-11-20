@@ -1,0 +1,54 @@
+{% extends 'pages/_layout.html' %}
+
+{% block content %}
+    <article class="article">
+        <h1 class="title">
+            StaticPages
+        </h1>
+
+        <h2 class="sub-title">
+            Working on creating a "Coming Soon Page" shop. <br />
+            We know ironic.
+        </h2>
+
+        <p class="description">
+            We are a team of keyboard kids who turned out to be good people and professionals located around the world trying to create the best product we can.
+
+            {% if has_subscribed != 'true' %}
+                Stay tuned by subscribing to our mailing list and we promise to update you with the product release.
+            {% endif %}
+        </p>
+
+        {% if has_subscribed == 'true' %}
+            {% from 'macros/3rd-party.html' import add_this %}
+            {{ add_this( pub_id ) }}
+        {% endif %}
+
+    </article>
+
+    {% if has_subscribed != 'true' %}
+        <form action="/welcome" method="POST" class="newsletter">
+            {# {{ form.csrf_token }} #}
+            {{ form.email(placeholder="email@domain.work") }}
+            <button type="submit" class="submit">Keep me posted!</button>
+            {% for message in form.email.errors %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </form>
+    {% endif %}
+
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+
+    {% assets filters="rjsmin", output="page.js", "../assets/js/page.js" %}
+        <script src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+
+{% endblock %}

@@ -1,0 +1,149 @@
+@charset "UTF-8";
+
+// Google Fonts
+// @import url("http://fonts.googleapis.com/earlyaccess/opensanshebrew.css");
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800");
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// Font set
+a {
+    color: #fff;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+html, body {
+    height: 100%;
+}
+
+body, button, input[type="text"], select, textarea {
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    font-family: 'Open Sans', Tahoma, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.background {
+    background-attachment: fixed;
+    background-color: #fff;
+    background-image: url('/static/images/background.jpeg');
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &:before {
+        background-color: rgba( #000, 0.3 );
+        bottom: 0;
+        content: "";
+        display: block;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: -1;
+    }
+}
+
+.static-page {
+    // align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    height: 100%;
+
+    & > * {
+        width: 80%;
+    }
+}
+
+.article {
+    text-shadow: 1px 1px 3px rgba(#000, 0.5);
+
+    & > * {
+        margin-bottom: 25px;
+    }
+
+    .title {
+        font-size: 5em;
+        letter-spacing: 1px;
+    }
+
+    .sub-title {
+        font-size: 2em;
+        font-style: italic;
+    }
+
+    .description {
+        font-size: 1.2em;
+        font-weight: 600;
+    }
+}
+
+.newsletter {
+    #email, .submit {
+        background-color: transparent;
+        border-radius: 5px;
+        border: 2px solid #fff;
+        font-weight: 600;
+        outline: 0;
+        padding: 5px 10px;
+
+        &:hover, &:focus {
+            box-shadow: 1px 1px 3px rgba(#000, 0.5);
+        }
+    }
+    #email {
+        margin-right: 5px;
+
+        &, &::placeholder {
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(#000, 0.5);
+        }
+
+        &::placeholder {
+            opacity: 0.8;
+        }
+    }
+
+    .submit {
+        cursor: pointer;
+        text-shadow: 1px 1px 3px rgba(#000, 0.5);
+    }
+}
+
+
+// Smartphone
+@media ( max-width: 320px ) {}
+// Tablet
+@media ( max-width: 768px ) {}
+// Netbook
+@media ( max-width: 1024px ) {}
+// Desktop
+@media ( max-width: 1600px ) {}
+
+// - rem and em units are computed into pixel values by the browser, based on font sizes in your design.
+// - em units are based on the font size of the element they’re used on.
+// - rem units are based on the font size of the html element.
+// - em units can be influenced by font size inheritance from any parent element
+// - rem units can be influenced by font size inheritance from browser font settings.
+
+// - Use em units for sizing that should scale depending on the font size of an element other than the root.
+// - Use rem units for sizing that doesn’t need em units, and that should scale depending on browser font size settings.
+// - Use rem units unless you’re sure you need em units, including on font sizes.
+// - Use rem units on media queries
+// - Don’t use em or rem in multi column layout widths - use % instead.
+// - Don’t use em or rem if scaling would unavoidably cause a layout element to break.

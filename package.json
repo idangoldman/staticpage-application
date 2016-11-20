@@ -1,31 +1,24 @@
 {
-  "name": "StaticPages",
-  "version": "0.0.1",
-  "private": true,
-  "engines" : {
-    "node" : "5.x",
-    "npm": "3.x"
-  },
+  "name": "static-pages",
+  "version": "1.0.0",
+  "description": "## Install git clone cd static-pages",
+  "main": "Gulpfile.js",
   "scripts": {
-    "prod": "gulp --production",
-    "dev": "gulp watch"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idanm/static-pages.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/idanm/static-pages/issues"
+  },
+  "homepage": "https://github.com/idanm/static-pages#readme",
   "dependencies": {
-    "babel-core": "^6.10.4",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "bower": "^1.7.9",
-    "exports-loader": "^0.6.3",
-    "flightjs": "^1.5.1",
-    "gulp": "^3.9.1",
-    "imports-loader": "^0.6.5",
-    "jquery": "^3.0.0",
-    "laravel-elixir": "^5.0.0",
-    "laravel-elixir-images": "^2.0.0",
-    "laravel-elixir-svg-symbols": "^1.0.1",
-    "laravel-elixir-webpack": "^1.0.1",
-    "normalize-scss": "^5.0.3",
-    "nunjucks": "^2.4.2",
-    "nunjucks-loader": "^2.4.3"
+    "autoprefixer": "^6.5.3",
+    "clean-css": "^3.4.20",
+    "postcss-cli": "^2.6.0"
   }
 }

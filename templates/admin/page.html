@@ -1,0 +1,16 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+    {{ super() }}
+
+    <div class="row-fluid">
+        Some admin page
+    </div>
+{% endblock body %}
+
+{% block tail_js %}
+    {{ super() }}
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+{% endblock tail_js %}
