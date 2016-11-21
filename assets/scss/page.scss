@@ -171,6 +171,10 @@ body, button, input[type="text"], select, textarea {
     }
 }
 
+.add-this {
+    margin-top: px2rem(25);
+}
+
 // min Netbook
 @media ( min-width: 1024px ) {
     .static-page > * {
@@ -183,16 +187,13 @@ body, button, input[type="text"], select, textarea {
         & > * {
             display: block;
             margin: 0 auto;
+            text-align: center;
             width: 80%;
         }
 
         .email {
             margin-right: auto;
             margin-bottom: px2rem(20);
-        }
-
-        .submit {
-            text-align: center;
         }
     }
 }
