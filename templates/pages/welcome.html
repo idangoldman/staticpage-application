@@ -29,7 +29,7 @@
     {% if has_subscribed != 'true' %}
         <form action="/welcome" method="POST" class="newsletter">
             {# {{ form.csrf_token }} #}
-            {{ form.email(placeholder="email@domain.work") }}
+            {{ form.email(class="email", placeholder="email@domain.work") }}
             <button type="submit" class="submit">Keep me posted!</button>
             {% for message in form.email.errors %}
                 <p>{{ message }}</p>
