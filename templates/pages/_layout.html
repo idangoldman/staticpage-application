@@ -7,7 +7,7 @@
 
     {% include 'macros/social.html' %}
 
-    {% assets filters="scss, autoprefixer6, cleancss", output="page.css", "../assets/scss/page.scss" %}
+    {% assets filters="autoprefixer6, scss", output="page.css", "../assets/scss/page.scss" %}
         <link href="{{ ASSET_URL }}" rel="stylesheet" type="text/css" />
     {% endassets %}
 
