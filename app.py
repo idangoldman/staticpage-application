@@ -19,6 +19,7 @@ def create_app():
     print(os.environ['APP_SETTINGS'])
     #from app.models import User
     assets = Environment(app)
+    assets.versions = 'timestamp'
     assets.init_app(app)
     from flask_admin import Admin
     admin = Admin(app)
