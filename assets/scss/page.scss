@@ -2,6 +2,8 @@
 
 
 $rem-base: 16;
+$theme-color: #000813;
+$theme-second-color: #021B2C;
 
 @function px2rem($value) {
     @return ( $value / $rem-base ) + rem;
@@ -142,7 +144,7 @@ body, button, input[type="text"], select, textarea {
     .email, .submit {
         background-color: transparent;
         border-radius: px2rem(5);
-        border: px2rem(2) solid #fff;
+        border: px2rem(1) solid #fff;
         font-weight: 600;
         outline: 0;
         padding: px2rem(10) px2rem(12);
@@ -166,6 +168,8 @@ body, button, input[type="text"], select, textarea {
     }
 
     .submit {
+        background-color: $theme-second-color;
+        border-color: $theme-second-color;
         cursor: pointer;
         text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
     }
