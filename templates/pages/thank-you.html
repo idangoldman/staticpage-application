@@ -1,6 +1,12 @@
 {% extends 'pages/_layout.html' %}
 {% set title = 'Thank you for subscribing to StaticPages ! =]' %}
 
+{% block head %}
+    {{ super() }}
+
+    {% include 'macros/social.html' %}
+{% endblock head %}
+
 {% block content %}
     <article class="article">
         <h1 class="title">
