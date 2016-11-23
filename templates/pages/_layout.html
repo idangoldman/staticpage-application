@@ -2,11 +2,10 @@
 <html><head>
 
     <meta charset="UTF-8" />
+    <title>{{ title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, target-densitydpi=high-dpi, user-scalable=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="theme-color" content="#000813">
-
-    {% include 'macros/social.html' %}
 
     {% assets filters="scss, autoprefixer6", output="page.css", "../assets/scss/page.scss" %}
         <link href="{{ ASSET_URL }}" rel="stylesheet" type="text/css" />
