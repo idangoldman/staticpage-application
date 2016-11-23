@@ -1,45 +1,57 @@
-from fabric.api import run, cd, env, lcd, sudo, put, local
+from fabric.api import run, cd, env, sudo
+import os
 
 '''
 TO DEPLOY:
-    fab dev/prod deploy
+    fab prod deploy
 
 TO RESTART BACKEND
-    fab dev/prod restart
+    fab prod restart
 
 TODO
  1. configure the ip's, remote app directory , ssh key etc
  2. add git tag support  - for easy rolleback
- 3. run pip -r requirments.txt in env ??
 
 '''
 
-remote_app_dir ='/opt/app'
-env.key_filename = '~/.ssh/production.pem' ## ssh key file (chmod 400)
-env.user = 'ubuntu' #remote user
-
+env.remote_app_dir = '/opt/app'
+env.git_repo = os.environ['GIT_REPO_PATH']
+env.key_filename = os.environ['SSH_KEY_PATH'] ## ssh key file (chmod 400)
+env.user = 'deploy' #remote user
 
 
 def prod():
-    env.hosts = ['prod-server-ip']
+    env.hosts = os.environ['SERVER_IP']
     env.branch = 'master'
-
-def dev():
-    env.hosts = ['dev-server-ip'] # replace with IP address or hostname
-    env.branch = 'dev'
 
 def restart():
     run('sudo restart backend')
 
-def clearcache():
+def clear_cache():
     ################################
     run('rm -rf /opt/tmp/cache/*')
     ################################
 
+def git_clone():
+    run('git clone %(git_repo)s %(remote_app_dir)s' % env)
+
+def git_checkout_latest():
+    run('cd %(remote_app_dir)s; git checkout %(branch)s; git pull origin %(branch)s' % env)
 
 def deploy():
-
-    run('cd %s; git checkout %s' % (remote_app_dir,env.branch))
-    run('cd %(path)s; git pull' % {'path': remote_app_dir})
+    git_checkout_latest()
     restart()
-    clearcache()
+    clear_cache()
+
+def install_backend():
+    run('cd %' % env.remote_app_dir)
+    run('pip install -r requirements.txt')
+
+def install_frontend():
+    run('cd %' % env.remote_app_dir)
+    run('npm install; bundle update')
+
+def setup():
+    git_clone()
+    install_backend()
+    install_frontend()
