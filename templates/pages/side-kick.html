@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="UTF-8" />
+    <title>It's your friendly side-kick!</title>
+
+    {% assets "../assets/scss/side-kick.scss",
+        output="side-kick.css",
+        filters="scss, autoprefixer6"
+    %}
+        <link href="{{ ASSET_URL }}" rel="stylesheet" type="text/css" />
+    {% endassets %}
+
+    {# <meta name="csrf-token" content="{{ csrf_token() }}" /> #}
+
+</head><body>
+    {# {!! $svg_icons !!} #}
+
+    <section class="side-kick">
+        123
+    </section>
+
+    {# <script> var initialData = {!! $initial_data !!}; </script> #}
+    {# <script src="{{ URL::asset('js/side-kick.js') }}"></script> #}
+
+</body></html>

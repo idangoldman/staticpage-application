@@ -1,0 +1,34 @@
+{% extends 'pages/_layout.html' %}
+{% set title = 'Welcome Home' %}
+
+{% block head %}
+    {{ super() }}
+
+    {% assets "../assets/scss/home.scss",
+        output="home.css",
+        filters="scss, autoprefixer6"
+    %}
+        <link href="{{ ASSET_URL }}" rel="stylesheet" type="text/css" />
+    {% endassets %}
+{% endblock head %}
+
+{% block content %}
+    <article class="article">
+        <h1 class="title">
+        </h1>
+
+        <h2 class="sub-title">
+        </h2>
+
+        <p class="description">
+        </p>
+    </article>
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+
+    <iframe class="iframe-side-kick" src="/side-kick"
+        frameborder="0" border="0" cellspacing="0">
+    </iframe>
+{% endblock %}

@@ -64,6 +64,14 @@ def thank_you():
 def index_route():
     return redirect('/welcome')
 
+@app.route('/home')
+def home():
+    return render_template('pages/home.html')
+
+@app.route('/side-kick')
+def side_kick():
+    return render_template('pages/side-kick.html')
+
 @app.errorhandler(403)
 def page_forbidden(e):
     return render_template('pages/errors/403.html'), 403
