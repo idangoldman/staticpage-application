@@ -15,8 +15,7 @@ start.sh
 venv/
 .env
 
-static/**/*
-!/static/images/**/*.jpeg
+static/
 
 node_modules/
 npm-debug.log
