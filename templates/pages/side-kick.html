@@ -9,7 +9,7 @@
     {# <meta name="csrf-token" content="{{ csrf_token() }}" /> #}
 
 </head><body>
-    {# {!! $svg_icons !!} #}
+    {{ svg_sprite | safe }}
 
     <section class="side-kick">
         123

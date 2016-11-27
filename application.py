@@ -65,7 +65,8 @@ def home():
 
 @app.route('/side-kick')
 def side_kick():
-    return render_template('pages/side-kick.html')
+    svg_sprite = open('static/images/side-kick-sprite.svg', 'r').read()
+    return render_template('pages/side-kick.html', svg_sprite=svg_sprite)
 
 @app.errorhandler(403)
 def page_forbidden(e):
