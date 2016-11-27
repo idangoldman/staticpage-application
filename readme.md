@@ -17,7 +17,10 @@ cp start_example.sh start.sh
 ### Frontend
 npm install
 
-bundle update
-
 ## Run
-sh start.sh
+
+### Backend
+sh start.sh # Backend
+
+### Frontend
+gulp # Frontend

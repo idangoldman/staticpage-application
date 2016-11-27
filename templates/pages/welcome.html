@@ -49,8 +49,5 @@
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>
 
-    {% assets filters="rjsmin", output="page.js", "../assets/js/page.js" %}
-        <script src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-
+    <script src="{{ url_for('static', filename='page.js') }}"></script>
 {% endblock %}

@@ -1,7 +1,5 @@
 from flask import Flask, Blueprint, render_template, redirect, make_response
-from flask_assets import Environment
 from wtforms import Form, StringField, validators
-from pprint import pprint
 
 from werkzeug.contrib.fixers import ProxyFix
 import inspect, os
@@ -23,9 +21,6 @@ def create_app():
     app.config.from_object(os.environ['APP_SETTINGS'])
     print(os.environ['APP_SETTINGS'])
     #from app.models import User
-    assets = Environment(app)
-    assets.versions = 'timestamp'
-    assets.init_app(app)
     from flask_admin import Admin
     admin = Admin(app)
     db = MongoEngine()

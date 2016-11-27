@@ -7,13 +7,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="theme-color" content="#000813">
 
-    {% assets "../assets/scss/page.scss",
-        depends="../assets/scss/lib/*.scss",
-        output="page.css",
-        filters="scss, autoprefixer6"
-    %}
-        <link href="{{ ASSET_URL }}" rel="stylesheet" type="text/css" />
-    {% endassets %}
+    <link href="{{ url_for('static', filename='page.css') }}" rel="stylesheet" type="text/css" />
 
     {% block head %}{% endblock %}
 </head><body class="background">

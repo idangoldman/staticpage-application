@@ -4,12 +4,7 @@
 {% block head %}
     {{ super() }}
 
-    {% assets "../assets/scss/home.scss",
-        output="home.css",
-        filters="scss, autoprefixer6"
-    %}
-        <link href="{{ ASSET_URL }}" rel="stylesheet" type="text/css" />
-    {% endassets %}
+    <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet" type="text/css" />
 {% endblock head %}
 
 {% block content %}
