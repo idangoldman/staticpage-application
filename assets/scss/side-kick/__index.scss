@@ -1,0 +1,10 @@
+@import "assets/scss/side-kick/devices";
+// @import "assets/scss/side-kick/features";
+
+.side-kick {
+    padding: 20px 20px 0 20px;
+
+    & > * {
+        margin: 0 0 20px 0;
+    }
+}

@@ -12,7 +12,23 @@
     {{ svg_sprite | safe }}
 
     <section class="side-kick">
-        123
+        <nav class="devices">
+            <a href="#" class="device">
+                <svg class="icon">
+                    <use class="use" xlink:href="#icons--mobile"></use>
+                </svg>
+                <span class="title">Mobile</span>
+            </a>
+
+            <a href="#" class="device current">
+                <svg class="icon">
+                    <use class="use" xlink:href="#icons--desktop"></use>
+                </svg>
+                <span class="title">Desktop</span>
+            </a>
+        </nav>
+
+        <!--<ul class="features"></ul>-->
     </section>
 
     {# <script> var initialData = {!! $initial_data !!}; </script> #}
