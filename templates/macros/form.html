@@ -1,0 +1,78 @@
+{% macro input_text( field ) -%}
+    <fieldset class="fieldset {{ field.id }}">
+        <label class="title" for="{{ field.id }}">{{ field.title }}</label>
+        <div class="field-wrap">
+            <input type="text"
+                class="field"
+                id="{{ field.id }}"
+                name="{{ field.id }}"
+                value="{{ field.value }}"
+                placeholder="{{ field.placeholder }}" />
+        </div>
+        {% if field.message %}
+            <span class="message">{{ field.message }}</span>
+        {% endif %}
+    </fieldset>
+{%- endmacro %}
+
+{% macro textarea( field ) -%}
+    <fieldset class="fieldset {{ field.id }}">
+        <label class="title" for="{{ field.id }}">{{ field.title }}</label>
+        <div class="field-wrap">
+            <textarea
+                class="field-textarea"
+                id="{{ field.id }}"
+                name="{{ field.id }}"
+                placeholder="{{ field.placeholder }}">{{ value }}</textarea>
+        </div>
+        {% if field.message %}
+            <span class="message">{{ field.message }}</span>
+        {% endif %}
+    </fieldset>
+{%- endmacro %}
+
+{% macro select( field ) -%}
+    <fieldset class="fieldset {{ field.id }}">
+        <label class="title" for="{{ field.id }}">{{ field.title }}</label>
+        <div class="select-wrap">
+            <select id="{{ field.id }}" name="{{ field.id }}" class="field">
+                {% for option in field.options %}
+                    {%
+                        set selected = field.value == option.key if "selected" else ""
+                    %}
+                    <option value="{{ option.key }}" {{ selected }}>{{ option.value }}</option>
+                {% endfor %}
+            </select>
+            <span class="selected-text">
+                {{ field.value or field.options[0].value }}
+            </span>
+            <div class="caret">
+                <svg class="icon caret-up">
+                    <use class="use" xlink:href="#icons--caret-up"></use>
+                </svg>
+                <svg class="icon caret-down">
+                    <use class="use" xlink:href="#icons--caret-down"></use>
+                </svg>
+            </div>
+        </div>
+        {% if field.message %}
+            <span class="message">{{ field.message }}</span>
+        {% endif %}
+    </fieldset>
+{%- endmacro %}
+
+{% macro upload_image( field ) -%}
+    <fieldset class="fieldset {{ field.id }}">
+        <label class="title" for="{{ field.id }}">{{ field.title }}</label>
+        <div class="upload-wrap">
+            <input id="{{ field.id }}" class="field" type="file" name="{{ field.id }}" value="{{ field.value }}" />
+            <span class="file-name" placeholder="{{ field.placeholder }}">{{ field.fileName }}</span>
+            <svg class="icon">
+                <use class="use" xlink:href="#icons--upload"></use>
+            </svg>
+        </div>
+        {% if field.message %}
+            <span class="message">{{ field.message }}</span>
+        {% endif %}
+    </fieldset>
+{%- endmacro %}

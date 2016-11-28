@@ -74,6 +74,7 @@
                     }
 
                     .field,
+                    .field-textarea,
                     .file-name,
                     .selected-text {
                         background-color: transparent;
@@ -89,6 +90,13 @@
                             color: rgba( #000, 0.5 );
                             opacity: 1;
                         }
+                    }
+                }
+
+                .field-wrap {
+                    .field-textarea {
+                        height: 34px * 2;
+                        resize: vertical;
                     }
                 }
 
