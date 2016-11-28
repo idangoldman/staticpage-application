@@ -2,10 +2,6 @@
 // @import url("http://fonts.googleapis.com/earlyaccess/opensanshebrew.css");
 @import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800");
 
-$rem-base: 16;
-$theme-color: #000813;
-$theme-second-color: #021B2C;
-
 @function px2rem($value) {
     @return ( $value / $rem-base ) + rem;
 }
@@ -18,7 +14,7 @@ $theme-second-color: #021B2C;
 
 // Font set
 a {
-    color: #fff;
+    color: $base-color;
 
     &:hover {
         text-decoration: none;
@@ -35,7 +31,7 @@ html {
 
 body, button, input[type="text"], select, textarea {
     -webkit-font-smoothing: antialiased;
-    color: #fff;
+    color: $base-color;
     font-family: 'Open Sans', Tahoma, Helvetica, Arial, sans-serif;
     font-size: 1rem;
     font-weight: 400;
