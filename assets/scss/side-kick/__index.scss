@@ -7,4 +7,35 @@
     & > * {
         margin: 0 0 20px 0;
     }
+
+    .download {
+        background-color: #0085BA;
+        border-radius: 3px;
+        border: 0;
+        box-shadow:
+            0 1px 0 #0073AA,
+            -1px 0 0 #006799,
+            1px 0 0 #006799,
+            0 -1px 0 #0073AA,
+            0 1px 0 #006799; 
+        color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        height: 36px;
+        line-height: 34px;
+        outline: none;
+        text-shadow:
+            -1px 1px 0 #006799,
+            1px 0 1px #006799,
+            0 1px 1px #006799,
+            0 -1px 0 #006799;
+        width: 100%;
+    }
+
+    .footer {
+        color: rgba(#000, 0.5);
+        // margin: 10px 0;
+        text-align: center;        
+    }
 }
