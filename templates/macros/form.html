@@ -10,7 +10,7 @@
                 placeholder="{{ field.placeholder }}" />
         </div>
         {% if field.message %}
-            <span class="message">{{ field.message }}</span>
+            <span class="message">{{ field.message | markdown }}</span>
         {% endif %}
     </fieldset>
 {%- endmacro %}
@@ -26,7 +26,7 @@
                 placeholder="{{ field.placeholder }}">{{ value }}</textarea>
         </div>
         {% if field.message %}
-            <span class="message">{{ field.message }}</span>
+            <span class="message">{{ field.message | markdown }}</span>
         {% endif %}
     </fieldset>
 {%- endmacro %}
@@ -56,7 +56,7 @@
             </div>
         </div>
         {% if field.message %}
-            <span class="message">{{ field.message }}</span>
+            <span class="message">{{ field.message | markdown }}</span>
         {% endif %}
     </fieldset>
 {%- endmacro %}
@@ -72,7 +72,7 @@
             </svg>
         </div>
         {% if field.message %}
-            <span class="message">{{ field.message }}</span>
+            <span class="message">{{ field.message | markdown }}</span>
         {% endif %}
     </fieldset>
 {%- endmacro %}

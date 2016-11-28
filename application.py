@@ -1,5 +1,4 @@
 from flask import Flask, Blueprint, render_template, redirect, make_response
-from wtforms import Form, StringField, validators
 
 from werkzeug.contrib.fixers import ProxyFix
 import inspect, os
@@ -14,6 +13,9 @@ from flask_wtf import FlaskForm
 from flask_wtf.csrf import CsrfProtect
 from wtforms import StringField, validators
 
+import jinja2
+import markdown
+jinja2.filters.FILTERS['markdown'] = lambda text: jinja2.Markup(markdown.markdown(text))
 
 def create_app():
     app = Flask(__name__)
