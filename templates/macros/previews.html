@@ -1,0 +1,10 @@
+{% macro search( field ) -%}
+<fieldset class="fieldset preview search">
+    <label class="title">{{ field.title }}</label>
+    <div class="preview-wrap">
+        <a href="{{ field.link | default('http://staticpages.info') }}" target="_blank">{{ field.link_text | default('StaticPages') }}</a>
+        <cite>{{ field.link | default('http://staticpages.info') }}</cite>
+        <p>{{ field.description | default('Something descriptive') }}</p>
+    </div>
+</fieldset>
+{%- endmacro %}

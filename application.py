@@ -252,7 +252,7 @@ def side_kick():
                     },
                     {
                         'title': 'Preview',
-                        'type': 'search-preview'
+                        'type': 'search_preview'
                     }
                 ]
             },

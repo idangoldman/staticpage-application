@@ -93,6 +93,46 @@
                     }
                 }
 
+                .preview-wrap {
+                    font-family: arial, sans-serif;
+                    margin-top: 5px;
+
+                    & > * {
+                        display: block;
+                    }
+
+                    a {
+                        color: #1800C5;
+                        font-size: 18px;
+                        margin-bottom: 2px;
+                        text-decoration: none;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+
+                        &:visited {
+                            color: #609;
+                        }
+                    }
+
+                    cite {
+                        color: #006817;
+                        font-size: 14px;
+                        font-style: normal;
+                        margin-bottom: 3px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        width: 210px;
+                    }
+
+                    p {
+                        color: #545454;
+                        font-size: 13px;
+                    }
+                }
+
                 .field-wrap {
                     .field-textarea {
                         height: 34px * 2;
