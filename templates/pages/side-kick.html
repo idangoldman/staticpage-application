@@ -56,7 +56,7 @@
         </ul>
     </section>
 
-    {# <script> var initialData = {!! $initial_data !!}; </script> #}
-    {# <script src="{{ URL::asset('js/side-kick.js') }}"></script> #}
+    {# <script> var initialData = {{ initial_data | safe }}; </script> #}
+    {# <script src="{{ url_for('static', filename='side-kick.js') }}"></script> #}
 
 </body></html>
