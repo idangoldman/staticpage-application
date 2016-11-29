@@ -1,4 +1,5 @@
 var autoprefixer = require('autoprefixer'),
+    del = require('del'),
     gulp = require('gulp'),
     imageMin = require('gulp-imagemin'),
     imageMinMozjpeg = require('imagemin-mozjpeg'),
@@ -9,12 +10,14 @@ var autoprefixer = require('autoprefixer'),
     sass = require('gulp-sass'),
     size = require('gulp-size'),
     svgSprite = require('gulp-svg-sprite'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    webpack = require('gulp-webpack');
 
 // Default task with watch
-gulp.task('default', ['page-script', 'style', 'svg-sprite', 'background-images'], function() {
+gulp.task('default', ['uglify-page', 'style', 'svg-sprite', 'background-images'], function() {
     gulp.watch('assets/scss/**/*.scss', ['style']);
-    gulp.watch('assets/js/page.js', ['page-script']);
+    gulp.watch('assets/js/page.js', ['uglify-page']);
+    gulp.watch('assets/js/side-kick.js', ['webpack-side-kick']);
     gulp.watch('assets/images/icons/**/*.svg', ['svg-sprite']);
 });
 
@@ -86,9 +89,42 @@ gulp.task('style', function() {
         .pipe( gulp.dest('static/') )
 });
 
-// only uglify
-gulp.task('page-script', function() {
+gulp.task('clean-static', function() {
+    return del( ['static/**/*'] );
+});
+
+// only uglify page script
+gulp.task('uglify-page', function() {
     return gulp.src('page.js', { cwd: 'assets/js' })
         .pipe(uglify())
         .pipe( gulp.dest('static/') )
+});
+
+//  webpack side kick script
+gulp.task('webpack-side-kick', function() {
+    var webpackConfig = {
+        output: {
+            filename: 'side-kick.js',
+        },
+        module: {
+            loaders: [
+                {
+                    test: /\.js$/,
+                    exclude: /(node_modules|bower_components)/,
+                    loader: 'babel',
+                    query: {
+                        presets: [ 'es2015' ]
+                    }
+                },
+                {
+                    test: /\.(njk|nunjucks)$/,
+                    loader: 'nunjucks-loader'
+                }
+            ]
+        }
+    };
+
+    return gulp.src('side-kick.js', { cwd: 'assets/js' })
+        .pipe( webpack( webpackConfig ) )
+        .pipe( gulp.dest('static/') );
 });
