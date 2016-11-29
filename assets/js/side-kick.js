@@ -1,0 +1,1 @@
+import flight, { component } from 'imports?$=jquery!flightjs';
