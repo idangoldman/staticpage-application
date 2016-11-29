@@ -37,9 +37,7 @@
         <div class="select-wrap">
             <select id="{{ field.id }}" name="{{ field.id }}" class="field">
                 {% for option in field.options %}
-                    {%
-                        set selected = field.value == option.key if "selected" else ""
-                    %}
+                    {% set selected = field.value == option.key if "selected" else "" %}
                     <option value="{{ option.key }}" {{ selected }}>{{ option.value }}</option>
                 {% endfor %}
             </select>
