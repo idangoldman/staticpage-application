@@ -11,6 +11,11 @@ from app.controllers.general import *
 
 import app.controllers.admin as dashboard
 from app.models import *
+from flask_wtf.csrf import CsrfProtect
+from wtforms.csrf.session import SessionCSRF
+from flask import session
+
+
 
 def create_app():
     app = Flask(__name__)
@@ -25,6 +30,7 @@ def create_app():
     admin = Admin(app)
     db = MongoEngine()
     db.init_app(app)
+    CsrfProtect(app)
     from app.models import db
     admin.add_view(dashboard.adminPage(name='Page'))
     admin.add_view(dashboard.UserView(User))
@@ -38,11 +44,17 @@ app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspec
 
 class NewsletterForm(Form):
     email = StringField("email", [validators.Required(), validators.Email("Please enter your email address.")])
+    class Meta:
+        csrf = True  # Enable CSRF
+        csrf_secret = app.config['CSRF_SECRET_KEY']
+        csrf_class = SessionCSRF
+        @property
+        def csrf_context(self):
+            return session
 
 @app.route('/welcome', methods=['GET', 'POST'])
 def welcome():
     form = NewsletterForm(request.form)
-
     if request.method == 'POST' and form.validate():
         if mailchimp_subscribe(form.email.data):
             return redirect('/thank-you')
@@ -74,6 +86,7 @@ def page_internal_server_error(e):
 @app.errorhandler(503)
 def page_service_unavailable(e):
     return render_template('pages/errors/503.html'), 503
+
 
 if __name__ == '__main__':
     # some stuff for debugger in pycharm
