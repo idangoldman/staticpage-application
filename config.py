@@ -9,6 +9,7 @@ class Config(object):
     MAILCHIMP_USERNAME = os.environ['MAILCHIMP_USERNAME']
     GOOGLE_ANALYTICS_ID = os.environ['GOOGLE_ANALYTICS_ID']
     ADDTHIS_PUBID = os.environ['ADDTHIS_PUBID']
-
+    CSRF_SECRET_KEY = "vsfDW34#!FVFVRWVdvsdrqDWFEW$FvdfR#sv23t"
+    WTF_CSRF_ENABLED = True
 class DevConfig(Config):
     DEBUG = True
