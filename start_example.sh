@@ -11,6 +11,7 @@ export AUTOPREFIXER_BIN="${FILE_PATH}/node_modules/.bin/postcss"
 
 export MAILCHIMP_API_KEY=""
 export MAILCHIMP_LIST_ID=""
+export MAILCHIMP_USERNAME=""
 export GOOGLE_ANALYTICS_ID=""
 export ADDTHIS_PUBID=""
 
