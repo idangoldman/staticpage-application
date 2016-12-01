@@ -15,7 +15,6 @@ def mailchimp_subscribe(email):
                 'status': 'subscribed'
             })
         except Exception as e:
-            pprint(e)
             '''
             TODO - Check if user exist and return true otherwise false
             '''
