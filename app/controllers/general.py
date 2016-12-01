@@ -4,8 +4,6 @@ from flask_cors import CORS
 
 from mailchimp3 import MailChimp
 from validate_email import validate_email
-from pprint import pprint
-
 
 
 def mailchimp_subscribe(email):
