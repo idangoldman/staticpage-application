@@ -4,25 +4,20 @@ from flask_cors import CORS
 
 from mailchimp3 import MailChimp
 from validate_email import validate_email
-import sys
 from pprint import pprint
+
 
 
 def mailchimp_subscribe(email):
     if email and validate_email(email):
-        api_key = app.config['MAILCHIMP_API_KEY']
-
-
-        client = MailChimp('staticpages', api_key)
-        client.lists.members.create(app.config['MAILCHIMP_LIST_ID'], {
-            'email_address': email,'status': 'subscribed'
-        })
+        client = MailChimp(app.config['MAILCHIMP_USERNAME'], app.config['MAILCHIMP_API_KEY'])
         try:
             client.lists.members.create(app.config['MAILCHIMP_LIST_ID'], {
                 'email_address': email,
                 'status': 'subscribed'
             })
         except Exception as e:
+            pprint(e)
             '''
             TODO - Check if user exist and return true otherwise false
             '''
