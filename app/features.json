@@ -1,0 +1,208 @@
+[
+    {
+        "title": "General",
+        "class": "general",
+        "fields": [
+            {
+                "title": "HTML filename",
+                "type": "text",
+                "placeholder": "index"
+            },
+            {
+                "title": "Type",
+                "type": "select",
+                "default": "welcome",
+                "disabled": 1,
+                "options": [
+                    { "key": "welcome", "value": "Welcome" },
+                    { "key": "thank_you", "value": "Thank You" }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Content",
+        "class": "content",
+        "fields": [
+            {
+                "title": "Logo",
+                "type": "image_upload",
+                "placeholder": "logo.png",
+                "message": "Upload gif, jpg, and png only, up to 1MB."
+            },
+            {
+                "title": "Title",
+                "type": "text"
+            },
+            {
+                "title": "Sub Title",
+                "type": "textarea"
+            },
+            {
+                "title": "Description",
+                "type": "textarea"
+            }
+        ]
+    },
+    {
+        "title": "Design",
+        "class": "design",
+        "fields": [
+            {
+                "title": "Background image",
+                "type": "image_upload",
+                "placeholder": "background.png",
+                "message": "Upload gif, jpg, and png only, up to 1MB."
+            },
+            {
+                "title": "Background color",
+                "type": "text",
+                "default": "#fff",
+                "placeholder": "#bada55"
+            },
+            {
+                "title": "Background repeat",
+                "type": "select",
+                "default": "no-repeat",
+                "options": [
+                    { "key": "no-repeat", "value": "No repeat" },
+                    { "key": "repeat", "value": "Repeat" },
+                    { "key": "repeat-x", "value": "Repeat horizontally" },
+                    { "key": "repeat-y", "value": "Repeat vertically" }
+                ]
+            },
+            {
+                "title": "Container position",
+                "type": "select",
+                "default": "middle",
+                "options": [
+                    { "key": "top-left", "value": "Top Left" },
+                    { "key": "top-middle", "value": "Top Middle" },
+                    { "key": "top-right", "value": "Top Right" },
+                    { "key": "middle-left", "value": "Middle Left" },
+                    { "key": "middle", "value": "Middle" },
+                    { "key": "middle-right", "value": "Middle Right" },
+                    { "key": "bottom-left", "value": "Bottom Left" },
+                    { "key": "bottom-middle", "value": "Bottom Middle" },
+                    { "key": "bottom-right", "value": "Bottom Right" }
+                ]
+            },
+            {
+                "title": "Container entrance animation",
+                "type": "select",
+                "default": "no-animation",
+                "disabled": 1,
+                "options": [
+                    { "key": "no-animation", "value": "No animation" }
+                ]
+            },
+            {
+                "title": "Favicon",
+                "type": "image_upload",
+                "placeholder": "favicon.ico",
+                "message": "Upload ico, and png only, up to 512KB."
+            },
+            {
+                "title": "Font family",
+                "type": "select",
+                "default": "open-sans",
+                "options": [
+                    { "key": "arial", "value": "Arial" },
+                    { "key": "arvo", "value": "Arvo" },
+                    { "key": "comic-cans-ms", "value": "Comic Sans MS" },
+                    { "key": "courier-new", "value": "Courier New" },
+                    { "key": "georgia", "value": "Georgia" },
+                    { "key": "helvetica", "value": "Helvetica" },
+                    { "key": "lato", "value": "Lato" },
+                    { "key": "lora", "value": "Lora" },
+                    { "key": "lucida", "value": "Lucida" },
+                    { "key": "merriweather-sans", "value": "Merriweather Sans" },
+                    { "key": "merriweather", "value": "Merriweather" },
+                    { "key": "noticia-text", "value": "Noticia Text" },
+                    { "key": "open-sans", "value": "Open Sans" },
+                    { "key": "playfair-display", "value": "Playfair Display" },
+                    { "key": "roboto", "value": "Roboto" },
+                    { "key": "source-sans-pro", "value": "Source Sans Pro" },
+                    { "key": "tahoma", "value": "Tahoma" },
+                    { "key": "times-new-roman", "value": "Times New Roman" },
+                    { "key": "trebuchet-ms", "value": "Trebuchet MS" },
+                    { "key": "verdana", "value": "Verdana" }
+                ]
+            },
+            {
+                "title": "Base font size",
+                "type": "select",
+                "default": "16",
+                "options": [
+                    { "key": "4", "value": "4px" },
+                    { "key": "8", "value": "8px" },
+                    { "key": "12", "value": "12px" },
+                    { "key": "16", "value": "16px" },
+                    { "key": "24", "value": "24px" },
+                    { "key": "28", "value": "28px" },
+                    { "key": "32", "value": "32px" }
+                ]
+            },
+            {
+                "title": "Text alignment",
+                "type": "select",
+                "default": "center",
+                "options": [
+                    { "key": "left", "value": "Left" },
+                    { "key": "center", "value": "Center" },
+                    { "key": "right", "value": "Right" }
+                ]
+            },
+            {
+                "title": "Font color",
+                "type": "text",
+                "default": "#fff",
+                "placeholder": "#bada55"
+            },
+            {
+                "title": "Additional styles",
+                "type": "textarea"
+            }
+        ]
+    },
+    {
+        "title": "Search Results",
+        "class": "search-results",
+        "fields": [
+            {
+                "title": "Title",
+                "type": "text",
+                "message": "Recommended **70** characters."
+            },
+            {
+                "title": "Description",
+                "type": "textarea",
+                "message": "Recommended **156** characters."
+            },
+            {
+                "title": "Preview",
+                "type": "search_preview"
+            }
+        ]
+    },
+    {
+        "title": "Analytics",
+        "class": "analytics",
+        "fields": [
+            {
+                "title": "Service",
+                "type": "select",
+                "default": "google-analytics",
+                "disabled": 1,
+                "options": [
+                    { "key": "google-analytics", "value": "Google Analytics" }
+                ]
+            },
+            {
+                "title": "Identifier",
+                "type": "text",
+                "placeholder": "UA-12345678-1"
+            }
+        ]
+    }
+]
