@@ -68,3 +68,8 @@ body, button, input[type="text"], select, textarea {
 // - Use rem units on media queries
 // - Don’t use em or rem in multi column layout widths - use % instead.
 // - Don’t use em or rem if scaling would unavoidably cause a layout element to break.
+
+
+.none {
+    display: none !important;
+}
