@@ -14,14 +14,15 @@ var autoprefixer = require('autoprefixer'),
     webpack = require('gulp-webpack');
 
 // Default task with watch
-gulp.task('default', ['uglify-page', 'style', 'svg-sprite', 'background-images'], function() {
+gulp.task('default', ['webpack-side-kick', 'uglify-page', 'style', 'svg-sprite', 'background-images'], function() {
     gulp.watch('assets/scss/**/*.scss', ['style']);
     gulp.watch('assets/js/page.js', ['uglify-page']);
+    gulp.watch(['assets/js/side-kick.js', 'assets/js/side-kick/**/*.js'], ['webpack-side-kick']);
     gulp.watch('assets/js/side-kick.js', ['webpack-side-kick']);
     gulp.watch('assets/images/icons/**/*.svg', ['svg-sprite']);
 });
 
-// SVG sprite from set of icons 
+// SVG sprite from set of icons
 gulp.task('svg-sprite', function() {
     var spriteConfig = {
         svg: {
@@ -51,7 +52,7 @@ gulp.task('background-images', function() {
     var imageResizeConfig = {
         width: 2000
     };
-    
+
     var imageMinPlugins = [
         imageMinMozjpeg()
     ];
@@ -103,6 +104,8 @@ gulp.task('uglify-page', function() {
 //  webpack side kick script
 gulp.task('webpack-side-kick', function() {
     var webpackConfig = {
+        debug: true,
+        devtool: 'source-map',
         output: {
             filename: 'side-kick.js',
         },
