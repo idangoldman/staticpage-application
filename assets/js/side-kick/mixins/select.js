@@ -10,7 +10,7 @@ var withSelect = function mixin() {
 
     this.after('initialize', function() {
         // set a selected text
-        this.on( this.attr.selectField, 'change', selectText );
+        this.select('selectField').on('change', selectText.bind(this) );
     });
 
     function selectText( event ) {
