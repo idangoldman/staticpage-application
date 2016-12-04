@@ -1,0 +1,14 @@
+{
+  "name": "static-pages",
+  "homepage": "https://github.com/idanm/static-pages",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "flight-request": "^1.0.0"
+  }
+}

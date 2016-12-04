@@ -4,7 +4,6 @@ var autoprefixer = require('autoprefixer'),
     imageMin = require('gulp-imagemin'),
     imageMinMozjpeg = require('imagemin-mozjpeg'),
     imageResize = require('gulp-image-resize'),
-    notify = require('gulp-notify'),
     postcss = require('gulp-postcss'),
     rename = require('gulp-rename'),
     sass = require('gulp-sass'),
@@ -108,6 +107,13 @@ gulp.task('webpack-side-kick', function() {
         devtool: 'source-map',
         output: {
             filename: 'side-kick.js',
+        },
+        resolve: {
+            modulesDirectories: [
+                "web_modules",
+                "node_modules",
+                "bower_components"
+            ]
         },
         module: {
             loaders: [
