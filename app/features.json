@@ -4,11 +4,13 @@
         "class": "general",
         "fields": [
             {
+                "id": "general_html_filename",
                 "title": "HTML filename",
                 "type": "text",
                 "placeholder": "index"
             },
             {
+                "id": "general_html_type",
                 "title": "Type",
                 "type": "select",
                 "default": "welcome",
@@ -25,20 +27,24 @@
         "class": "content",
         "fields": [
             {
+                "id": "content_logo",
                 "title": "Logo",
                 "type": "image_upload",
                 "placeholder": "logo.png",
                 "message": "Upload gif, jpg, and png only, up to 1MB."
             },
             {
+                "id": "content_title",
                 "title": "Title",
                 "type": "text"
             },
             {
+                "id": "content_sub_title",
                 "title": "Sub Title",
                 "type": "textarea"
             },
             {
+                "id": "content_desciption",
                 "title": "Description",
                 "type": "textarea"
             }
@@ -49,18 +55,21 @@
         "class": "design",
         "fields": [
             {
+                "id": "design_background_image",
                 "title": "Background image",
                 "type": "image_upload",
                 "placeholder": "background.png",
                 "message": "Upload gif, jpg, and png only, up to 1MB."
             },
             {
+                "id": "design_background_color",
                 "title": "Background color",
                 "type": "text",
                 "default": "#fff",
                 "placeholder": "#bada55"
             },
             {
+                "id": "design_background_repeat",
                 "title": "Background repeat",
                 "type": "select",
                 "default": "no-repeat",
@@ -72,6 +81,7 @@
                 ]
             },
             {
+                "id": "design_container_position",
                 "title": "Container position",
                 "type": "select",
                 "default": "middle",
@@ -88,6 +98,7 @@
                 ]
             },
             {
+                "id": "design_container_entrance_animation",
                 "title": "Container entrance animation",
                 "type": "select",
                 "default": "no-animation",
@@ -97,12 +108,14 @@
                 ]
             },
             {
+                "id": "design_favicon",
                 "title": "Favicon",
                 "type": "image_upload",
                 "placeholder": "favicon.ico",
                 "message": "Upload ico, and png only, up to 512KB."
             },
             {
+                "id": "design_font_family",
                 "title": "Font family",
                 "type": "select",
                 "default": "open-sans",
@@ -130,6 +143,7 @@
                 ]
             },
             {
+                "id": "design_base_font_size",
                 "title": "Base font size",
                 "type": "select",
                 "default": "16",
@@ -144,6 +158,7 @@
                 ]
             },
             {
+                "id": "design_text_alignment",
                 "title": "Text alignment",
                 "type": "select",
                 "default": "center",
@@ -154,12 +169,14 @@
                 ]
             },
             {
+                "id": "design_font_color",
                 "title": "Font color",
                 "type": "text",
                 "default": "#fff",
                 "placeholder": "#bada55"
             },
             {
+                "id": "design_additional_styles",
                 "title": "Additional styles",
                 "type": "textarea"
             }
@@ -170,11 +187,13 @@
         "class": "search-results",
         "fields": [
             {
+                "id": "search_results_title",
                 "title": "Title",
                 "type": "text",
                 "message": "Recommended **70** characters."
             },
             {
+                "id": "search_results_desciption",
                 "title": "Description",
                 "type": "textarea",
                 "message": "Recommended **156** characters."
@@ -190,6 +209,7 @@
         "class": "analytics",
         "fields": [
             {
+                "id": "analytics_services",
                 "title": "Service",
                 "type": "select",
                 "default": "google-analytics",
@@ -199,6 +219,7 @@
                 ]
             },
             {
+                "id": "analytics_identifier",
                 "title": "Identifier",
                 "type": "text",
                 "placeholder": "UA-12345678-1"

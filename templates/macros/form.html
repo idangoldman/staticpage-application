@@ -63,7 +63,11 @@
     <fieldset class="fieldset {{ field.id }}">
         <label class="title" for="{{ field.id }}">{{ field.title }}</label>
         <div class="upload-wrap">
-            <input id="{{ field.id }}" class="field" type="file" name="{{ field.id }}" value="{{ field.value }}" />
+            <input type="file"
+                class="field"
+                id="{{ field.id }}"
+                name="{{ field.id }}"
+                value="{{ field.value }}" />
             <span class="file-name" placeholder="{{ field.placeholder }}">{{ field.fileName }}</span>
             <svg class="icon">
                 <use class="use" xlink:href="#icons--upload"></use>
