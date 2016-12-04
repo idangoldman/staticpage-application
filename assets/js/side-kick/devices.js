@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import flight, { component } from 'imports?$=jquery!flightjs';
 
-var devicesComponent = component( function application() {
+var devicesComponent = component( function() {
     this.after('initialize', function() {
         this.on( '.device', 'click', this.toggle );
     });
@@ -22,4 +22,4 @@ var devicesComponent = component( function application() {
     }
 });
 
-export default devicesComponent;
+devicesComponent.attachTo( '.devices' );
