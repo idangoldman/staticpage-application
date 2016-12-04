@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import flight, { component } from 'imports?$=jquery!flightjs';
 
 var withToggle = function mixin() {
     this.attributes({

@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import flight, { component } from 'imports?$=jquery!flightjs';
 
 var withSelect = function mixin() {
     this.attributes({
