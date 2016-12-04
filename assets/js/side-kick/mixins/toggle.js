@@ -10,10 +10,10 @@ var withToggle = function mixin() {
 
     this.after('initialize', function() {
         // toggle feature box
-        this.select('toggleClick').on( 'click', this.toggle.bind(this) );
+        this.select('toggleClick').on( 'click', toggle.bind(this) );
     });
 
-    this.toggle = function( event ) {
+    function toggle( event ) {
         $( event.currentTarget )
             .toggleClass( this.attr.toggleClass )
             .parent()

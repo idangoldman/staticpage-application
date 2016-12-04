@@ -8,19 +8,19 @@ var withSelect = function mixin() {
 
     this.after('initialize', function() {
         // focus click
-        this.select('focusField').on( 'focus', this.focus );
+        this.select('focusField').on( 'focus', focus );
 
         // blur click
-        this.select('focusField').on( 'blur', this.blur );
+        this.select('focusField').on( 'blur', blur );
     });
 
-    this.focus = function( event ) {
+    function focus( event ) {
         $( event.currentTarget )
             .parent()
                 .addClass('focus');
     }
 
-    this.blur = function( event ) {
+    function blur( event ) {
         $( event.currentTarget )
             .parent()
                 .removeClass('focus');
