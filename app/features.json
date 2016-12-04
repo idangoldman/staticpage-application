@@ -4,21 +4,24 @@
         "class": "general",
         "fields": [
             {
-                "id": "general_html_filename",
-                "title": "HTML filename",
-                "type": "text",
-                "placeholder": "index"
-            },
-            {
-                "id": "general_html_type",
-                "title": "Type",
+                "id": "general_file_type",
+                "title": "File type",
                 "type": "select",
+                "is_disabled": true,
                 "default": "welcome",
-                "disabled": 1,
+                "value": "welcome",
                 "options": [
                     { "key": "welcome", "value": "Welcome" },
                     { "key": "thank_you", "value": "Thank You" }
                 ]
+            },
+            {
+                "id": "general_file_name",
+                "title": "File name",
+                "type": "text",
+                "default": "index",
+                "placeholder": "index",
+                "message": "Accepted characters are **a-z**, **0-9**, **-**, **_** only."
             }
         ]
     },
@@ -102,7 +105,7 @@
                 "title": "Container entrance animation",
                 "type": "select",
                 "default": "no-animation",
-                "disabled": 1,
+                "is_disabled": true,
                 "options": [
                     { "key": "no-animation", "value": "No animation" }
                 ]
@@ -212,9 +215,11 @@
                 "id": "analytics_services",
                 "title": "Service",
                 "type": "select",
-                "default": "google-analytics",
-                "disabled": 1,
+                "default": "none",
+                "value": "none",
+                "is_disabled": false,
                 "options": [
+                    { "key": "none", "value": "None" },
                     { "key": "google-analytics", "value": "Google Analytics" }
                 ]
             },
