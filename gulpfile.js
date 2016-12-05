@@ -10,7 +10,7 @@ var autoprefixer = require('autoprefixer'),
     size = require('gulp-size'),
     svgSprite = require('gulp-svg-sprite'),
     uglify = require('gulp-uglify'),
-    webpack = require('gulp-webpack');
+    webpack = require('webpack-stream');
 
 // Default task with watch
 gulp.task('default', ['webpack-side-kick', 'uglify-page', 'style', 'svg-sprite', 'background-images'], function() {
