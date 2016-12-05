@@ -47,7 +47,7 @@ def clearcache():
 
 def deploy():
     run('cd %s; git checkout %s' % (remote_app_dir, env.branch))
-    run('cd %(path)s; git pull' % {'path': remote_app_dir})
+    run('cd %s; git pull' % (remote_app_dir))
     install_backend()
     restart()
     clearcache()
