@@ -31,7 +31,7 @@ def create_app():
     return app
 
 app = create_app()
-app.register_blueprint(static_pages,url_prefix='/pages')
+app.register_blueprint(static_pages, url_prefix='/pages')
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
 app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -58,6 +58,22 @@ def thank_you():
 @app.route('/')
 def index_route():
     return redirect('/welcome')
+
+@app.errorhandler(403)
+def page_forbidden(e):
+    return render_template('pages/errors/403.html'), 403
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('pages/errors/404.html'), 404
+
+@app.errorhandler(500)
+def page_internal_server_error(e):
+    return render_template('pages/errors/500.html'), 500
+
+@app.errorhandler(503)
+def page_service_unavailable(e):
+    return render_template('pages/errors/503.html'), 503
 
 if __name__ == '__main__':
     # some stuff for debugger in pycharm
