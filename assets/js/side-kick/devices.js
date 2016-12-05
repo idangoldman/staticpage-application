@@ -7,7 +7,8 @@ var devicesComponent = component( function() {
     });
 
     this.toggle = function( event ) {
-        var $device = $( event.currentTarget );
+        var $device = $( event.currentTarget ),
+            deviceType = $device.text().trim().toLowerCase();
 
         this.$node
             .children()
@@ -16,9 +17,7 @@ var devicesComponent = component( function() {
         $device
             .addClass('current');
 
-        this.trigger(
-            document, 'switchDeviceView', { deviceType: $device.text().trim().toLowerCase() }
-        );
+        this.trigger( document, 'switchDeviceView', { deviceType } );
     }
 });
 
