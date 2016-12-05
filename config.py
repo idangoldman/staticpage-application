@@ -8,6 +8,6 @@ class Config(object):
     MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
     GOOGLE_ANALYTICS_ID = os.environ['GOOGLE_ANALYTICS_ID']
     ADDTHIS_PUBID = os.environ['ADDTHIS_PUBID']
-
+    CSRF_SECRET_KEY = "vsdfvF34VTRE5Ef2hkl8RSGGWE"
 class DevConfig(Config):
     DEBUG = True
