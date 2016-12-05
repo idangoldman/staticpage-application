@@ -58,6 +58,7 @@ def thank_you():
     return response
 
 @app.route('/')
+@app.route('/pages')
 def index_route():
     return redirect('/welcome')
 
