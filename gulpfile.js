@@ -21,7 +21,7 @@ gulp.task('default', ['webpack', 'uglify-page', 'style', 'svg-sprite', 'backgrou
         'assets/js/side-kick.js',
         'assets/js/home.js',
         'assets/js/side-kick/**/*.js'
-    ], ['webpack-side-kick']);
+    ], ['webpack']);
     gulp.watch('assets/js/side-kick.js', ['webpack']);
     gulp.watch('assets/images/icons/**/*.svg', ['svg-sprite']);
 });
