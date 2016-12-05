@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import flight, { component, utils } from 'imports?$=jquery!flightjs';
+import { component, utils } from 'imports?$=jquery!flightjs';
 
 // mixins
 import withFocus from './mixins/focus';

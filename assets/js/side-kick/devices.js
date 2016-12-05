@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import flight, { component } from 'imports?$=jquery!flightjs';
+import { component } from 'imports?$=jquery!flightjs';
 
 let currentDeviceType = 'desktop';
 
