@@ -24,8 +24,9 @@ body {
     }
 
     &.mobile-view {
-        width: 320px;
+        box-shadow: 0 0 4px 0 rgba( #000, 0.5 );
         height: 568px;
+        width: 320px;
     }
 }
 
