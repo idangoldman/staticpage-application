@@ -3,7 +3,7 @@
 
     <meta charset="UTF-8" />
     <title>{{ title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, target-densitydpi=high-dpi, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="theme-color" content="#000813">
 
@@ -16,9 +16,5 @@
         {% block content %}{% endblock %}
     </section>
 
-    {% block footer %}
-        {% from 'macros/3rd-party.html' import google_analytics %}
-        {{ google_analytics( ga_id ) }}
-    {% endblock %}
-
+    {% block footer %}{% endblock %}
 </body></html>

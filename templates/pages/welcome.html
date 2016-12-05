@@ -44,6 +44,9 @@
 {% block footer %}
     {{ super() }}
 
+    {% from 'macros/3rd-party.html' import google_analytics %}
+    {{ google_analytics( ga_id ) }}
+
     <script
       src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="

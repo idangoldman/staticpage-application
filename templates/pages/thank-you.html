@@ -21,3 +21,10 @@
         {{ add_this( pub_id ) }}
     </article>
 {% endblock %}
+
+{% block footer %}
+    {{ super() }}
+
+    {% from 'macros/3rd-party.html' import google_analytics %}
+    {{ google_analytics( ga_id ) }}
+{% endblock %}
