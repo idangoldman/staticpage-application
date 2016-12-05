@@ -1,6 +1,8 @@
 import $ from 'jquery';
 import flight, { component } from 'imports?$=jquery!flightjs';
 
+let currentDeviceType = 'desktop';
+
 var devicesComponent = component( function() {
     this.after('initialize', function() {
         this.on( '.device', 'click', this.toggle );
@@ -10,14 +12,19 @@ var devicesComponent = component( function() {
         var $device = $( event.currentTarget ),
             deviceType = $device.text().trim().toLowerCase();
 
-        this.$node
-            .children()
-                .removeClass('current');
+        if ( deviceType !== currentDeviceType ) {
+            this.$node
+                .children()
+                    .removeClass('current');
 
-        $device
-            .addClass('current');
+            $device
+                .addClass('current');
 
-        this.trigger( document, 'switchDeviceView', { deviceType } );
+            this.trigger( document, 'switchDeviceView', { deviceType } );
+
+            currentDeviceType = deviceType;
+        }
+
     }
 });
 
