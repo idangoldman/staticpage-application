@@ -10,14 +10,19 @@ var autoprefixer = require('autoprefixer'),
     size = require('gulp-size'),
     svgSprite = require('gulp-svg-sprite'),
     uglify = require('gulp-uglify'),
-    webpack = require('webpack-stream');
+    webpack = require('webpack-stream'),
+    webpackConfig = require('./webpack.config.js');
 
 // Default task with watch
-gulp.task('default', ['webpack-side-kick', 'uglify-page', 'style', 'svg-sprite', 'background-images'], function() {
+gulp.task('default', ['webpack', 'uglify-page', 'style', 'svg-sprite', 'background-images'], function() {
     gulp.watch('assets/scss/**/*.scss', ['style']);
     gulp.watch('assets/js/page.js', ['uglify-page']);
-    gulp.watch(['assets/js/side-kick.js', 'assets/js/side-kick/**/*.js'], ['webpack-side-kick']);
-    gulp.watch('assets/js/side-kick.js', ['webpack-side-kick']);
+    gulp.watch([
+        'assets/js/side-kick.js',
+        'assets/js/home.js',
+        'assets/js/side-kick/**/*.js'
+    ], ['webpack-side-kick']);
+    gulp.watch('assets/js/side-kick.js', ['webpack']);
     gulp.watch('assets/images/icons/**/*.svg', ['svg-sprite']);
 });
 
@@ -89,7 +94,7 @@ gulp.task('style', function() {
         .pipe( gulp.dest('static/') )
 });
 
-gulp.task('clean-static', function() {
+gulp.task('clean', function() {
     return del( ['static/**/*'] );
 });
 
@@ -101,39 +106,8 @@ gulp.task('uglify-page', function() {
 });
 
 //  webpack side kick script
-gulp.task('webpack-side-kick', function() {
-    var webpackConfig = {
-        debug: true,
-        devtool: 'source-map',
-        output: {
-            filename: 'side-kick.js',
-        },
-        resolve: {
-            modulesDirectories: [
-                "web_modules",
-                "node_modules",
-                "bower_components"
-            ]
-        },
-        module: {
-            loaders: [
-                {
-                    test: /\.js$/,
-                    exclude: /(node_modules|bower_components)/,
-                    loader: 'babel',
-                    query: {
-                        presets: [ 'es2015' ]
-                    }
-                },
-                {
-                    test: /\.(njk|nunjucks)$/,
-                    loader: 'nunjucks-loader'
-                }
-            ]
-        }
-    };
-
-    return gulp.src('side-kick.js', { cwd: 'assets/js' })
+gulp.task('webpack', function() {
+    return gulp.src('relevant-enteries-in-webpack-config')
         .pipe( webpack( webpackConfig ) )
         .pipe( gulp.dest('static/') );
 });
