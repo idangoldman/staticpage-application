@@ -1,29 +1,23 @@
-{% extends 'pages/_layout.html' %}
-{% set title = 'Welcome Home' %}
+<!DOCTYPE html>
+<html><head>
 
-{% block head %}
-    {{ super() }}
+    <meta charset="UTF-8" />
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="theme-color" content="#000813">
 
     <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet" type="text/css" />
-{% endblock head %}
+</head><body>
 
-{% block content %}
-    <article class="article">
-        <h1 class="title">
-        </h1>
-
-        <h2 class="sub-title">
-        </h2>
-
-        <p class="description">
-        </p>
-    </article>
-{% endblock %}
-
-{% block footer %}
-    {{ super() }}
-
-    <iframe class="iframe-side-kick" src="/side-kick"
+    <iframe class="page" src="/pages"
         frameborder="0" border="0" cellspacing="0">
     </iframe>
-{% endblock %}
+
+    <iframe class="side-kick" src="/side-kick"
+        frameborder="0" border="0" cellspacing="0">
+    </iframe>
+
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
+
+</body></html>
