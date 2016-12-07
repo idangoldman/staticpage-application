@@ -1,7 +1,5 @@
 from flask import Flask, Blueprint, render_template, redirect, make_response
 from flask_assets import Environment, Bundle
-from wtforms import Form, StringField, validators
-from pprint import pprint
 
 from werkzeug.contrib.fixers import ProxyFix
 import inspect, os
@@ -11,10 +9,10 @@ from app.controllers.general import *
 
 import app.controllers.admin as dashboard
 from app.models import *
-from flask_wtf.csrf import CsrfProtect
-from wtforms.csrf.session import SessionCSRF
-from flask import session
 
+from flask_wtf import FlaskForm
+from flask_wtf.csrf import CsrfProtect
+from wtforms import StringField, validators
 
 
 def create_app():
@@ -42,15 +40,8 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 
 app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
-class NewsletterForm(Form):
+class NewsletterForm(FlaskForm):
     email = StringField("email", [validators.Required(), validators.Email("Please enter your email address.")])
-    class Meta:
-        csrf = True  # Enable CSRF
-        csrf_secret = app.config['CSRF_SECRET_KEY']
-        csrf_class = SessionCSRF
-        @property
-        def csrf_context(self):
-            return session
 
 @app.route('/welcome', methods=['GET', 'POST'])
 def welcome():

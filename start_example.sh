@@ -21,5 +21,5 @@ export GOOGLE_ANALYTICS_ID=""
 export ADDTHIS_PUBID=""
 
 
-venv/bin/python app.py
+venv/bin/python application.py
 
