@@ -17,6 +17,8 @@ cp start_example.sh start.sh
 ### Frontend
 npm install
 
+npm install gulp bower
+
 bower install
 
 ## Run
