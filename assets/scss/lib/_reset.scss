@@ -73,3 +73,7 @@ body, button, input[type="text"], select, textarea {
 .none {
     display: none !important;
 }
+
+@mixin no-select {
+    user-select: none;
+}

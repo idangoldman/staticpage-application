@@ -16,7 +16,6 @@ var withValidation = function mixin() {
     };
 
     this.addClassError = function( element ) {
-        console.log('fail.');
         $( element )
             .parents( this.attr.fieldParent )
                 .addClass('error');
