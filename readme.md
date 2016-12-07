@@ -16,6 +16,7 @@ cp start_example.sh start.sh
 
 ### Frontend
 npm install
+
 bower install
 
 ## Run
