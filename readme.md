@@ -21,7 +21,7 @@ bower install
 ## Run
 
 ### Backend
-sh start.sh # Backend
+sh start.sh
 
 ### Frontend
-gulp # Frontend
+gulp
