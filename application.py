@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, render_template, redirect, make_response, json
+from flask import Flask, Blueprint, render_template, redirect, make_response, json, request, jsonify
 
 from werkzeug.contrib.fixers import ProxyFix
 import inspect, os
@@ -79,6 +79,10 @@ def side_kick():
     }
 
     return render_template('pages/side-kick.html', **payload)
+
+@app.route('/fake-api', methods=['POST'])
+def fake_api():
+    return jsonify( request.values )
 
 @app.errorhandler(403)
 def page_forbidden(e):

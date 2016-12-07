@@ -16,14 +16,19 @@ var featureGeneral = component( withFocus, withSelect, withToggle, withValidatio
 
     this.after('initialize', function() {
         this.select('fileNameField').on( 'keyup keypress blur', utils.throttle( fileNameSave.bind(this), 250 ) );
+
+        this.on( document, 'updateField.success', function() {
+            console.log('YaY?');
+        })
     });
 
     function fileNameSave( event ) {
         var element = event.currentTarget,
+            name = element.name,
             value = element.value.trim();
 
         if ( this.validate( 'name', value ) ) {
-            console.log( value );
+            this.trigger( document, 'updateField', { name, value } );
             this.removeClassError( element );
         } else {
             this.addClassError( element );
