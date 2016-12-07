@@ -8,6 +8,7 @@
 {% endblock head %}
 
 {% block content %}
+
     <article class="article">
         <h1 class="title">
             StaticPages
@@ -25,7 +26,7 @@
     </article>
 
     <form action="/welcome" method="POST" class="newsletter">
-        {# {{ form.csrf_token }} #}
+        {{ form.csrf_token }}
         {{ form.email(class="email", placeholder="your@email.work") }}
         <button type="submit" class="submit">Keep me posted!</button>
         {% for message in form.email.errors %}

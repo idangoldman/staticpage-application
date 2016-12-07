@@ -1,7 +1,5 @@
 from flask import Flask, Blueprint, render_template, redirect, make_response
 from flask_assets import Environment, Bundle
-from wtforms import Form, StringField, validators
-from pprint import pprint
 
 from werkzeug.contrib.fixers import ProxyFix
 import inspect, os
@@ -11,6 +9,11 @@ from app.controllers.general import *
 
 import app.controllers.admin as dashboard
 from app.models import *
+
+from flask_wtf import FlaskForm
+from flask_wtf.csrf import CsrfProtect
+from wtforms import StringField, validators
+
 
 def create_app():
     app = Flask(__name__)
@@ -25,6 +28,7 @@ def create_app():
     admin = Admin(app)
     db = MongoEngine()
     db.init_app(app)
+    CsrfProtect(app)
     from app.models import db
     admin.add_view(dashboard.adminPage(name='Page'))
     admin.add_view(dashboard.UserView(User))
@@ -36,13 +40,12 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 
 app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
-class NewsletterForm(Form):
+class NewsletterForm(FlaskForm):
     email = StringField("email", [validators.Required(), validators.Email("Please enter your email address.")])
 
 @app.route('/welcome', methods=['GET', 'POST'])
 def welcome():
     form = NewsletterForm(request.form)
-
     if request.method == 'POST' and form.validate():
         if mailchimp_subscribe(form.email.data):
             return redirect('/thank-you')
@@ -74,6 +77,7 @@ def page_internal_server_error(e):
 @app.errorhandler(503)
 def page_service_unavailable(e):
     return render_template('pages/errors/503.html'), 503
+
 
 if __name__ == '__main__':
     # some stuff for debugger in pycharm
