@@ -23,20 +23,20 @@ var apiCalls = component( withRequest, function() {
     }
 
     function updateField( event, data ) {
-        console.log(event);
-        var postConfig = {
-            url: apiUrl,
-            data: data,
-            success: function( responseData ) {
-                this.trigger( document, event.type + '.success', responseData );
-            },
-            // error: function(jqXHR, textStatus, errorThrown) {
-            error: function() {
-                this.trigger( document, event.type + '.error' );
-            }
-        };
+        var eventName = event.type + '_' + data.name,
+            putConfig = {
+                url: apiUrl,
+                data: { 'data': JSON.stringify( data ) },
+                success: function( responseData ) {
+                    this.trigger( document, eventName + '_success', responseData );
+                },
+                // error: function(jqXHR, textStatus, errorThrown) {
+                error: function() {
+                    this.trigger( document, eventName + '_error' );
+                }
+            };
 
-        this.post( postConfig );
+        this.put( putConfig );
     }
 });
 

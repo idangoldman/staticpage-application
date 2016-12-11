@@ -11,15 +11,16 @@ import withValidation from './mixins/validation';
 var featureGeneral = component( withFocus, withSelect, withToggle, withValidation, function() {
     this.attributes({
         'fileTypeField': '.general_type_name .field',
-        'fileNameField': '.general_file_name .field'
+        'fileNameField': '.general_file_name .field',
+        'fileNameFieldName': 'general_file_name'
     });
 
     this.after('initialize', function() {
         this.select('fileNameField').on( 'keyup keypress blur', utils.throttle( fileNameSave.bind(this), 250 ) );
 
-        this.on( document, 'updateField.success', function() {
-            console.log('YaY?');
-        })
+        // this.on( document, 'updateField_' + this.attr.fileNameFieldName + '_success', function(event) {
+        //     console.log(event.type);
+        // });
     });
 
     function fileNameSave( event ) {
