@@ -5,12 +5,15 @@ let currentDeviceType = 'desktop';
 
 var devicesComponent = component( function() {
     this.after('initialize', function() {
-        this.on( '.device', 'click', this.toggle );
+        this.on( '.device', 'click', this.switch );
     });
 
-    this.toggle = function( event ) {
+    this.switch = function( event ) {
         var $device = $( event.currentTarget ),
             deviceType = $device.text().trim().toLowerCase();
+
+        // TODO: href regex and not text.trim
+        // \/(\w+)$
 
         if ( deviceType !== currentDeviceType ) {
             this.$node
@@ -25,6 +28,7 @@ var devicesComponent = component( function() {
             currentDeviceType = deviceType;
         }
 
+        event.preventDefault();
     }
 });
 
