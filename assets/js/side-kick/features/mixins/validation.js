@@ -1,18 +1,26 @@
 import $ from 'jquery';
 
+let cacheValue = '';
+
 var withValidation = function mixin() {
     this.attributes({
         'fieldParent': '.fieldset',
     });
 
     this.validate = function( type, value ) {
-        var regex = {
-            'name': /^[a-zA-Z0-9_]*$/
-        };
+        var valid = false,
+            regex = {
+                'name': /^[a-zA-Z0-9_]*$/
+            };
 
         value = typeof value === 'string' ? value.trim() : '';
 
-        return regex[type].test( value );
+        if (value !== cacheValue && regex[type].test( value )) {
+            cacheValue = value;
+            valid = true;
+        }
+
+        return valid;
     };
 
     this.addClassError = function( element ) {
