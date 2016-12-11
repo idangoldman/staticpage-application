@@ -1,15 +1,15 @@
 [
     {
+        "name": "general",
         "title": "General",
-        "class": "general",
         "fields": [
             {
                 "id": "general_file_type",
+                "name": "file_type",
                 "title": "File type",
                 "type": "select",
                 "is_disabled": true,
                 "default": "welcome",
-                "value": "welcome",
                 "options": [
                     { "key": "welcome", "value": "Welcome" },
                     { "key": "thank_you", "value": "Thank You" }
@@ -17,6 +17,7 @@
             },
             {
                 "id": "general_file_name",
+                "name": "file_name",
                 "title": "File name",
                 "type": "text",
                 "default": "index",
@@ -26,11 +27,12 @@
         ]
     },
     {
+        "name": "content",
         "title": "Content",
-        "class": "content",
         "fields": [
             {
                 "id": "content_logo",
+                "name": "logo",
                 "title": "Logo",
                 "type": "image_upload",
                 "placeholder": "logo.png",
@@ -38,27 +40,31 @@
             },
             {
                 "id": "content_title",
+                "name": "title",
                 "title": "Title",
                 "type": "text"
             },
             {
                 "id": "content_sub_title",
+                "name": "sub_title",
                 "title": "Sub Title",
                 "type": "textarea"
             },
             {
                 "id": "content_desciption",
+                "name": "desciption",
                 "title": "Description",
                 "type": "textarea"
             }
         ]
     },
     {
+        "name": "design",
         "title": "Design",
-        "class": "design",
         "fields": [
             {
                 "id": "design_background_image",
+                "name": "background_image",
                 "title": "Background image",
                 "type": "image_upload",
                 "placeholder": "background.png",
@@ -66,6 +72,7 @@
             },
             {
                 "id": "design_background_color",
+                "name": "background_color",
                 "title": "Background color",
                 "type": "text",
                 "default": "#fff",
@@ -73,6 +80,7 @@
             },
             {
                 "id": "design_background_repeat",
+                "name": "background_repeat",
                 "title": "Background repeat",
                 "type": "select",
                 "default": "no-repeat",
@@ -85,6 +93,7 @@
             },
             {
                 "id": "design_container_position",
+                "name": "container_position",
                 "title": "Container position",
                 "type": "select",
                 "default": "middle",
@@ -102,6 +111,7 @@
             },
             {
                 "id": "design_container_entrance_animation",
+                "name": "container_entrance_animation",
                 "title": "Container entrance animation",
                 "type": "select",
                 "default": "no-animation",
@@ -112,6 +122,7 @@
             },
             {
                 "id": "design_favicon",
+                "name": "favicon",
                 "title": "Favicon",
                 "type": "image_upload",
                 "placeholder": "favicon.ico",
@@ -119,6 +130,7 @@
             },
             {
                 "id": "design_font_family",
+                "name": "font_family",
                 "title": "Font family",
                 "type": "select",
                 "default": "open-sans",
@@ -147,6 +159,7 @@
             },
             {
                 "id": "design_base_font_size",
+                "name": "base_font_size",
                 "title": "Base font size",
                 "type": "select",
                 "default": "16",
@@ -162,6 +175,7 @@
             },
             {
                 "id": "design_text_alignment",
+                "name": "text_alignment",
                 "title": "Text alignment",
                 "type": "select",
                 "default": "center",
@@ -173,6 +187,7 @@
             },
             {
                 "id": "design_font_color",
+                "name": "font_color",
                 "title": "Font color",
                 "type": "text",
                 "default": "#fff",
@@ -180,23 +195,26 @@
             },
             {
                 "id": "design_additional_styles",
+                "name": "additional_styles",
                 "title": "Additional styles",
                 "type": "textarea"
             }
         ]
     },
     {
+        "name": "search-results",
         "title": "Search Results",
-        "class": "search-results",
         "fields": [
             {
                 "id": "search_results_title",
+                "name": "title",
                 "title": "Title",
                 "type": "text",
                 "message": "Recommended **70** characters."
             },
             {
                 "id": "search_results_desciption",
+                "name": "desciption",
                 "title": "Description",
                 "type": "textarea",
                 "message": "Recommended **156** characters."
@@ -208,15 +226,15 @@
         ]
     },
     {
+        "name": "analytics",
         "title": "Analytics",
-        "class": "analytics",
         "fields": [
             {
                 "id": "analytics_services",
+                "name": "services",
                 "title": "Service",
                 "type": "select",
                 "default": "none",
-                "value": "none",
                 "is_disabled": false,
                 "options": [
                     { "key": "none", "value": "None" },
@@ -225,6 +243,7 @@
             },
             {
                 "id": "analytics_identifier",
+                "name": "identifier",
                 "title": "Identifier",
                 "type": "text",
                 "placeholder": "UA-12345678-1"
