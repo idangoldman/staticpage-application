@@ -15,7 +15,8 @@ var Logo = component( withFocus, function application() {
     this.after('initialize', function() {
         this.select('field').on( 'change', this.fieldChanged.bind(this) );
 
-
+        // this.on( document, 'updateField_' + this.attr.fieldName + '_success', function() { console.log('Yay!'); });
+        // this.on( document, 'updateField_' + this.attr.fieldName + '_error', function() { console.log('Nay!'); });
     });
 
     this.fieldChanged = function( event ) {
@@ -23,25 +24,27 @@ var Logo = component( withFocus, function application() {
         var that = this,
             file = this.setFile( event.currentTarget );
 
-        this.setChoosenFileName( file.name );
-        this.getFileContent( file )
-            .then(function( rawFile ) {
+        if ( 'empty' !== file.name ) {
+            this.setChoosenFileName( file.name );
+            this.getFileContent( file )
+                .then(function( rawFile ) {
 
-                that.select('message')
-                    .removeClass('red')
-                    .html( 'Upload gif, jpg, and png only, up to 1MB.' );
+                    that.select('message')
+                        .removeClass('red')
+                        .html( 'Upload gif, jpg, and png only, up to 1MB.' );
 
-                that.trigger( document, 'updateField', {
-                    name: that.attr.fieldName,
-                    raw_image: rawFile,
-                    value: file.name
+                    that.trigger( document, 'updateField', {
+                        name: that.attr.fieldName,
+                        raw_image: rawFile,
+                        value: file.name
+                    });
+                })
+                .catch(function( errorMessage ) {
+                    that.select('message')
+                        .addClass('red')
+                        .html( errorMessage );
                 });
-            })
-            .catch(function( errorMessage ) {
-                that.select('message')
-                    .addClass('red')
-                    .html( errorMessage );
-            });
+        }
     }
 
     this.setChoosenFileName = function( filename ) {
@@ -49,7 +52,7 @@ var Logo = component( withFocus, function application() {
     }
 
     this.setFile = function( element ) {
-        var file = {};
+        var file = new File([], 'empty');
 
         if ( !! element.files.length ) {
             file = element.files[0];
