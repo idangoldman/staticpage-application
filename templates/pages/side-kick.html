@@ -65,7 +65,7 @@
         </footer>
     </section>
 
-    {# <script> var initialData = {{ initial_data | safe }}; </script> #}
+    {# <script> var featuresData = {{ features | tojson | safe }}; </script> #}
     <script src="{{ url_for('static', filename='side-kick.js') }}"></script>
 
 </body></html>

@@ -8,17 +8,16 @@ import withToggle from './mixins/toggle';
 import withValidation from './mixins/validation';
 
 
-var featureGeneral = component( withFocus, withSelect, withToggle, withValidation, function() {
+var generalFeature = component( withFocus, withSelect, withToggle, withValidation, function() {
     this.attributes({
-        'fileTypeField': '.general_type_name .field',
         'fileNameField': '.general_file_name .field',
-        'fileNameFieldName': 'general_file_name'
+        'fileNameEventName': 'updateField_general_file_name_success'
     });
 
     this.after('initialize', function() {
         this.select('fileNameField').on( 'keyup keypress blur', utils.throttle( fileNameSave.bind(this), 250 ) );
 
-        // this.on( document, 'updateField_' + this.attr.fileNameFieldName + '_success', function(event) {
+        // this.on( document, this.attr.fileNameEventName, function(event) {
         //     console.log(event.type);
         // });
     });
@@ -37,4 +36,4 @@ var featureGeneral = component( withFocus, withSelect, withToggle, withValidatio
     }
 });
 
-featureGeneral.attachTo( '.features .general' );
+generalFeature.attachTo( '.feature.general' );

@@ -1,4 +1,6 @@
 module.exports = {
+    watch: false,
+    cache: false,
     debug: true,
     devtool: 'source-map',
     entry: {
