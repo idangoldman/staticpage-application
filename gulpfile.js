@@ -16,13 +16,12 @@ var autoprefixer = require('autoprefixer'),
 // Default task with watch
 gulp.task('default', ['webpack', 'uglify-page', 'style', 'svg-sprite', 'background-images'], function() {
     gulp.watch('assets/scss/**/*.scss', ['style']);
-    gulp.watch('assets/js/page.js', ['uglify-page']);
+    gulp.watch('assets/js/page/index.js', ['uglify-page']);
     gulp.watch([
-        'assets/js/side-kick.js',
         'assets/js/home.js',
+        'assets/js/page/intervention.js',
         'assets/js/side-kick/**/*.js'
     ], ['webpack']);
-    gulp.watch('assets/js/side-kick.js', ['webpack']);
     gulp.watch('assets/images/icons/**/*.svg', ['svg-sprite']);
 });
 
@@ -43,7 +42,7 @@ gulp.task('svg-sprite', function() {
     var spriteRename = ( path ) => {
         path.dirname = '';
         path.basename = 'side-kick-sprite';
-    }
+    };
 
     return gulp.src('**/*.svg', { cwd: 'assets/images/' })
         .pipe( svgSprite( spriteConfig ) )
@@ -100,8 +99,13 @@ gulp.task('clean', function() {
 
 // only uglify page script
 gulp.task('uglify-page', function() {
-    return gulp.src('page.js', { cwd: 'assets/js' })
-        .pipe(uglify())
+    var pageRename = ( path ) => {
+        path.basename = 'page';
+    };
+
+    return gulp.src('index.js', { cwd: 'assets/js/page' })
+        .pipe( uglify() )
+        .pipe( rename( pageRename ) )
         .pipe( gulp.dest('static/') )
 });
 

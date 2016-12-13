@@ -4,7 +4,8 @@ module.exports = {
     debug: true,
     devtool: 'source-map',
     entry: {
-        'side-kick': './assets/js/side-kick.js',
+        'page-intervention': './assets/js/page/intervention.js',
+        'side-kick': './assets/js/side-kick/index.js',
         'home': './assets/js/home.js'
     },
     output: {
