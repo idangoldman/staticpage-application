@@ -29,7 +29,6 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    // height: 100vh;
     height: 100%;
     justify-content: center;
     margin: 0 auto;
@@ -43,11 +42,19 @@
     }
 }
 
-.article {
+.content {
     text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
 
     & > * {
         margin-bottom: px2rem(25);
+    }
+
+    .logo {
+        display: block;
+        margin: 0 auto;
+        max-height: px2rem(150);
+        max-width: px2rem(350);
+        width: 100%;
     }
 
     .title {

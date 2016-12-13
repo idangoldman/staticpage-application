@@ -9,18 +9,28 @@
 
 {% block content %}
 
-    <article class="article">
-        <h1 class="title">
-            {{ content.title }}
-        </h1>
+    <article class="content">
+        {% if content.logo %}
+            <img class="logo" src="{{ content.logo }}" />
+        {% endif %}
 
-        <h2 class="sub-title">
-            {{ content.sub_title | nl2br }}
-        </h2>
+        {% if content.title %}
+            <h1 class="title">
+                {{ content.title }}
+            </h1>
+        {% endif %}
 
-        <p class="description">
-            {{ content.description | nl2br | markdown }}
-        </p>
+        {% if content.title %}
+            <h2 class="sub-title">
+                {{ content.sub_title | nl2br }}
+            </h2>
+        {% endif %}
+
+        {% if content.title %}
+            <p class="description">
+                {{ content.description | nl2br | markdown }}
+            </p>
+        {% endif %}
     </article>
 
     <form action="/welcome" method="POST" class="newsletter">
