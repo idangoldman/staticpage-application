@@ -75,7 +75,7 @@
 
                     .field,
                     .field-textarea,
-                    .file-name,
+                    .choosen-file-name,
                     .selected-text {
                         background-color: transparent;
                         border: 0;
@@ -148,7 +148,7 @@
                         z-index: 2;
                     }
 
-                    .file-name,
+                    .choosen-file-name,
                     .selected-text {
                         @include no-select;
 
