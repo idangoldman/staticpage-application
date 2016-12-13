@@ -13,10 +13,6 @@ from flask_wtf import FlaskForm
 from flask_wtf.csrf import CsrfProtect
 from wtforms import StringField, validators
 
-import jinja2
-import markdown
-jinja2.filters.FILTERS['markdown'] = lambda text: jinja2.Markup(markdown.markdown(text))
-
 def create_app():
     app = Flask(__name__)
     CORS(app)
@@ -39,21 +35,59 @@ app.wsgi_app = ProxyFix(app.wsgi_app)
 
 app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
+
+# Jinja custom filters
+import re
+from jinja2 import evalcontextfilter, Markup
+import markdown as markdown_lib
+
+@app.template_filter()
+@evalcontextfilter
+def markdown(eval_ctx, value):
+    return Markup(markdown_lib.markdown(value))
+
+@app.template_filter()
+@evalcontextfilter
+def nl2br(eval_ctx, value):
+    value = re.sub(r'\r\n|\r|\n', '\n', value)
+    param = re.split('\n{2,}', value)
+    param = [u'%s' % p.replace('\n', '<br />') for p in param]
+    param = u'\n\n'.join(param)
+    return Markup(param)
+
+
 class NewsletterForm(FlaskForm):
     email = StringField("email", [validators.Required(), validators.Email("Please enter your email address.")])
 
 @app.route('/welcome', methods=['GET', 'POST'])
 def welcome():
     form = NewsletterForm(request.form)
+
     if request.method == 'POST' and form.validate():
         if mailchimp_subscribe(form.email.data):
             return redirect('/thank-you')
 
-    return render_template('pages/welcome.html', form=form, ga_id=app.config['GOOGLE_ANALYTICS_ID'], pub_id=app.config['ADDTHIS_PUBID'], has_subscribed=request.cookies.get('has_subscribed'))
+    with open('app/user_page.json', 'r') as json_file:
+        user_page = json.load( json_file )
+
+    payload = {
+        'form': form,
+        'ga_id': app.config['GOOGLE_ANALYTICS_ID'],
+        'pub_id': app.config['ADDTHIS_PUBID'],
+        'has_subscribed': request.cookies.get('has_subscribed'),
+        'content': user_page['content']
+    }
+
+    return render_template('pages/welcome.html', **payload)
 
 @app.route('/thank-you')
 def thank_you():
-    response = make_response(render_template('pages/thank-you.html', pub_id=app.config['ADDTHIS_PUBID'], ga_id=app.config['GOOGLE_ANALYTICS_ID']))
+    payload = {
+        'pub_id': app.config['ADDTHIS_PUBID'],
+        'ga_id': app.config['GOOGLE_ANALYTICS_ID']
+    }
+
+    response = make_response(render_template('pages/thank-you.html', **payload))
     response.set_cookie('has_subscribed', 'true')
     return response
 
