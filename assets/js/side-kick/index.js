@@ -1,6 +1,6 @@
 // import './storage';
 import './api-calls';
-import './window-messaging';
+import './post-messaging';
 
 import './devices';
 import './features/general';

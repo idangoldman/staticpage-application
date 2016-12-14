@@ -3,7 +3,7 @@ import { component } from 'imports?$=jquery!flightjs';
 
 let dataNames = ['content_logo'];
 
-var windowMessaging = component( function() {
+var postMessaging = component( function() {
     this.after('initialize', function() {
         this.on( document, 'switchDeviceView', messagePost );
         this.on( document, 'updateField', updatePage );
@@ -20,4 +20,4 @@ var windowMessaging = component( function() {
     }
 });
 
-windowMessaging.attachTo( document );
+postMessaging.attachTo( document );
