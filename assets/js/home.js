@@ -10,19 +10,15 @@ function receiveMessage( event ) {
             case 'switchDeviceView':
                 switchDeviceView( message.data );
                 break;
-            case 'updateField':
-                updateField( message.data );
+            case 'updatePageContent':
+                updatePageContent( message.data );
                 break;
         }
     }
 }
 
-function updateField( data ) {
-    switch( data.name ) {
-        case 'content_logo':
-            window.frames['page'].postMessage( { type: data.name, rawImage: data.raw_image }, '*' );
-            break;
-    }
+function updatePageContent( messageData ) {
+    window.frames['page'].postMessage( messageData, '*' );
 }
 
 function switchDeviceView( { deviceType } ) {

@@ -1,0 +1,1 @@
+export const UPDATE_LOGO = 'content_logo';
