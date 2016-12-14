@@ -2,8 +2,9 @@ import $ from 'jquery';
 import { component } from 'imports?$=jquery!flightjs';
 
 import withFocus from '../mixins/focus';
+import withState from 'flight-with-state';
 
-var Logo = component( withFocus, function application() {
+var Logo = component( withFocus, withState, function application() {
 
     this.attributes({
         'field': '.field',
@@ -42,6 +43,7 @@ var Logo = component( withFocus, function application() {
                     });
                 })
                 .catch(function( errorMessage ) {
+
                     that.select('message')
                         .addClass('red')
                         .html( errorMessage );
