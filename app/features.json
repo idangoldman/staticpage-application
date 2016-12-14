@@ -22,7 +22,7 @@
                 "type": "text",
                 "default": "index",
                 "placeholder": "index",
-                "message": "Accepted characters are **a-z**, **0-9**, **-**, **_** only."
+                "message": "Allowed characters are **_**, **-**, **a-z**, **A-Z**, **0-9**."
             }
         ]
     },

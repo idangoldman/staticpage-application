@@ -12,5 +12,14 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
 });
 
 function handleLogo( data ) {
-    console.log('legs are the new hands.');
+     var $logo = $('.logo');
+
+     if ( $logo.length ) {
+        $logo.attr( 'src', data.raw_image );
+     } else {
+        $('<img />')
+            .addClass('logo')
+            .attr( 'src', data.raw_image )
+            .prependTo('.content');
+     }
 }

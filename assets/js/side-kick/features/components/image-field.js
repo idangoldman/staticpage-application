@@ -25,7 +25,9 @@ var Logo = component( withFocus, function application() {
             file = this.setFile( event.currentTarget );
 
         if ( 'empty' !== file.name ) {
+
             this.setChoosenFileName( file.name );
+
             this.getFileContent( file )
                 .then(function( rawFile ) {
 
