@@ -1,9 +1,17 @@
 import $ from 'jquery';
 import { component } from 'imports?$=jquery!flightjs';
-import { UPDATE_LOGO } from '../constants';
+import {
+    UPDATE_LOGO,
+    UPDATE_TITLE,
+    UPDATE_SUB_TITLE,
+    UPDATE_DESCRIPTION
+} from '../constants';
 
 let pageUpdateFieldsFilter = [
-    UPDATE_LOGO
+    UPDATE_LOGO,
+    UPDATE_TITLE,
+    UPDATE_SUB_TITLE,
+    UPDATE_DESCRIPTION
 ];
 
 var postMessaging = component( function() {
