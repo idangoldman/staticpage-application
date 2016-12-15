@@ -15,21 +15,15 @@
         {% endif %}
 
         {% if content.title %}
-            <h1 class="title">
-                {{ content.title }}
-            </h1>
+            <h1 class="title">{{ content.title }}</h1>
         {% endif %}
 
         {% if content.sub_title %}
-            <h2 class="sub-title">
-                {{ content.sub_title | nl2br }}
-            </h2>
+            <h2 class="sub-title">{{ content.sub_title }}</h2>
         {% endif %}
 
         {% if content.description %}
-            <p class="description">
-                {{ content.description | nl2br }}
-            </p>
+            <p class="description">{{ content.description }}</p>
         {% endif %}
     </article>
 

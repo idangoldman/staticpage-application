@@ -37,15 +37,9 @@ function handleTitle( data ) {
 }
 
 function handleSubTitle( data ) {
-    var text = htmlLineBreak( data.value );
-    $('.sub-title').html( text );
+    $('.sub-title').html( data.value );
 }
 
 function handleDescription( data ) {
-    var text = htmlLineBreak( data.value );
-    $('.description').html( text );
-}
-
-function htmlLineBreak( text ) {
-    return text.replace( /(?:\r\n|\r|\n)/g, '<br />' );
+    $('.description').html( data.value );
 }
