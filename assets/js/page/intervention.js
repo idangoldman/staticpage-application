@@ -37,9 +37,15 @@ function handleTitle( data ) {
 }
 
 function handleSubTitle( data ) {
-    $('.sub-title').html( data.value );
+    var text = htmlLineBreak( data.value );
+    $('.sub-title').html( text );
 }
 
 function handleDescription( data ) {
-    $('.description').html( data.value );
+    var text = htmlLineBreak( data.value );
+    $('.description').html( text );
+}
+
+function htmlLineBreak( text ) {
+    return text.replace( /(?:\r\n|\r|\n)/g, '<br />' );
 }

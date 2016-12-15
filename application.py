@@ -37,6 +37,7 @@ app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspec
 
 
 # Jinja custom filters
+import re
 from jinja2 import evalcontextfilter, Markup
 import markdown as markdown_lib
 
@@ -44,6 +45,15 @@ import markdown as markdown_lib
 @evalcontextfilter
 def markdown(eval_ctx, value):
     return Markup(markdown_lib.markdown(value))
+
+@app.template_filter()
+@evalcontextfilter
+def nl2br(eval_ctx, value):
+    value = re.sub(r'\r\n|\r|\n', '\n', value)
+    param = re.split('\n{2,}', value)
+    param = [u'%s' % p.replace('\n', '<br />') for p in param]
+    param = u'\n\n'.join(param)
+    return Markup(param)
 
 
 class NewsletterForm(FlaskForm):
