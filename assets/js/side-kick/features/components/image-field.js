@@ -1,11 +1,11 @@
 import $ from 'jquery';
 import { component } from 'imports?$=jquery!flightjs';
 
-import withFocus from '../mixins/focus';
 import withEquals from '../mixins/equals';
+import withFocus from '../mixins/focus';
 import withState from 'flight-with-state';
 
-var Logo = component( withFocus, withState, withEquals, function application() {
+var imageField = component( withFocus, withState, withEquals, function application() {
 
     this.attributes({
         'field': '.field',
@@ -42,7 +42,7 @@ var Logo = component( withFocus, withState, withEquals, function application() {
                 .then(function( rawFile ) {
 
                     that.select('message')
-                        .removeClass('red')
+                        .removeClass('error')
                         .html( 'Upload gif, jpg, and png only, up to 1MB.' );
 
                     that.mergeState({
@@ -53,14 +53,14 @@ var Logo = component( withFocus, withState, withEquals, function application() {
                 .catch(function( errorMessage ) {
 
                     that.select('message')
-                        .addClass('red')
+                        .addClass('error')
                         .html( errorMessage );
                 });
         }
     }
 
     this.updateField = function( state, previousState ) {
-        if ( ! this.equals(state, previousState) ) {
+        if ( ! this.equals( state, previousState ) ) {
             this.trigger( document, 'updateField', state );
         }
     };
@@ -115,4 +115,4 @@ var Logo = component( withFocus, withState, withEquals, function application() {
     }
 });
 
-export default Logo;
+export default imageField;

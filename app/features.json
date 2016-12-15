@@ -51,8 +51,8 @@
                 "type": "textarea"
             },
             {
-                "id": "content_desciption",
-                "name": "desciption",
+                "id": "content_description",
+                "name": "description",
                 "title": "Description",
                 "type": "textarea"
             }
@@ -213,8 +213,8 @@
                 "message": "Recommended **70** characters."
             },
             {
-                "id": "search_results_desciption",
-                "name": "desciption",
+                "id": "search_results_description",
+                "name": "description",
                 "title": "Description",
                 "type": "textarea",
                 "message": "Recommended **156** characters."

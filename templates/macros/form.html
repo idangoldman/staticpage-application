@@ -18,9 +18,9 @@
 {% macro textarea( field ) -%}
     <fieldset class="fieldset {{ field.id }}">
         <label class="title" for="{{ field.id }}">{{ field.title }}</label>
-        <div class="field-wrap">
+        <div class="textarea-wrap">
             <textarea
-                class="field-textarea"
+                class="field"
                 id="{{ field.id }}"
                 name="{{ field.id }}"
                 placeholder="{{ field.placeholder }}">{{ value }}</textarea>

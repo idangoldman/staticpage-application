@@ -20,13 +20,13 @@
             </h1>
         {% endif %}
 
-        {% if content.title %}
+        {% if content.sub_title %}
             <h2 class="sub-title">
                 {{ content.sub_title | nl2br }}
             </h2>
         {% endif %}
 
-        {% if content.title %}
+        {% if content.description %}
             <p class="description">
                 {{ content.description | nl2br | markdown }}
             </p>

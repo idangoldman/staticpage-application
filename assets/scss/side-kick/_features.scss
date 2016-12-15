@@ -57,6 +57,7 @@
                 }
 
                 .field-wrap,
+                .textarea-wrap,
                 .select-wrap,
                 .upload-wrap {
                     border: 1px solid #ddd;
@@ -74,7 +75,6 @@
                     }
 
                     .field,
-                    .field-textarea,
                     .choosen-file-name,
                     .selected-text {
                         background-color: transparent;
@@ -133,8 +133,8 @@
                     }
                 }
 
-                .field-wrap {
-                    .field-textarea {
+                .textarea-wrap {
+                    .field {
                         height: 34px * 2;
                         resize: vertical;
                     }
@@ -195,7 +195,7 @@
                     font-size: 11px;
                     margin-top: 5px;
 
-                    &.red {
+                    &.error {
                         color: #ca0000;
                     }
                 }
