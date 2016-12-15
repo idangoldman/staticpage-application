@@ -2,9 +2,10 @@ import $ from 'jquery';
 import { component } from 'imports?$=jquery!flightjs';
 
 import withFocus from '../mixins/focus';
+import withEquals from '../mixins/equals';
 import withState from 'flight-with-state';
 
-var Logo = component( withFocus, withState, function application() {
+var Logo = component( withFocus, withState, withEquals, function application() {
 
     this.attributes({
         'field': '.field',
@@ -13,8 +14,16 @@ var Logo = component( withFocus, withState, function application() {
         'choosenFileName': '.choosen-file-name'
     });
 
+    this.initialState({
+        name: this.fromAttr('fieldName'),
+        raw_image: null,
+        value: ''
+    });
+
     this.after('initialize', function() {
         this.select('field').on( 'change', this.fieldChanged.bind(this) );
+
+        this.after( 'stateChanged', this.updateField );
 
         // this.on( document, 'updateField_' + this.attr.fieldName + '_success', function() { console.log('Yay!'); });
         // this.on( document, 'updateField_' + this.attr.fieldName + '_error', function() { console.log('Nay!'); });
@@ -36,8 +45,7 @@ var Logo = component( withFocus, withState, function application() {
                         .removeClass('red')
                         .html( 'Upload gif, jpg, and png only, up to 1MB.' );
 
-                    that.trigger( document, 'updateField', {
-                        name: that.attr.fieldName,
+                    that.mergeState({
                         raw_image: rawFile,
                         value: file.name
                     });
@@ -50,6 +58,12 @@ var Logo = component( withFocus, withState, function application() {
                 });
         }
     }
+
+    this.updateField = function( state, previousState ) {
+        if ( ! this.equals(state, previousState) ) {
+            this.trigger( document, 'updateField', state );
+        }
+    };
 
     this.setChoosenFileName = function( filename ) {
         this.select('choosenFileName').html( filename );
