@@ -1,15 +1,14 @@
 import $ from 'jquery';
 import { component, utils } from 'imports?$=jquery!flightjs';
 
-import withEquals from '../mixins/equals';
 import withFocus from '../mixins/focus';
 import withState from 'flight-with-state';
 
-var textField = component( withFocus, withState, withEquals, function application() {
+var textField = component( withFocus, withState, function application() {
 
     this.attributes({
         'field': '.field',
-        'fieldName': '',
+        'fieldName': null,
         'message': '.message'
     });
 
@@ -35,7 +34,7 @@ var textField = component( withFocus, withState, withEquals, function applicatio
     }
 
     this.updateField = function( state, previousState ) {
-        if ( ! this.equals( state, previousState ) ) {
+        if ( previousState.value !== state.value ) {
             this.trigger( document, 'updateField', state );
         }
     };

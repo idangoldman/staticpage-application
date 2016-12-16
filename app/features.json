@@ -34,7 +34,14 @@
                 "id": "content_logo",
                 "name": "logo",
                 "title": "Logo",
-                "type": "image_upload",
+                "type": "file",
+                "accepted_formats": [
+                    "image/png",
+                    "image/gif",
+                    "image/jpg",
+                    "image/jpeg",
+                    "image/webp"
+                ],
                 "placeholder": "logo.png",
                 "message": "Upload gif, jpg, and png only, up to 1MB."
             },
@@ -66,7 +73,7 @@
                 "id": "design_background_image",
                 "name": "background_image",
                 "title": "Background image",
-                "type": "image_upload",
+                "type": "file",
                 "placeholder": "background.png",
                 "message": "Upload gif, jpg, and png only, up to 1MB."
             },
@@ -124,7 +131,7 @@
                 "id": "design_favicon",
                 "name": "favicon",
                 "title": "Favicon",
-                "type": "image_upload",
+                "type": "file",
                 "placeholder": "favicon.ico",
                 "message": "Upload ico, and png only, up to 512KB."
             },

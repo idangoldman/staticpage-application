@@ -38,7 +38,7 @@
                         </svg>
                     </header>
                     <form class="body" action="blah.php" method="post" enctype="multipart/form-data">
-                        {% from 'macros/form.html' import input_text, textarea, select, upload_image %}
+                        {% from 'macros/form.html' import input_text, textarea, select, file %}
                         {% from 'macros/previews.html' import search as search_preview %}
                         {% for field in feature.fields %}
                             {% if field.type == "text" %}
@@ -47,8 +47,8 @@
                                 {{ textarea( field ) }}
                             {% elif field.type == "select" %}
                                 {{ select( field ) }}
-                            {% elif field.type == "image_upload" %}
-                                {{ upload_image( field ) }}
+                            {% elif field.type == "file" %}
+                                {{ file( field ) }}
                             {% elif field.type == "search_preview" %}
                                 {{ search_preview( field ) }}
                             {% endif %}

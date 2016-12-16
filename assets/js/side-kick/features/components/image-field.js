@@ -1,15 +1,14 @@
 import $ from 'jquery';
 import { component } from 'imports?$=jquery!flightjs';
 
-import withEquals from '../mixins/equals';
 import withFocus from '../mixins/focus';
 import withState from 'flight-with-state';
 
-var imageField = component( withFocus, withState, withEquals, function application() {
+var imageField = component( withFocus, withState, function application() {
 
     this.attributes({
         'field': '.field',
-        'fieldName': '',
+        'fieldName': null,
         'message': '.message',
         'choosenFileName': '.choosen-file-name'
     });
@@ -60,7 +59,7 @@ var imageField = component( withFocus, withState, withEquals, function applicati
     }
 
     this.updateField = function( state, previousState ) {
-        if ( ! this.equals( state, previousState ) ) {
+        if ( previousState.raw_image !== state.raw_image ) {
             this.trigger( document, 'updateField', state );
         }
     };

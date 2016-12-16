@@ -66,7 +66,7 @@
     </fieldset>
 {%- endmacro %}
 
-{% macro upload_image( field ) -%}
+{% macro file( field ) -%}
     <fieldset class="fieldset {{ field.id }}">
         <label class="title" for="{{ field.id }}">{{ field.title }}</label>
         <div class="upload-wrap">
@@ -74,6 +74,7 @@
                 class="field"
                 id="{{ field.id }}"
                 name="{{ field.id }}"
+                accept="{{ field.accepted_formats | join(', ') }}"
                 value="{{ field.value }}" />
             <span class="choosen-file-name" data-placeholder="{{ field.placeholder }}">{{ field.value }}</span>
             <svg class="icon">
