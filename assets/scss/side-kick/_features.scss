@@ -160,6 +160,12 @@
                         text-overflow: ellipsis;
                         white-space: nowrap;
                         width: 205px;
+                    }
+
+                    .choosen-file-name,
+                    .selected-text,
+                    .caret,
+                    .icon {
                         z-index: 1;
                     }
 
@@ -198,6 +204,11 @@
                         position: absolute;
                         right: 8px;
                         top: 8px;
+
+                        &.close {
+                            cursor: pointer;
+                            z-index: 3;
+                        }
                     }
                 }
 

@@ -22,7 +22,7 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
 function handleLogo( { raw_file } ) {
      var $logo = $('.logo');
 
-     if ( $logo.length && raw_file.length ) {
+     if ( $logo.length ) {
         if ( raw_file.length ) {
             $logo.attr( 'src', raw_file );
         } else {

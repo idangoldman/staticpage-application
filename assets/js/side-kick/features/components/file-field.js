@@ -11,7 +11,8 @@ var fileField = component( withFocus, withState, function application() {
         'fieldName': null,
         'message': '.message',
         'error': '.error',
-        'choosenFileName': '.choosen-file-name'
+        'choosenFileName': '.choosen-file-name',
+        'closeIcon': '.close.icon'
     });
 
     this.initialState({
@@ -22,6 +23,7 @@ var fileField = component( withFocus, withState, function application() {
 
     this.after('initialize', function() {
         this.select('field').on( 'change', this.fieldChanged.bind(this) );
+        this.select('closeIcon').on( 'click', this.resetField.bind(this) );
 
         this.after( 'stateChanged', this.updateField );
 
@@ -37,10 +39,8 @@ var fileField = component( withFocus, withState, function application() {
 
             this.getFileContent( file )
                 .then(function( rawFile ) {
-                    this.select('error').html();
-
+                    this.select('error').html('');
                     this.setChoosenFileName( file.name );
-
                     this.mergeState({
                         raw_file: rawFile,
                         value: file.name
@@ -56,6 +56,15 @@ var fileField = component( withFocus, withState, function application() {
         if ( previousState.raw_file !== state.raw_file ) {
             this.trigger( document, 'updateField', state );
         }
+    };
+
+    this.resetField = function( event ) {
+        this.select('error').html('');
+        this.setChoosenFileName('');
+        this.mergeState({
+            raw_file: '',
+            value: ''
+        });
     };
 
     this.setChoosenFileName = function( filename ) {

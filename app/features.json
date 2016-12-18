@@ -41,12 +41,13 @@
                         "image/gif",
                         "image/jpg",
                         "image/jpeg",
-                        "image/webp"
+                        "image/webp",
+                        "image/svg+xml"
                     ],
                     "size": 1024000
                 },
                 "placeholder": "logo.png",
-                "message": "Upload gif, jpg, and png only, up to 1MB."
+                "message": "Upload gif, jpg, png and svg, up to 1MB."
             },
             {
                 "id": "content_title",
