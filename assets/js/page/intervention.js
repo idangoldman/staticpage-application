@@ -19,15 +19,19 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
     }
 });
 
-function handleLogo( data ) {
+function handleLogo( { raw_file } ) {
      var $logo = $('.logo');
 
-     if ( $logo.length ) {
-        $logo.attr( 'src', data.raw_image );
-     } else {
+     if ( $logo.length && raw_file.length ) {
+        if ( raw_file.length ) {
+            $logo.attr( 'src', raw_file );
+        } else {
+            $logo.remove();
+        }
+     } else if ( ! $logo.length && raw_file.length ) {
         $('<img />')
             .addClass('logo')
-            .attr( 'src', data.raw_image )
+            .attr( 'src', raw_file )
             .prependTo('.content');
      }
 }

@@ -4,18 +4,19 @@ import { component } from 'imports?$=jquery!flightjs';
 import withFocus from '../mixins/focus';
 import withState from 'flight-with-state';
 
-var imageField = component( withFocus, withState, function application() {
+var fileField = component( withFocus, withState, function application() {
 
     this.attributes({
         'field': '.field',
         'fieldName': null,
         'message': '.message',
+        'error': '.error',
         'choosenFileName': '.choosen-file-name'
     });
 
     this.initialState({
         name: this.fromAttr('fieldName'),
-        raw_image: null,
+        raw_file: null,
         value: ''
     });
 
@@ -30,43 +31,36 @@ var imageField = component( withFocus, withState, function application() {
 
     this.fieldChanged = function( event ) {
 
-        var that = this,
-            file = this.setFile( event.currentTarget );
+        var file = this.setFile( event.currentTarget );
 
         if ( 'empty' !== file.name ) {
 
-            this.setChoosenFileName( file.name );
-
             this.getFileContent( file )
                 .then(function( rawFile ) {
+                    this.select('error').html();
 
-                    that.select('message')
-                        .removeClass('error')
-                        .html( 'Upload gif, jpg, and png only, up to 1MB.' );
+                    this.setChoosenFileName( file.name );
 
-                    that.mergeState({
-                        raw_image: rawFile,
+                    this.mergeState({
+                        raw_file: rawFile,
                         value: file.name
                     });
-                })
+                }.bind( this ))
                 .catch(function( errorMessage ) {
-
-                    that.select('message')
-                        .addClass('error')
-                        .html( errorMessage );
-                });
+                    this.select('error').html( errorMessage );
+                }.bind( this ));
         }
-    }
+    };
 
     this.updateField = function( state, previousState ) {
-        if ( previousState.raw_image !== state.raw_image ) {
+        if ( previousState.raw_file !== state.raw_file ) {
             this.trigger( document, 'updateField', state );
         }
     };
 
     this.setChoosenFileName = function( filename ) {
         this.select('choosenFileName').html( filename );
-    }
+    };
 
     this.setFile = function( element ) {
         var file = new File([], 'empty');
@@ -76,15 +70,15 @@ var imageField = component( withFocus, withState, function application() {
         }
 
         return file;
-    }
+    };
 
     this.getFileContent = function( file ) {
         return new Promise( function ( resolve, reject ) {
             var fileReader = new FileReader();
 
-            if ( ! isImageTypeMatches( file.type ) ) {
+            if ( ! this.isFileTypeAccepted( file.type ) ) {
                 reject('File type "' + file.type + '" doesn\'t supported.');
-            } else if ( ! isImageSizeMatches( file.size ) ) {
+            } else if ( ! this.isFileSizeAccepted( file.size ) ) {
                 reject('File size greater than 1MB.');
             } else {
                 fileReader.onload = function( event ) {
@@ -94,24 +88,20 @@ var imageField = component( withFocus, withState, function application() {
                 fileReader.readAsDataURL( file );
             }
 
-        } );
-    }
+        }.bind(this) );
+    };
 
-    // check for image file type
-    function isImageTypeMatches( imageType ) {
-        return [
-            'image/png',
-            'image/gif',
-            'image/jpg',
-            'image/jpeg',
-            'image/webp'
-        ].indexOf( imageType ) !== -1;
-    }
+    this.isFileTypeAccepted = function( fileType ) {
+        var acceptedTypes = this.select('field').attr('accept').split(/,\s?/g);
 
-    // checking for image size to be greater than 1024KB.
-    function isImageSizeMatches( imageSize ) {
-        return imageSize < 1024000; // 1024KB
-    }
+        return acceptedTypes.indexOf( fileType ) !== -1;
+    };
+
+    this.isFileSizeAccepted = function( fileSize ) {
+        var acceptedSize = this.select('field').attr('data-accept-size');
+
+        return acceptedSize >= fileSize;
+    };
 });
 
-export default imageField;
+export default fileField;

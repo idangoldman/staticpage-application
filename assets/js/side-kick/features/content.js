@@ -6,7 +6,7 @@ import withChildComponents from 'flight-with-child-components' ;
 import withToggle from './mixins/toggle';
 
 // child components
-import imageFieldComponent from './components/image-field';
+import fileFieldComponent from './components/file-field';
 import textFieldComponent from './components/text-field';
 
 var contentFeature = component( withChildComponents, withToggle, function() {
@@ -21,7 +21,7 @@ var contentFeature = component( withChildComponents, withToggle, function() {
     this.after('initialize', function() {
 
         // Logo
-        this.attachChild( imageFieldComponent, this.select('logoField'), {
+        this.attachChild( fileFieldComponent, this.select('logoField'), {
             'fieldName': 'content_logo'
         });
 

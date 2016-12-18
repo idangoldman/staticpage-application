@@ -69,18 +69,23 @@
 {% macro file( field ) -%}
     <fieldset class="fieldset {{ field.id }}">
         <label class="title" for="{{ field.id }}">{{ field.title }}</label>
-        <div class="upload-wrap">
+        <div class="file-wrap">
             <input type="file"
                 class="field"
                 id="{{ field.id }}"
                 name="{{ field.id }}"
-                accept="{{ field.accepted_formats | join(', ') }}"
+                accept="{{ field.accepted.formats | join(', ') }}"
+                data-accept-size="{{ field.accepted.size | default('128000') }}"
                 value="{{ field.value }}" />
             <span class="choosen-file-name" data-placeholder="{{ field.placeholder }}">{{ field.value }}</span>
-            <svg class="icon">
+            <svg class="icon upload">
                 <use class="use" xlink:href="#icons--upload"></use>
             </svg>
+            <svg class="icon close">
+                <use class="use" xlink:href="#icons--close"></use>
+            </svg>
         </div>
+        <span class="error"></span>
         {% if field.message %}
             <span class="message">{{ field.message | markdown }}</span>
         {% endif %}
