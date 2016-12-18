@@ -1,7 +1,8 @@
-// import './storage';
-import './api-calls';
-import './post-messaging';
+// import 'side-kick/storage';
+import 'side-kick/api-calls';
+import 'side-kick/post-messaging';
 
-import './devices';
-import './features/general';
-import './features/content';
+import 'side-kick/devices';
+import 'side-kick/features/general';
+import 'side-kick/features/content';
+import 'side-kick/features/design';

@@ -4,14 +4,16 @@ import {
     UPDATE_LOGO,
     UPDATE_TITLE,
     UPDATE_SUB_TITLE,
-    UPDATE_DESCRIPTION
-} from '../constants';
+    UPDATE_DESCRIPTION,
+    UPDATE_BACKGROUND_IMAGE
+} from 'page/constants';
 
 let pageUpdateFieldsFilter = [
     UPDATE_LOGO,
     UPDATE_TITLE,
     UPDATE_SUB_TITLE,
-    UPDATE_DESCRIPTION
+    UPDATE_DESCRIPTION,
+    UPDATE_BACKGROUND_IMAGE
 ];
 
 var postMessaging = component( function() {

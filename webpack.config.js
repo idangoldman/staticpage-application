@@ -1,3 +1,5 @@
+var path = require("path");
+
 module.exports = {
     watch: false,
     cache: false,
@@ -9,13 +11,14 @@ module.exports = {
         'home': './assets/js/home.js'
     },
     output: {
-        filename: "[name].js"
+        filename: '[name].js'
     },
     resolve: {
+        root: path.resolve( __dirname, 'assets/js' ),
         modulesDirectories: [
-            "web_modules",
-            "node_modules",
-            "bower_components"
+            'web_modules',
+            'node_modules',
+            'bower_components'
         ]
     },
     module: {

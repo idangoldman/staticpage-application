@@ -1,5 +1,29 @@
 [
     {
+        "name": "design",
+        "title": "Design",
+        "fields": [
+            {
+                "id": "design_background_image",
+                "name": "background_image",
+                "title": "Background image",
+                "type": "file",
+                "accepted": {
+                    "formats": [
+                        "image/png",
+                        "image/gif",
+                        "image/jpg",
+                        "image/jpeg",
+                        "image/webp"
+                    ],
+                    "size": 1024000
+                },
+                "placeholder": "background.png",
+                "message": "Upload gif, jpg and png, up to 1MB."
+            }
+        ]
+    },
+    {
         "name": "general",
         "title": "General",
         "fields": [

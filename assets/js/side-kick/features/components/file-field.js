@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { component } from 'imports?$=jquery!flightjs';
 
-import withFocus from '../mixins/focus';
+import withFocus from 'side-kick/features/mixins/focus';
 import withState from 'flight-with-state';
 
 var fileField = component( withFocus, withState, function application() {

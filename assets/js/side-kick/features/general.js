@@ -2,10 +2,10 @@ import $ from 'jquery';
 import { component, utils } from 'imports?$=jquery!flightjs';
 
 // mixins
-import withFocus from './mixins/focus';
-import withSelect from './mixins/select';
-import withToggle from './mixins/toggle';
-import withValidation from './mixins/validation';
+import withFocus from 'side-kick/features/mixins/focus';
+import withSelect from 'side-kick/features/mixins/select';
+import withToggle from 'side-kick/features/mixins/toggle';
+import withValidation from 'side-kick/features/mixins/validation';
 
 
 var generalFeature = component( withFocus, withSelect, withToggle, withValidation, function() {

@@ -3,11 +3,11 @@ import { component, utils } from 'imports?$=jquery!flightjs';
 
 // mixins
 import withChildComponents from 'flight-with-child-components' ;
-import withToggle from './mixins/toggle';
+import withToggle from 'side-kick/features/mixins/toggle';
 
 // child components
-import fileFieldComponent from './components/file-field';
-import textFieldComponent from './components/text-field';
+import fileFieldComponent from 'side-kick/features/components/file-field';
+import textFieldComponent from 'side-kick/features/components/text-field';
 
 var contentFeature = component( withChildComponents, withToggle, function() {
 
