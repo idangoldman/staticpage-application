@@ -19,7 +19,7 @@ gulp.task('default', ['webpack', 'uglify-page', 'style', 'svg-sprite', 'backgrou
     gulp.watch('assets/js/page/index.js', ['uglify-page']);
     gulp.watch([
         'assets/js/home.js',
-        'assets/js/page/intervention.js',
+        'assets/js/page/**/*.js',
         'assets/js/side-kick/**/*.js'
     ], ['webpack']);
     gulp.watch('assets/images/icons/**/*.svg', ['svg-sprite']);

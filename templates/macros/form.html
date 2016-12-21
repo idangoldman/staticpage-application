@@ -77,7 +77,8 @@
                 accept="{{ field.accepted.formats | join(', ') }}"
                 data-accept-size="{{ field.accepted.size | default('128000') }}"
                 value="{{ field.value }}" />
-            <span class="choosen-file-name" data-placeholder="{{ field.placeholder }}">{{ field.value }}</span>
+            {% set file_name = field.value.split('/')[-1] %}
+            <span class="choosen-file-name" data-placeholder="{{ field.placeholder }}">{{ file_name }}</span>
             <svg class="icon upload">
                 <use class="use" xlink:href="#icons--upload"></use>
             </svg>

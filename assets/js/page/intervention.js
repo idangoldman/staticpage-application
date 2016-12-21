@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import StyleSheet from 'page/styles';
 import {
     UPDATE_LOGO,
     UPDATE_TITLE,
@@ -53,13 +54,14 @@ function handleDescription( data ) {
 }
 
 function handleBackgroundImage( { raw_file } ) {
-    var image = '';
+    var css = new StyleSheet('additional');
+    var propertyValue = '';
 
     if ( raw_file.length ) {
-        image = ['url(', raw_file, ')'].join('');
+        propertyValue = ['url(', raw_file, ')'].join('');
     }
 
-    $('.background').css( 'background-image', image );
+    css( '.background', 'backgroundImage', propertyValue );
 }
 
 function htmlLineBreak( text ) {
