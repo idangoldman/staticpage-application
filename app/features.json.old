@@ -1,82 +1,8 @@
 [
     {
-        "name": "general",
-        "title": "General",
-        "fields": [
-            {
-                "id": "general_file_type",
-                "name": "file_type",
-                "title": "File type",
-                "type": "select",
-                "is_disabled": true,
-                "default": "welcome",
-                "options": [
-                    { "key": "welcome", "value": "Welcome" },
-                    { "key": "thank_you", "value": "Thank You" }
-                ]
-            },
-            {
-                "id": "general_file_name",
-                "name": "file_name",
-                "title": "File name",
-                "type": "text",
-                "default": "index",
-                "placeholder": "index",
-                "message": "Allowed characters are **_**, **-**, **a-z**, **A-Z**, **0-9**."
-            }
-        ]
-    },
-    {
-        "name": "content",
-        "title": "Content",
-        "fields": [
-            {
-                "id": "content_logo",
-                "name": "logo",
-                "title": "Logo",
-                "type": "file",
-                "accepted_formats": [
-                    "image/png",
-                    "image/gif",
-                    "image/jpg",
-                    "image/jpeg",
-                    "image/webp"
-                ],
-                "placeholder": "logo.png",
-                "message": "Upload gif, jpg, and png only, up to 1MB."
-            },
-            {
-                "id": "content_title",
-                "name": "title",
-                "title": "Title",
-                "type": "text"
-            },
-            {
-                "id": "content_sub_title",
-                "name": "sub_title",
-                "title": "Sub Title",
-                "type": "textarea"
-            },
-            {
-                "id": "content_description",
-                "name": "description",
-                "title": "Description",
-                "type": "textarea"
-            }
-        ]
-    },
-    {
         "name": "design",
         "title": "Design",
         "fields": [
-            {
-                "id": "design_background_image",
-                "name": "background_image",
-                "title": "Background image",
-                "type": "file",
-                "placeholder": "background.png",
-                "message": "Upload gif, jpg, and png only, up to 1MB."
-            },
             {
                 "id": "design_background_color",
                 "name": "background_color",

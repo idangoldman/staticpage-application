@@ -75,7 +75,8 @@ def welcome():
         'ga_id': app.config['GOOGLE_ANALYTICS_ID'],
         'pub_id': app.config['ADDTHIS_PUBID'],
         'has_subscribed': request.cookies.get('has_subscribed'),
-        'content': user_page['content']
+        'content': user_page['content'],
+        'design': user_page['design']
     }
 
     return render_template('pages/welcome.html', **payload)

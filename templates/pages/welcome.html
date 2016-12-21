@@ -5,6 +5,14 @@
     {{ super() }}
 
     {% include 'macros/social.html' %}
+
+    <style type="text/css" class="css-additional">
+        .background {
+            {% if design.background_image %}
+                background-image: url('{{ design.background_image }}');
+            {% endif %}
+        }
+    </style>
 {% endblock head %}
 
 {% block content %}
