@@ -67,8 +67,17 @@ def welcome():
         if mailchimp_subscribe(form.email.data):
             return redirect('/thank-you')
 
+    with open('app/features.json', 'r') as json_file:
+        features = json.load( json_file )
     with open('app/user_page.json', 'r') as json_file:
         user_page = json.load( json_file )
+
+    for feature in features:
+        if feature['name'] in user_page:
+            for field in feature['fields']:
+                if field['name'] in user_page[feature['name']]:
+                    if not user_page[feature['name']][field['name']] and 'default' in field:
+                        user_page[feature['name']][field['name']] = field['default']
 
     payload = {
         'form': form,

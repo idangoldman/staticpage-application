@@ -13,6 +13,7 @@ var designFeature = component( withChildComponents, withToggle, function() {
 
     this.attributes({
         'backgroundImageField': '.design_background_image',
+        'backgroundColorField': '.design_background_color'
     });
 
     this.after('initialize', function() {
@@ -20,6 +21,11 @@ var designFeature = component( withChildComponents, withToggle, function() {
         // Background Image
         this.attachChild( fileFieldComponent, this.select('backgroundImageField'), {
             'fieldName': 'design_background_image'
+        });
+
+        // Background Color
+        this.attachChild( textFieldComponent, this.select('backgroundColorField'), {
+            'fieldName': 'design_background_color'
         });
     });
 });

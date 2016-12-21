@@ -20,6 +20,13 @@
                 },
                 "placeholder": "background.png",
                 "message": "Upload gif, jpg and png, up to 1MB."
+            },
+            {
+                "id": "design_background_color",
+                "name": "background_color",
+                "title": "Background color",
+                "type": "text",
+                "default": "#fff"
             }
         ]
     },

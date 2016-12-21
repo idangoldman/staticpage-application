@@ -5,7 +5,8 @@ import {
     UPDATE_TITLE,
     UPDATE_SUB_TITLE,
     UPDATE_DESCRIPTION,
-    UPDATE_BACKGROUND_IMAGE
+    UPDATE_BACKGROUND_IMAGE,
+    UPDATE_BACKGROUND_COLOR
 } from 'page/constants';
 
 $( window ).on( 'message onmessage', function receiveMessage( event ) {
@@ -18,6 +19,7 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case UPDATE_SUB_TITLE: handleSubTitle( data ); break;
             case UPDATE_DESCRIPTION: handleDescription( data ); break;
             case UPDATE_BACKGROUND_IMAGE: handleBackgroundImage( data ); break;
+            case UPDATE_BACKGROUND_COLOR: handleBackgroundColor( data ); break;
         }
     }
 });
@@ -39,17 +41,17 @@ function handleLogo( { raw_file } ) {
      }
 }
 
-function handleTitle( data ) {
-    $('.title').html( data.value );
+function handleTitle( { value } ) {
+    $('.title').html( value );
 }
 
-function handleSubTitle( data ) {
-    var text = htmlLineBreak( data.value );
+function handleSubTitle( { value } ) {
+    var text = htmlLineBreak( value );
     $('.sub-title').html( text );
 }
 
-function handleDescription( data ) {
-    var text = htmlLineBreak( data.value );
+function handleDescription( { value } ) {
+    var text = htmlLineBreak( value );
     $('.description').html( text );
 }
 
@@ -62,6 +64,11 @@ function handleBackgroundImage( { raw_file } ) {
     }
 
     css( '.background', 'backgroundImage', propertyValue );
+}
+
+function handleBackgroundColor( { value } ) {
+    var css = new StyleSheet('additional');
+    css( '.background', 'backgroundColor', value );
 }
 
 function htmlLineBreak( text ) {

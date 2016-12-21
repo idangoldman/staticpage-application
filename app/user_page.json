@@ -6,6 +6,7 @@
         "description": "We are a team of keyboard kids who turned out to be good people and professionals located around the world trying to create the best product we can.\nStay tuned by subscribing to our mailing list and we promise to update you with the product release."
     },
     "design": {
-        "background_image": "/static/images/backgrounds/003.jpeg"
+        "background_image": "/static/images/backgrounds/003.jpeg",
+        "background_color": ""
     }
 }

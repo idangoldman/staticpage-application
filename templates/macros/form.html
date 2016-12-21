@@ -7,7 +7,7 @@
                 id="{{ field.id }}"
                 name="{{ field.id }}"
                 value="{{ field.value }}"
-                placeholder="{{ field.placeholder }}" />
+                placeholder="{{ field.placeholder | default( field.default or '' ) }}" />
         </div>
         {% if field.message %}
             <span class="message">{{ field.message | markdown }}</span>

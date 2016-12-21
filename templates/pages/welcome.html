@@ -11,6 +11,9 @@
             {% if design.background_image %}
                 background-image: url('{{ design.background_image }}');
             {% endif %}
+            {% if design.background_color %}
+                background-color: {{ design.background_color }};
+            {% endif %}
         }
     </style>
 {% endblock head %}

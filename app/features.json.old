@@ -4,14 +4,6 @@
         "title": "Design",
         "fields": [
             {
-                "id": "design_background_color",
-                "name": "background_color",
-                "title": "Background color",
-                "type": "text",
-                "default": "#fff",
-                "placeholder": "#bada55"
-            },
-            {
                 "id": "design_background_repeat",
                 "name": "background_repeat",
                 "title": "Background repeat",
