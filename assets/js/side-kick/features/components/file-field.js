@@ -3,14 +3,14 @@ import { component } from 'imports?$=jquery!flightjs';
 
 import withFocus from 'side-kick/features/mixins/focus';
 import withState from 'flight-with-state';
+import withValidation from 'side-kick/features/mixins/validation';
 
-var fileField = component( withFocus, withState, function application() {
+export default component( withFocus, withState, withValidation, function fileField() {
 
     this.attributes({
         'field': '.field',
         'fieldName': null,
         'message': '.message',
-        'error': '.error',
         'choosenFileName': '.choosen-file-name',
         'closeIcon': '.close.icon'
     });
@@ -39,15 +39,14 @@ var fileField = component( withFocus, withState, function application() {
 
             this.getFileContent( file )
                 .then(function( rawFile ) {
-                    this.select('error').html('');
                     this.setChoosenFileName( file.name );
                     this.mergeState({
                         raw_file: rawFile,
                         value: file.name
                     });
                 }.bind( this ))
-                .catch(function( errorMessage ) {
-                    this.select('error').html( errorMessage );
+                .catch(function() {
+                    // console.log('something went wrong...')
                 }.bind( this ));
         }
     };
@@ -59,7 +58,7 @@ var fileField = component( withFocus, withState, function application() {
     };
 
     this.resetField = function( event ) {
-        this.select('error').html('');
+        this.removeErrorClass();
         this.setChoosenFileName('');
         this.mergeState({
             raw_file: '',
@@ -85,10 +84,8 @@ var fileField = component( withFocus, withState, function application() {
         return new Promise( function ( resolve, reject ) {
             var fileReader = new FileReader();
 
-            if ( ! this.isFileTypeAccepted( file.type ) ) {
-                reject('File type "' + file.type + '" doesn\'t supported.');
-            } else if ( ! this.isFileSizeAccepted( file.size ) ) {
-                reject('File size greater than 1MB.');
+            if ( ! this.validate( file ) ) {
+                reject();
             } else {
                 fileReader.onload = function( event ) {
                     resolve( event.target.result );
@@ -97,20 +94,12 @@ var fileField = component( withFocus, withState, function application() {
                 fileReader.readAsDataURL( file );
             }
 
+            // if ( ! this.isFileTypeAccepted( file.type ) ) {
+            // } else if ( ! this.isFileSizeAccepted( file.size ) ) {
+            //     reject('File size greater than 1MB.');
+            // } else {
+            // }
+
         }.bind(this) );
     };
-
-    this.isFileTypeAccepted = function( fileType ) {
-        var acceptedTypes = this.select('field').attr('accept').split(/,\s?/g);
-
-        return acceptedTypes.indexOf( fileType ) !== -1;
-    };
-
-    this.isFileSizeAccepted = function( fileSize ) {
-        var acceptedSize = this.select('field').attr('data-accept-size');
-
-        return acceptedSize >= fileSize;
-    };
 });
-
-export default fileField;

@@ -20,12 +20,14 @@ var designFeature = component( withChildComponents, withToggle, function() {
 
         // Background Image
         this.attachChild( fileFieldComponent, this.select('backgroundImageField'), {
-            'fieldName': 'design_background_image'
+            'fieldName': 'design_background_image',
+            'toValidate': ['file_size', 'file_format']
         });
 
         // Background Color
         this.attachChild( textFieldComponent, this.select('backgroundColorField'), {
-            'fieldName': 'design_background_color'
+            'fieldName': 'design_background_color',
+            'toValidate': ['hex_color']
         });
     });
 });

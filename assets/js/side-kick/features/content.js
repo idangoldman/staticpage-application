@@ -22,7 +22,8 @@ var contentFeature = component( withChildComponents, withToggle, function() {
 
         // Logo
         this.attachChild( fileFieldComponent, this.select('logoField'), {
-            'fieldName': 'content_logo'
+            'fieldName': 'content_logo',
+            'toValidate': ['file_size', 'file_format']
         });
 
         // Title

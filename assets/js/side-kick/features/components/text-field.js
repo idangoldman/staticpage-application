@@ -5,7 +5,7 @@ import withFocus from 'side-kick/features/mixins/focus';
 import withState from 'flight-with-state';
 import withValidation from 'side-kick/features/mixins/validation';
 
-var textField = component( withFocus, withState, withValidation, function application() {
+export default component( withFocus, withState, withValidation, function textField() {
 
     this.attributes({
         'field': '.field',
@@ -45,5 +45,3 @@ var textField = component( withFocus, withState, withValidation, function applic
         }
     };
 });
-
-export default textField;

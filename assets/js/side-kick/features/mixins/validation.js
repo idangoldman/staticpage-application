@@ -14,24 +14,46 @@ var withValidation = function mixin() {
     });
 
     this.after('initialize', function() {
-        var attrs = this.attr;
-
-        this.select('validationEL').children().each(function() {
-            attrs.toValidate.push( this.className );
-        });
+        // var attrs = this.attr;
+        // this.select('validationEL').children().each(function() {
+        //     attrs.toValidate.push( this.className );
+        // });
 
         this.before('validate', this.removeErrorClass);
         this.after('validate', this.addErrorClass);
     });
 
+    this.valueIsNotEmpty = function( value ) {
+        var isNotEmpty = false;
+        switch ( typeof value ) {
+            case 'string':
+                isNotEmpty = !! value.trim().length;
+                break;
+            case 'object':
+                isNotEmpty = ! $.isEmptyObject( value );
+                break;
+
+        }
+
+        return !! isNotEmpty;
+    };
+
     this.validate = function( value ) {
+
         var isValid = true;
-        if ( !! this.attr.toValidate.length && !! value.trim().length ) {
+
+        if ( !! this.attr.toValidate.length && this.valueIsNotEmpty( value ) ) {
 
             this.attr.toValidate.some(function( rule ) {
                 switch ( rule ) {
                     case 'hex_color':
-                        isValid = this.regexValidation( 'hex_color', value );
+                        isValid = this.regexValidation( rule, value );
+                        break;
+                    case 'file_format':
+                        isValid = this.isFileFormatAccepted( value.type );
+                        break;
+                    case 'file_size':
+                        isValid = this.isFileSizeAccepted( value.size );
                         break;
                 }
 
@@ -63,6 +85,18 @@ var withValidation = function mixin() {
 
     this.regexValidation = function( patternName, value ) {
         return regexPatterns[ patternName ].test( value );
+    };
+
+    this.isFileFormatAccepted = function( fileFormat ) {
+        var acceptedFormats = this.select('field').attr('accept').split(/,\s?/g);
+
+        return acceptedFormats.indexOf( fileFormat ) !== -1;
+    };
+
+    this.isFileSizeAccepted = function( fileSize ) {
+        var acceptedSize = this.select('field').attr('data-accept-size');
+
+        return acceptedSize >= fileSize;
     };
 };
 
