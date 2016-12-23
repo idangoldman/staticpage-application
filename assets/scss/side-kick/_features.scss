@@ -212,15 +212,20 @@
                     }
                 }
 
-                .error,
+                .validation li,
                 .message {
                     display: block;
                     font-size: 11px;
                     margin-top: 5px;
                 }
 
-                .error {
-                    color: #ca0000;
+                .validation li {
+                    display: none;
+
+                    &.error {
+                        color: #ca0000;
+                        display: block;
+                    }
                 }
 
                 .message {

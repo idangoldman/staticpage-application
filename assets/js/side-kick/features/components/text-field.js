@@ -3,13 +3,15 @@ import { component, utils } from 'imports?$=jquery!flightjs';
 
 import withFocus from 'side-kick/features/mixins/focus';
 import withState from 'flight-with-state';
+import withValidation from 'side-kick/features/mixins/validation';
 
-var textField = component( withFocus, withState, function application() {
+var textField = component( withFocus, withState, withValidation, function application() {
 
     this.attributes({
         'field': '.field',
-        'fieldName': null,
-        'message': '.message'
+        'message': '.message',
+
+        'fieldName': null
     });
 
     this.initialState({
@@ -21,15 +23,19 @@ var textField = component( withFocus, withState, function application() {
         this.select('field').on( 'keyup keypress blur', utils.throttle( this.fieldChanged.bind(this), 250 ) );
 
         this.after( 'stateChanged', this.updateField );
-
         // this.on( document, 'updateField_' + this.attr.fieldName + '_success', function() { console.log('Yay!'); });
         // this.on( document, 'updateField_' + this.attr.fieldName + '_error', function() { console.log('Nay!'); });
     });
 
     this.fieldChanged = function( event ) {
+        var value = event.currentTarget.value.trim();
+
+        if ( ! this.validate( value ) ) {
+            return true;
+        }
 
         this.mergeState({
-            value: event.currentTarget.value.trim()
+            value: value
         });
     }
 

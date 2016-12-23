@@ -37,7 +37,11 @@
                             <use class="use" xlink:href="#icons--caret-up"></use>
                         </svg>
                     </header>
-                    <form class="body" action="blah.php" method="post" enctype="multipart/form-data">
+                    <form class="body"
+                        action="blah.php"
+                        method="post"
+                        enctype="multipart/form-data"
+                        autocomplete="off">
                         {% from 'macros/form.html' import input_text, textarea, select, file %}
                         {% from 'macros/previews.html' import search as search_preview %}
                         {% for field in feature.fields %}

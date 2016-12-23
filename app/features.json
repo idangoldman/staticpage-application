@@ -26,6 +26,10 @@
                 "name": "background_color",
                 "title": "Background color",
                 "type": "text",
+                "default": "#fff",
+                "validation": {
+                    "hex_color":  "Not valid Hex color"
+                }
             }
         ]
     },
