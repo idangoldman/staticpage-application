@@ -75,6 +75,7 @@ export default component( withFocus, withState, withValidation, function fileFie
 
         if ( !! element.files.length ) {
             file = element.files[0];
+            element.value = '';
         }
 
         return file;
