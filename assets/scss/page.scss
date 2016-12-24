@@ -7,6 +7,7 @@
     background-attachment: fixed;
     background-position: 50% 50%;
     background-size: cover;
+    display: flex;
 
     &:before {
         background-color: rgba( #000, 0.15 );
@@ -22,18 +23,13 @@
 }
 
 .page {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    height: 100%;
-    justify-content: center;
-    margin: 0 auto;
+    margin: auto;
     position: relative;
     width: 90%;
     z-index: 2;
 
     & > * {
+        margin: 0 auto;
         width: 100%;
     }
 }
@@ -118,14 +114,13 @@
     .newsletter {
         & > * {
             display: block;
-            margin: 0 auto;
+            margin: 0 auto px2rem(20);
             text-align: center;
             width: 80%;
         }
 
         .email {
             margin-right: auto;
-            margin-bottom: px2rem(20);
         }
     }
 }
