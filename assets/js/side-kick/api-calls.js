@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { component } from 'imports?$=jquery!flightjs';
+import { component, utils } from 'imports?$=jquery!flightjs';
 import withRequest from 'imports?$=jquery!flight-request/lib/with_request';
 
 let apiUrl = 'http://0.0.0.0:5000/fake-api';
@@ -25,7 +25,7 @@ var apiCalls = component( withRequest, function() {
                 }
             };
 
-        this.put( putConfig );
+        utils.throttle( this.put( putConfig ) );
     };
 
     function setCsrfHeader() {

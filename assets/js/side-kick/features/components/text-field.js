@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { component, utils } from 'imports?$=jquery!flightjs';
+import { component } from 'imports?$=jquery!flightjs';
 
 import withFocus from 'side-kick/features/mixins/focus';
 import withState from 'flight-with-state';
@@ -20,7 +20,7 @@ export default component( withFocus, withState, withValidation, function textFie
     });
 
     this.after('initialize', function() {
-        this.select('field').on( 'keyup keypress blur', utils.throttle( this.fieldChanged.bind(this), 250 ) );
+        this.select('field').on( 'keyup keypress blur', this.fieldChanged.bind(this) );
 
         this.after( 'stateChanged', this.updateField );
         // this.on( document, 'updateField_' + this.attr.fieldName + '_success', function() { console.log('Yay!'); });
