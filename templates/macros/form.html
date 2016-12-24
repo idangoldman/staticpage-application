@@ -44,23 +44,21 @@
 {%- endmacro %}
 
 {% macro select( field ) -%}
+    {% set selectedKey = field.value if field.value else field.default %}
     <fieldset class="fieldset {{ field.id }}">
         <label class="title" for="{{ field.id }}">{{ field.title }}</label>
-        <div class="select-wrap {{ 'disabled' if field.is_disabled is equalto 1 }}">
-            {% if field.is_disabled is equalto 0 %}
-                <select id="{{ field.id }}" name="{{ field.id }}" class="field">
-                    {% for option in field.options %}
-                        {% set selected = "selected" if field.value == option.key else "" %}
-                        <option value="{{ option.key }}" {{ selected }}>{{ option.value }}</option>
-                    {% endfor %}
-                </select>
-            {% endif %}
+        <div class="select-wrap">
+            <select id="{{ field.id }}" name="{{ field.id }}" class="field">
+                {% for option in field.options %}
+                    {% set selected = "selected" if selectedKey == option.key else "" %}
+                    <option value="{{ option.key }}" {{ selected }}>{{ option.value }}</option>
+                {% endfor %}
+            </select>
+            {# <span class="selected-text">{{ selectedKey }}</span> #}
             <span class="selected-text">
-                {% set selected_text = field.options | selectattr( "key", "equalto", field.value ) %}
+                {% set selected_text = field.options | selectattr( "key", "equalto", selectedKey ) %}
                 {% for text in selected_text %}
                     {{ text.value }}
-                {% else %}
-                    {{ field.options[0].value }}
                 {% endfor %}
             </span>
             <div class="caret">
