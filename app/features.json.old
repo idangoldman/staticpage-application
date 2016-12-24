@@ -31,19 +31,6 @@
         "title": "Design",
         "fields": [
             {
-                "id": "design_background_repeat",
-                "name": "background_repeat",
-                "title": "Background repeat",
-                "type": "select",
-                "default": "no-repeat",
-                "options": [
-                    { "key": "no-repeat", "value": "No repeat" },
-                    { "key": "repeat", "value": "Repeat" },
-                    { "key": "repeat-x", "value": "Repeat horizontally" },
-                    { "key": "repeat-y", "value": "Repeat vertically" }
-                ]
-            },
-            {
                 "id": "design_container_position",
                 "name": "container_position",
                 "title": "Container position",
@@ -60,25 +47,6 @@
                     { "key": "bottom-middle", "value": "Bottom Middle" },
                     { "key": "bottom-right", "value": "Bottom Right" }
                 ]
-            },
-            {
-                "id": "design_container_entrance_animation",
-                "name": "container_entrance_animation",
-                "title": "Container entrance animation",
-                "type": "select",
-                "default": "no-animation",
-                "is_disabled": true,
-                "options": [
-                    { "key": "no-animation", "value": "No animation" }
-                ]
-            },
-            {
-                "id": "design_favicon",
-                "name": "favicon",
-                "title": "Favicon",
-                "type": "file",
-                "placeholder": "favicon.ico",
-                "message": "Upload ico, and png only, up to 512KB."
             },
             {
                 "id": "design_font_family",
@@ -123,18 +91,6 @@
                     { "key": "24", "value": "24px" },
                     { "key": "28", "value": "28px" },
                     { "key": "32", "value": "32px" }
-                ]
-            },
-            {
-                "id": "design_text_alignment",
-                "name": "text_alignment",
-                "title": "Text alignment",
-                "type": "select",
-                "default": "center",
-                "options": [
-                    { "key": "left", "value": "Left" },
-                    { "key": "center", "value": "Center" },
-                    { "key": "right", "value": "Right" }
                 ]
             },
             {

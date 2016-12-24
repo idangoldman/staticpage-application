@@ -47,6 +47,18 @@
                     { "key": "repeat-x", "value": "Repeat horizontally" },
                     { "key": "repeat-y", "value": "Repeat vertically" }
                 ]
+            },
+            {
+                "id": "design_content_alignment",
+                "name": "content_alignment",
+                "title": "Content alignment",
+                "type": "select",
+                "default": "center",
+                "options": [
+                    { "key": "left", "value": "Left" },
+                    { "key": "center", "value": "Center" },
+                    { "key": "right", "value": "Right" }
+                ]
             }
         ]
     },

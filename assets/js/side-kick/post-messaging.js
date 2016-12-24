@@ -7,7 +7,8 @@ import {
     UPDATE_DESCRIPTION,
     UPDATE_BACKGROUND_IMAGE,
     UPDATE_BACKGROUND_COLOR,
-    UPDATE_BACKGROUND_REPEAT
+    UPDATE_BACKGROUND_REPEAT,
+    UPDATE_CONTENT_ALIGNMENT
 } from 'page/constants';
 
 let pageUpdateFieldsFilter = [
@@ -17,7 +18,8 @@ let pageUpdateFieldsFilter = [
     UPDATE_DESCRIPTION,
     UPDATE_BACKGROUND_IMAGE,
     UPDATE_BACKGROUND_COLOR,
-    UPDATE_BACKGROUND_REPEAT
+    UPDATE_BACKGROUND_REPEAT,
+    UPDATE_CONTENT_ALIGNMENT
 ];
 
 var postMessaging = component( function() {

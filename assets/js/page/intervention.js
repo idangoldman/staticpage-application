@@ -7,7 +7,8 @@ import {
     UPDATE_DESCRIPTION,
     UPDATE_BACKGROUND_IMAGE,
     UPDATE_BACKGROUND_COLOR,
-    UPDATE_BACKGROUND_REPEAT
+    UPDATE_BACKGROUND_REPEAT,
+    UPDATE_CONTENT_ALIGNMENT
 } from 'page/constants';
 
 var css = new StyleSheet('additional');
@@ -24,6 +25,7 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case UPDATE_BACKGROUND_IMAGE: handleBackgroundImage( data ); break;
             case UPDATE_BACKGROUND_COLOR: handleBackgroundColor( data ); break;
             case UPDATE_BACKGROUND_REPEAT: handleBackgroundRepeat( data ); break;
+            case UPDATE_CONTENT_ALIGNMENT: handleContentAlignmnet( data ); break;
         }
     }
 });
@@ -60,7 +62,6 @@ function handleDescription( { value } ) {
 }
 
 function handleBackgroundImage( { raw_file } ) {
-    var css = new StyleSheet('additional');
     var propertyValue = '';
 
     if ( raw_file.length ) {
@@ -76,6 +77,22 @@ function handleBackgroundColor( { value } ) {
 
 function handleBackgroundRepeat( { value } ) {
     css( '.background', 'backgroundRepeat', value );
+}
+
+function handleContentAlignmnet( { value } ) {
+    var margins = {
+        'marginRight': 'auto',
+        'marginLeft': 'auto'
+    };
+
+    if ( value === 'left' ) {
+        margins['marginLeft'] = 0;
+    } else if ( value === 'right' ) {
+        margins['marginRight'] = 0;
+    }
+
+    css('.page', 'textAlign', value );
+    css('.logo', margins);
 }
 
 function htmlLineBreak( text ) {

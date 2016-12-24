@@ -8,14 +8,28 @@
 
     <style type="text/css" class="css-additional">
         .background {
+            background-color: {{ design.background_color }};
+            background-repeat: {{ design.background_repeat }};
+
             {% if design.background_image %}
                 background-image: url('{{ design.background_image }}');
             {% endif %}
-            {% if design.background_color %}
-                background-color: {{ design.background_color }};
-            {% endif %}
-            {% if design.background_repeat %}
-                background-repeat: {{ design.background_repeat }};
+        }
+
+        .page {
+            text-align: {{ design.content_alignment }};
+        }
+
+        .logo {
+            {% if design.content_alignment == "left" %}
+                margin-left: 0;
+                margin-right: auto;
+            {% elif design.content_alignment == "right" %}
+                margin-left: auto;
+                margin-right: 0;
+            {% else %}
+                margin-left: auto;
+                margin-right: auto;
             {% endif %}
         }
     </style>
