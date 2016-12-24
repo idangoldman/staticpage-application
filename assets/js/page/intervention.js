@@ -6,8 +6,11 @@ import {
     UPDATE_SUB_TITLE,
     UPDATE_DESCRIPTION,
     UPDATE_BACKGROUND_IMAGE,
-    UPDATE_BACKGROUND_COLOR
+    UPDATE_BACKGROUND_COLOR,
+    UPDATE_BACKGROUND_REPEAT
 } from 'page/constants';
+
+var css = new StyleSheet('additional');
 
 $( window ).on( 'message onmessage', function receiveMessage( event ) {
     var data = event.originalEvent.data;
@@ -20,6 +23,7 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case UPDATE_DESCRIPTION: handleDescription( data ); break;
             case UPDATE_BACKGROUND_IMAGE: handleBackgroundImage( data ); break;
             case UPDATE_BACKGROUND_COLOR: handleBackgroundColor( data ); break;
+            case UPDATE_BACKGROUND_REPEAT: handleBackgroundRepeat( data ); break;
         }
     }
 });
@@ -67,8 +71,11 @@ function handleBackgroundImage( { raw_file } ) {
 }
 
 function handleBackgroundColor( { value } ) {
-    var css = new StyleSheet('additional');
     css( '.background', 'backgroundColor', value );
+}
+
+function handleBackgroundRepeat( { value } ) {
+    css( '.background', 'backgroundRepeat', value );
 }
 
 function htmlLineBreak( text ) {

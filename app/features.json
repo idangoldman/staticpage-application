@@ -34,6 +34,19 @@
                 "validation": {
                     "hex_color":  "Not valid Hex color"
                 }
+            },
+            {
+                "id": "design_background_repeat",
+                "name": "background_repeat",
+                "title": "Background repeat",
+                "type": "select",
+                "default": "no-repeat",
+                "options": [
+                    { "key": "no-repeat", "value": "No repeat" },
+                    { "key": "repeat", "value": "Repeat" },
+                    { "key": "repeat-x", "value": "Repeat horizontally" },
+                    { "key": "repeat-y", "value": "Repeat vertically" }
+                ]
             }
         ]
     },

@@ -7,6 +7,7 @@
     },
     "design": {
         "background_image": "/static/images/backgrounds/003.jpeg",
-        "background_color": ""
+        "background_color": "",
+        "background_repeat": ""
     }
 }

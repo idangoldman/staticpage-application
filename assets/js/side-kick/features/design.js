@@ -8,12 +8,14 @@ import withToggle from 'side-kick/features/mixins/toggle';
 // child components
 import fileFieldComponent from 'side-kick/features/components/file-field';
 import textFieldComponent from 'side-kick/features/components/text-field';
+import selectFieldComponent from 'side-kick/features/components/select-field';
 
 var designFeature = component( withChildComponents, withToggle, function() {
 
     this.attributes({
         'backgroundImageField': '.design_background_image',
-        'backgroundColorField': '.design_background_color'
+        'backgroundColorField': '.design_background_color',
+        'backgroundRepeatField': '.design_background_repeat',
     });
 
     this.after('initialize', function() {
@@ -28,6 +30,11 @@ var designFeature = component( withChildComponents, withToggle, function() {
         this.attachChild( textFieldComponent, this.select('backgroundColorField'), {
             'fieldName': 'design_background_color',
             'toValidate': ['hex_color']
+        });
+
+        // Background Repeat
+        this.attachChild( selectFieldComponent, this.select('backgroundRepeatField'), {
+            'fieldName': 'design_background_repeat'
         });
     });
 });

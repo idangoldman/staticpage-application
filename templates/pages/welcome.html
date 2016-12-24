@@ -14,6 +14,9 @@
             {% if design.background_color %}
                 background-color: {{ design.background_color }};
             {% endif %}
+            {% if design.background_repeat %}
+                background-repeat: {{ design.background_repeat }};
+            {% endif %}
         }
     </style>
 {% endblock head %}
