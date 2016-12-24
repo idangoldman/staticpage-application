@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import { component } from 'imports?$=jquery!flightjs';
 
 import withFocus from 'side-kick/features/mixins/focus';
@@ -10,7 +9,6 @@ export default component( withFocus, withState, withValidation, function fileFie
     this.attributes({
         'field': '.field',
         'fieldName': null,
-        'message': '.message',
         'choosenFileName': '.choosen-file-name',
         'closeIcon': '.close.icon'
     });
@@ -94,13 +92,6 @@ export default component( withFocus, withState, withValidation, function fileFie
 
                 fileReader.readAsDataURL( file );
             }
-
-            // if ( ! this.isFileTypeAccepted( file.type ) ) {
-            // } else if ( ! this.isFileSizeAccepted( file.size ) ) {
-            //     reject('File size greater than 1MB.');
-            // } else {
-            // }
-
         }.bind(this) );
     };
 });

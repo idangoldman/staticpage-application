@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import { component } from 'imports?$=jquery!flightjs';
 
 import withFocus from 'side-kick/features/mixins/focus';
@@ -37,7 +36,7 @@ export default component( withFocus, withState, withValidation, function textFie
         this.mergeState({
             value: value
         });
-    }
+    };
 
     this.updateField = function( state, previousState ) {
         if ( previousState.value !== state.value ) {
