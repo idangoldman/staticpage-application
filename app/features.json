@@ -59,6 +59,17 @@
                     { "key": "center", "value": "Center" },
                     { "key": "right", "value": "Right" }
                 ]
+            },
+            {
+                "id": "design_content_direction",
+                "name": "content_direction",
+                "title": "Content direction",
+                "type": "select",
+                "default": "ltr",
+                "options": [
+                    { "key": "ltr", "value": "Left to Right" },
+                    { "key": "rtl", "value": "Right to Left" }
+                ]
             }
         ]
     },

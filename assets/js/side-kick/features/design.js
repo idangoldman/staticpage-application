@@ -16,7 +16,8 @@ var designFeature = component( withChildComponents, withToggle, function() {
         'backgroundImageField': '.design_background_image',
         'backgroundColorField': '.design_background_color',
         'backgroundRepeatField': '.design_background_repeat',
-        'contentAlignmentField': '.design_content_alignment'
+        'contentAlignmentField': '.design_content_alignment',
+        'contentDirectionField': '.design_content_direction'
     });
 
     this.after('initialize', function() {
@@ -38,9 +39,14 @@ var designFeature = component( withChildComponents, withToggle, function() {
             'fieldName': 'design_background_repeat'
         });
 
-        // Background Repeat
+        // Content Alignment
         this.attachChild( selectFieldComponent, this.select('contentAlignmentField'), {
             'fieldName': 'design_content_alignment'
+        });
+
+        // Content Direction
+        this.attachChild( selectFieldComponent, this.select('contentDirectionField'), {
+            'fieldName': 'design_content_direction'
         });
     });
 });

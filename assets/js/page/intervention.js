@@ -8,7 +8,8 @@ import {
     UPDATE_BACKGROUND_IMAGE,
     UPDATE_BACKGROUND_COLOR,
     UPDATE_BACKGROUND_REPEAT,
-    UPDATE_CONTENT_ALIGNMENT
+    UPDATE_CONTENT_ALIGNMENT,
+    UPDATE_CONTENT_DIRECTION
 } from 'page/constants';
 
 var css = new StyleSheet('additional');
@@ -26,6 +27,7 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case UPDATE_BACKGROUND_COLOR: handleBackgroundColor( data ); break;
             case UPDATE_BACKGROUND_REPEAT: handleBackgroundRepeat( data ); break;
             case UPDATE_CONTENT_ALIGNMENT: handleContentAlignmnet( data ); break;
+            case UPDATE_CONTENT_DIRECTION: handleContentDirection( data ); break;
         }
     }
 });
@@ -91,8 +93,12 @@ function handleContentAlignmnet( { value } ) {
         margins['marginRight'] = 0;
     }
 
-    css('.page', 'textAlign', value );
-    css('.logo', margins);
+    css( '.page', 'textAlign', value );
+    css( '.logo', margins );
+}
+
+function handleContentDirection( { value } ) {
+    css( 'body', 'direction', value );
 }
 
 function htmlLineBreak( text ) {
