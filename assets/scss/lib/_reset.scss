@@ -33,7 +33,7 @@ html {
   font-size: $rem-base + px;
 }
 
-body, button, input[type="text"], select, textarea {
+body, button, input, select, textarea {
     -webkit-font-smoothing: antialiased;
     color: $base-color;
     font-family: 'Open Sans', Tahoma, Helvetica, Arial, sans-serif;

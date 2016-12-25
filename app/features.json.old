@@ -94,14 +94,6 @@
                 ]
             },
             {
-                "id": "design_font_color",
-                "name": "font_color",
-                "title": "Font color",
-                "type": "text",
-                "default": "#fff",
-                "placeholder": "#bada55"
-            },
-            {
                 "id": "design_additional_styles",
                 "name": "additional_styles",
                 "title": "Additional styles",

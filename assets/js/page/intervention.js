@@ -8,6 +8,7 @@ import {
     UPDATE_BACKGROUND_IMAGE,
     UPDATE_BACKGROUND_COLOR,
     UPDATE_BACKGROUND_REPEAT,
+    UPDATE_FONT_COLOR,
     UPDATE_CONTENT_ALIGNMENT,
     UPDATE_CONTENT_DIRECTION
 } from 'page/constants';
@@ -26,6 +27,7 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case UPDATE_BACKGROUND_IMAGE: handleBackgroundImage( data ); break;
             case UPDATE_BACKGROUND_COLOR: handleBackgroundColor( data ); break;
             case UPDATE_BACKGROUND_REPEAT: handleBackgroundRepeat( data ); break;
+            case UPDATE_FONT_COLOR: handleFontColor( data ); break;
             case UPDATE_CONTENT_ALIGNMENT: handleContentAlignmnet( data ); break;
             case UPDATE_CONTENT_DIRECTION: handleContentDirection( data ); break;
         }
@@ -83,11 +85,14 @@ function handleBackgroundRepeat( { value } ) {
         'backgroundSize': 'cover'
     };
     if ( 'repeat' === value ) {
-console.log('dude123');
         backgroundProperties['backgroundSize'] = 'auto';
     }
 
     css( '.background', backgroundProperties, value );
+}
+
+function handleFontColor( { value } ) {
+    css( 'body, button, input, select, textarea', 'color', value );
 }
 
 function handleContentAlignmnet( { value } ) {

@@ -16,6 +16,7 @@ var designFeature = component( withChildComponents, withToggle, function() {
         'backgroundImageField': '.design_background_image',
         'backgroundColorField': '.design_background_color',
         'backgroundRepeatField': '.design_background_repeat',
+        'fontColorField': '.design_font_color',
         'contentAlignmentField': '.design_content_alignment',
         'contentDirectionField': '.design_content_direction'
     });
@@ -37,6 +38,12 @@ var designFeature = component( withChildComponents, withToggle, function() {
         // Background Repeat
         this.attachChild( selectFieldComponent, this.select('backgroundRepeatField'), {
             'fieldName': 'design_background_repeat'
+        });
+
+        // Font Color
+        this.attachChild( textFieldComponent, this.select('fontColorField'), {
+            'fieldName': 'design_font_color',
+            'toValidate': ['hex_color']
         });
 
         // Content Alignment

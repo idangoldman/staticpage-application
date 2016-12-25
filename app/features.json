@@ -94,6 +94,16 @@
                 ]
             },
             {
+                "id": "design_font_color",
+                "name": "font_color",
+                "title": "Font color",
+                "type": "text",
+                "default": "#fff",
+                "validation": {
+                    "hex_color":  "Not valid Hex color"
+                }
+            },
+            {
                 "id": "design_content_alignment",
                 "name": "content_alignment",
                 "title": "Content alignment",
