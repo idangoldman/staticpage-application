@@ -42,19 +42,22 @@
                         method="post"
                         enctype="multipart/form-data"
                         autocomplete="off">
-                        {% from 'macros/form.html' import input_text, textarea, select, file %}
-                        {% from 'macros/previews.html' import search as search_preview %}
                         {% for field in feature.fields %}
                             {% if field.type == "text" %}
-                                {{ input_text( field ) }}
+                                {% from 'macros/form/text.html' import text %}
+                                {{ text( field ) }}
                             {% elif field.type == "textarea" %}
+                                {% from 'macros/form/textarea.html' import textarea %}
                                 {{ textarea( field ) }}
                             {% elif field.type == "select" %}
+                                {% from 'macros/form/select.html' import select %}
                                 {{ select( field ) }}
                             {% elif field.type == "file" %}
+                                {% from 'macros/form/file.html' import file %}
                                 {{ file( field ) }}
                             {% elif field.type == "search_preview" %}
-                                {{ search_preview( field ) }}
+                                {% from 'macros/previews.html' import search %}
+                                {{ search( field ) }}
                             {% endif %}
                         {% endfor %}
                     </form>

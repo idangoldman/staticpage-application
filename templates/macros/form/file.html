@@ -1,0 +1,28 @@
+{% from 'macros/form/validation.html' import validation %}
+
+{% macro file( field ) -%}
+    <fieldset class="fieldset {{ field.id }}">
+        <label class="title" for="{{ field.id }}">{{ field.title }}</label>
+        <div class="file-wrap">
+            <input type="file"
+                class="field"
+                id="{{ field.id }}"
+                name="{{ field.id }}"
+                accept="{{ field.accepted.formats | join(', ') }}"
+                data-accept-size="{{ field.accepted.size | default('128000') }}"
+                value="{{ field.value }}" />
+            {% set file_name = field.value.split('/')[-1] %}
+            <span class="choosen-file-name" data-placeholder="{{ field.placeholder }}">{{ file_name }}</span>
+            <svg class="icon upload">
+                <use class="use" xlink:href="#icons--upload"></use>
+            </svg>
+            <svg class="icon close">
+                <use class="use" xlink:href="#icons--close"></use>
+            </svg>
+        </div>
+        {{ validation( field.validation ) }}
+        {% if field.message %}
+            <span class="message">{{ field.message | markdown }}</span>
+        {% endif %}
+    </fieldset>
+{%- endmacro %}

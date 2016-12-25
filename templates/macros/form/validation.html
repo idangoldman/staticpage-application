@@ -1,0 +1,9 @@
+{% macro validation( rules ) %}
+    {% if rules %}
+        <ul class="validation">
+            {% for rule, message in rules.items() %}
+                <li class="{{ rule }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{%- endmacro %}
