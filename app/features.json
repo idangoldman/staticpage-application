@@ -98,7 +98,7 @@
                 "name": "font_family",
                 "title": "Font family",
                 "type": "select",
-                "default": "open-sans",
+                "default": "open sans, helvetica neue, helvetica, arial, sans-serif",
                 "groups": [
                     {
                         "label": "System Fonts",

@@ -5,16 +5,24 @@
         <label class="title" for="{{ field.id }}">{{ field.title }}</label>
         <div class="select-wrap">
             <select id="{{ field.id }}" name="{{ field.id }}" class="field">
-                {% for option in field.options %}
-                    {% set selected = "selected" if selectedKey == option.key else "" %}
-                    <option value="{{ option.key }}" {{ selected }}>{{ option.value }}</option>
-                {% endfor %}
+                {% if field.groups %}
+                    {% for group in field.groups %}
+                        <optgroup label="{{ group.label }}">
+                            {{ options( group.options, selectedKey ) }}
+                        </optgroup>
+                    {% endfor %}
+                {% else %}
+                    {{ options( field.options, selectedKey ) }}
+                {% endif %}
             </select>
             <span class="selected-text">
-                {% set selected_text = field.options | selectattr( "key", "equalto", selectedKey ) %}
-                {% for text in selected_text %}
-                    {{ text.value }}
-                {% endfor %}
+                {% if field.groups %}
+                    {% for group in field.groups %}
+                        {{ selected_text( group.options, selectedKey ) }}
+                    {% endfor %}
+                {% else %}
+                    {{ selected_text( field.options, selectedKey ) }}
+                {% endif %}
             </span>
             <div class="caret">
                 <svg class="icon caret-up">
@@ -29,4 +37,20 @@
             <span class="message">{{ field.message | markdown }}</span>
         {% endif %}
     </fieldset>
+{%- endmacro %}
+
+{% macro options( options, selectedKey ) %}
+    {% for option in options %}
+        {% set selected = "selected" if selectedKey == option.key else "" %}
+
+        <option value="{{ option.key }}" {{ selected }}>{{ option.value }}</option>
+    {% endfor %}
+{%- endmacro %}
+
+{% macro selected_text( options, selectedKey ) %}
+    {% set selected = options | selectattr( "key", "equalto", selectedKey ) %}
+
+    {% for text in selected %}
+        {{ text.value }}
+    {% endfor %}
 {%- endmacro %}
