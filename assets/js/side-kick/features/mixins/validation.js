@@ -2,7 +2,8 @@ import $ from 'jquery';
 
 let regexPatterns = {
     'name': /^[a-zA-Z0-9_]*$/,
-    'hex_color': /^#([0-9a-f]{3}|[0-9a-f]{6})$/i
+    'hex_color': /^#([0-9a-f]{3}|[0-9a-f]{6})$/i,
+    // 'css': /([#.@]?[\w.:> ]+)[\s]{[\r\n]?([A-Za-z\- \r\n\t]+[:][\s]*[\w .\/()\-!]+;[\r\n]*(?:[A-Za-z\- \r\n\t]+[:][\s]*[\w .\/()\-!]+;[\r\n]*(?2)*)*)}/
 };
 
 var withValidation = function mixin() {
@@ -47,6 +48,7 @@ var withValidation = function mixin() {
             this.attr.toValidate.some(function( rule ) {
                 switch ( rule ) {
                     case 'hex_color':
+                    // case 'css':
                         isValid = this.regexValidation( rule, value );
                         break;
                     case 'file_format':

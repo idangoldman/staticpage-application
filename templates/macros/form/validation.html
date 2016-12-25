@@ -2,7 +2,7 @@
     {% if rules %}
         <ul class="validation">
             {% for rule, message in rules.items() %}
-                <li class="{{ rule }}">{{ message }}</li>
+                <li class="{{ rule }}">{{ message | markdown }}</li>
             {% endfor %}
         </ul>
     {% endif %}

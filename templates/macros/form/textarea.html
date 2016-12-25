@@ -8,7 +8,7 @@
                 class="field"
                 id="{{ field.id }}"
                 name="{{ field.id }}"
-                placeholder="{{ field.placeholder }}">{{ field.value }}</textarea>
+                placeholder="{{ field.placeholder | default( field.default or '' ) }}">{{ field.value }}</textarea>
         </div>
         {{ validation( field.validation ) }}
         {% if field.message %}

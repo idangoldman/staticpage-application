@@ -19,14 +19,27 @@ function StyleSheet( stylesheetTitle ) {
 
 StyleSheet.prototype.CSSOM = null;
 StyleSheet.prototype.findStyle = function( cssClass ) {
+    var CSSOM = null,
+        prefix = 'css-';
+
     for ( var index = 0; index < document.styleSheets.length; index++ ) {
 
-        var cssom = document.styleSheets[ index ];
+        var styleSheet = document.styleSheets[ index ];
 
-        if ( cssom.ownerNode.className === 'css-' + cssClass ) {
-            return cssom;
+        if ( styleSheet.ownerNode.className === prefix + cssClass ) {
+            CSSOM = styleSheet;
+            break;
         }
     }
+
+    if ( null === CSSOM ) {
+        var newStyleSheet = document.createElement('style');
+        newStyleSheet.className = prefix + cssClass;
+        document.getElementsByTagName('head')[0].appendChild( newStyleSheet );
+        CSSOM = document.styleSheets[ document.styleSheets.length -1 ];
+    }
+
+    return CSSOM
 };
 StyleSheet.prototype.findRuleIndex = function( selector ) {
     var rules = this.CSSOM.cssRules,
