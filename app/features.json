@@ -94,6 +94,45 @@
                 ]
             },
             {
+                "id": "design_font_family",
+                "name": "font_family",
+                "title": "Font family",
+                "type": "select",
+                "default": "open-sans",
+                "groups": [
+                    {
+                        "label": "System Fonts",
+                        "options": [
+                            { "value": "Arial", "key": "arial, helvetica neue, helvetica, sans-serif" },
+                            { "value": "Comic Sans MS", "key": "comic sans ms, marker felt-thin, arial, sans-serif" },
+                            { "value": "Courier New", "key": "courier new, courier, lucida sans typewriter, lucida typewriter, monospace" },
+                            { "value": "Georgia", "key": "georgia, times, times new roman, serif" },
+                            { "value": "Helvetica", "key": "helvetica neue, helvetica, arial, verdana, sans-serif" },
+                            { "value": "Lucida", "key": "lucida sans unicode, lucida grande, sans-serif" },
+                            { "value": "Tahoma", "key": "tahoma, verdana, segoe, sans-serif" },
+                            { "value": "Times New Roman", "key": "times new roman, times, baskerville, georgia, serif" },
+                            { "value": "Trebuchet MS", "key": "trebuchet ms, lucida grande, lucida sans unicode, lucida sans, tahoma, sans-serif" },
+                            { "value": "Verdana", "key": "verdana, geneva, sans-serif" }
+                        ]
+                    },
+                    {
+                        "label": "Google Fonts",
+                        "options": [
+                            { "value": "Arvo", "key": "arvo, courier, georgia, serif" },
+                            { "value": "Lato", "key": "lato, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Lora", "key": "lora, georgia, times new roman, serif" },
+                            { "value": "Merriweather", "key": "merriweather, georgia, times new roman, serif" },
+                            { "value": "Merriweather Sans", "key": "merriweather sans, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Noticia Text", "key": "noticia text, georgia, times new roman, serif" },
+                            { "value": "Open Sans", "key": "open sans, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Playfair Display", "key": "playfair display, georgia, times new roman, serif" },
+                            { "value": "Roboto", "key": "roboto, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Source Sans Pro", "key": "source sans pro, helvetica neue, helvetica, arial, sans-serif" }
+                        ]
+                    }
+                ]
+            },
+            {
                 "id": "design_base_font_size",
                 "name": "base_font_size",
                 "title": "Base font size",

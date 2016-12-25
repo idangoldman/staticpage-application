@@ -22,35 +22,6 @@
                 ]
             },
             {
-                "id": "design_font_family",
-                "name": "font_family",
-                "title": "Font family",
-                "type": "select",
-                "default": "open-sans",
-                "options": [
-                    { "key": "arial", "value": "Arial" },
-                    { "key": "arvo", "value": "Arvo" },
-                    { "key": "comic-cans-ms", "value": "Comic Sans MS" },
-                    { "key": "courier-new", "value": "Courier New" },
-                    { "key": "georgia", "value": "Georgia" },
-                    { "key": "helvetica", "value": "Helvetica" },
-                    { "key": "lato", "value": "Lato" },
-                    { "key": "lora", "value": "Lora" },
-                    { "key": "lucida", "value": "Lucida" },
-                    { "key": "merriweather-sans", "value": "Merriweather Sans" },
-                    { "key": "merriweather", "value": "Merriweather" },
-                    { "key": "noticia-text", "value": "Noticia Text" },
-                    { "key": "open-sans", "value": "Open Sans" },
-                    { "key": "playfair-display", "value": "Playfair Display" },
-                    { "key": "roboto", "value": "Roboto" },
-                    { "key": "source-sans-pro", "value": "Source Sans Pro" },
-                    { "key": "tahoma", "value": "Tahoma" },
-                    { "key": "times-new-roman", "value": "Times New Roman" },
-                    { "key": "trebuchet-ms", "value": "Trebuchet MS" },
-                    { "key": "verdana", "value": "Verdana" }
-                ]
-            },
-            {
                 "id": "design_additional_styles",
                 "name": "additional_styles",
                 "title": "Additional styles",
