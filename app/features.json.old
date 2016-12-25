@@ -1,32 +1,5 @@
 [
     {
-        "name": "general",
-        "title": "General",
-        "fields": [
-            {
-                "id": "general_file_type",
-                "name": "file_type",
-                "title": "File type",
-                "type": "select",
-                "is_disabled": true,
-                "default": "welcome",
-                "options": [
-                    { "key": "welcome", "value": "Welcome" },
-                    { "key": "thank_you", "value": "Thank You" }
-                ]
-            },
-            {
-                "id": "general_file_name",
-                "name": "file_name",
-                "title": "File name",
-                "type": "text",
-                "default": "index",
-                "placeholder": "index",
-                "message": "Allowed characters are **_**, **-**, **a-z**, **A-Z**, **0-9**."
-            }
-        ]
-    },
-    {
         "name": "design",
         "title": "Design",
         "fields": [
