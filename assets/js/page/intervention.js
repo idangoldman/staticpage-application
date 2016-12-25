@@ -9,6 +9,7 @@ import {
     UPDATE_BACKGROUND_COLOR,
     UPDATE_BACKGROUND_REPEAT,
     UPDATE_FONT_COLOR,
+    UPDATE_BASE_FONT_SIZE,
     UPDATE_CONTENT_ALIGNMENT,
     UPDATE_CONTENT_DIRECTION
 } from 'page/constants';
@@ -27,6 +28,7 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case UPDATE_BACKGROUND_IMAGE: handleBackgroundImage( data ); break;
             case UPDATE_BACKGROUND_COLOR: handleBackgroundColor( data ); break;
             case UPDATE_BACKGROUND_REPEAT: handleBackgroundRepeat( data ); break;
+            case UPDATE_BASE_FONT_SIZE: handleBaseFontSize( data ); break;
             case UPDATE_FONT_COLOR: handleFontColor( data ); break;
             case UPDATE_CONTENT_ALIGNMENT: handleContentAlignmnet( data ); break;
             case UPDATE_CONTENT_DIRECTION: handleContentDirection( data ); break;
@@ -84,11 +86,17 @@ function handleBackgroundRepeat( { value } ) {
         'backgroundRepeat': value,
         'backgroundSize': 'cover'
     };
+
     if ( 'repeat' === value ) {
         backgroundProperties['backgroundSize'] = 'auto';
     }
 
     css( '.background', backgroundProperties, value );
+}
+
+function handleBaseFontSize( { value } ) {
+    console.log('font size?');
+    css( 'html', 'fontSize', value );
 }
 
 function handleFontColor( { value } ) {

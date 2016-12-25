@@ -16,6 +16,7 @@ var designFeature = component( withChildComponents, withToggle, function() {
         'backgroundImageField': '.design_background_image',
         'backgroundColorField': '.design_background_color',
         'backgroundRepeatField': '.design_background_repeat',
+        'baseFontSizeField': '.design_base_font_size',
         'fontColorField': '.design_font_color',
         'contentAlignmentField': '.design_content_alignment',
         'contentDirectionField': '.design_content_direction'
@@ -38,6 +39,11 @@ var designFeature = component( withChildComponents, withToggle, function() {
         // Background Repeat
         this.attachChild( selectFieldComponent, this.select('backgroundRepeatField'), {
             'fieldName': 'design_background_repeat'
+        });
+
+        // Base Font Size
+        this.attachChild( selectFieldComponent, this.select('baseFontSizeField'), {
+            'fieldName': 'design_base_font_size'
         });
 
         // Font Color

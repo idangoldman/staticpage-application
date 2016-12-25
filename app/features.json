@@ -94,6 +94,28 @@
                 ]
             },
             {
+                "id": "design_base_font_size",
+                "name": "base_font_size",
+                "title": "Base font size",
+                "type": "select",
+                "default": "16px",
+                "options": [
+                    { "key": "8px", "value": "8px" },
+                    { "key": "10px", "value": "10px" },
+                    { "key": "12px", "value": "12px" },
+                    { "key": "14px", "value": "14px" },
+                    { "key": "16px", "value": "16px" },
+                    { "key": "18px", "value": "18px" },
+                    { "key": "20px", "value": "20px" },
+                    { "key": "22px", "value": "22px" },
+                    { "key": "24px", "value": "24px" },
+                    { "key": "26px", "value": "26px" },
+                    { "key": "28px", "value": "28px" },
+                    { "key": "30px", "value": "30px" },
+                    { "key": "32px", "value": "32px" }
+                ]
+            },
+            {
                 "id": "design_font_color",
                 "name": "font_color",
                 "title": "Font color",

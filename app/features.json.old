@@ -78,22 +78,6 @@
                 ]
             },
             {
-                "id": "design_base_font_size",
-                "name": "base_font_size",
-                "title": "Base font size",
-                "type": "select",
-                "default": "16",
-                "options": [
-                    { "key": "4", "value": "4px" },
-                    { "key": "8", "value": "8px" },
-                    { "key": "12", "value": "12px" },
-                    { "key": "16", "value": "16px" },
-                    { "key": "24", "value": "24px" },
-                    { "key": "28", "value": "28px" },
-                    { "key": "32", "value": "32px" }
-                ]
-            },
-            {
                 "id": "design_additional_styles",
                 "name": "additional_styles",
                 "title": "Additional styles",
