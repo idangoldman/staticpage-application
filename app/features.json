@@ -186,6 +186,17 @@
                     { "key": "ltr", "value": "Left to Right" },
                     { "key": "rtl", "value": "Right to Left" }
                 ]
+            },
+            {
+                "id": "design_additional_styles",
+                "name": "additional_styles",
+                "title": "Additional styles",
+                "message": "Show us your CSS Kong Fu style.",
+                "type": "textarea",
+                "placeholder": "#element { ... }",
+                "validation": {
+                    "css": "Not valid CSS"
+                }
             }
         ]
     }

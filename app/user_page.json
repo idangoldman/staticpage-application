@@ -13,6 +13,7 @@
         "base_font_size": "",
         "font_color": "",
         "content_alignment": "",
-        "content_direction": ""
+        "content_direction": "",
+        "additional_styles": ""
     }
 }

@@ -20,12 +20,6 @@
                     { "key": "bottom-middle", "value": "Bottom Middle" },
                     { "key": "bottom-right", "value": "Bottom Right" }
                 ]
-            },
-            {
-                "id": "design_additional_styles",
-                "name": "additional_styles",
-                "title": "Additional styles",
-                "type": "textarea"
             }
         ]
     },

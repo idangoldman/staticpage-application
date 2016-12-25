@@ -12,7 +12,8 @@ import {
     UPDATE_BASE_FONT_SIZE,
     UPDATE_FONT_COLOR,
     UPDATE_CONTENT_ALIGNMENT,
-    UPDATE_CONTENT_DIRECTION
+    UPDATE_CONTENT_DIRECTION,
+    UPDATE_ADDITIONAL_STYLES
 } from 'page/constants';
 
 let pageUpdateFieldsFilter = [
@@ -27,7 +28,8 @@ let pageUpdateFieldsFilter = [
     UPDATE_BASE_FONT_SIZE,
     UPDATE_FONT_COLOR,
     UPDATE_CONTENT_ALIGNMENT,
-    UPDATE_CONTENT_DIRECTION
+    UPDATE_CONTENT_DIRECTION,
+    UPDATE_ADDITIONAL_STYLES
 ];
 
 var postMessaging = component( function() {

@@ -11,11 +11,13 @@ import {
     UPDATE_BASE_FONT_SIZE,
     UPDATE_FONT_COLOR,
     UPDATE_CONTENT_ALIGNMENT,
-    UPDATE_CONTENT_DIRECTION
+    UPDATE_CONTENT_DIRECTION,
+    UPDATE_ADDITIONAL_STYLES
 } from 'page/constants';
 
 import StyleSheet from 'page/styles';
-var css = new StyleSheet('intervention');
+var css = new StyleSheet('intervention'),
+    additionalCSS = new StyleSheet('additional');
 
 $( window ).on( 'message onmessage', function receiveMessage( event ) {
     var data = event.originalEvent.data;
@@ -34,9 +36,14 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case UPDATE_FONT_COLOR: handleFontColor( data ); break;
             case UPDATE_CONTENT_ALIGNMENT: handleContentAlignmnet( data ); break;
             case UPDATE_CONTENT_DIRECTION: handleContentDirection( data ); break;
+            case UPDATE_ADDITIONAL_STYLES: handleAdditionalStyles( data ); break;
         }
     }
 });
+
+function htmlLineBreak( text ) {
+    return text.replace( /(?:\r\n|\r|\n)/g, '<br />' );
+}
 
 function handleLogo( { raw_file } ) {
      var $logo = $('.logo');
@@ -147,6 +154,6 @@ function handleContentDirection( { value } ) {
     css( 'body', 'direction', value );
 }
 
-function htmlLineBreak( text ) {
-    return text.replace( /(?:\r\n|\r|\n)/g, '<br />' );
+function handleAdditionalStyles( { value } ) {
+    $('.css-additional').html( value );
 }

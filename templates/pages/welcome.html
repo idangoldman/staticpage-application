@@ -57,6 +57,13 @@
             {% endif %}
         }
     </style>
+
+    {% if design.additional_styles %}
+        <style type="text/css" class="css-additional">
+            {{ design.additional_styles }}
+        </style>
+    {% endif %}
+
 {% endblock head %}
 
 {% block content %}

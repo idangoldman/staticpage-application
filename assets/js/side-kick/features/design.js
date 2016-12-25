@@ -20,7 +20,8 @@ var designFeature = component( withChildComponents, withToggle, function() {
         'baseFontSizeField': '.design_base_font_size',
         'fontColorField': '.design_font_color',
         'contentAlignmentField': '.design_content_alignment',
-        'contentDirectionField': '.design_content_direction'
+        'contentDirectionField': '.design_content_direction',
+        'additionalStyleField': '.design_additional_styles'
     });
 
     this.after('initialize', function() {
@@ -66,6 +67,12 @@ var designFeature = component( withChildComponents, withToggle, function() {
         // Content Direction
         this.attachChild( selectFieldComponent, this.select('contentDirectionField'), {
             'fieldName': 'design_content_direction'
+        });
+
+        // Additional Style
+        this.attachChild( textFieldComponent, this.select('additionalStyleField'), {
+            'fieldName': 'design_additional_styles',
+            'validation': ['css']
         });
     });
 });
