@@ -98,7 +98,7 @@
                 "name": "font_family",
                 "title": "Font family",
                 "type": "select",
-                "default": "open sans, helvetica neue, helvetica, arial, sans-serif",
+                "default": "Open Sans, helvetica neue, helvetica, arial, sans-serif",
                 "groups": [
                     {
                         "label": "System Fonts",
@@ -118,16 +118,16 @@
                     {
                         "label": "Google Fonts",
                         "options": [
-                            { "value": "Arvo", "key": "arvo, courier, georgia, serif" },
-                            { "value": "Lato", "key": "lato, helvetica neue, helvetica, arial, sans-serif" },
-                            { "value": "Lora", "key": "lora, georgia, times new roman, serif" },
-                            { "value": "Merriweather", "key": "merriweather, georgia, times new roman, serif" },
-                            { "value": "Merriweather Sans", "key": "merriweather sans, helvetica neue, helvetica, arial, sans-serif" },
-                            { "value": "Noticia Text", "key": "noticia text, georgia, times new roman, serif" },
-                            { "value": "Open Sans", "key": "open sans, helvetica neue, helvetica, arial, sans-serif" },
-                            { "value": "Playfair Display", "key": "playfair display, georgia, times new roman, serif" },
-                            { "value": "Roboto", "key": "roboto, helvetica neue, helvetica, arial, sans-serif" },
-                            { "value": "Source Sans Pro", "key": "source sans pro, helvetica neue, helvetica, arial, sans-serif" }
+                            { "value": "Arvo", "key": "Arvo, courier, georgia, serif" },
+                            { "value": "Lato", "key": "Lato, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Lora", "key": "Lora, georgia, times new roman, serif" },
+                            { "value": "Merriweather", "key": "Merriweather, georgia, times new roman, serif" },
+                            { "value": "Merriweather Sans", "key": "Merriweather Sans, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Noticia Text", "key": "Noticia Text, georgia, times new roman, serif" },
+                            { "value": "Open Sans", "key": "Open Sans, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Playfair Display", "key": "Playfair Display, georgia, times new roman, serif" },
+                            { "value": "Roboto", "key": "Roboto, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Source Sans Pro", "key": "Source Sans Pro, helvetica neue, helvetica, arial, sans-serif" }
                         ]
                     }
                 ]

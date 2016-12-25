@@ -6,7 +6,17 @@
 
     {% include 'macros/social.html' %}
 
-    <style type="text/css" class="css-additional">
+    <style type="text/css" class="css-intervention">
+
+        {% set google_fonts = ("Arvo", "Lato", "Lora", "Merriweather", "Merriweather Sans", "Noticia Text", "Open Sans", "Playfair Display", "Roboto", "Source Sans Pro") %}
+        {% for google_font in google_fonts %}
+            {% set font_family = design.font_family.split(', ')[0] %}
+            {% if font_family is equalto google_font %}
+                {% set font_family = font_family.split(' ') %}
+                @import url("http://fonts.googleapis.com/css?family={{ font_family | join('+') }}:400,600,700,800&subset=latin");
+            {% endif %}
+        {% endfor %}
+
         html {
             font-size: {{ design.base_font_size }};
         }
@@ -16,6 +26,7 @@
         }
 
         body, button, input, select, textarea {
+            font-family: {{ design.font_family }}
             color: {{ design.font_color }};
         }
 

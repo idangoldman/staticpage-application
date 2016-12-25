@@ -44,9 +44,11 @@ StyleSheet.prototype.findRuleIndex = function( selector ) {
 StyleSheet.prototype.select = function( selector, property, value ) {
     var ruleIndex = this.findRuleIndex( selector );
 
-    if ( null !== ruleIndex ) {
+    if ( null === ruleIndex ) {
+        this.CSSOM.insertRule( selector, 0 );
+        return this.CSSOM;
+    } else {
         var rule = this.CSSOM.cssRules[ ruleIndex ];
-
         switch ( typeof property ) {
             case 'undefined':
                 return rule;

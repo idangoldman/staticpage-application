@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import StyleSheet from 'page/styles';
 import {
     UPDATE_LOGO,
     UPDATE_TITLE,
@@ -15,7 +14,8 @@ import {
     UPDATE_CONTENT_DIRECTION
 } from 'page/constants';
 
-var css = new StyleSheet('additional');
+import StyleSheet from 'page/styles';
+var css = new StyleSheet('intervention');
 
 $( window ).on( 'message onmessage', function receiveMessage( event ) {
     var data = event.originalEvent.data;
@@ -97,8 +97,26 @@ function handleBackgroundRepeat( { value } ) {
 }
 
 function handleFontFamily( { value } ) {
-    console.log('font family:', value);
-    // css( 'body, button, input, select, textarea', 'fontFamily', value );
+    var fontFamily = value.split(', ')[0],
+        googleFonts = [
+            "Arvo",
+            "Lato",
+            "Lora",
+            "Merriweather",
+            "Merriweather Sans",
+            "Noticia Text",
+            "Open Sans",
+            "Playfair Display",
+            "Roboto",
+            "Source Sans Pro"
+        ];
+
+    if ( googleFonts.indexOf( fontFamily ) !== -1 ) {
+        fontFamily = fontFamily.split(' ').join('+');
+        css( '@import url("http://fonts.googleapis.com/css?family=' + fontFamily + ':400,600,700,800&subset=latin");' );
+    }
+
+    css( 'body, button, input, select, textarea', 'fontFamily', value );
 }
 
 function handleBaseFontSize( { value } ) {
