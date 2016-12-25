@@ -14,6 +14,7 @@
         .background {
             background-color: {{ design.background_color }};
             background-repeat: {{ design.background_repeat }};
+            background-size: {{ 'cover' if design.background_repeat == 'no-repeat' else 'auto' }};
 
             {% if design.background_image %}
                 background-image: url('{{ design.background_image }}');

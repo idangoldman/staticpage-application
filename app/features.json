@@ -1,79 +1,5 @@
 [
     {
-        "name": "design",
-        "title": "Design",
-        "fields": [
-            {
-                "id": "design_background_image",
-                "name": "background_image",
-                "title": "Background image",
-                "type": "file",
-                "accepted": {
-                    "formats": [
-                        "image/png",
-                        "image/gif",
-                        "image/jpg",
-                        "image/jpeg",
-                        "image/webp"
-                    ],
-                    "size": 1024000
-                },
-                "placeholder": "background.png",
-                "message": "Upload gif, jpg and png, up to 1MB.",
-                "validation": {
-                    "file_format": "File type doesn't supported.",
-                    "file_size": "File size greater than supported"
-                }
-            },
-            {
-                "id": "design_background_color",
-                "name": "background_color",
-                "title": "Background color",
-                "type": "text",
-                "default": "#fff",
-                "validation": {
-                    "hex_color":  "Not valid Hex color"
-                }
-            },
-            {
-                "id": "design_background_repeat",
-                "name": "background_repeat",
-                "title": "Background repeat",
-                "type": "select",
-                "default": "no-repeat",
-                "options": [
-                    { "key": "no-repeat", "value": "No repeat" },
-                    { "key": "repeat", "value": "Repeat" },
-                    { "key": "repeat-x", "value": "Repeat horizontally" },
-                    { "key": "repeat-y", "value": "Repeat vertically" }
-                ]
-            },
-            {
-                "id": "design_content_alignment",
-                "name": "content_alignment",
-                "title": "Content alignment",
-                "type": "select",
-                "default": "center",
-                "options": [
-                    { "key": "left", "value": "Left" },
-                    { "key": "center", "value": "Center" },
-                    { "key": "right", "value": "Right" }
-                ]
-            },
-            {
-                "id": "design_content_direction",
-                "name": "content_direction",
-                "title": "Content direction",
-                "type": "select",
-                "default": "ltr",
-                "options": [
-                    { "key": "ltr", "value": "Left to Right" },
-                    { "key": "rtl", "value": "Right to Left" }
-                ]
-            }
-        ]
-    },
-    {
         "name": "content",
         "title": "Content",
         "fields": [
@@ -117,6 +43,78 @@
                 "name": "description",
                 "title": "Description",
                 "type": "textarea"
+            }
+        ]
+    },
+    {
+        "name": "design",
+        "title": "Design",
+        "fields": [
+            {
+                "id": "design_background_image",
+                "name": "background_image",
+                "title": "Background image",
+                "type": "file",
+                "accepted": {
+                    "formats": [
+                        "image/png",
+                        "image/gif",
+                        "image/jpg",
+                        "image/jpeg",
+                        "image/webp"
+                    ],
+                    "size": 1024000
+                },
+                "placeholder": "background.png",
+                "message": "Upload gif, jpg and png, up to 1MB.",
+                "validation": {
+                    "file_format": "File type doesn't supported.",
+                    "file_size": "File size greater than supported"
+                }
+            },
+            {
+                "id": "design_background_color",
+                "name": "background_color",
+                "title": "Background color",
+                "type": "text",
+                "default": "#fff",
+                "validation": {
+                    "hex_color":  "Not valid Hex color"
+                }
+            },
+            {
+                "id": "design_background_repeat",
+                "name": "background_repeat",
+                "title": "Background repeat",
+                "type": "select",
+                "default": "no-repeat",
+                "options": [
+                    { "key": "no-repeat", "value": "No repeat" },
+                    { "key": "repeat", "value": "Repeat" }
+                ]
+            },
+            {
+                "id": "design_content_alignment",
+                "name": "content_alignment",
+                "title": "Content alignment",
+                "type": "select",
+                "default": "center",
+                "options": [
+                    { "key": "left", "value": "Left" },
+                    { "key": "center", "value": "Center" },
+                    { "key": "right", "value": "Right" }
+                ]
+            },
+            {
+                "id": "design_content_direction",
+                "name": "content_direction",
+                "title": "Content direction",
+                "type": "select",
+                "default": "ltr",
+                "options": [
+                    { "key": "ltr", "value": "Left to Right" },
+                    { "key": "rtl", "value": "Right to Left" }
+                ]
             }
         ]
     }

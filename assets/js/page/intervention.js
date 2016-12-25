@@ -78,23 +78,32 @@ function handleBackgroundColor( { value } ) {
 }
 
 function handleBackgroundRepeat( { value } ) {
-    css( '.background', 'backgroundRepeat', value );
+    var backgroundProperties = {
+        'backgroundRepeat': value,
+        'backgroundSize': 'cover'
+    };
+    if ( 'repeat' === value ) {
+console.log('dude123');
+        backgroundProperties['backgroundSize'] = 'auto';
+    }
+
+    css( '.background', backgroundProperties, value );
 }
 
 function handleContentAlignmnet( { value } ) {
-    var margins = {
+    var logoProperties = {
         'marginRight': 'auto',
         'marginLeft': 'auto'
     };
 
-    if ( value === 'left' ) {
-        margins['marginLeft'] = 0;
-    } else if ( value === 'right' ) {
-        margins['marginRight'] = 0;
+    if ( 'left' === value ) {
+        logoProperties['marginLeft'] = 0;
+    } else if ( 'right' === value ) {
+        logoProperties['marginRight'] = 0;
     }
 
     css( '.page', 'textAlign', value );
-    css( '.logo', margins );
+    css( '.logo', logoProperties );
 }
 
 function handleContentDirection( { value } ) {
