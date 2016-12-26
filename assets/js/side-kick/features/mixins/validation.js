@@ -3,7 +3,9 @@ import $ from 'jquery';
 let regexPatterns = {
     'name': /^[a-zA-Z0-9_]*$/,
     'hex_color': /^#([0-9a-f]{3}|[0-9a-f]{6})$/i,
-    // 'css': /([#.@]?[\w.:> ]+)[\s]{[\r\n]?([A-Za-z\- \r\n\t]+[:][\s]*[\w .\/()\-!]+;[\r\n]*(?:[A-Za-z\- \r\n\t]+[:][\s]*[\w .\/()\-!]+;[\r\n]*(?2)*)*)}/
+    'css': /([#.@]?[\w.:> ]+)[\s]?{[\r\n]?([a-z\- \r\n\t]+[:][\s]*[\w .\/()\-!]+;[\r\n]*)*}/gi
+    // https://regex101.com/r/fK9mY3/1
+    // 'css': /([#.]?[a-z:>+.~ ]+)\s?{([a-z-:;()""''\s]+)}/gi
 };
 
 var withValidation = function mixin() {
@@ -26,6 +28,7 @@ var withValidation = function mixin() {
 
     this.valueIsNotEmpty = function( value ) {
         var isNotEmpty = false;
+
         switch ( typeof value ) {
             case 'string':
                 isNotEmpty = !! value.trim().length;
@@ -40,7 +43,6 @@ var withValidation = function mixin() {
     };
 
     this.validate = function( value ) {
-
         var isValid = true;
 
         if ( !! this.attr.toValidate.length && this.valueIsNotEmpty( value ) ) {
@@ -48,7 +50,7 @@ var withValidation = function mixin() {
             this.attr.toValidate.some(function( rule ) {
                 switch ( rule ) {
                     case 'hex_color':
-                    // case 'css':
+                    case 'css':
                         isValid = this.regexValidation( rule, value );
                         break;
                     case 'file_format':
@@ -86,6 +88,9 @@ var withValidation = function mixin() {
     };
 
     this.regexValidation = function( patternName, value ) {
+        if (patternName === 'css') {
+            console.log(regexPatterns[ patternName ].test( value ));
+        }
         return regexPatterns[ patternName ].test( value );
     };
 

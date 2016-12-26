@@ -72,7 +72,7 @@ var designFeature = component( withChildComponents, withToggle, function() {
         // Additional Style
         this.attachChild( textFieldComponent, this.select('additionalStyleField'), {
             'fieldName': 'design_additional_styles',
-            'validation': ['css']
+            'toValidate': ['css']
         });
     });
 });

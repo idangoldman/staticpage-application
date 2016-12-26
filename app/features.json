@@ -191,7 +191,7 @@
                 "id": "design_additional_styles",
                 "name": "additional_styles",
                 "title": "Additional styles",
-                "message": "Show us your CSS Kong Fu style.",
+                "message": "Show your CSS Kong Fu skills.",
                 "type": "textarea",
                 "placeholder": "#element { ... }",
                 "validation": {
