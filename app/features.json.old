@@ -24,30 +24,6 @@
         ]
     },
     {
-        "name": "search-results",
-        "title": "Search Results",
-        "fields": [
-            {
-                "id": "search_results_title",
-                "name": "title",
-                "title": "Title",
-                "type": "text",
-                "message": "Recommended **70** characters."
-            },
-            {
-                "id": "search_results_description",
-                "name": "description",
-                "title": "Description",
-                "type": "textarea",
-                "message": "Recommended **156** characters."
-            },
-            {
-                "title": "Preview",
-                "type": "search_preview"
-            }
-        ]
-    },
-    {
         "name": "analytics",
         "title": "Analytics",
         "fields": [

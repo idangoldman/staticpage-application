@@ -124,6 +124,9 @@ def side_kick():
             for field in feature['fields']:
                 if field['name'] in user_page[feature['name']]:
                     field['value'] = user_page[feature['name']][field['name']]
+            # if feature['name'] is 'search_results':
+                # from pprint import pprint
+                # pprint
 
     payload = {
         'svg_sprite': svg_sprite,

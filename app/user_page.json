@@ -15,5 +15,9 @@
         "content_alignment": "",
         "content_direction": "",
         "additional_styles": ""
+    },
+    "search_results": {
+        "title": "",
+        "description": ""
     }
 }
