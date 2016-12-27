@@ -3,11 +3,7 @@ from flask import Flask, Blueprint, render_template, redirect, make_response, js
 from werkzeug.contrib.fixers import ProxyFix
 import inspect, os
 
-from app.controllers.static import static_pages
 from app.controllers.general import *
-
-import app.controllers.admin as dashboard
-from app.models import *
 
 from flask_wtf import FlaskForm
 from flask_wtf.csrf import CsrfProtect
@@ -18,19 +14,10 @@ def create_app():
     CORS(app)
     app.config.from_object(os.environ['APP_SETTINGS'])
     print(os.environ['APP_SETTINGS'])
-    #from app.models import User
-    from flask_admin import Admin
-    admin = Admin(app)
-    db = MongoEngine()
-    db.init_app(app)
     CsrfProtect(app)
-    from app.models import db
-    admin.add_view(dashboard.adminPage(name='Page'))
-    admin.add_view(dashboard.UserView(User))
     return app
 
 app = create_app()
-app.register_blueprint(static_pages, url_prefix='/pages')
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
 app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -54,7 +41,6 @@ def nl2br(eval_ctx, value):
     param = [u'%s' % p.replace('\n', '<br />') for p in param]
     param = u'\n\n'.join(param)
     return Markup(param)
-
 
 class NewsletterForm(FlaskForm):
     email = StringField("email", [validators.Required(), validators.Email("Please enter your email address.")])
