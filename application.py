@@ -11,9 +11,8 @@ from wtforms import StringField, validators
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)
     app.config.from_object(os.environ['APP_SETTINGS'])
-    print(os.environ['APP_SETTINGS'])
+    CORS(app)
     CsrfProtect(app)
     return app
 
