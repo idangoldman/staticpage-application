@@ -1,10 +1,11 @@
+print(' - Start')
+
+import click
 import inspect, os
 
 from flask import Flask, Blueprint, render_template, redirect, make_response, json, request, jsonify
 
 from werkzeug.contrib.fixers import ProxyFix
-
-from app.controllers.general import *
 
 from flask_wtf import FlaskForm
 from flask_wtf.csrf import CsrfProtect
@@ -14,7 +15,7 @@ from wtforms import StringField, validators
 env_file = '.env_flask'
 
 if os.path.exists(env_file):
-    print('Importing environment from %s...' % env_file)
+    print(' * Importing environment from %s...' % env_file)
     for line in open(env_file):
         variables = line.strip().split('=')
         if len(variables) == 2:
@@ -22,6 +23,7 @@ if os.path.exists(env_file):
             os.environ[variables[0]] = variables[1]
 
 
+from app.third_party import mailchimp_subscribe
 from app import create_app
 # from flask_script import Manager
 
@@ -162,6 +164,7 @@ def page_internal_server_error(e):
 @app.errorhandler(503)
 def page_service_unavailable(e):
     return render_template('pages/errors/503.html'), 503
+
 
 if __name__ == '__main__':
     app_options = {
