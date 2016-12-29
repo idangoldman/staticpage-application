@@ -20,10 +20,14 @@ def create_app( config_name ):
     db.init_app(app)
     login_manager.init_app(app)
 
-    from .auth import auth as auth_blueprint
+    with app.app_context():
+        from app.third_party import jinja_filters
+        from app import routes
+
+    from app.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    from .root import root as root_blueprint
+    from app.root import root as root_blueprint
     app.register_blueprint(root_blueprint)
 
     return app
