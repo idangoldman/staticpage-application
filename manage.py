@@ -128,10 +128,10 @@ def side_kick():
 def fake_api():
     return jsonify( request.values )
 
-# TODO: enable this 401 page
-# @app.errorhandler(401)
-# def page_unauthorized(e):
-#     return render_template('pages/errors/401.html'), 401
+
+@app.errorhandler(401)
+def page_unauthorized(e):
+    return render_template('pages/errors/401.html'), 401
 
 @app.errorhandler(403)
 def page_forbidden(e):
@@ -140,7 +140,6 @@ def page_forbidden(e):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    print('something to print?')
     return render_template('pages/errors/404.html'), 404
 
 

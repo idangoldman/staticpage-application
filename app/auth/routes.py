@@ -1,9 +1,10 @@
 from flask import render_template, request, redirect, url_for, flash
+from flask_login import login_user, logout_user, login_required
 
 from . import auth
 from .forms import RegisterForm, LoginForm
-from ..models import User
 from .. import db
+from ..models import User
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -25,12 +26,14 @@ def login():
         if user is None or not user.verify_password(form.password.data):
             flash('Invalid email or password.')
             return redirect(url_for('auth.login'))
+        login_user(user, form.remember_me.data)
         redirect_url = url_for('home') if not user.is_admin else url_for('root.index')
         return redirect(request.args.get('next') or redirect_url)
-        # login_user(user, form.remember_me.data)
     return render_template('root/auth/login.html', form=form)
 
 
 @auth.route('/logout')
+@login_required
 def logout():
+    logout_user()
     return redirect(url_for('auth.login'))
