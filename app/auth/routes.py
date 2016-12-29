@@ -4,15 +4,20 @@ from flask_login import login_user, logout_user, login_required
 from . import auth
 from .forms import RegisterForm, LoginForm
 from .. import db
-from ..models import User
+from ..models import User, Page
 
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
+        # TODO: same email crash
         user = User(fullname=form.fullname.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
+        db.session.commit()
+        user = User.query.filter_by(email=form.email.data).first()
+        page = Page(user_id=user.id)
+        db.session.add(page)
         db.session.commit()
         return redirect(url_for('auth.login'))
     return render_template('root/auth/register.html', form=form)

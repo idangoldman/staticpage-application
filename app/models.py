@@ -13,7 +13,7 @@ class User(UserMixin, db.Model):
     is_admin = db.Column(db.Boolean, default=False)
     joined_at = db.Column(db.DateTime(), default=datetime.utcnow)
 
-    # pages = db.relationship('Pages', lazy='dynamic', backref='creator')
+    pages = db.relationship('Page', lazy='dynamic', backref='creator')
 
 
     @property
@@ -33,3 +33,32 @@ class User(UserMixin, db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+class Page(db.Model):
+    __tablename__ = 'pages'
+
+    id = db.Column(db.Integer, primary_key=True, index=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created_at = db.Column(db.DateTime(), default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime(), default=datetime.utcnow)
+
+    file_type = db.Column(db.String(64), nullable=False, default='welcome')
+    file_name = db.Column(db.String(64), default='index')
+
+    content_logo = db.Column(db.String(64))
+    content_title = db.Column(db.String(64))
+    content_sub_title = db.Column(db.String(64))
+    content_description = db.Column(db.String(64))
+
+    design_background_image = db.Column(db.String(64))
+    design_background_color = db.Column(db.String(64))
+    design_background_repeat = db.Column(db.String(64))
+    design_font_family = db.Column(db.String(64))
+    design_base_font_size = db.Column(db.String(64))
+    design_font_color = db.Column(db.String(64))
+    design_content_alignment = db.Column(db.String(64))
+    design_content_direction = db.Column(db.String(64))
+    design_additional_styles = db.Column(db.String(64))
+
+    search_results_title = db.Column(db.String(64))
+    search_results_description = db.Column(db.String(64))
