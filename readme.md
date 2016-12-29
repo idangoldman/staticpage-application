@@ -28,3 +28,10 @@ sh start.sh
 
 ### Frontend
 gulp
+
+### Migrate
+python migrate.py db init
+
+python migrate.py db migrate
+
+python migrate.py db upgrade

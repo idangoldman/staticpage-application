@@ -8,7 +8,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fullname = db.Column(db.String(64), nullable=False)
     email = db.Column(db.String(64), nullable=False, unique=True, index=True)
-    password_hash = db.Column(db.String(128))
+    password_hash = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
     joined_at = db.Column(db.DateTime(), default=datetime.utcnow)
 
