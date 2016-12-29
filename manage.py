@@ -12,25 +12,13 @@ from flask_wtf.csrf import CsrfProtect
 from wtforms import StringField, validators
 
 
-env_file = '.env_flask'
-
-if os.path.exists(env_file):
-    print(' * Importing environment from %s...' % env_file)
-    for line in open(env_file):
-        variables = line.strip().split('=')
-        if len(variables) == 2:
-            # print(variables[0])
-            os.environ[variables[0]] = variables[1]
-
-
-from app.third_party import mailchimp_subscribe
+from app.third_party import mailchimp_subscribe, load_env_var
 from app import create_app
-# from flask_script import Manager
+load_env_var()
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+app = create_app(os.getenv('FLASK_CONFIG'))
 app.config['root_path'] = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 app.wsgi_app = ProxyFix(app.wsgi_app)
-
 
 # Jinja custom filters
 import re

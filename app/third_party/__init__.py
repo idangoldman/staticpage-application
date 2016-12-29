@@ -15,10 +15,19 @@ def mailchimp_subscribe(email):
                 'status': 'subscribed'
             })
         except Exception as e:
-            '''
-            TODO - Check if user exist and return true otherwise false
-            '''
+            # TODO: Check if user exist and return true otherwise false
             return True
         return True
     else:
         return False
+
+# TODO: Move it to a better place
+def load_env_var( env_file = '.env_flask' ):
+    import os
+    if os.path.exists(env_file):
+        print(' * Importing environment from %s...' % env_file)
+        for line in open(env_file):
+            variables = line.strip().split('=')
+            if len(variables) == 2:
+                # print(variables[0])
+                os.environ[variables[0]] = variables[1]

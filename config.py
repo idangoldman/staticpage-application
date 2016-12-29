@@ -1,6 +1,4 @@
 import os
-# basedir = os.path.abspath(os.path.dirname(__file__))
-
 
 class Config(object):
     # SQLALCHEMY
@@ -28,11 +26,3 @@ class ProductionConfig(Config):
     SQLALCHEMY_ECHO = False
 
     SECRET_KEY = os.getenv('SECRET_KEY')
-
-
-config = {
-    'development': DevelopmentConfig,
-    'production': ProductionConfig,
-
-    'default': DevelopmentConfig
-}
