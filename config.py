@@ -3,6 +3,10 @@ import os
 
 
 class Config(object):
+    # SQLALCHEMY
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
+
     # 3rd Party
     # TODO: make them part of DB table - page
     ADDTHIS_PUBID = os.getenv('ADDTHIS_PUBID')
@@ -14,11 +18,15 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    SQLALCHEMY_ECHO = True
+
     SECRET_KEY = os.getenv('SECRET_KEY') or 'blah'
 
 
 class ProductionConfig(Config):
     DEBUG = False
+    SQLALCHEMY_ECHO = False
+
     SECRET_KEY = os.getenv('SECRET_KEY')
 
 
