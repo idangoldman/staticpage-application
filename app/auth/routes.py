@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 
 from . import auth
 from .forms import RegisterForm, LoginForm
@@ -17,9 +17,17 @@ def register():
     return render_template('root/auth/register.html', form=form)
 
 
-@auth.route('/login')
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user is None or not user.verify_password(form.password.data):
+            flash('Invalid email or password.')
+            return redirect(url_for('auth.login'))
+        redirect_url = url_for('home') if not user.is_admin else url_for('root.index')
+        return redirect(request.args.get('next') or redirect_url)
+        # login_user(user, form.remember_me.data)
     return render_template('root/auth/login.html', form=form)
 
 
