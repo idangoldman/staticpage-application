@@ -11,7 +11,7 @@ from ..models import User, Page
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
-        # TODO: same email crash
+        # TODO: fix same site_name or email crash
         user = User(site_name=form.site_name.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
