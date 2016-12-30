@@ -1,5 +1,5 @@
 from flask import render_template, current_app, redirect, make_response, json, request, jsonify
-
+from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from flask_wtf.csrf import CsrfProtect
 from wtforms import StringField, validators
@@ -60,9 +60,23 @@ def index_route():
     return redirect('/welcome')
 
 
+@current_app.route('/page_intervention/<int:page_id>')
+@login_required
+def page_intervention(page_id):
+    payload = current_user.pages.first().__dict__
+    payload['is_intervention'] = True
+
+    return render_template('pages/layout.html', **payload)
+
+
 @current_app.route('/home')
+@login_required
 def home():
-    return render_template('pages/home.html')
+    payload = {
+        'site_name': current_user.site_name,
+        'page_id': current_user.pages.first().id
+    }
+    return render_template('pages/home.html', **payload)
 
 
 @current_app.route('/side-kick')
@@ -90,10 +104,6 @@ def side_kick():
 
     return render_template('pages/side-kick.html', **payload)
 
-
-@current_app.route('/fake-api', methods=['POST'])
-def fake_api():
-    return jsonify( request.values )
 
 
 @current_app.errorhandler(401)
