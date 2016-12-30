@@ -4,7 +4,6 @@ from wtforms.validators import Required, Length, Email, Regexp
 
 
 class RegisterForm(FlaskForm):
-    # TODO: check for whitespices in the fullname
     site_name = StringField('Site Name', validators=[Required(), Regexp(r'^[a-zA-Z0-9_-]+$', message='Site Name can only use a-zA-Z0-9-_ characters'), Length(3,64)])
     email = StringField('Email', validators=[Required(), Length(1,64), Email()])
     password = PasswordField('Password', validators=[Required(), Length(8)])
