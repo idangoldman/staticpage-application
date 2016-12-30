@@ -12,7 +12,7 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         # TODO: same email crash
-        user = User(fullname=form.fullname.data, email=form.email.data, password=form.password.data)
+        user = User(site_name=form.site_name.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
         user = User.query.filter_by(email=form.email.data).first()

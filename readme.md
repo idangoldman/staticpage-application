@@ -12,7 +12,7 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
-cp start_example.sh start.sh
+cp .env_flask.example .env_flask
 
 ### Frontend
 npm install

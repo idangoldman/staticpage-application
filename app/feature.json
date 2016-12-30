@@ -1,0 +1,74 @@
+[
+    {
+        "name": "",
+        "title": "",
+        "fields": [
+            {
+                "id": "",
+                "name": "",
+                "title": "",
+                "type": "",
+                "default": "",
+                "message": "",
+                "accepted": {
+                    "formats": [],
+                    "size": 0
+                },
+                "placeholder": "",
+                "validation": [],
+                "groups": [
+                    {
+                        "label": "",
+                        "options": [
+                            { "key": "", "value": "" }
+                        ]
+                    }
+                ],
+                "options": [
+                    { "key": "", "value": "" }
+                ],
+                "value": ""
+            }
+        ]
+    }
+]
+
+{
+    "content": {
+        "logo": "",
+        "title": "",
+        "sub_title": "",
+        "description": ""
+    },
+
+    "background": {
+        "image": "",
+        "color": "",
+        "repeat": "",
+    },
+
+    "title": {
+        "tag": "",
+        "font_family": "",
+        "font_size": "",
+        "font_color": "",
+        "alignment": "",
+        "direction": "",
+    },
+
+    "paragraph": {
+        "font_family": "",
+        "font_size": "",
+        "font_color": "",
+        "alignment": "",
+        "direction": "",
+    },
+
+    "style": {},
+    "markup": {},
+
+    "search_results": {
+        "title": "",
+        "description": ""
+    }
+}
