@@ -18,9 +18,9 @@ def welcome():
         if mailchimp_subscribe(form.email.data):
             return redirect('/thank-you')
 
-    with open('app/features.json', 'r') as json_file:
+    with open('app/stubs/features.json', 'r') as json_file:
         features = json.load( json_file )
-    with open('app/user_page.json', 'r') as json_file:
+    with open('app/stubs/user_page.json', 'r') as json_file:
         user_page = json.load( json_file )
 
     for feature in features:
@@ -83,9 +83,9 @@ def home():
 def side_kick():
     with open('static/images/side-kick-sprite.svg', 'r') as svg_file:
         svg_sprite = svg_file.read()
-    with open('app/features.json', 'r') as json_file:
+    with open('app/stubs/features.json', 'r') as json_file:
         features = json.load( json_file )
-    with open('app/user_page.json', 'r') as json_file:
+    with open('app/stubs/user_page.json', 'r') as json_file:
         user_page = json.load( json_file )
 
     for feature in features:
