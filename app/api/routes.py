@@ -1,14 +1,32 @@
-from flask import request
+from flask import request, jsonify
 
-from . import api
-from .forms import APIForm
-from .. import db
-from ..models import Page
+from . import api, errors
+from .forms import PageForm
+from app import db
+from app.models import Page
 
 
-# @auth.route('/', methods=['GET', 'POST'])
-# def register():
+@api.route('/page/<int:id>', methods=['POST'])
+def page(id):
+    form = PageForm(data=request.get_json())
+    if (form.validate()):
+        return jsonify({'status': 'ok', 'data': request.get_json()})
+    else:
+        return errors.bad_request('not a good request, try again.')
+    # return jsonify({'status': 'ok', 'data': request.get_json()})
 
+
+# @api.before_request
+# def before_api_request():
+#     if request.json is None:
+#         return errors.bad_request('Invalid JSON in body.')
+#     token = request.json.get('token')
+#     if not token:
+#         return errors.unauthorized('Authentication token not provided.')
+#     user = User.validate_api_token(token)
+#     if not user:
+#         return errors.unauthorized('Invalid authentication token.')
+#     g.current_user = user
 
 # @api.route('/comments/<int:id>', methods=['PUT'])
 # def approve_comment(id):

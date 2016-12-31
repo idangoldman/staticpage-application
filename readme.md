@@ -17,9 +17,7 @@ cp .env_flask.example .env_flask
 ### Frontend
 npm install
 
-npm install -g gulp bower
-
-bower install
+npm install -g gulp
 
 ## Run
 

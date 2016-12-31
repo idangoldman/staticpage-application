@@ -1,6 +1,8 @@
 import os
 
 class Config(object):
+    API_URL = os.getenv('API_URL')
+
     # SQLALCHEMY
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')

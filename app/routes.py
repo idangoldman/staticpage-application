@@ -79,8 +79,8 @@ def home():
     return render_template('pages/home.html', **payload)
 
 
-@current_app.route('/side-kick')
-def side_kick():
+@current_app.route('/side-kick/<int:page_id>')
+def side_kick(page_id):
     with open('static/images/side-kick-sprite.svg', 'r') as svg_file:
         svg_sprite = svg_file.read()
     with open('app/stubs/features.json', 'r') as json_file:
@@ -99,7 +99,8 @@ def side_kick():
 
     payload = {
         'svg_sprite': svg_sprite,
-        'features': features
+        'features': features,
+        'page_api_url': current_app.config['API_URL'] + '/page/' + str(page_id),
     }
 
     return render_template('pages/side-kick.html', **payload)
