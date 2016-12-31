@@ -92,8 +92,6 @@ def side_kick(page_id):
     for feature in features:
         for field in feature['fields']:
             if field.has_key('id') and page[field['id']]:
-                from app.third_party.dump import comment_view_obj
-                print(field['id'])
                 field['value'] = page[field['id']]
 
     payload = {
