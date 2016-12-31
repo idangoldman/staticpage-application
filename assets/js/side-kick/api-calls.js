@@ -12,13 +12,13 @@ var apiCalls = component( function() {
 
     this.updateField = function( event, field ) {
         var eventName = event.type + '_' + field.name;
-        var requestData = {};
-            requestData[field.name] = field.value;
+        // var requestData = {};
+        //     requestData[field.name] = field.value;
 
         utils.throttle( $.ajax({
             url: PAGE_API_URL,
             type: 'POST',
-            data: JSON.stringify( requestData ),
+            data: JSON.stringify( field ),
             contentType: 'application/json',
             success: function( responseData ) {
                 console.log( responseData );

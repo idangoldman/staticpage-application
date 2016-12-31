@@ -1,32 +1,24 @@
-from flask import request, jsonify
+from flask import request, jsonify, g, escape
 
 from . import api, errors
-from .forms import PageForm
+# from .forms import PageForm
 from app import db
 from app.models import Page
 
 
 @api.route('/page/<int:id>', methods=['POST'])
 def page(id):
-    form = PageForm(data=request.get_json())
-    if (form.validate()):
-        return jsonify({'status': 'ok', 'data': request.get_json()})
-    else:
-        return errors.bad_request('not a good request, try again.')
-    # return jsonify({'status': 'ok', 'data': request.get_json()})
+    request_data = request.get_json()
+    page = Page.query.get_or_404(id)
 
+    # if page.creator != g.current_user \
+    #         and not g.current_user.is_admin:
+    #     return errors.unauthorized
 
-# @api.before_request
-# def before_api_request():
-#     if request.json is None:
-#         return errors.bad_request('Invalid JSON in body.')
-#     token = request.json.get('token')
-#     if not token:
-#         return errors.unauthorized('Authentication token not provided.')
-#     user = User.validate_api_token(token)
-#     if not user:
-#         return errors.unauthorized('Invalid authentication token.')
-#     g.current_user = user
+    setattr(page, request_data['name'], escape(request_data['value']))
+    db.session.commit()
+
+    return jsonify({'status': 'ok', 'data': request_data})
 
 # @api.route('/comments/<int:id>', methods=['PUT'])
 # def approve_comment(id):
@@ -54,3 +46,15 @@ def page(id):
 #     db.session.delete(comment)
 #     db.session.commit()
 #     return jsonify({'status': 'ok'})
+
+# @api.before_request
+# def before_api_request():
+#     if request.json is None:
+#         return errors.bad_request('Invalid JSON in body.')
+#     token = request.json.get('token')
+#     if not token:
+#         return errors.unauthorized('Authentication token not provided.')
+#     user = User.validate_api_token(token)
+#     if not user:
+#         return errors.unauthorized('Invalid authentication token.')
+#     g.current_user = user
