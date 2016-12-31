@@ -18,7 +18,7 @@ class Config(object):
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    SQLALCHEMY_ECHO = True
+    SQLALCHEMY_ECHO = False
 
     SECRET_KEY = os.getenv('SECRET_KEY') or 'blah'
 

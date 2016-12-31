@@ -8,7 +8,7 @@
 
         {% set google_fonts = ("Arvo", "Lato", "Lora", "Merriweather", "Merriweather Sans", "Noticia Text", "Open Sans", "Playfair Display", "Roboto", "Source Sans Pro") %}
         {% if design_font_family is not none %}
-            {% for google_font in google_fonts is not none %}
+            {% for google_font in google_fonts %}
                 {% set font_family = design_font_family.split(', ')[0] %}
                 {% if font_family is equalto google_font %}
                     {% set font_family = font_family.split(' ') %}
@@ -26,7 +26,7 @@
         }
 
         body, button, input, select, textarea {
-            font-family: {{ design_font_family }}
+            font-family: {{ design_font_family }};
             color: {{ design_font_color }};
         }
 
@@ -96,13 +96,6 @@
 
 {% block footer %}
     {{ super() }}
-
-    <script
-      src="https://code.jquery.com/jquery-3.1.1.min.js"
-      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-      crossorigin="anonymous"></script>
-
-    <script src="{{ url_for('static', filename='page.js') }}"></script>
 
     {% if is_intervention %}
         <script src="{{ url_for('static', filename='page-intervention.js') }}"></script>

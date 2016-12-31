@@ -80,22 +80,21 @@ def home():
 
 
 @current_app.route('/side-kick/<int:page_id>')
+@login_required
 def side_kick(page_id):
     with open('static/images/side-kick-sprite.svg', 'r') as svg_file:
         svg_sprite = svg_file.read()
     with open('app/stubs/features.json', 'r') as json_file:
         features = json.load( json_file )
-    with open('app/stubs/user_page.json', 'r') as json_file:
-        user_page = json.load( json_file )
+
+    page = current_user.pages.first().__dict__
 
     for feature in features:
-        if feature['name'] in user_page:
-            for field in feature['fields']:
-                if field['name'] in user_page[feature['name']]:
-                    field['value'] = user_page[feature['name']][field['name']]
-            # if feature['name'] is 'search_results':
-                # from pprint import pprint
-                # pprint
+        for field in feature['fields']:
+            if field.has_key('id') and page[field['id']]:
+                from app.third_party.dump import comment_view_obj
+                print(field['id'])
+                field['value'] = page[field['id']]
 
     payload = {
         'svg_sprite': svg_sprite,
