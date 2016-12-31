@@ -1,0 +1,110 @@
+{% extends 'pages/_base.html' %}
+{% set title = search_results_title %}
+
+{% block head %}
+    {{ super() }}
+
+    <style type="text/css" class="css-intervention">
+
+        {% set google_fonts = ("Arvo", "Lato", "Lora", "Merriweather", "Merriweather Sans", "Noticia Text", "Open Sans", "Playfair Display", "Roboto", "Source Sans Pro") %}
+        {% if design_font_family is not none %}
+            {% for google_font in google_fonts is not none %}
+                {% set font_family = design_font_family.split(', ')[0] %}
+                {% if font_family is equalto google_font %}
+                    {% set font_family = font_family.split(' ') %}
+                    @import url("http://fonts.googleapis.com/css?family={{ font_family | join('+') }}:400,600,700,800&subset=latin");
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        html {
+            font-size: {{ design_base_font_size }};
+        }
+
+        body {
+            direction: {{ design_content_direction }};
+        }
+
+        body, button, input, select, textarea {
+            font-family: {{ design_font_family }}
+            color: {{ design_font_color }};
+        }
+
+        .background {
+            background-color: {{ design_background_color }};
+            background-repeat: {{ design_background_repeat }};
+            background-size: {{ 'cover' if design_background_repeat == 'no-repeat' else 'auto' }};
+
+            {% if design_background_image %}
+                background-image: url('{{ design_background_image }}');
+            {% endif %}
+        }
+
+        .page {
+            text-align: {{ design_content_alignment }};
+        }
+
+        .logo {
+            {% if design_content_alignment == "left" %}
+                margin-left: 0;
+                margin-right: auto;
+            {% elif design_content_alignment == "right" %}
+                margin-left: auto;
+                margin-right: 0;
+            {% else %}
+                margin-left: auto;
+                margin-right: auto;
+            {% endif %}
+        }
+    </style>
+
+    {% if design_additional_styles %}
+        <style type="text/css" class="css-additional">
+            {{ design_additional_styles }}
+        </style>
+    {% endif %}
+
+{% endblock head %}
+
+{% block content %}
+
+    <article class="content">
+        {% if content_logo %}
+            <img class="logo" src="{{ content_logo }}" />
+        {% endif %}
+
+        {% if content_title %}
+            <h1 class="title">
+                {{ content_title | safe }}
+            </h1>
+        {% endif %}
+
+        {% if content_sub_title %}
+            <h2 class="sub-title">
+                {{ content_sub_title | nl2br }}
+            </h2>
+        {% endif %}
+
+        {% if content_description %}
+            <p class="description">
+                {{ content_description | nl2br }}
+            </p>
+        {% endif %}
+    </article>
+
+{% endblock %}
+
+{% block footer %}
+    {{ super() }}
+
+    <script
+      src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+
+    <script src="{{ url_for('static', filename='page.js') }}"></script>
+
+    {% if is_intervention %}
+        <script src="{{ url_for('static', filename='page-intervention.js') }}"></script>
+    {% endif %}
+{% endblock %}

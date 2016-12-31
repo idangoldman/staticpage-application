@@ -10,14 +10,13 @@
     <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet" type="text/css" />
 
 </head><body>
-
     <div class="page-view">
-        <iframe class="page desktop-view" name="page" src="/pages"
+        <iframe class="page desktop-view" name="page" src="{{ url_for('page_intervention', page_id=page_id) }}"
             frameborder="0" border="0" cellspacing="0">
         </iframe>
     </div>
 
-    <iframe class="side-kick" name="side-kick" src="/side-kick"
+    <iframe class="side-kick" name="side-kick" src="{{ url_for('side_kick', page_id=page_id) }}"
         frameborder="0" border="0" cellspacing="0">
     </iframe>
 

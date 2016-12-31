@@ -6,7 +6,7 @@
     "url": "git+https://github.com/idanm/static-pages.git"
   },
   "scripts": {
-    "preinstall": "npm install -g gulp bower"
+    "preinstall": "npm install -g gulp"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.3",

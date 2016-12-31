@@ -41,6 +41,13 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
     }
 });
 
+// http://shebang.brandonmintern.com/foolproof-html-escaping-in-javascript/
+function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
 function htmlLineBreak( text ) {
     return text.replace( /(?:\r\n|\r|\n)/g, '<br />' );
 }
@@ -63,16 +70,16 @@ function handleLogo( { raw_file } ) {
 }
 
 function handleTitle( { value } ) {
-    $('.title').html( value );
+    $('.title').html( escapeHtml( value ) );
 }
 
 function handleSubTitle( { value } ) {
-    var text = htmlLineBreak( value );
+    var text = htmlLineBreak( escapeHtml( value ) );
     $('.sub-title').html( text );
 }
 
 function handleDescription( { value } ) {
-    var text = htmlLineBreak( value );
+    var text = htmlLineBreak( escapeHtml( value ) );
     $('.description').html( text );
 }
 
@@ -155,5 +162,5 @@ function handleContentDirection( { value } ) {
 }
 
 function handleAdditionalStyles( { value } ) {
-    $('.css-additional').html( value );
+    $('.css-additional').html( escapeHtml( value ) );
 }

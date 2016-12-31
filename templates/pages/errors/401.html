@@ -1,19 +1,18 @@
 {% extends 'pages/_base.html' %}
-{% set title = '404 Not Found' %}
+{% set title = '401 Unauthorized' %}
 
 {% block content %}
     <article class="content">
         <h1 class="title">
-            404
+            401
         </h1>
 
         <h2 class="sub-title">
-            Ooops you got us, we don't have <br />
-            the page you are asking for.
+            Ooops we got you, access restricted.
         </h2>
 
         <p class="description">
-            If you want, you can <a href="/create">create</a> this page yourself.
+            If you want, you can always try and ask us to give you an <a href="/404">access key</a> to this informantion.
         </p>
     </article>
 {% endblock %}
