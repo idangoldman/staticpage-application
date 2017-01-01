@@ -23,11 +23,11 @@ var apiCalls = component( function() {
             success: function( responseData ) {
                 console.log( responseData );
                 this.trigger( document, eventName + '_success', responseData );
-            },
+            }.bind(this),
             // error: function(jqXHR, textStatus, errorThrown) {
             error: function() {
                 this.trigger( document, eventName + '_error' );
-            }
+            }.bind(this)
         }) );
     };
 
