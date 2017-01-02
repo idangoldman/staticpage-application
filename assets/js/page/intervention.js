@@ -52,19 +52,19 @@ function htmlLineBreak( text ) {
     return text.replace( /(?:\r\n|\r|\n)/g, '<br />' );
 }
 
-function handleLogo( { raw_file } ) {
+function handleLogo( { base64 } ) {
      var $logo = $('.logo');
 
      if ( $logo.length ) {
-        if ( raw_file.length ) {
-            $logo.attr( 'src', raw_file );
+        if ( base64.length ) {
+            $logo.attr( 'src', base64 );
         } else {
             $logo.remove();
         }
-     } else if ( ! $logo.length && raw_file.length ) {
+    } else if ( ! $logo.length && base64.length ) {
         $('<img />')
             .addClass('logo')
-            .attr( 'src', raw_file )
+            .attr( 'src', base64 )
             .prependTo('.content');
      }
 }
@@ -83,11 +83,11 @@ function handleDescription( { value } ) {
     $('.description').html( text );
 }
 
-function handleBackgroundImage( { raw_file } ) {
+function handleBackgroundImage( { base64 } ) {
     var propertyValue = '';
 
-    if ( raw_file.length ) {
-        propertyValue = ['url(', raw_file, ')'].join('');
+    if ( base64.length ) {
+        propertyValue = ['url(', base64, ')'].join('');
     }
 
     css( '.background', 'backgroundImage', propertyValue );

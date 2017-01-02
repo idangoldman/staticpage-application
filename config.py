@@ -1,7 +1,11 @@
 import os
+import inspect
 
 class Config(object):
     API_URL = os.getenv('API_URL')
+    root_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+    UPLOAD_FOLDER = root_path + os.getenv('FLASK_UPLOAD_FOLDER')
+    MAX_CONTENT_LENGTH = os.getenv('FLASK_MAX_CONTENT_LENGTH')
 
     # SQLALCHEMY
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -20,11 +24,11 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_ECHO = False
 
-    SECRET_KEY = os.getenv('SECRET_KEY') or 'blah'
+    SECRET_KEY = os.getenv('FLASK_SECRET_KEY') or 'blah'
 
 
 class ProductionConfig(Config):
     DEBUG = False
     SQLALCHEMY_ECHO = False
 
-    SECRET_KEY = os.getenv('SECRET_KEY')
+    SECRET_KEY = os.getenv('FLASK_SECRET_KEY')

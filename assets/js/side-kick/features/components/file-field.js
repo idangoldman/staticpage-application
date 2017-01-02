@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { component } from 'imports?$=jquery!flightjs';
 
 import withFocus from 'side-kick/features/mixins/focus';
@@ -15,8 +16,8 @@ export default component( withFocus, withState, withValidation, function fileFie
 
     this.initialState({
         name: this.fromAttr('fieldName'),
-        raw_file: null,
-        value: ''
+        base64: null,
+        value: {}
     });
 
     this.after('initialize', function() {
@@ -30,17 +31,15 @@ export default component( withFocus, withState, withValidation, function fileFie
     });
 
     this.fieldChanged = function( event ) {
-
         var file = this.setFile( event.currentTarget );
 
         if ( 'empty' !== file.name ) {
-
             this.getFileContent( file )
                 .then(function( rawFile ) {
                     this.setChoosenFileName( file.name );
                     this.mergeState({
-                        raw_file: rawFile,
-                        value: file.name
+                        base64: rawFile,
+                        value: file
                     });
                 }.bind( this ))
                 .catch(function() {
@@ -50,7 +49,7 @@ export default component( withFocus, withState, withValidation, function fileFie
     };
 
     this.updateField = function( state, previousState ) {
-        if ( previousState.raw_file !== state.raw_file ) {
+        if ( previousState.base64 !== state.base64 ) {
             this.trigger( document, 'updateField', state );
         }
     };
@@ -59,9 +58,10 @@ export default component( withFocus, withState, withValidation, function fileFie
         this.removeErrorClass();
         this.setChoosenFileName('');
         this.mergeState({
-            raw_file: '',
-            value: ''
+            base64: null,
+            value: {}
         });
+        // this.replaceState( this.defaultState );
     };
 
     this.setChoosenFileName = function( filename ) {
