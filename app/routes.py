@@ -102,6 +102,9 @@ def side_kick(page_id):
 
     return render_template('pages/side-kick.html', **payload)
 
+@current_app.route('/flex-color')
+def flex_color():
+    return render_template('pages/flex-color.html')
 
 
 @current_app.errorhandler(401)
