@@ -3,6 +3,7 @@
     justify-content: center;
     text-align: center;
 
+    .link,
     .device {
         color: #000;
         display: flex;
@@ -10,12 +11,14 @@
         margin-right: 15px;
         text-decoration: none;
 
+        &.current, &:hover {
+            text-decoration: underline;
+        }
+
         .icon { fill: rgba( #000, 0.5 ); }
         .title { margin-left: 5px; }
 
         &.current, &:hover {
-            text-decoration: underline;
-
             .icon { fill: #000; }
         }
 

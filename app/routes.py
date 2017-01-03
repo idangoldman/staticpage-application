@@ -1,11 +1,12 @@
-from flask import render_template, current_app, redirect, make_response, json, request, jsonify, send_from_directory
+from flask import render_template, current_app, redirect, make_response, json, request, jsonify, send_from_directory, abort
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from flask_wtf.csrf import CsrfProtect
 from wtforms import StringField, validators
 
-from app.third_party import mailchimp_subscribe
 from app.helpers import path_builder
+from app.models import User, Page
+from app.third_party import mailchimp_subscribe
 
 
 class NewsletterForm(FlaskForm):
@@ -70,6 +71,15 @@ def page_intervention(page_id):
     return render_template('pages/layout.html', **payload)
 
 
+@current_app.route('/page/<site_name>')
+def page_view(site_name):
+    page = Page.query.join( User, User.site_name == site_name ).first_or_404()
+
+    payload = page.__dict__
+
+    return render_template( 'pages/layout.html', **payload )
+
+
 @current_app.route('/home')
 @login_required
 def home():
@@ -98,6 +108,7 @@ def side_kick(page_id):
     payload = {
         'svg_sprite': svg_sprite,
         'features': features,
+        'site_name': current_user.site_name,
         'page_api_url': current_app.config['API_URL'] + '/page/' + str(page_id),
     }
 
