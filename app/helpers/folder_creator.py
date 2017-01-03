@@ -14,6 +14,7 @@ def user_folder_path( identifier ):
 
     return folder_path
 
+
 def user_folder_uri( identifier ):
     folder_uri = path_builder( current_app.config['UPLOAD_FOLDER'], \
                                 md5_identifier( identifier ) )

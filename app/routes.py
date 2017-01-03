@@ -1,10 +1,11 @@
-from flask import render_template, current_app, redirect, make_response, json, request, jsonify
+from flask import render_template, current_app, redirect, make_response, json, request, jsonify, send_from_directory
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from flask_wtf.csrf import CsrfProtect
 from wtforms import StringField, validators
 
 from app.third_party import mailchimp_subscribe
+from app.helpers import path_builder
 
 
 class NewsletterForm(FlaskForm):
@@ -105,6 +106,14 @@ def side_kick(page_id):
 @current_app.route('/flex-color')
 def flex_color():
     return render_template('pages/flex-color.html')
+
+
+@current_app.route('/uploads/<user_hash>/<file_name>')
+def user_uploads( user_hash, file_name ):
+    upload_folder_path = path_builder( current_app.config['BASE_PATH'], \
+                                current_app.config['UPLOAD_FOLDER'], \
+                                user_hash )
+    return send_from_directory( upload_folder_path, file_name )
 
 
 @current_app.errorhandler(401)

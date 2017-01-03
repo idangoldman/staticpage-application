@@ -1,51 +1,48 @@
-from flask import request, jsonify, g, escape
+from flask import current_app, request, jsonify, escape, g
 
 from . import api, errors
-# from .forms import PageForm
+from app.helpers import path_builder
+from app.helpers.upload_file import upload_file
+from app.helpers.folder_creator import user_folder_path, user_folder_uri
 from app import db
 from app.models import Page
 
 
 @api.route('/page/<int:id>', methods=['POST'])
 def page(id):
-    request_data = request.get_json()
-    page = Page.query.get_or_404(id)
-
     # if page.creator != g.current_user \
     #         and not g.current_user.is_admin:
     #     return errors.unauthorized
 
-    setattr(page, request_data['name'], escape(request_data['value']))
-    db.session.commit()
+    page = Page.query.get_or_404(id)
 
-    return jsonify({'status': 'ok', 'data': request_data})
+    if request.files:
+        creator_email = page.creator.email
+        upload_folder_path = user_folder_path( creator_email )
 
-# @api.route('/comments/<int:id>', methods=['PUT'])
-# def approve_comment(id):
-#     comment = Comment.query.get_or_404(id)
-#     if comment.talk.author != g.current_user and \
-#             not g.current_user.is_admin:
-#         return forbidden('You cannot modify this comment.')
-#     if comment.approved:
-#         return bad_request('Comment is already approved.')
-#     comment.approved = True
-#     db.session.add(comment)
-#     db.session.commit()
-#     send_comment_notification(comment)
-#     return jsonify({'status': 'ok'})
+        for field_name in request.files:
+            file_name = upload_file( request.files[ field_name ], upload_folder_path )
+        if not file_name:
+            return errors.bad_request('file was not uploaded')
 
+        upload_file_uri = path_builder( user_folder_uri( creator_email ), file_name )
 
-# @api.route('/comments/<int:id>', methods=['DELETE'])
-# def delete_comment(id):
-#     comment = Comment.query.get_or_404(id)
-#     if comment.talk.author != g.current_user and \
-#             not g.current_user.is_admin:
-#         return forbidden('You cannot modify this comment.')
-#     if comment.approved:
-#         return bad_request('Comment is already approved.')
-#     db.session.delete(comment)
-#     db.session.commit()
-#     return jsonify({'status': 'ok'})
+        """
+        TODO:
+        - delete other images from folder
+        - validate file name, back and front
+        """
+
+        setattr( page, field_name, upload_file_uri )
+        db.session.commit()
+    else:
+        request_data = request.get_json()
+        setattr( page, request_data['name'], escape( request_data['value'] ) )
+        db.session.commit()
+
+    # return jsonify({'status': 'ok', 'data': request.get_json})
+    # return jsonify({'status': 'ok', 'data': request_data})
+    return jsonify( { 'status': 'ok' } )
 
 # @api.before_request
 # def before_api_request():

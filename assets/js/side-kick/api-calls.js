@@ -12,23 +12,36 @@ var apiCalls = component( function() {
 
     this.updateField = function( event, field ) {
         var eventName = event.type + '_' + field.name;
-        // var requestData = {};
-        //     requestData[field.name] = field.value;
+        // new FormData('form')
 
-        utils.throttle( $.ajax({
+        var basicRequest = {
             url: PAGE_API_URL,
             type: 'POST',
-            data: JSON.stringify( field ),
-            contentType: 'application/json',
             success: function( responseData ) {
                 console.log( responseData );
                 this.trigger( document, eventName + '_success', responseData );
             }.bind(this),
-            // error: function(jqXHR, textStatus, errorThrown) {
-            error: function() {
-                this.trigger( document, eventName + '_error' );
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log( jqXHR.responseJSON );
+                this.trigger( document, eventName + '_error', jqXHR.responseJSON );
             }.bind(this)
-        }) );
+        };
+
+        var jsonRequest = utils.merge( {}, {
+            data: JSON.stringify( field ),
+            contentType: 'application/json'
+        }, basicRequest );
+
+        var requestData = new FormData();
+        requestData.append(field.name, field.value);
+        var fileRequest = utils.merge( {}, {
+            data: requestData,
+            dataType: 'json',
+            processData: false,
+            contentType: false
+        }, basicRequest );
+
+        utils.throttle( $.ajax( fileRequest ) );
     };
 
     function setCsrfHeader() {
