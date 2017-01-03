@@ -108,11 +108,12 @@ def flex_color():
     return render_template('pages/flex-color.html')
 
 
-@current_app.route('/uploads/<user_hash>/<file_name>')
-def user_uploads( user_hash, file_name ):
+@current_app.route('/uploads/<user_hash>/<timestamp>/<file_name>')
+def user_uploads( user_hash, timestamp, file_name ):
     upload_folder_path = path_builder( current_app.config['BASE_PATH'], \
                                 current_app.config['UPLOAD_FOLDER'], \
-                                user_hash )
+                                user_hash, \
+                                timestamp )
     return send_from_directory( upload_folder_path, file_name )
 
 

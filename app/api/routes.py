@@ -3,7 +3,7 @@ from flask import current_app, request, jsonify, escape, g
 from . import api, errors
 from app.helpers import path_builder
 from app.helpers.upload_file import upload_file
-from app.helpers.folder_creator import user_folder_path, user_folder_uri
+from app.helpers.folder_maker import user_folder_path
 from app import db
 from app.models import Page
 
@@ -21,12 +21,10 @@ def page(id):
         upload_folder_path = user_folder_path( creator_email )
 
         for field_name in request.files:
-            file_name = upload_file( request.files[ field_name ], upload_folder_path )
+            upload_file_uri = upload_file( request.files[ field_name ], upload_folder_path )
 
-        if not file_name:
+        if not upload_file_uri:
             return errors.bad_request('file was not uploaded')
-
-        upload_file_uri = path_builder( user_folder_uri( creator_email ), file_name )
 
         setattr( page, field_name, upload_file_uri )
         db.session.commit()

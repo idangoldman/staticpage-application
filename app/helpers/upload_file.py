@@ -1,6 +1,8 @@
 from flask import current_app
 from werkzeug.utils import secure_filename
-import os
+
+from app.helpers import path_builder
+from app.helpers.folder_maker import user_folder_uri
 
 ALLOWED_EXTENSIONS = ('png','gif','jpg','jpeg','webp', 'svg')
 
@@ -21,9 +23,10 @@ def upload_file( _file, dest_path ):
         return None
 
     try:
-        file_path = os.path.sep.join( [ dest_path, file_name ] )
+        file_path = path_builder( dest_path, file_name )
         _file.save( file_path )
     except:
         return None
 
-    return file_name
+    file_uri = user_folder_uri( file_path )
+    return file_uri
