@@ -20,8 +20,8 @@ var apiCalls = component( function() {
         var config = {
                 url: PAGE_API_URL,
                 type: 'POST',
-                success: function requestSuccess( responseData ) {
-                    this.trigger( document, eventName + '_success', responseData );
+                success: function requestSuccess( response ) {
+                    this.trigger( document, eventName + '_success', response.data );
                 }.bind(this),
                 error: function requestError( jqXHR, textStatus, errorThrown ) {
                     this.trigger( document, eventName + '_error', jqXHR.responseJSON );

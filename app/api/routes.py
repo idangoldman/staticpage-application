@@ -22,27 +22,29 @@ def page(id):
 
         for field_name in request.files:
             file_name = upload_file( request.files[ field_name ], upload_folder_path )
+
         if not file_name:
             return errors.bad_request('file was not uploaded')
 
         upload_file_uri = path_builder( user_folder_uri( creator_email ), file_name )
 
-        """
-        TODO:
-        - delete other images from folder
-        - validate file name, back and front
-        """
-
         setattr( page, field_name, upload_file_uri )
         db.session.commit()
+
+        response_data = {
+            'name': field_name,
+            'value': upload_file_uri
+        }
+
     else:
         request_data = request.get_json()
-        setattr( page, request_data['name'], escape( request_data['value'] ) )
+        request_data['value'] = escape( request_data['value'] )
+        setattr( page, request_data['name'], request_data['value'] )
         db.session.commit()
 
-    # return jsonify({'status': 'ok', 'data': request.get_json})
-    # return jsonify({'status': 'ok', 'data': request_data})
-    return jsonify( { 'status': 'ok' } )
+        response_data = request_data
+
+    return jsonify( { 'status': 'ok', 'data': response_data } )
 
 # @api.before_request
 # def before_api_request():

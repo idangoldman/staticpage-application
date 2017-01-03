@@ -26,7 +26,7 @@ export default component( withFocus, withState, withValidation, function fileFie
 
         this.after( 'stateChanged', this.updateField );
 
-        // this.on( document, 'updateField_' + this.attr.fieldName + '_success', function() { console.log('Yay!'); });
+        this.on( document, 'updateField_' + this.attr.fieldName + '_success', this.updateFileName.bind(this) );
         // this.on( document, 'updateField_' + this.attr.fieldName + '_error', function() { console.log('Nay!'); });
     });
 
@@ -61,8 +61,13 @@ export default component( withFocus, withState, withValidation, function fileFie
         });
     };
 
-    this.setChoosenFileName = function( filename ) {
-        this.select('choosenFileName').html( filename );
+    this.updateFileName = function( event, data ) {
+        var fileName = data.value.split('/').pop();
+        this.setChoosenFileName( fileName );
+    };
+
+    this.setChoosenFileName = function( fileName ) {
+        this.select('choosenFileName').html( fileName );
     };
 
     this.setFile = function( element ) {
