@@ -12,36 +12,47 @@ var apiCalls = component( function() {
 
     this.updateField = function( event, field ) {
         var eventName = event.type + '_' + field.name;
-        // new FormData('form')
 
-        var basicRequest = {
-            url: PAGE_API_URL,
-            type: 'POST',
-            success: function( responseData ) {
-                console.log( responseData );
-                this.trigger( document, eventName + '_success', responseData );
-            }.bind(this),
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log( jqXHR.responseJSON );
-                this.trigger( document, eventName + '_error', jqXHR.responseJSON );
-            }.bind(this)
-        };
+        utils.throttle( $.ajax( this.requestConfig( eventName, field ) ) );
+    };
 
-        var jsonRequest = utils.merge( {}, {
-            data: JSON.stringify( field ),
-            contentType: 'application/json'
-        }, basicRequest );
+    this.requestConfig = function( eventName, field ) {
+        var config = {
+                url: PAGE_API_URL,
+                type: 'POST',
+                success: function requestSuccess( responseData ) {
+                    this.trigger( document, eventName + '_success', responseData );
+                }.bind(this),
+                error: function requestError( jqXHR, textStatus, errorThrown ) {
+                    this.trigger( document, eventName + '_error', jqXHR.responseJSON );
+                }.bind(this)
+            },
+            fileConfig = {},
+            jsonConfig = {};
 
-        var requestData = new FormData();
-        requestData.append(field.name, field.value);
-        var fileRequest = utils.merge( {}, {
-            data: requestData,
-            dataType: 'json',
-            processData: false,
-            contentType: false
-        }, basicRequest );
+        if ( !! field.base64 ) {
+            var requestData = new FormData();
+                requestData.append( field.name, field.value );
 
-        utils.throttle( $.ajax( fileRequest ) );
+            fileConfig = {
+                data: requestData,
+                dataType: 'json',
+                processData: false,
+                contentType: false
+            };
+
+            config = utils.merge( {}, config, fileConfig );
+        } else {
+            jsonConfig = {
+                data: JSON.stringify( field ),
+                contentType: 'application/json'
+            };
+
+            config = utils.merge( {}, jsonConfig, config );
+        }
+
+
+        return config;
     };
 
     function setCsrfHeader() {
