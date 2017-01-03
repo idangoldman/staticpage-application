@@ -3,8 +3,9 @@ import inspect
 
 class Config(object):
     API_URL = os.getenv('API_URL')
-    root_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
-    UPLOAD_FOLDER = root_path + os.getenv('FLASK_UPLOAD_FOLDER')
+    # root_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+    BASE_PATH = os.path.dirname( os.path.abspath( __file__ ) )
+    UPLOAD_FOLDER = os.getenv('FLASK_UPLOAD_FOLDER')
     MAX_CONTENT_LENGTH = os.getenv('FLASK_MAX_CONTENT_LENGTH')
 
     # SQLALCHEMY

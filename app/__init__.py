@@ -21,7 +21,7 @@ def create_app( config_name ):
     login_manager.init_app(app)
 
     with app.app_context():
-        from app.third_party import jinja_filters
+        from app.helpers import jinja_filters
         from app import routes
 
     from app.auth import auth as auth_blueprint

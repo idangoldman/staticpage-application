@@ -1,13 +1,14 @@
-print(' - Start')
-
 import os
 from werkzeug.contrib.fixers import ProxyFix
 
-from app.third_party import load_env_var
+from app.helpers import load_env_var
 from app import create_app
+
+
+# loading environmental variables
 load_env_var()
 
-
+# starting the backend
 app = create_app(os.getenv('FLASK_CONFIG'))
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
