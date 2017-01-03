@@ -11,13 +11,13 @@ export default component( withFocus, withState, withValidation, function fileFie
         'field': '.field',
         'fieldName': null,
         'choosenFileName': '.choosen-file-name',
-        'closeIcon': '.close.icon'
+        'closeIcon': '.icon.close'
     });
 
     this.initialState({
         name: this.fromAttr('fieldName'),
-        base64: null,
-        value: {}
+        base64: '',
+        value: ''
     });
 
     this.after('initialize', function() {
@@ -49,19 +49,16 @@ export default component( withFocus, withState, withValidation, function fileFie
     };
 
     this.updateField = function( state, previousState ) {
-        if ( previousState.base64 !== state.base64 ) {
-            this.trigger( document, 'updateField', state );
-        }
+        this.trigger( document, 'updateField', state );
     };
 
     this.resetField = function( event ) {
         this.removeErrorClass();
         this.setChoosenFileName('');
         this.mergeState({
-            base64: null,
-            value: {}
+            base64: '',
+            value: ''
         });
-        // this.replaceState( this.defaultState );
     };
 
     this.setChoosenFileName = function( filename ) {
