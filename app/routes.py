@@ -107,10 +107,6 @@ def side_kick(page_id):
 
     return render_template('pages/side-kick.html', **payload)
 
-@current_app.route('/flex-color')
-def flex_color():
-    return render_template('pages/flex-color.html')
-
 
 @current_app.route('/uploads/<user_hash>/<timestamp>/<file_name>')
 def user_uploads( user_hash, timestamp, file_name ):
@@ -144,3 +140,9 @@ def page_internal_server_error(e):
 @current_app.errorhandler(503)
 def page_service_unavailable(e):
     return render_template('pages/errors/503.html'), 503
+
+
+
+@current_app.route('/flex-color')
+def flex_color():
+    return render_template('flex-color.html')
