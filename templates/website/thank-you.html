@@ -1,5 +1,4 @@
 {% extends 'website/_base.html' %}
-{% set title = 'Thank you for subscribing to StaticPages ! =]' %}
 
 {% block head %}
     {{ super() }}
@@ -8,18 +7,10 @@
 {% endblock head %}
 
 {% block content %}
-    <article class="content">
-        <h1 class="title">
-            Thank You.
-        </h1>
+    {{ super() }}
 
-        <h2 class="sub-title">
-            We promise to update you with the product release email.
-        </h2>
-
-        {% from 'macros/3rd-party.html' import add_this %}
-        {{ add_this( pub_id ) }}
-    </article>
+    {% from 'macros/3rd-party.html' import add_this %}
+    {{ add_this( pub_id ) }}
 {% endblock %}
 
 {% block footer %}

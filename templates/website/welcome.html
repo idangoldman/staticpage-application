@@ -1,74 +1,12 @@
 {% extends 'website/_base.html' %}
-{% set title = 'Welcome to StaticPages! =]' %}
 
 {% block head %}
     {{ super() }}
 
     {% include 'macros/social.html' %}
-
-    <style type="text/css" class="css-intervention">
-
-        {% set google_fonts = ("Arvo", "Lato", "Lora", "Merriweather", "Merriweather Sans", "Noticia Text", "Open Sans", "Playfair Display", "Roboto", "Source Sans Pro") %}
-        {% if page.design_font_family is not none %}
-            {% for google_font in google_fonts %}
-                {% set font_family = page.design_font_family.split(', ')[0] %}
-                {% if font_family is equalto google_font %}
-                    {% set font_family = font_family.split(' ') %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-
-        html {
-            font-size: {{ page.design_base_font_size }};
-        }
-
-        body {
-            direction: {{ page.design_content_direction }};
-        }
-
-        body, button, input, select, textarea {
-            font-family: {{ page.design_font_family }}
-            color: {{ page.design_font_color }};
-        }
-
-        .background {
-            background-color: {{ page.design_background_color }};
-            background-repeat: {{ page.design_background_repeat }};
-            background-size: {{ 'cover' if page.design_background_repeat == 'no-repeat' else 'auto' }};
-
-            {% if page.design_background_image %}
-                background-image: url('{{ page.design_background_image }}');
-            {% endif %}
-        }
-
-        .page {
-            text-align: {{ page.design_content_alignment }};
-        }
-
-        .logo {
-            {% if page.design_content_alignment == "left" %}
-                margin-left: 0;
-                margin-right: auto;
-            {% elif page.design_content_alignment == "right" %}
-                margin-left: auto;
-                margin-right: 0;
-            {% else %}
-                margin-left: auto;
-                margin-right: auto;
-            {% endif %}
-        }
-    </style>
-
-    {% if page.design_additional_styles %}
-        <style type="text/css" class="css-additional">
-            {{ page.design_additional_styles }}
-        </style>
-    {% endif %}
-
 {% endblock head %}
 
 {% block content %}
-
     <article class="content">
         {% if page.content_logo %}
             <img class="logo" src="{{ page.content_logo }}" />
@@ -106,7 +44,6 @@
         {% from 'macros/3rd-party.html' import add_this %}
         {{ add_this( pub_id ) }}
     {% endif %}
-
 {% endblock %}
 
 {% block footer %}
@@ -121,5 +58,4 @@
       crossorigin="anonymous"></script>
 
     <script src="{{ url_for('static', filename='page.js') }}"></script>
-    <script src="{{ url_for('static', filename='page-intervention.js') }}"></script>
 {% endblock %}
