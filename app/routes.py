@@ -5,7 +5,8 @@ from flask_wtf.csrf import CsrfProtect
 from wtforms import StringField, validators
 
 from app.helpers import path_builder
-from app.models import User, Page
+from app.models.user import User
+from app.models.page import Page
 from app.third_party import mailchimp_subscribe
 
 

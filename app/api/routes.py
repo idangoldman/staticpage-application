@@ -5,7 +5,7 @@ from app.helpers import path_builder
 from app.helpers.upload_file import upload_file
 from app.helpers.folder_maker import user_folder_path
 from app import db
-from app.models import Page
+from app.models.page import Page
 
 
 @api.route('/page/<int:id>', methods=['POST'])
