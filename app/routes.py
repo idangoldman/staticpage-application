@@ -12,7 +12,7 @@ def page_intervention(page_id):
     payload = current_user.pages.first().with_defaults()
     payload['is_intervention'] = True
 
-    return render_template('pages/layout.html', **payload)
+    return render_template('page/index.html', **payload)
 
 
 @current_app.route('/page/<site_name>')
@@ -22,7 +22,7 @@ def page_view( site_name ):
                      .first_or_404() \
                      .with_defaults()
 
-    return render_template( 'pages/layout.html', **payload )
+    return render_template( 'page/index.html', **payload )
 
 
 @current_app.route('/home')
@@ -32,7 +32,7 @@ def home():
         'site_name': current_user.site_name,
         'page_id': current_user.pages.first().id
     }
-    return render_template('pages/home.html', **payload)
+    return render_template( 'home.html', **payload )
 
 
 @current_app.route('/side-kick/<int:page_id>')
@@ -52,7 +52,7 @@ def side_kick(page_id):
         'page_api_url': current_app.config['API_URL'] + '/page/' + str(page_id),
     }
 
-    return render_template('pages/side-kick.html', **payload)
+    return render_template( 'side-kick.html', **payload )
 
 
 @current_app.route('/uploads/<user_hash>/<timestamp>/<file_name>')
