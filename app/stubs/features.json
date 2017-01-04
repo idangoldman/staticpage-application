@@ -219,8 +219,12 @@
                 "message": "Recommended **156** characters."
             },
             {
+                "id": "search_results_preview",
                 "title": "Preview",
-                "type": "search_preview"
+                "type": "search_preview",
+                "description": "",
+                "link": "",
+                "link_title": ""
             }
         ]
     }
