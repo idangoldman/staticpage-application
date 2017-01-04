@@ -7,12 +7,14 @@ import withToggle from 'side-kick/features/mixins/toggle';
 
 // child components
 import textFieldComponent from 'side-kick/features/components/text-field';
+import searchPreviewComponent from 'side-kick/features/components/search-preview';
 
 var serchResultsFeature = component( withChildComponents, withToggle, function() {
 
     this.attributes({
         'titleField': '.search_results_title',
-        'descriptionField': '.search_results_description'
+        'descriptionField': '.search_results_description',
+        'searchPreviewField': '.search_results_preview'
     });
 
     this.after('initialize', function() {
@@ -25,6 +27,12 @@ var serchResultsFeature = component( withChildComponents, withToggle, function()
         // Description
         this.attachChild( textFieldComponent, this.select('descriptionField'), {
             'fieldName': 'search_results_description'
+        });
+
+        // Search Preview
+        this.attachChild( searchPreviewComponent, this.select('searchPreviewField'), {
+            'changedTitleEvent': 'fieldChanged_search_results_title',
+            'changedDescriptionEvent': 'fieldChanged_search_results_description'
         });
     });
 });

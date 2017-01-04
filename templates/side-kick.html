@@ -59,8 +59,8 @@
                                 {% from 'macros/form/file.html' import file %}
                                 {{ file( field ) }}
                             {% elif field.type == "search_preview" %}
-                                {% from 'macros/previews.html' import search %}
-                                {{ search( field ) }}
+                                {% from 'macros/previews.html' import search_preview %}
+                                {{ search_preview( field ) }}
                             {% endif %}
                         {% endfor %}
                     </div>

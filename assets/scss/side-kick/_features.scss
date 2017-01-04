@@ -93,7 +93,7 @@
                     }
                 }
 
-                .preview-wrap {
+                .search-preview-wrap {
                     font-family: arial, sans-serif;
                     margin-top: 5px;
 
@@ -101,7 +101,14 @@
                         display: block;
                     }
 
-                    a {
+                    .link,
+                    .link-title,
+                    .description {
+                        hyphens: auto;
+                        word-break: break-all;
+                    }
+
+                    .link-title {
                         color: #1800C5;
                         font-size: 18px;
                         margin-bottom: 2px;
@@ -116,18 +123,14 @@
                         }
                     }
 
-                    cite {
+                    .link {
                         color: #006817;
                         font-size: 14px;
                         font-style: normal;
                         margin-bottom: 3px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        width: 210px;
                     }
 
-                    p {
+                    .description {
                         color: #545454;
                         font-size: 13px;
                     }

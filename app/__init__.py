@@ -22,7 +22,7 @@ def create_app( config_name ):
 
     with app.app_context():
         from app.helpers import jinja_filters
-        from app import routes
+        from app import website, routes
 
     from app.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)

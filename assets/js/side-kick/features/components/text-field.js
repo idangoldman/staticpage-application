@@ -33,9 +33,11 @@ export default component( withFocus, withState, withValidation, function textFie
             return true;
         }
 
-        this.mergeState({
+        this.trigger( document, 'fieldChanged_' + this.attr.fieldName, {
+            placeholder: this.select('field').attr('placeholder'),
             value: value
         });
+        this.mergeState({ value });
     };
 
     this.updateField = function( state, previousState ) {

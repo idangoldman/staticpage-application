@@ -51,7 +51,15 @@ class Page(db.Model):
                 if field.get('id') == 'search_results_description':
                     field['placeholder'] = page_dict.get('content_sub_title')
 
+                if field.get('id') == 'search_results_preview':
+                    field['link'] = 'http://staticpages.dev:5000/' + self.creator.site_name
+                    field['link_title'] = page_dict.get('search_results_title') \
+                                            or page_dict.get('content_title')
+                    field['description'] = page_dict.get('search_results_description') \
+                                            or page_dict.get('content_sub_title')
+
         return features
+
 
     def with_defaults(self):
         with open('app/stubs/features.json', 'r') as json_file:
