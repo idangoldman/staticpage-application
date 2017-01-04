@@ -14,13 +14,12 @@
                         "image/gif",
                         "image/jpg",
                         "image/jpeg",
-                        "image/webp",
-                        "image/svg+xml"
+                        "image/webp"
                     ],
                     "size": 1024000
                 },
                 "placeholder": "logo.png",
-                "message": "Upload gif, jpg, png and svg, up to 1MB.",
+                "message": "Upload gif, jpg, png, and webp up to 1MB.",
                 "validation": {
                     "file_format": "File type doesn't supported.",
                     "file_size": "File size greater than supported"
@@ -66,7 +65,7 @@
                     "size": 1024000
                 },
                 "placeholder": "background.png",
-                "message": "Upload gif, jpg and png, up to 1MB.",
+                "message": "Upload gif, jpg, png, and webp, up to 1MB.",
                 "validation": {
                     "file_format": "File type doesn't supported.",
                     "file_size": "File size greater than supported"

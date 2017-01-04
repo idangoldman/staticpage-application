@@ -4,7 +4,7 @@ from werkzeug.utils import secure_filename
 from app.helpers import path_builder
 from app.helpers.folder_maker import user_folder_uri
 
-ALLOWED_EXTENSIONS = ('png','gif','jpg','jpeg','webp', 'svg')
+ALLOWED_EXTENSIONS = ('png','gif','jpg','jpeg','webp')
 
 
 def file_extension_allowed( file_name ):
