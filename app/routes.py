@@ -55,7 +55,6 @@ def thank_you():
 
 
 @current_app.route('/')
-@current_app.route('/pages')
 def index_route():
     return redirect('/welcome')
 
@@ -70,8 +69,9 @@ def page_intervention(page_id):
 
 
 @current_app.route('/page/<site_name>')
-def page_view(site_name):
-    payload = Page.query.join( User, User.site_name == site_name ) \
+def page_view( site_name ):
+    payload = Page.query.join( Page.creator ) \
+                     .filter( User.site_name == site_name ) \
                      .first_or_404() \
                      .with_defaults()
 
