@@ -46,6 +46,11 @@ class Page(db.Model):
                 if page_field_value:
                     field['value'] = page_field_value
 
+                if field.get('id') == 'search_results_title':
+                    field['placeholder'] = page_dict.get('content_title')
+                if field.get('id') == 'search_results_description':
+                    field['placeholder'] = page_dict.get('content_sub_title')
+
         return features
 
     def with_defaults(self):
@@ -56,7 +61,13 @@ class Page(db.Model):
 
         for feature in features:
             for field in feature.get('fields'):
-                if not page_dict.get( field.get('id') ) and field.get('default'):
-                    page_dict[ field.get('id') ] = field.get('default')
+                if not page_dict.get( field.get('id') ):
+                    if field.get('default'):
+                        page_dict[ field.get('id') ] = field.get('default')
+
+                    if field.get('id') == 'search_results_title':
+                        page_dict['search_results_title'] = page_dict.get('content_title')
+                    if field.get('id') == 'search_results_description':
+                        page_dict['search_results_description'] = page_dict.get('content_sub_title')
 
         return page_dict
