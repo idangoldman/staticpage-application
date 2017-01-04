@@ -1,5 +1,7 @@
-from app import db
+from flask import json
 from datetime import datetime
+
+from app import db
 
 
 class Page(db.Model):
@@ -30,3 +32,31 @@ class Page(db.Model):
 
     search_results_title = db.Column('search_results_title', db.Text())
     search_results_description = db.Column('search_results_description', db.Text())
+
+
+    def with_features(self):
+        with open('app/stubs/features.json', 'r') as json_file:
+            features = json.load( json_file )
+
+        page_dict = self.__dict__
+
+        for feature in features:
+            for field in feature.get('fields'):
+                page_field_value = page_dict.get( field.get('id') )
+                if page_field_value:
+                    field['value'] = page_field_value
+
+        return features
+
+    def with_defaults(self):
+        with open('app/stubs/features.json', 'r') as json_file:
+            features = json.load( json_file )
+
+        page_dict = self.__dict__
+
+        for feature in features:
+            for field in feature.get('fields'):
+                if not page_dict.get( field.get('id') ) and field.get('default'):
+                    page_dict[ field.get('id') ] = field.get('default')
+
+        return page_dict

@@ -9,46 +9,47 @@
     <style type="text/css" class="css-intervention">
 
         {% set google_fonts = ("Arvo", "Lato", "Lora", "Merriweather", "Merriweather Sans", "Noticia Text", "Open Sans", "Playfair Display", "Roboto", "Source Sans Pro") %}
-        {% for google_font in google_fonts %}
-            {% set font_family = design.font_family.split(', ')[0] %}
-            {% if font_family is equalto google_font %}
-                {% set font_family = font_family.split(' ') %}
-                @import url("http://fonts.googleapis.com/css?family={{ font_family | join('+') }}:400,600,700,800&subset=latin");
-            {% endif %}
-        {% endfor %}
+        {% if page.design_font_family is not none %}
+            {% for google_font in google_fonts %}
+                {% set font_family = page.design_font_family.split(', ')[0] %}
+                {% if font_family is equalto google_font %}
+                    {% set font_family = font_family.split(' ') %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
 
         html {
-            font-size: {{ design.base_font_size }};
+            font-size: {{ page.design_base_font_size }};
         }
 
         body {
-            direction: {{ design.content_direction }};
+            direction: {{ page.design_content_direction }};
         }
 
         body, button, input, select, textarea {
-            font-family: {{ design.font_family }}
-            color: {{ design.font_color }};
+            font-family: {{ page.design_font_family }}
+            color: {{ page.design_font_color }};
         }
 
         .background {
-            background-color: {{ design.background_color }};
-            background-repeat: {{ design.background_repeat }};
-            background-size: {{ 'cover' if design.background_repeat == 'no-repeat' else 'auto' }};
+            background-color: {{ page.design_background_color }};
+            background-repeat: {{ page.design_background_repeat }};
+            background-size: {{ 'cover' if page.design_background_repeat == 'no-repeat' else 'auto' }};
 
-            {% if design.background_image %}
-                background-image: url('{{ design.background_image }}');
+            {% if page.design_background_image %}
+                background-image: url('{{ page.design_background_image }}');
             {% endif %}
         }
 
         .page {
-            text-align: {{ design.content_alignment }};
+            text-align: {{ page.design_content_alignment }};
         }
 
         .logo {
-            {% if design.content_alignment == "left" %}
+            {% if page.design_content_alignment == "left" %}
                 margin-left: 0;
                 margin-right: auto;
-            {% elif design.content_alignment == "right" %}
+            {% elif page.design_content_alignment == "right" %}
                 margin-left: auto;
                 margin-right: 0;
             {% else %}
@@ -58,9 +59,9 @@
         }
     </style>
 
-    {% if design.additional_styles %}
+    {% if page.design_additional_styles %}
         <style type="text/css" class="css-additional">
-            {{ design.additional_styles }}
+            {{ page.design_additional_styles }}
         </style>
     {% endif %}
 
@@ -69,25 +70,25 @@
 {% block content %}
 
     <article class="content">
-        {% if content.logo %}
-            <img class="logo" src="{{ content.logo }}" />
+        {% if page.content_logo %}
+            <img class="logo" src="{{ page.content_logo }}" />
         {% endif %}
 
-        {% if content.title %}
+        {% if page.content_title %}
             <h1 class="title">
-                {{ content.title }}
+                {{ page.content_title | safe }}
             </h1>
         {% endif %}
 
-        {% if content.sub_title %}
+        {% if page.content_sub_title %}
             <h2 class="sub-title">
-                {{ content.sub_title | nl2br }}
+                {{ page.content_sub_title | nl2br }}
             </h2>
         {% endif %}
 
-        {% if content.description %}
+        {% if page.content_description %}
             <p class="description">
-                {{ content.description | nl2br }}
+                {{ page.content_description | nl2br }}
             </p>
         {% endif %}
     </article>

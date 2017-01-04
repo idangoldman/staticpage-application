@@ -23,23 +23,20 @@ def welcome():
 
     with open('app/stubs/features.json', 'r') as json_file:
         features = json.load( json_file )
-    with open('app/stubs/user_page.json', 'r') as json_file:
-        user_page = json.load( json_file )
+    with open('app/stubs/welcome_page.json', 'r') as json_file:
+        page_stub = json.load( json_file )
 
     for feature in features:
-        if feature['name'] in user_page:
-            for field in feature['fields']:
-                if field['name'] in user_page[feature['name']]:
-                    if not user_page[feature['name']][field['name']] and 'default' in field:
-                        user_page[feature['name']][field['name']] = field['default']
+        for field in feature.get('fields'):
+            if not page_stub.get( field.get('id') ) and field.get('default'):
+                page_stub[ field.get('id') ] = field.get('default')
 
     payload = {
         'form': form,
         'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'pub_id': current_app.config['ADDTHIS_PUBID'],
         'has_subscribed': request.cookies.get('has_subscribed'),
-        'content': user_page['content'],
-        'design': user_page['design']
+        'page': page_stub,
     }
 
     return render_template('pages/welcome.html', **payload)
@@ -66,7 +63,7 @@ def index_route():
 @current_app.route('/page_intervention/<int:page_id>')
 @login_required
 def page_intervention(page_id):
-    payload = current_user.pages.first().__dict__
+    payload = current_user.pages.first().with_defaults()
     payload['is_intervention'] = True
 
     return render_template('pages/layout.html', **payload)
@@ -74,9 +71,9 @@ def page_intervention(page_id):
 
 @current_app.route('/page/<site_name>')
 def page_view(site_name):
-    page = Page.query.join( User, User.site_name == site_name ).first_or_404()
-
-    payload = page.__dict__
+    payload = Page.query.join( User, User.site_name == site_name ) \
+                     .first_or_404() \
+                     .with_defaults()
 
     return render_template( 'pages/layout.html', **payload )
 
@@ -99,16 +96,11 @@ def side_kick(page_id):
     with open('app/stubs/features.json', 'r') as json_file:
         features = json.load( json_file )
 
-    page = current_user.pages.first().__dict__
-
-    for feature in features:
-        for field in feature['fields']:
-            if field.has_key('id') and page[field['id']]:
-                field['value'] = page[field['id']]
+    page_with_features = current_user.pages.first().with_features()
 
     payload = {
         'svg_sprite': svg_sprite,
-        'features': features,
+        'features': page_with_features,
         'site_name': current_user.site_name,
         'page_api_url': current_app.config['API_URL'] + '/page/' + str(page_id),
     }
