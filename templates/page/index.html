@@ -64,31 +64,23 @@
 {% endblock head %}
 
 {% block content %}
-
     <article class="content">
         {% if content_logo %}
             <img class="logo" src="{{ content_logo }}" />
         {% endif %}
 
         {% if is_intervention or content_title %}
-            <h1 class="title">
-                {{ content_title | safe }}
-            </h1>
+            <h1 class="title">{{ content_title | safe }}</h1>
         {% endif %}
 
         {% if is_intervention or content_sub_title %}
-            <h2 class="sub-title">
-                {{ content_sub_title | nl2br }}
-            </h2>
+            <h2 class="sub-title">{{ content_sub_title | nl2br }}</h2>
         {% endif %}
 
         {% if is_intervention or content_description %}
-            <p class="description">
-                {{ content_description | nl2br }}
-            </p>
+            <p class="description">{{ content_description | nl2br }}</p>
         {% endif %}
     </article>
-
 {% endblock %}
 
 {% block footer %}

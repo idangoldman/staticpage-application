@@ -81,3 +81,10 @@ body, button, input, select, textarea {
 @mixin no-select {
     user-select: none;
 }
+
+@mixin text-break {
+    hyphens: auto;
+    white-space: pre-line;
+    word-break: break-word;
+    word-wrap: break-word;
+}

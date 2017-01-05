@@ -38,9 +38,8 @@
     text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
 
     & > * {
-        hyphens: auto;
+        @include text-break;
         margin-bottom: px2rem(25);
-        word-break: break-all;
     }
 
     .logo {
@@ -103,8 +102,8 @@
 }
 
 .add-this {
-    height: 32px;
-    margin-top: px2rem(25);
+    height: 48px;
+    margin-bottom: px2rem(25);
 }
 
 // min Netbook
