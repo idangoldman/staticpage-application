@@ -24,7 +24,6 @@ class Page(db.Model):
     design_background_color = db.Column('design_background_color', db.String(8))
     design_background_repeat = db.Column('design_background_repeat', db.String(16))
     design_font_family = db.Column('design_font_family', db.String(128))
-    design_base_font_size = db.Column('design_base_font_size', db.String(8))
     design_font_color = db.Column('design_font_color', db.String(8))
     design_content_alignment = db.Column('design_content_alignment', db.String(8))
     design_content_direction = db.Column('design_content_direction', db.String(3))

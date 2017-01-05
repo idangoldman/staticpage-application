@@ -4,7 +4,7 @@ from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 
-from app.third_party import load_env_var
+from app.helpers import load_env_var
 from app import create_app, db
 load_env_var()
 

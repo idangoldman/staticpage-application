@@ -17,7 +17,6 @@ var designFeature = component( withChildComponents, withToggle, function() {
         'backgroundColorField': '.design_background_color',
         'backgroundRepeatField': '.design_background_repeat',
         'fontFamilyField': '.design_font_family',
-        'baseFontSizeField': '.design_base_font_size',
         'fontColorField': '.design_font_color',
         'contentAlignmentField': '.design_content_alignment',
         'contentDirectionField': '.design_content_direction',
@@ -46,11 +45,6 @@ var designFeature = component( withChildComponents, withToggle, function() {
         // Font Family
         this.attachChild( selectFieldComponent, this.select('fontFamilyField'), {
             'fieldName': 'design_font_family'
-        });
-
-        // Base Font Size
-        this.attachChild( selectFieldComponent, this.select('baseFontSizeField'), {
-            'fieldName': 'design_base_font_size'
         });
 
         // Font Color
