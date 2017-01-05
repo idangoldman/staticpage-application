@@ -1,7 +1,7 @@
 var path = require("path");
 
 module.exports = {
-    watch: true,
+    watch: false,
     cache: false,
     debug: true,
     devtool: 'source-map',

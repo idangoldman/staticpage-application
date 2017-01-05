@@ -15,6 +15,7 @@ var autoprefixer = require('autoprefixer'),
 // Default task with watch
 gulp.task('default', ['webpack', 'style', 'svg-sprite', 'background-images'], function() {
     gulp.watch('assets/scss/**/*.scss', ['style']);
+    gulp.watch('assets/js/**/*.js', ['webpack']);
     gulp.watch('assets/images/icons/**/*.svg', ['svg-sprite']);
 });
 
