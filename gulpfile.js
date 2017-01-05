@@ -44,7 +44,7 @@ gulp.task('svg-sprite', function() {
         path.basename = 'side-kick-sprite';
     };
 
-    return gulp.src('**/*.svg', { cwd: 'assets/images/' })
+    return gulp.src('**/*.svg', { cwd: 'assets/images/icons' })
         .pipe( svgSprite( spriteConfig ) )
         .pipe( rename( spriteRename ) )
         .pipe( gulp.dest('static/images') );
