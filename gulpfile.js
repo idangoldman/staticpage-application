@@ -9,19 +9,12 @@ var autoprefixer = require('autoprefixer'),
     sass = require('gulp-sass'),
     size = require('gulp-size'),
     svgSprite = require('gulp-svg-sprite'),
-    uglify = require('gulp-uglify'),
     webpack = require('webpack-stream'),
     webpackConfig = require('./webpack.config.js');
 
 // Default task with watch
-gulp.task('default', ['webpack', 'uglify-page', 'style', 'svg-sprite', 'background-images'], function() {
+gulp.task('default', ['webpack', 'style', 'svg-sprite', 'background-images'], function() {
     gulp.watch('assets/scss/**/*.scss', ['style']);
-    gulp.watch('assets/js/page/index.js', ['uglify-page']);
-    gulp.watch([
-        'assets/js/home.js',
-        'assets/js/page/**/*.js',
-        'assets/js/side-kick/**/*.js'
-    ], ['webpack']);
     gulp.watch('assets/images/icons/**/*.svg', ['svg-sprite']);
 });
 
@@ -95,18 +88,6 @@ gulp.task('style', function() {
 
 gulp.task('clean', function() {
     return del( ['static/**/*'] );
-});
-
-// only uglify page script
-gulp.task('uglify-page', function() {
-    var pageRename = ( path ) => {
-        path.basename = 'page';
-    };
-
-    return gulp.src('index.js', { cwd: 'assets/js/page' })
-        .pipe( uglify() )
-        .pipe( rename( pageRename ) )
-        .pipe( gulp.dest('static/') )
 });
 
 //  webpack side kick script
