@@ -36,7 +36,6 @@ def page(id):
 
     else:
         request_data = request.get_json()
-        request_data['value'] = escape( request_data['value'] )
         setattr( page, request_data['name'], request_data['value'] )
         db.session.commit()
 
