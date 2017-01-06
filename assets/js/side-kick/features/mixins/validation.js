@@ -3,9 +3,8 @@ import $ from 'jquery';
 let regexPatterns = {
     'name': /^[a-zA-Z0-9_]*$/,
     'hex_color': /^#([0-9a-f]{3}|[0-9a-f]{6})$/i,
-    'css': /([#.@]?[\w.:> ]+)[\s]?{[\r\n]?([a-z\- \r\n\t]+[:][\s]*[\w .\/()\-!]+;[\r\n]*)*}/gi
     // https://regex101.com/r/fK9mY3/1
-    // 'css': /([#.]?[a-z:>+.~ ]+)\s?{([a-z-:;()""''\s]+)}/gi
+    // 'css': /([#.@]?[\w.:> ]+)[\s]?{[\r\n]?([A-Za-z\- \r\n\t]+[:][\s]*[\w .\/()\-!]+;[\r\n]*)*}/gi
 };
 
 var withValidation = function mixin() {
