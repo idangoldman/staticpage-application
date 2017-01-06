@@ -14,6 +14,9 @@ export default textFieldComponent.mixin( function searchPreview() {
 
     this.changeDescriptionPlaceholder = function( event, { value } ) {
         this.select('field').attr( 'placeholder', value );
-        this.trigger( document, 'placeholderChanged_' + this.attr.fieldName, { placeholder: value } )
+
+        if ( ! this.select('field').val().length ) {
+            this.trigger( document, 'placeholderChanged_' + this.attr.fieldName, { placeholder: value } )
+        }
     };
 });
