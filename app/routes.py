@@ -1,7 +1,7 @@
-from flask import render_template, current_app, json, jsonify, send_from_directory
+from flask import render_template, current_app, json, jsonify, send_from_directory, request
 from flask_login import login_required, current_user
 
-from app.helpers import path_builder
+from app.helpers import path_builder, is_phone
 from app.models.user import User
 from app.models.page import Page
 
@@ -30,17 +30,19 @@ def page_view( site_name ):
 def home():
     payload = {
         'site_name': current_user.site_name,
-        'page_id': current_user.pages.first().id
+        'page_id': current_user.pages.first().id,
+        'on_phone': is_phone( request.user_agent )
     }
+
     return render_template( 'home.html', **payload )
 
 
 @current_app.route('/side-kick/<int:page_id>')
 @login_required
-def side_kick(page_id):
-    with open('static/images/side-kick-sprite.svg', 'r') as svg_file:
+def side_kick( page_id ):
+    with open( 'static/images/side-kick-sprite.svg', 'r' ) as svg_file:
         svg_sprite = svg_file.read()
-    with open('app/stubs/features.json', 'r') as json_file:
+    with open( 'app/stubs/features.json', 'r' ) as json_file:
         features = json.load( json_file )
 
     page_with_features = current_user.pages.first().with_features()
@@ -50,6 +52,7 @@ def side_kick(page_id):
         'features': page_with_features,
         'site_name': current_user.site_name,
         'page_api_url': current_app.config['API_URL'] + '/page/' + str(page_id),
+        'on_phone': is_phone( request.user_agent )
     }
 
     return render_template( 'side-kick.html', **payload )

@@ -40,4 +40,8 @@ body {
     height: 100%;
     width: 300px;
     z-index: 2;
+
+    &.full-width {
+        width: 100%;
+    }
 }

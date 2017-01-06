@@ -1,4 +1,6 @@
-import os, hashlib, time
+from flask import json
+import os, hashlib, time, re
+
 
 def load_env_var( env_file = '.env_flask' ):
     if os.path.exists(env_file):
@@ -33,3 +35,19 @@ def path_slicer( path, slice_path ):
     slice_path = path_builder( slice_path )
 
     return path[ len( slice_path ) : ]
+
+
+def is_phone( user_agent ):
+    with open('app/stubs/ua_detect.json', 'r') as json_file:
+        ua_stub = json.load( json_file )
+        ua_phone = ua_stub['uaMatch']['phones']
+
+    detected_phone = None
+
+    for phone, regex in ua_phone.iteritems():
+        detected_phone = re.search( regex, str( user_agent ) )
+
+        if detected_phone:
+            break
+
+    return bool(detected_phone)
