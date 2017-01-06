@@ -1,4 +1,5 @@
-from flask import render_template, current_app, redirect, make_response, json, request
+from flask import render_template, current_app, redirect, make_response, json, request, url_for
+from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, validators
 
@@ -29,7 +30,10 @@ def get_page_stub( name ):
 
 @current_app.route('/')
 def index_route():
-    return redirect('/welcome')
+    if current_user.is_authenticated:
+        return redirect( url_for('home') )
+    else:
+        return redirect( url_for('welcome') )
 
 
 @current_app.route('/welcome', methods=['GET', 'POST'])

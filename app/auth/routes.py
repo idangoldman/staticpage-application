@@ -1,11 +1,17 @@
 from flask import render_template, request, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 
 from . import auth
 from .forms import RegisterForm, LoginForm
 from .. import db
 from ..models.user import User
 from ..models.page import Page
+
+
+@auth.before_request
+def before_request():
+    if current_user.is_authenticated and not request.endpoint == 'auth.logout':
+        return redirect( url_for('home') )
 
 
 @auth.route('/register', methods=['GET', 'POST'])
