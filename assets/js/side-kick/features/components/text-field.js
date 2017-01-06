@@ -15,7 +15,9 @@ export default component( withFocus, withState, withValidation, function textFie
 
     this.initialState({
         name: this.fromAttr('fieldName'),
-        value: ''
+        value: function() {
+            return this.select('field').val()
+        }
     });
 
     this.after('initialize', function() {
@@ -37,6 +39,7 @@ export default component( withFocus, withState, withValidation, function textFie
             placeholder: this.select('field').attr('placeholder'),
             value: value
         });
+
         this.mergeState({ value });
     };
 
