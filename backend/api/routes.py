@@ -1,11 +1,11 @@
 from flask import current_app, request, jsonify, escape, g
 
-from . import api, errors
-from app.helpers import path_builder
-from app.helpers.upload_file import upload_file
-from app.helpers.folder_maker import user_folder_path
-from app import db
-from app.models.page import Page
+from backend import db
+from backend.api import api, errors
+from backend.helpers import path_builder
+from backend.helpers.folder_maker import user_folder_path
+from backend.helpers.upload_file import upload_file
+from backend.models.page import Page
 
 
 @api.route('/page/<int:id>', methods=['POST'])

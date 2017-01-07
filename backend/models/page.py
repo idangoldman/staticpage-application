@@ -1,7 +1,7 @@
 from flask import json, current_app
 from datetime import datetime
 
-from app import db
+from backend import db
 
 
 class Page(db.Model):
@@ -34,7 +34,7 @@ class Page(db.Model):
 
 
     def with_features(self):
-        with open('app/stubs/features.json', 'r') as json_file:
+        with open('backend/stubs/features.json', 'r') as json_file:
             features = json.load( json_file )
 
         page_dict = self.__dict__
@@ -61,7 +61,7 @@ class Page(db.Model):
 
 
     def with_defaults(self):
-        with open('app/stubs/features.json', 'r') as json_file:
+        with open('backend/stubs/features.json', 'r') as json_file:
             features = json.load( json_file )
 
         page_dict = self.__dict__

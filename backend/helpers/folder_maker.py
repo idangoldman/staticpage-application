@@ -1,7 +1,7 @@
 from flask import current_app
 import os
 
-from . import path_builder, path_slicer, md5_identifier, timestamp
+from backend.helpers import path_builder, path_slicer, md5_identifier, timestamp
 
 
 def user_folder_path( identifier ):

@@ -1,5 +1,5 @@
 from flask import jsonify
-from . import api
+from backend.api import api
 
 
 def bad_request(message):

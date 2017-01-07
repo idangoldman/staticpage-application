@@ -1,9 +1,9 @@
 from flask import render_template, current_app, json, jsonify, send_from_directory, request
 from flask_login import login_required, current_user
 
-from app.helpers import path_builder, is_phone
-from app.models.user import User
-from app.models.page import Page
+from backend.helpers import path_builder, is_phone
+from backend.models.user import User
+from backend.models.page import Page
 
 
 @current_app.route('/page_intervention/<int:page_id>')
@@ -42,7 +42,7 @@ def home():
 def side_kick( page_id ):
     with open( 'static/images/side-kick-sprite.svg', 'r' ) as svg_file:
         svg_sprite = svg_file.read()
-    with open( 'app/stubs/features.json', 'r' ) as json_file:
+    with open( 'backend/stubs/features.json', 'r' ) as json_file:
         features = json.load( json_file )
 
     page_with_features = current_user.pages.first().with_features()

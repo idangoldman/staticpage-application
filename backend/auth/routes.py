@@ -1,11 +1,11 @@
 from flask import render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, login_required, current_user
 
-from . import auth
-from .forms import RegisterForm, LoginForm
-from .. import db
-from ..models.user import User
-from ..models.page import Page
+from backend import db
+from backend.auth import auth
+from backend.auth.forms import RegisterForm, LoginForm
+from backend.models.page import Page
+from backend.models.user import User
 
 
 @auth.before_request

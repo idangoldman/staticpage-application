@@ -1,5 +1,5 @@
 from flask import Flask, request
-from flask import current_app as app
+from flask import current_app
 from flask_cors import CORS
 
 from mailchimp3 import MailChimp
@@ -8,9 +8,9 @@ from validate_email import validate_email
 
 def mailchimp_subscribe(email):
     if email and validate_email(email):
-        client = MailChimp(app.config['MAILCHIMP_USERNAME'], app.config['MAILCHIMP_API_KEY'])
+        client = MailChimp(current_app.config['MAILCHIMP_USERNAME'], current_app.config['MAILCHIMP_API_KEY'])
         try:
-            client.lists.members.create(app.config['MAILCHIMP_LIST_ID'], {
+            client.lists.members.create(current_app.config['MAILCHIMP_LIST_ID'], {
                 'email_address': email,
                 'status': 'subscribed'
             })

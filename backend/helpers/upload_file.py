@@ -1,8 +1,8 @@
 from flask import current_app
 from werkzeug.utils import secure_filename
 
-from app.helpers import path_builder
-from app.helpers.folder_maker import user_folder_uri
+from backend.helpers import path_builder
+from backend.helpers.folder_maker import user_folder_uri
 
 ALLOWED_EXTENSIONS = ('png','gif','jpg','jpeg','webp')
 

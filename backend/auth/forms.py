@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import Required, Length, Email, Regexp, ValidationError
 
-from ..models.user import User
+from backend.models.user import User
 
 
 def unique_site_name( form, field ):

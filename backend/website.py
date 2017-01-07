@@ -3,16 +3,16 @@ from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, validators
 
-from app.third_party import mailchimp_subscribe
+from backend.third_party import mailchimp_subscribe
 
 
 class NewsletterForm(FlaskForm):
     email = StringField("email", [validators.Required(), validators.Email("Please enter your email address.")])
 
 def get_page_stub( name ):
-    with open('app/stubs/features.json', 'r') as json_file:
+    with open('backend/stubs/features.json', 'r') as json_file:
         features = json.load( json_file )
-    with open('app/stubs/website/' + name + '.json', 'r') as json_file:
+    with open('backend/stubs/website/' + name + '.json', 'r') as json_file:
         page_stub = json.load( json_file )
 
     for feature in features:

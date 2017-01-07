@@ -1,16 +1,16 @@
 import os
 from werkzeug.contrib.fixers import ProxyFix
 
-from app.helpers import load_env_var
-from app import create_app
+from backend import create_app
+from backend.helpers import load_env_var
 
 
 # loading environmental variables
 load_env_var()
 
 # starting the backend
-app = create_app(os.getenv('FLASK_CONFIG'))
-app.wsgi_app = ProxyFix(app.wsgi_app)
+app = create_app( os.getenv('FLASK_CONFIG') )
+app.wsgi_app = ProxyFix( app.wsgi_app )
 
 
 if __name__ == '__main__':
@@ -20,4 +20,4 @@ if __name__ == '__main__':
         'debug' : app.config['DEBUG']
     }
 
-    app.run(**app_options)
+    app.run( **app_options )
