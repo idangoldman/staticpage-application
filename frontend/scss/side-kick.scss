@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+@import "frontend/scss/lib/variables";
+
+$base-color: #333;
+
+@import "frontend/scss/lib/reset";
+@import "frontend/scss/lib/icons";
+@import "frontend/scss/side-kick/_index";

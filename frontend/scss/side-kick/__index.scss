@@ -1,5 +1,5 @@
-@import "assets/scss/side-kick/devices";
-@import "assets/scss/side-kick/features";
+@import "frontend/scss/side-kick/devices";
+@import "frontend/scss/side-kick/features";
 
 .side-kick {
     padding: 20px 20px 0 20px;
@@ -17,7 +17,7 @@
             -1px 0 0 #006799,
             1px 0 0 #006799,
             0 -1px 0 #0073AA,
-            0 1px 0 #006799; 
+            0 1px 0 #006799;
         color: #fff;
         cursor: pointer;
         font-size: 14px;
@@ -36,6 +36,6 @@
     .footer {
         color: rgba(#000, 0.5);
         // margin: 10px 0;
-        text-align: center;        
+        text-align: center;
     }
 }

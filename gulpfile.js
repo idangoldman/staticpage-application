@@ -14,9 +14,9 @@ var autoprefixer = require('autoprefixer'),
 
 // Default task with watch
 gulp.task('default', ['webpack', 'style', 'svg-sprite', 'background-images'], function() {
-    gulp.watch('assets/scss/**/*.scss', ['style']);
-    gulp.watch('assets/js/**/*.js', ['webpack']);
-    gulp.watch('assets/images/icons/**/*.svg', ['svg-sprite']);
+    gulp.watch('frontend/scss/**/*.scss', ['style']);
+    gulp.watch('frontend/js/**/*.js', ['webpack']);
+    gulp.watch('frontend/images/icons/**/*.svg', ['svg-sprite']);
 });
 
 // SVG sprite from set of icons
@@ -38,7 +38,7 @@ gulp.task('svg-sprite', function() {
         path.basename = 'side-kick-sprite';
     };
 
-    return gulp.src('**/*.svg', { cwd: 'assets/images/icons' })
+    return gulp.src('**/*.svg', { cwd: 'frontend/images/icons' })
         .pipe( svgSprite( spriteConfig ) )
         .pipe( rename( spriteRename ) )
         .pipe( gulp.dest('static/images') );
@@ -54,7 +54,7 @@ gulp.task('background-images', function() {
         imageMinMozjpeg()
     ];
 
-    return gulp.src('*.jpeg', { cwd: 'assets/images/backgrounds' })
+    return gulp.src('*.jpeg', { cwd: 'frontend/images/backgrounds' })
         // .pipe( imageResize( imageResizeConfig ) )
         .pipe( imageMin( imageMinPlugins ) )
         .pipe( gulp.dest('static/images/backgrounds') );
@@ -81,7 +81,7 @@ gulp.task('style', function() {
         autoprefixer( { browsers: ['last 2 versions'] } )
     ];
 
-    return gulp.src('*.scss', { cwd: 'assets/scss/' })
+    return gulp.src('*.scss', { cwd: 'frontend/scss/' })
         .pipe( sass( sassConfig ).on('error', sass.logError) )
         .pipe( postcss( postCssConfig ) )
         .pipe( gulp.dest('static/') )
