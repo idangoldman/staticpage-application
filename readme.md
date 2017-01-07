@@ -1,4 +1,4 @@
-# StaticPages
+# StaticPage
 
 ## Install
 git clone
@@ -12,7 +12,7 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
-cp .env_flask.example .env_flask
+cp .flask_env.example .flask_env
 
 ### Frontend
 npm install

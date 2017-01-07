@@ -1,4 +1,4 @@
-from flask import json
+from flask import json, current_app
 from datetime import datetime
 
 from app import db
@@ -51,7 +51,7 @@ class Page(db.Model):
                     field['placeholder'] = page_dict.get('content_sub_title')
 
                 if field.get('id') == 'search_results_preview':
-                    field['link'] = 'http://staticpages.dev:5000/' + self.creator.site_name
+                    field['link'] = current_app.config['HTTP_HOST'] + '/page/' + self.creator.site_name
                     field['link_title'] = page_dict.get('search_results_title') \
                                             or page_dict.get('content_title')
                     field['description'] = page_dict.get('search_results_description') \

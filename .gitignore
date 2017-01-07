@@ -6,7 +6,7 @@
 *.sublime-project
 *.sublime-workspace
 .DS_Store
-.env_flask
+.flask_env
 .idea/
 .Rproj.user
 .sass-cache/
