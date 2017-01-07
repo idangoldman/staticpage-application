@@ -2,7 +2,7 @@ from flask import json
 import os, hashlib, time, re
 
 
-def load_env_var( env_file = '.flask_env' ):
+def load_env_var( env_file = 'flask_env' ):
     if os.path.exists(env_file):
         print(' * Importing environment from %s...' % env_file)
         for line in open(env_file):
