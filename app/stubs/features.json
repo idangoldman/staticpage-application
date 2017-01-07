@@ -1,0 +1,208 @@
+[
+    {
+        "name": "content",
+        "title": "Content",
+        "fields": [
+            {
+                "id": "content_logo",
+                "name": "logo",
+                "title": "Logo",
+                "type": "file",
+                "accepted": {
+                    "formats": [
+                        "image/png",
+                        "image/gif",
+                        "image/jpg",
+                        "image/jpeg",
+                        "image/webp"
+                    ],
+                    "size": 1024000
+                },
+                "placeholder": "logo.png",
+                "message": "Upload gif, jpg, png, and webp up to 1MB.",
+                "validation": {
+                    "file_format": "File type doesn't supported.",
+                    "file_size": "File size greater than supported"
+                }
+            },
+            {
+                "id": "content_title",
+                "name": "title",
+                "title": "Title",
+                "type": "text"
+            },
+            {
+                "id": "content_sub_title",
+                "name": "sub_title",
+                "title": "Sub Title",
+                "type": "textarea"
+            },
+            {
+                "id": "content_description",
+                "name": "description",
+                "title": "Description",
+                "type": "textarea"
+            }
+        ]
+    },
+    {
+        "name": "design",
+        "title": "Design",
+        "fields": [
+            {
+                "id": "design_background_image",
+                "name": "background_image",
+                "title": "Background image",
+                "type": "file",
+                "accepted": {
+                    "formats": [
+                        "image/png",
+                        "image/gif",
+                        "image/jpg",
+                        "image/jpeg",
+                        "image/webp"
+                    ],
+                    "size": 1024000
+                },
+                "placeholder": "background.png",
+                "message": "Upload gif, jpg, png, and webp, up to 1MB.",
+                "validation": {
+                    "file_format": "File type doesn't supported.",
+                    "file_size": "File size greater than supported"
+                }
+            },
+            {
+                "id": "design_background_color",
+                "name": "background_color",
+                "title": "Background color",
+                "type": "text",
+                "default": "#fff",
+                "validation": {
+                    "hex_color":  "Not valid Hex color"
+                }
+            },
+            {
+                "id": "design_background_repeat",
+                "name": "background_repeat",
+                "title": "Background repeat",
+                "type": "select",
+                "default": "no-repeat",
+                "options": [
+                    { "key": "no-repeat", "value": "No repeat" },
+                    { "key": "repeat", "value": "Repeat" }
+                ]
+            },
+            {
+                "id": "design_font_family",
+                "name": "font_family",
+                "title": "Font family",
+                "type": "select",
+                "default": "Open Sans, helvetica neue, helvetica, arial, sans-serif",
+                "groups": [
+                    {
+                        "label": "System Fonts",
+                        "options": [
+                            { "value": "Arial", "key": "arial, helvetica neue, helvetica, sans-serif" },
+                            { "value": "Comic Sans MS", "key": "comic sans ms, marker felt-thin, arial, sans-serif" },
+                            { "value": "Courier New", "key": "courier new, courier, lucida sans typewriter, lucida typewriter, monospace" },
+                            { "value": "Georgia", "key": "georgia, times, times new roman, serif" },
+                            { "value": "Helvetica", "key": "helvetica neue, helvetica, arial, verdana, sans-serif" },
+                            { "value": "Lucida", "key": "lucida sans unicode, lucida grande, sans-serif" },
+                            { "value": "Tahoma", "key": "tahoma, verdana, segoe, sans-serif" },
+                            { "value": "Times New Roman", "key": "times new roman, times, baskerville, georgia, serif" },
+                            { "value": "Trebuchet MS", "key": "trebuchet ms, lucida grande, lucida sans unicode, lucida sans, tahoma, sans-serif" },
+                            { "value": "Verdana", "key": "verdana, geneva, sans-serif" }
+                        ]
+                    },
+                    {
+                        "label": "Google Fonts",
+                        "options": [
+                            { "value": "Arvo", "key": "Arvo, courier, georgia, serif" },
+                            { "value": "Lato", "key": "Lato, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Lora", "key": "Lora, georgia, times new roman, serif" },
+                            { "value": "Merriweather", "key": "Merriweather, georgia, times new roman, serif" },
+                            { "value": "Merriweather Sans", "key": "Merriweather Sans, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Noticia Text", "key": "Noticia Text, georgia, times new roman, serif" },
+                            { "value": "Open Sans", "key": "Open Sans, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Playfair Display", "key": "Playfair Display, georgia, times new roman, serif" },
+                            { "value": "Roboto", "key": "Roboto, helvetica neue, helvetica, arial, sans-serif" },
+                            { "value": "Source Sans Pro", "key": "Source Sans Pro, helvetica neue, helvetica, arial, sans-serif" }
+                        ]
+                    }
+                ]
+            },
+            {
+                "id": "design_font_color",
+                "name": "font_color",
+                "title": "Font color",
+                "type": "text",
+                "default": "#fff",
+                "validation": {
+                    "hex_color":  "Not valid Hex color"
+                }
+            },
+            {
+                "id": "design_content_alignment",
+                "name": "content_alignment",
+                "title": "Content alignment",
+                "type": "select",
+                "default": "center",
+                "options": [
+                    { "key": "left", "value": "Left" },
+                    { "key": "center", "value": "Center" },
+                    { "key": "right", "value": "Right" }
+                ]
+            },
+            {
+                "id": "design_content_direction",
+                "name": "content_direction",
+                "title": "Content direction",
+                "type": "select",
+                "default": "ltr",
+                "options": [
+                    { "key": "ltr", "value": "Left to Right" },
+                    { "key": "rtl", "value": "Right to Left" }
+                ]
+            },
+            {
+                "id": "design_additional_styles",
+                "name": "additional_styles",
+                "title": "Additional styles",
+                "message": "Show your CSS Kong Fu skills.",
+                "type": "textarea",
+                "placeholder": "#element { ... }",
+                "validation": {
+                    "css": "Not valid CSS"
+                }
+            }
+        ]
+    },
+    {
+        "name": "search-results",
+        "title": "Search Results",
+        "fields": [
+            {
+                "id": "search_results_title",
+                "name": "title",
+                "title": "Title",
+                "type": "text",
+                "message": "Recommended **70** characters."
+            },
+            {
+                "id": "search_results_description",
+                "name": "description",
+                "title": "Description",
+                "type": "textarea",
+                "message": "Recommended **156** characters."
+            },
+            {
+                "id": "search_results_preview",
+                "title": "Preview",
+                "type": "search_preview",
+                "description": "",
+                "link": "",
+                "link_title": ""
+            }
+        ]
+    }
+]

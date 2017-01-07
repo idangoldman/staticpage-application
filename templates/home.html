@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="UTF-8" />
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="theme-color" content="#233733">
+
+    <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet" type="text/css" />
+
+</head><body>
+    {% if not on_phone %}
+        <div class="page-view">
+            <iframe class="page desktop-view" name="page" src="{{ url_for('page_intervention', page_id=page_id) }}"
+                frameborder="0" border="0" cellspacing="0">
+            </iframe>
+        </div>
+    {% endif %}
+
+    <iframe class="side-kick {{ 'full-width' if on_phone }}" name="side-kick" src="{{ url_for('side_kick', page_id=page_id) }}"
+        frameborder="0" border="0" cellspacing="0">
+    </iframe>
+
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
+
+</body></html>

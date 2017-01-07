@@ -1,13 +1,35 @@
 import os
-
+import inspect
 
 class Config(object):
-    MONGODB_SETTINGS = {'DB': 'testing'}
-    SECRET_KEY = "w2525ferg3456t354y"
-    MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
-    MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
-    MAILCHIMP_USERNAME = os.environ['MAILCHIMP_USERNAME']
-    GOOGLE_ANALYTICS_ID = os.environ['GOOGLE_ANALYTICS_ID']
-    ADDTHIS_PUBID = os.environ['ADDTHIS_PUBID']
-class DevConfig(Config):
+    API_URL = os.getenv('API_URL')
+    # root_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+    BASE_PATH = os.path.dirname( os.path.abspath( __file__ ) )
+    UPLOAD_FOLDER = os.getenv('FLASK_UPLOAD_FOLDER')
+    MAX_CONTENT_LENGTH = os.getenv('FLASK_MAX_CONTENT_LENGTH')
+
+    # SQLALCHEMY
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.getenv('SQLALCHEMY_DATABASE_URI')
+
+    # 3rd Party
+    # TODO: make them part of DB table - page
+    ADDTHIS_PUBID = os.getenv('ADDTHIS_PUBID')
+    GOOGLE_ANALYTICS_ID = os.getenv('GOOGLE_ANALYTICS_ID')
+    MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
+    MAILCHIMP_LIST_ID = os.getenv('MAILCHIMP_LIST_ID')
+    MAILCHIMP_USERNAME = os.getenv('MAILCHIMP_USERNAME')
+
+
+class DevelopmentConfig(Config):
     DEBUG = True
+    SQLALCHEMY_ECHO = False
+
+    SECRET_KEY = os.getenv('FLASK_SECRET_KEY') or 'blah'
+
+
+class ProductionConfig(Config):
+    DEBUG = False
+    SQLALCHEMY_ECHO = False
+
+    SECRET_KEY = os.getenv('FLASK_SECRET_KEY')

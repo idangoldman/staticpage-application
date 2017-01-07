@@ -1,0 +1,51 @@
+[
+    {
+        "name": "design",
+        "title": "Design",
+        "fields": [
+            {
+                "id": "design_container_position",
+                "name": "container_position",
+                "title": "Container position",
+                "type": "select",
+                "default": "middle",
+                "options": [
+                    { "key": "top-left", "value": "Top Left" },
+                    { "key": "top-middle", "value": "Top Middle" },
+                    { "key": "top-right", "value": "Top Right" },
+                    { "key": "middle-left", "value": "Middle Left" },
+                    { "key": "middle", "value": "Middle" },
+                    { "key": "middle-right", "value": "Middle Right" },
+                    { "key": "bottom-left", "value": "Bottom Left" },
+                    { "key": "bottom-middle", "value": "Bottom Middle" },
+                    { "key": "bottom-right", "value": "Bottom Right" }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "analytics",
+        "title": "Analytics",
+        "fields": [
+            {
+                "id": "analytics_services",
+                "name": "services",
+                "title": "Service",
+                "type": "select",
+                "default": "none",
+                "is_disabled": false,
+                "options": [
+                    { "key": "none", "value": "None" },
+                    { "key": "google-analytics", "value": "Google Analytics" }
+                ]
+            },
+            {
+                "id": "analytics_identifier",
+                "name": "identifier",
+                "title": "Identifier",
+                "type": "text",
+                "placeholder": "UA-12345678-1"
+            }
+        ]
+    }
+]

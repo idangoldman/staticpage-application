@@ -1,127 +1,51 @@
 @charset "UTF-8";
 
-
-$rem-base: 16;
-$theme-color: #000813;
-$theme-second-color: #021B2C;
-
-@function px2rem($value) {
-    @return ( $value / $rem-base ) + rem;
-}
-
-// Google Fonts
-// @import url("http://fonts.googleapis.com/earlyaccess/opensanshebrew.css");
-@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800");
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-// Font set
-a {
-    color: #fff;
-
-    &:hover {
-        text-decoration: none;
-    }
-}
-
-html, body {
-    height: 100%;
-}
-
-html {
-  font-size: $rem-base + px;
-}
-
-body, button, input[type="text"], select, textarea {
-    -webkit-font-smoothing: antialiased;
-    color: #fff;
-    font-family: 'Open Sans', Tahoma, Helvetica, Arial, sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-}
-
-// Desktop
-// @media ( max-width: 1600px ) {}
-// Netbook
-// @media ( max-width: 1024px ) {}
-
-// Tablet
-@media ( max-width: 768px ) {
-    html {
-        font-size: 12px;
-    }
-}
-
-// Smartphone
-@media ( max-width: 320px ) {
-    html {
-        font-size: 10px;
-    }
-}
-
-// - rem and em units are computed into pixel values by the browser, based on font sizes in your design.
-// - em units are based on the font size of the element they’re used on.
-// - rem units are based on the font size of the html element.
-// - em units can be influenced by font size inheritance from any parent element
-// - rem units can be influenced by font size inheritance from browser font settings.
-
-// - Use em units for sizing that should scale depending on the font size of an element other than the root.
-// - Use rem units for sizing that doesn’t need em units, and that should scale depending on browser font size settings.
-// - Use rem units unless you’re sure you need em units, including on font sizes.
-// - Use rem units on media queries
-// - Don’t use em or rem in multi column layout widths - use % instead.
-// - Don’t use em or rem if scaling would unavoidably cause a layout element to break.
-
+@import "assets/scss/lib/variables";
+@import "assets/scss/lib/reset";
 
 .background {
     background-attachment: fixed;
-    background-color: #fff;
-    background-image: url('/static/images/background.jpeg');
     background-position: 50% 50%;
-    background-repeat: no-repeat;
-    background-size: cover;
+    display: flex;
 
     &:before {
-        background-color: rgba( #000, 0.3 );
+        background-color: rgba( #000, 0.15 );
         bottom: 0;
         content: "";
         display: block;
         left: 0;
-        position: absolute;
+        position: fixed;
         right: 0;
         top: 0;
         z-index: -1;
     }
 }
 
-.static-page {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    // height: 100vh;
-    height: 100%;
-    justify-content: center;
-    margin: 0 auto;
+.page {
+    margin: auto;
     position: relative;
-    text-align: center;
     width: 90%;
     z-index: 2;
 
     & > * {
+        margin: 0 auto;
         width: 100%;
     }
 }
 
-.article {
+.content {
+    margin-top: px2rem(25);
     text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
 
     & > * {
+        @include text-break;
         margin-bottom: px2rem(25);
+    }
+
+    .logo {
+        display: block;
+        max-height: px2rem(175);
+        max-width: px2rem(350);
     }
 
     .title {
@@ -131,16 +55,19 @@ body, button, input[type="text"], select, textarea {
 
     .sub-title {
         font-size: 2em;
-        font-style: italic;
+        // font-style: italic;
     }
 
     .description {
         font-size: 1.2em;
         font-weight: 600;
+        line-height: 1.5em;
     }
 }
 
 .newsletter {
+    margin-bottom: px2rem(20);
+
     .email, .submit {
         background-color: transparent;
         border-radius: px2rem(5);
@@ -176,13 +103,13 @@ body, button, input[type="text"], select, textarea {
 }
 
 .add-this {
-    height: 32px;
-    margin-top: px2rem(25);
+    height: 48px;
+    margin-bottom: px2rem(25);
 }
 
 // min Netbook
 @media ( min-width: 1024px ) {
-    .static-page > * {
+    .page > * {
         width: 80%;
     }
 }

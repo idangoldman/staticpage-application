@@ -12,12 +12,24 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
-cp start_example.sh start.sh
+cp .env_flask.example .env_flask
 
 ### Frontend
 npm install
 
-bundle update
+npm install -g gulp
 
 ## Run
+
+### Backend
 sh start.sh
+
+### Frontend
+gulp
+
+### Migrate
+python migrate.py db init
+
+python migrate.py db migrate
+
+python migrate.py db upgrade
