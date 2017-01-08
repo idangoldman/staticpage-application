@@ -3,7 +3,7 @@
 ## Install
 git clone
 
-cd static-pages
+cd staticpage
 
 ### Backend
 virtualenv venv
@@ -27,9 +27,11 @@ sh start.sh
 ### Frontend
 gulp
 
-### Migrate
-python migrate.py db init
+### Manager Commands
+python manage.py runserver
 
-python migrate.py db migrate
+python manage.py db init
 
-python migrate.py db upgrade
+python manage.py db migrate
+
+python manage.py db upgrade

@@ -1,9 +1,9 @@
 {
-  "name": "static-pages",
+  "name": "staticpage",
   "version": "1.0.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idanm/static-pages.git"
+    "url": "git+https://github.com/idangoldman/staticpage.git"
   },
   "scripts": {
     "preinstall": "npm install -g gulp"

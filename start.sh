@@ -1,1 +1,1 @@
-venv/bin/python manage.py
+venv/bin/python manage.py runserver

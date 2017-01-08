@@ -1,8 +1,7 @@
 import os
-import inspect
+
 
 class Config(object):
-    # root_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
     API_URL = os.getenv('API_URL')
     BASE_PATH = os.path.dirname( os.path.abspath( __file__ ) )
     HTTP_HOST = os.getenv('HTTP_HOST')
