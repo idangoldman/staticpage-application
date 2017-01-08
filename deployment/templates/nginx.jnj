@@ -1,0 +1,18 @@
+server {
+    listen 80;
+    server_name {{ domain }} www.{{ domain }};
+    root {{ www_path }};
+
+    access_log /var/log/nginx/{{ domain }}.access.log;
+    error_log /var/log/nginx/{{ domain }}.error.log;
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:{{ www_path }}/backend.sock;
+        proxy_buffers 8 64k;
+        proxy_buffer_size 128k;
+        proxy_temp_file_write_size 10M;
+        proxy_max_temp_file_size 10M;
+        proxy_buffering on;
+    }
+}

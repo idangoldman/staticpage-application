@@ -35,3 +35,9 @@ python manage.py db init
 python manage.py db migrate
 
 python manage.py db upgrade
+
+
+### Useful
+pip freeze > requirements.txt
+
+pip-autoremove -y somepackage
