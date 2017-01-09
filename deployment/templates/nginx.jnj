@@ -1,18 +1,25 @@
 server {
+    server_tokens off;
+
     listen 80;
     server_name {{ domain }} www.{{ domain }};
     root {{ www_path }};
 
-    access_log /var/log/nginx/{{ domain }}.access.log;
-    error_log /var/log/nginx/{{ domain }}.error.log;
+    access_log {{ access_log_path }};
+    error_log {{ error_log_path }};
 
-    location / {
+    location / { try_files $uri @flask_app; }
+    location @flask_app {
         include uwsgi_params;
-        uwsgi_pass unix:{{ www_path }}/backend.sock;
+        uwsgi_pass unix:{{ socket_path }};
         proxy_buffers 8 64k;
         proxy_buffer_size 128k;
         proxy_temp_file_write_size 10M;
         proxy_max_temp_file_size 10M;
         proxy_buffering on;
     }
+
+    # location /static {
+    #     alias /var/www/mysite/static;
+    # }
 }

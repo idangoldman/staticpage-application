@@ -1,0 +1,25 @@
+[uwsgi]
+; binary-path = /usr/bin/uwsgi
+; uwsgi-socket = {{ socket_path }}
+callable = app
+chdir = {{ www_path }}
+chmod-socket = 660
+chown-socket = www-data:www-data
+die-on-term = true
+gid = {{ user }}
+logto = {{ log_path }}
+master = true
+module = manage
+plugins = python
+processes = 3
+socket = {{ socket_path }}
+uid = {{ user }}
+vacuum = true
+vhost = true
+virtualenv = {{ virtualenv_path }}
+
+{#
+    File based on:
+    http://www.jeffwidman.com/blog/802/configuring-a-single-nginx-uwsgi-server-to-serve-multiple-flask-apps/
+    http://www.markjberger.com/flask-with-virtualenv-uwsgi-nginx/
+#}

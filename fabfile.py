@@ -2,9 +2,11 @@ import os
 from fabric.api import *
 from fabric.contrib import files
 
+
 def vagrant():
     env.use_ssh_config = True
     env.hosts = ['vagrant_ubuntu']
+
 
 def machine_info():
     run('uptime')
@@ -17,25 +19,28 @@ def update_upgrade():
 def set_hostname():
     sudo('echo "staticpage.vagrant" > /etc/hostname')
     sudo('hostname -F /etc/hostname')
-    run('hostname')
-    sudo('echo "127.0.0.1 staticpage.vagrant" >> /etc/hosts')
+    files.append('/etc/hosts', '127.0.0.1 staticpage.vagrant', use_sudo=True, escape=True)
 
 def install_packages():
     packages = {
         'ubuntu': ' '.join([
-            'software-properties-common',
-            'git',
             'build-essential',
-            'python',
+            'git',
+            'libffi-dev',
+            'libmysqlclient-dev',
+            'libssl-dev',
+            'mariadb-server',
+            'nginx',
+            'python-dev',
             'python-minimal',
             'python-pip',
-            'python-dev',
-            'nginx',
-            'mariadb-server'
+            'python',
+            'software-properties-common',
+            'uwsgi',
+            'uwsgi-plugin-python'
         ]),
         'pip': ' '.join([
             'pip',
-            'uwsgi',
             'virtualenv'
         ])
     }
@@ -43,22 +48,27 @@ def install_packages():
     sudo('apt-get install -y {0}'.format( packages['ubuntu'] ))
     run('pip install {0}'.format( packages['pip'] ))
 
-def nginx_setup():
-    # sudo('service nginx status')
-    if files.exists('rm -f /etc/nginx/sites-enabled/default'):
-        sudo('rm -f /etc/nginx/sites-enabled/default')
-    if not files.exists('/etc/nginx/sites-enabled/staticpage'):
-        update_nginx_template()
-        sudo('ln -s /etc/nginx/sites-available/staticpage /etc/nginx/sites-enabled')
-        sudo('service nginx restart')
+def create_folders():
+    run('mkdir /home/ubuntu/logs')
+
+def setup_machine():
+    machine_info()
+    update_upgrade()
+    set_hostname()
+    create_folders()
+    install_packages()
+
 
 def update_nginx_template():
-    template_variables = {
+    kwargs = {
         'filename': './nginx.jnj',
         'destination': '/etc/nginx/sites-available/staticpage',
         'template_dir': './deployment/templates',
         'context': {
+            'access_log_path': '/home/ubuntu/logs/nginx_access_log',
             'domain': 'staticpage.vagrant',
+            'error_log_path': '/home/ubuntu/logs/nginx_error_log',
+            'socket_path': '/tmp/backend.sock',
             'www_path': '/home/ubuntu/staticpage'
         },
         'use_jinja': True,
@@ -66,22 +76,17 @@ def update_nginx_template():
         'backup': False
     }
 
-    files.upload_template( **template_variables )
+    files.upload_template( **kwargs )
 
-def setup_machine():
-    machine_info()
-    update_upgrade()
-    set_hostname()
-    install_packages()
-    nginx_setup()
+def setup_nginx():
+    # sudo('service nginx status')
+    if files.exists('rm -f /etc/nginx/sites-enabled/default'):
+        sudo('rm -f /etc/nginx/sites-enabled/default')
+    if not files.is_link('/etc/nginx/sites-enabled/staticpage'):
+        update_nginx_template()
+        sudo('ln -s /etc/nginx/sites-available/staticpage /etc/nginx/sites-enabled')
+        sudo('service nginx restart')
 
-def git_clone():
-    if not files.exists('/home/ubuntu/staticpage'):
-        prompts_dict = {
-            'Are you sure you want to continue connecting (yes/no)? ': 'yes'
-        }
-        with cd('/home/ubuntu'), settings(prompts = prompts_dict):
-            run('git clone %s' % 'git@github.com:idangoldman/staticpage.git')
 
 def create_ssh_key(overwrite = False):
     if not files.exists('/home/ubuntu/.ssh/id_rsa.pub') or overwrite:
@@ -103,6 +108,70 @@ def create_ssh_key(overwrite = False):
         with settings(abort_on_prompts=False):
             prompt('\n\nPaste in "Settings > Deploy keys" and hit enter')
 
-def deploy():
+def git_clone():
+    if not files.exists('/home/ubuntu/staticpage'):
+        prompts_dict = {
+            'Are you sure you want to continue connecting (yes/no)? ': 'yes'
+        }
+        with cd('/home/ubuntu'), settings(prompts = prompts_dict):
+            run('git clone %s' % 'git@github.com:idangoldman/staticpage.git')
+
+def git_update():
+    with cd('/home/ubuntu/staticpage'):
+        run('git checkout deployment')
+        run('git pull')
+
+def setup_git():
     create_ssh_key()
     git_clone()
+    git_update()
+
+def setup_backend():
+    with cd('/home/ubuntu/staticpage'):
+        if not files.exists('venv'):
+            run('virtualenv venv')
+        if not files.exists('flask_env'):
+            run('cp flask_env.example flask_env')
+
+        with prefix('source venv/bin/activate'):
+            run('pip install -r requirements.txt')
+            run('deactivate')
+
+
+def update_uwsgi_template():
+    kwargs = {
+        'filename': './uwsgi.jnj',
+        'destination': '/etc/uwsgi/apps-available/staticpage',
+        'template_dir': './deployment/templates',
+        'context': {
+            'log_path': '/home/ubuntu/logs/uwsgi.log',
+            'socket_path': '/tmp/backend.sock',
+            'user': 'ubuntu',
+            'virtualenv_path': '/home/ubuntu/staticpage/venv',
+            'www_path': '/home/ubuntu/staticpage'
+        },
+        'use_jinja': True,
+        'use_sudo': True,
+        'backup': False
+    }
+
+    files.upload_template( **kwargs )
+
+def setup_uwsgi():
+    # sudo('service uwsgi status')
+    with cd('/tmp'):
+        run('touch backend.sock')
+        sudo('chown www-data backend.sock')
+
+    if not files.is_link('/etc/uwsgi/apps-enabled/staticpage'):
+        update_uwsgi_template()
+        sudo('ln -s /etc/uwsgi/apps-available/staticpage /etc/uwsgi/apps-enabled')
+        sudo('service uwsgi restart')
+
+
+def setup():
+    setup_machine()
+    setup_nginx()
+    setup_git()
+    setup_backend()
+    setup_uwsgi()
