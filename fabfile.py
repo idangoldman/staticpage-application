@@ -1,6 +1,6 @@
 import os
 from fabric.api import *
-from fabric.contrib.files import upload_template, exists
+from fabric.contrib import files
 
 def vagrant():
     env.use_ssh_config = True
@@ -43,21 +43,14 @@ def install_packages():
     sudo('apt-get install -y {0}'.format( packages['ubuntu'] ))
     run('pip install {0}'.format( packages['pip'] ))
 
-def setup_machine():
-    machine_info()
-    update_upgrade()
-    set_hostname()
-    install_packages()
-    nginx_setup()
-
 def nginx_setup():
     # sudo('service nginx status')
-    update_nginx_template()
-    if exists('rm -f /etc/nginx/sites-enabled/default'):
+    if files.exists('rm -f /etc/nginx/sites-enabled/default'):
         sudo('rm -f /etc/nginx/sites-enabled/default')
-    if not exists('/etc/nginx/sites-enabled/staticpage'):
+    if not files.exists('/etc/nginx/sites-enabled/staticpage'):
+        update_nginx_template()
         sudo('ln -s /etc/nginx/sites-available/staticpage /etc/nginx/sites-enabled')
-    sudo('service nginx restart')
+        sudo('service nginx restart')
 
 def update_nginx_template():
     template_variables = {
@@ -73,4 +66,43 @@ def update_nginx_template():
         'backup': False
     }
 
-    upload_template( **template_variables )
+    files.upload_template( **template_variables )
+
+def setup_machine():
+    machine_info()
+    update_upgrade()
+    set_hostname()
+    install_packages()
+    nginx_setup()
+
+def git_clone():
+    if not files.exists('/home/ubuntu/staticpage'):
+        prompts_dict = {
+            'Are you sure you want to continue connecting (yes/no)? ': 'yes'
+        }
+        with cd('/home/ubuntu'), settings(prompts = prompts_dict):
+            run('git clone %s' % 'git@github.com:idangoldman/staticpage.git')
+
+def create_ssh_key(overwrite = False):
+    if not files.exists('/home/ubuntu/.ssh/id_rsa.pub') or overwrite:
+        prompts_dict = {
+            'Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa): ': '',
+            'Enter passphrase (empty for no passphrase): ': '',
+            'Enter same passphrase again: ': '',
+            'Overwrite (y/n)? ': 'y'
+        }
+
+        with settings(prompts = prompts_dict):
+            run('ssh-keygen -t rsa -b 4096 -C "ubuntu@ubuntu.vagrant"')
+
+        id_rsa_pub = run('cat /home/ubuntu/.ssh/id_rsa.pub')
+        print '###'
+        print id_rsa_pub
+        print '###'
+        print ''
+        with settings(abort_on_prompts=False):
+            prompt('\n\nPaste in "Settings > Deploy keys" and hit enter')
+
+def deploy():
+    create_ssh_key()
+    git_clone()
