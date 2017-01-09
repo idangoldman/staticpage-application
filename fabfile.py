@@ -41,6 +41,7 @@ def install_packages():
         ]),
         'pip': ' '.join([
             'pip',
+            'uwsgi',
             'virtualenv'
         ])
     }
@@ -77,7 +78,7 @@ def update_nginx_template():
     }
 
     files.upload_template( **kwargs )
-    sudo('service nginx restart')
+    # sudo('service nginx restart')
 
 
 def setup_nginx():
@@ -160,7 +161,7 @@ def update_uwsgi_template():
     }
 
     files.upload_template( **kwargs )
-    sudo('service uwsgi restart')
+    # sudo('service uwsgi restart')
 
 def setup_uwsgi():
     # sudo('service uwsgi status')
