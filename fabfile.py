@@ -41,7 +41,6 @@ def install_packages():
         ]),
         'pip': ' '.join([
             'pip',
-            'uwsgi',
             'virtualenv'
         ])
     }
@@ -50,7 +49,8 @@ def install_packages():
     run('pip install {0}'.format( packages['pip'] ))
 
 def create_folders():
-    run('mkdir /home/ubuntu/logs')
+    if not files.exists('/home/ubuntu/logs'):
+        run('mkdir /home/ubuntu/logs')
 
 def setup_machine():
     machine_info()
@@ -66,9 +66,9 @@ def update_nginx_template():
         'destination': '/etc/nginx/sites-available/staticpage',
         'template_dir': './deployment/templates',
         'context': {
-            'access_log_path': '/home/ubuntu/logs/nginx_access_log',
+            'access_log_path': '/home/ubuntu/logs/nginx_access',
             'domain': 'staticpage.vagrant',
-            'error_log_path': '/home/ubuntu/logs/nginx_error_log',
+            'error_log_path': '/home/ubuntu/logs/nginx_error',
             'socket_path': '/tmp/backend.sock',
             'www_path': '/home/ubuntu/staticpage'
         },
@@ -146,12 +146,13 @@ def setup_backend():
 def update_uwsgi_template():
     kwargs = {
         'filename': './uwsgi.jnj',
-        'destination': '/etc/uwsgi/apps-available/staticpage',
+        'destination': '/etc/uwsgi/apps-available/staticpage.ini',
         'template_dir': './deployment/templates',
         'context': {
-            'log_path': '/home/ubuntu/logs/uwsgi.log',
+            'log_path': '/home/ubuntu/logs/uwsgi',
             'socket_path': '/tmp/backend.sock',
-            'user': 'www-data',
+            'user': 'ubuntu',
+            'group': 'www-data',
             'virtualenv_path': '/home/ubuntu/staticpage/venv',
             'www_path': '/home/ubuntu/staticpage'
         },
@@ -165,14 +166,10 @@ def update_uwsgi_template():
 
 def setup_uwsgi():
     # sudo('service uwsgi status')
-    with cd('/tmp'):
-        run('touch backend.sock')
-        sudo('chmod 660 backend.sock')
-        sudo('chown ubuntu:www-data backend.sock')
 
-    if not files.is_link('/etc/uwsgi/apps-enabled/staticpage'):
+    if not files.is_link('/etc/uwsgi/apps-enabled/staticpage.ini'):
         update_uwsgi_template()
-        sudo('ln -s /etc/uwsgi/apps-available/staticpage /etc/uwsgi/apps-enabled')
+        sudo('ln -s /etc/uwsgi/apps-available/staticpage.ini /etc/uwsgi/apps-enabled')
         sudo('service uwsgi restart')
 
 
