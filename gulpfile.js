@@ -1,4 +1,5 @@
-var autoprefixer = require('autoprefixer'),
+var argv = require('yargs').argv,
+    autoprefixer = require('autoprefixer'),
     del = require('del'),
     gulp = require('gulp'),
     imageMin = require('gulp-imagemin'),
@@ -12,8 +13,14 @@ var autoprefixer = require('autoprefixer'),
     webpack = require('webpack-stream'),
     webpackConfig = require('./webpack.config.js');
 
+var destFolder = !! argv.dist ? 'dist' : 'static';
+
 // Default task with watch
-gulp.task('default', ['webpack', 'style', 'svg-sprite', 'background-images'], function() {
+gulp.task('default');
+
+gulp.task('build', ['webpack', 'style', 'svg-sprite', 'background-images']);
+
+gulp.task('w', ['build'], function() {
     gulp.watch('frontend/scss/**/*.scss', ['style']);
     gulp.watch('frontend/js/**/*.js', ['webpack']);
     gulp.watch('frontend/images/icons/**/*.svg', ['svg-sprite']);
@@ -41,7 +48,7 @@ gulp.task('svg-sprite', function() {
     return gulp.src('**/*.svg', { cwd: 'frontend/images/icons' })
         .pipe( svgSprite( spriteConfig ) )
         .pipe( rename( spriteRename ) )
-        .pipe( gulp.dest('static/images') );
+        .pipe( gulp.dest( destFolder + '/images') );
 });
 
 //  Background images optimized
@@ -57,18 +64,7 @@ gulp.task('background-images', function() {
     return gulp.src('*.jpeg', { cwd: 'frontend/images/backgrounds' })
         // .pipe( imageResize( imageResizeConfig ) )
         .pipe( imageMin( imageMinPlugins ) )
-        .pipe( gulp.dest('static/images/backgrounds') );
-});
-
-// File stats
-gulp.task('static-stats', function () {
-    var sizeConfig = size({
-        showFiles: true
-    });
-
-    gulp.src('static/**/*')
-        .pipe( sizeConfig )
-        .pipe( gulp.dest('static/') );
+        .pipe( gulp.dest( destFolder + '/images/backgrounds') );
 });
 
 // Sass with autoprefixer :)
@@ -84,16 +80,20 @@ gulp.task('style', function() {
     return gulp.src('*.scss', { cwd: 'frontend/scss/' })
         .pipe( sass( sassConfig ).on('error', sass.logError) )
         .pipe( postcss( postCssConfig ) )
-        .pipe( gulp.dest('static/') )
+        .pipe( gulp.dest( destFolder + '/') )
 });
 
 gulp.task('clean', function() {
-    return del( ['static/**/*'] );
+    return del( ['static/**/*', 'dist'] );
 });
 
 //  webpack side kick script
 gulp.task('webpack', function() {
+    if ( destFolder === 'dist' ) {
+        webpackConfig.debug = false;
+        webpackConfig.devtool = '';
+    }
     return gulp.src('relevant-enteries-in-webpack-config')
         .pipe( webpack( webpackConfig ) )
-        .pipe( gulp.dest('static/') );
+        .pipe( gulp.dest( destFolder + '/') );
 });

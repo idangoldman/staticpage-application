@@ -80,7 +80,6 @@ def update_nginx_template():
     files.upload_template( **kwargs )
     # sudo('service nginx restart')
 
-
 def setup_nginx():
     # sudo('service nginx status')
     if files.exists('rm -f /etc/nginx/sites-enabled/default'):
@@ -131,7 +130,7 @@ def setup_git():
     git_update()
 
 
-def setup_backend():
+def setup_virtualenv():
     with cd('/home/ubuntu/staticpage'):
         if not files.exists('venv'):
             run('virtualenv venv')
@@ -173,9 +172,44 @@ def setup_uwsgi():
         sudo('service uwsgi restart')
 
 
+def setup_mysql():
+    sudo('service mysql start')
+
+    prompts_dict = {
+        'Enter current password for root (enter for none): ': '',
+        'Set root password? [Y/n] ': 'Y',
+        'Remove anonymous users? [Y/n] ': 'Y',
+        'Disallow root login remotely? [Y/n] ': 'n',
+        'Remove test database and access to it? [Y/n] ': 'Y',
+        'Reload privilege tables now? [Y/n] ': 'Y'
+    }
+
+    with settings(prompts = prompts_dict):
+        sudo('mysql_secure_installation')
+
+    # with settings(prompts = prompts_dict):
+    #     sudo('mysql_secure_installation')
+    run('mysql -u root -p -e "CREATE DATABASE staticpage;"')
+
+
 def setup():
     setup_machine()
     setup_nginx()
     setup_git()
-    setup_backend()
+    setup_virtualenv()
     setup_uwsgi()
+    # setup_mysql
+
+
+
+def deploy_frontend():
+    # local('gulp build --dist')
+    if not files.exists('/home/ubuntu/staticpage/static'):
+        run('mkdir /home/ubuntu/staticpage/static')
+        sudo('chown ubuntu:www-data /home/ubuntu/staticpage/static')
+
+    put('dist/*', '/home/ubuntu/staticpage/static')
+
+
+def deploy():
+    deploy_frontend()

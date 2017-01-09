@@ -11,3 +11,4 @@ static/
 venv/
 uploads/
 *.swp
+dist/
