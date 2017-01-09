@@ -77,6 +77,8 @@ def update_nginx_template():
     }
 
     files.upload_template( **kwargs )
+    sudo('service nginx restart')
+
 
 def setup_nginx():
     # sudo('service nginx status')
@@ -115,6 +117,7 @@ def git_clone():
         }
         with cd('/home/ubuntu'), settings(prompts = prompts_dict):
             run('git clone %s' % 'git@github.com:idangoldman/staticpage.git')
+            sudo('chown ubuntu:www-data staticpage')
 
 def git_update():
     with cd('/home/ubuntu/staticpage'):
@@ -125,6 +128,7 @@ def setup_git():
     create_ssh_key()
     git_clone()
     git_update()
+
 
 def setup_backend():
     with cd('/home/ubuntu/staticpage'):
@@ -146,7 +150,7 @@ def update_uwsgi_template():
         'context': {
             'log_path': '/home/ubuntu/logs/uwsgi.log',
             'socket_path': '/tmp/backend.sock',
-            'user': 'ubuntu',
+            'user': 'www-data',
             'virtualenv_path': '/home/ubuntu/staticpage/venv',
             'www_path': '/home/ubuntu/staticpage'
         },
@@ -156,12 +160,14 @@ def update_uwsgi_template():
     }
 
     files.upload_template( **kwargs )
+    sudo('service uwsgi restart')
 
 def setup_uwsgi():
     # sudo('service uwsgi status')
     with cd('/tmp'):
         run('touch backend.sock')
-        sudo('chown www-data backend.sock')
+        sudo('chmod 660 backend.sock')
+        sudo('chown ubuntu:www-data backend.sock')
 
     if not files.is_link('/etc/uwsgi/apps-enabled/staticpage'):
         update_uwsgi_template()

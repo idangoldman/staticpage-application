@@ -1,5 +1,3 @@
-from flask_migrate import Migrate, MigrateCommand
-from flask_script import Manager, Server
 from werkzeug.contrib.fixers import ProxyFix
 import os
 
@@ -14,13 +12,15 @@ load_env_var()
 app = create_app( os.getenv('FLASK_CONFIG') )
 app.wsgi_app = ProxyFix( app.wsgi_app )
 
-manager = Manager( app )
-migrate = Migrate( app, db )
-
-manager.add_command( 'db', MigrateCommand )
-manager.add_command( 'runserver', Server( host = '0.0.0.0', port = 5000 ) )
-
 
 if __name__ == '__main__':
+    from flask_migrate import Migrate, MigrateCommand
+    from flask_script import Manager, Server
+
+    manager = Manager( app )
+    migrate = Migrate( app, db )
+
+    manager.add_command( 'db', MigrateCommand )
+    manager.add_command( 'runserver', Server( host = '0.0.0.0', port = 5000 ) )
 
     manager.run()

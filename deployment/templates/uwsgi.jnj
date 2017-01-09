@@ -4,7 +4,7 @@
 callable = app
 chdir = {{ www_path }}
 chmod-socket = 660
-chown-socket = www-data:www-data
+chown-socket = {{ user }}:{{ user }}
 die-on-term = true
 gid = {{ user }}
 logto = {{ log_path }}
