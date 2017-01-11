@@ -18,6 +18,7 @@ def setup():
     virtualenv.setup()
     uwsgi.setup()
     # mysql.setup()
+    machine.info()
 
 
 # @task

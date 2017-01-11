@@ -16,9 +16,9 @@ def setup():
 @task
 def update_conf_file():
     kwargs = {
-        'filename': './nginx.jnj',
+        'filename': 'nginx.jnj',
         'destination': '/etc/nginx/sites-available/staticpage',
-        'template_dir': './templates',
+        'template_dir': 'deployment/templates',
         'context': {
             'access_log_path': '/home/ubuntu/logs/nginx_access',
             'domain': 'staticpage.vagrant',

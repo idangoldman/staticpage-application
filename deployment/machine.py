@@ -4,7 +4,6 @@ from fabric.contrib import files
 
 @task
 def setup():
-    info()
     update_and_upgrade()
     set_hostname()
     create_logs_folder()
@@ -13,8 +12,9 @@ def setup():
 
 @task
 def info():
-    run('uptime')
+    run('lsb_release -a')
     run('uname -a')
+    run('uptime')
 
 
 @task

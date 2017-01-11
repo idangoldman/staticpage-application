@@ -15,9 +15,9 @@ def setup():
 @task
 def update_conf_file():
     kwargs = {
-        'filename': './uwsgi.jnj',
+        'filename': 'uwsgi.jnj',
         'destination': '/etc/uwsgi/apps-available/staticpage.ini',
-        'template_dir': './templates',
+        'template_dir': 'deployment/templates',
         'context': {
             'log_path': '/home/ubuntu/logs/uwsgi',
             'socket_path': '/tmp/backend.sock',
