@@ -5,11 +5,9 @@ from fabric.contrib import files
 @task
 def setup():
     install()
-    status()
-    # secure_installation()
-    # create_db();
-    # restart()
-    # start()
+    secure_installation()
+    create_db()
+    restart()
 
 
 def install():
@@ -18,6 +16,12 @@ def install():
 
 def secure_installation():
     prompts_dict = {
+        'Press y|Y for Yes, any other key for No: ': 'n',
+        'Change the password for root ? ((Press y|Y for Yes, any other key for No) : ': 'n',
+        'Remove anonymous users? (Press y|Y for Yes, any other key for No) : ': 'y',
+        'Disallow root login remotely? (Press y|Y for Yes, any other key for No) : ': 'n',
+        'Remove test database and access to it? (Press y|Y for Yes, any other key for No) : ': 'y',
+        'Reload privilege tables now? (Press y|Y for Yes, any other key for No) : ': 'y'
     }
 
     with settings( prompts = prompts_dict ):
