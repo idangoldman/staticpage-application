@@ -47,3 +47,8 @@ def update():
     with cd('/home/ubuntu/staticpage'):
         run('git checkout deployment')
         run('git pull')
+
+
+@task
+def deploy():
+    update()

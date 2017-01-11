@@ -1,7 +1,7 @@
 from fabric.api import *
 from fabric.contrib import files
 
-from deployment import machine, nginx, uwsgi, git, virtualenv, mysql
+from deployment import machine, nginx, uwsgi, git, virtualenv, mysql, frontend
 
 
 @task
@@ -17,12 +17,13 @@ def setup():
     git.setup()
     virtualenv.setup()
     uwsgi.setup()
-    # mysql.setup()
+    mysql.setup()
+    frontend.setup()
     machine.info()
 
 
-# @task
-# def deploy():
-#     frontend.deploy()
-#     git.deploy()
-#     mysql.migrate()
+@task
+def deploy():
+    frontend.deploy()
+    git.deploy()
+    mysql.migrate()

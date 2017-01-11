@@ -10,10 +10,12 @@ def setup():
     restart()
 
 
+@task
 def install():
     sudo('apt-get install -y mysql-server')
 
 
+@task
 def secure_installation():
     prompts_dict = {
         'Press y|Y for Yes, any other key for No: ': 'n',
@@ -28,15 +30,26 @@ def secure_installation():
         sudo('mysql_secure_installation')
 
 
+@task
 def create_db():
     run('mysql -u root -p -e "CREATE DATABASE staticpage;"')
 
 
+@task
+def migrate():
+    with cd('/home/ubuntu/staticpage'), prefix('source venv/bin/activate'):
+        run('python manage.py db upgrade')
+
+
+@task
 def start():
     sudo('service mysql start')
+@task
 def restart():
     sudo('service mysql restart')
+@task
 def stop():
     sudo('service mysql stop')
+@task
 def status():
     sudo('service mysql status')
