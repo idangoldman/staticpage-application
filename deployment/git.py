@@ -45,7 +45,7 @@ def clone():
 @task
 def update():
     with cd('/home/ubuntu/staticpage'):
-        run('git checkout deployment')
+        run('git checkout master')
         run('git pull')
 
 
