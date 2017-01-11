@@ -21,7 +21,7 @@ def secure_installation():
         'Press y|Y for Yes, any other key for No: ': 'n',
         'Change the password for root ? ((Press y|Y for Yes, any other key for No) : ': 'n',
         'Remove anonymous users? (Press y|Y for Yes, any other key for No) : ': 'y',
-        'Disallow root login remotely? (Press y|Y for Yes, any other key for No) : ': 'n',
+        'Disallow root login remotely? (Press y|Y for Yes, any other key for No) : ': 'y',
         'Remove test database and access to it? (Press y|Y for Yes, any other key for No) : ': 'y',
         'Reload privilege tables now? (Press y|Y for Yes, any other key for No) : ': 'y'
     }

@@ -4,6 +4,7 @@ from fabric.contrib import files
 
 @task
 def setup():
+    create_logs_folder()
     if not files.is_link('/etc/uwsgi/apps-enabled/staticpage.ini'):
         update_conf_file()
         sudo('ln -s /etc/uwsgi/apps-available/staticpage.ini /etc/uwsgi/apps-enabled')
@@ -17,7 +18,7 @@ def update_conf_file():
         'destination': '/etc/uwsgi/apps-available/staticpage.ini',
         'template_dir': 'deployment/templates',
         'context': {
-            'log_path': '/home/ubuntu/logs/uwsgi',
+            'log_path': '/home/ubuntu/logs/uwsgi/%n.log',
             'socket_path': '/tmp/backend.sock',
             'user': 'ubuntu',
             'group': 'www-data',
@@ -30,6 +31,15 @@ def update_conf_file():
     }
 
     files.upload_template( **kwargs )
+
+
+@task
+def create_logs_folder():
+    if not files.exists('/home/ubuntu/logs/uwsgi'):
+        # run('touch /home/ubuntu/logs/uwsgi.log')
+        run('mkdir /home/ubuntu/logs/uwsgi')
+        sudo('chown ubuntu:www-data /home/ubuntu/logs/uwsgi')
+
 
 
 @task
