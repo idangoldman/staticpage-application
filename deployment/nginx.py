@@ -4,13 +4,12 @@ from fabric.contrib import files
 
 @task
 def setup():
-    # sudo('service nginx status')
     if files.exists('rm -f /etc/nginx/sites-enabled/default'):
         sudo('rm -f /etc/nginx/sites-enabled/default')
     if not files.is_link('/etc/nginx/sites-enabled/staticpage'):
         update_conf_file()
         sudo('ln -s /etc/nginx/sites-available/staticpage /etc/nginx/sites-enabled')
-        sudo('service nginx restart')
+        restart()
 
 
 @task
@@ -32,4 +31,17 @@ def update_conf_file():
     }
 
     files.upload_template( **kwargs )
-    # sudo('service nginx restart')
+
+
+@task
+def start():
+    sudo('service nginx start')
+@task
+def restart():
+    sudo('service nginx restart')
+@task
+def stop():
+    sudo('service nginx stop')
+@task
+def status():
+    sudo('service nginx status')

@@ -26,4 +26,5 @@ def setup():
 def deploy():
     frontend.deploy()
     git.deploy()
+    uwsgi.restart()
     mysql.migrate()

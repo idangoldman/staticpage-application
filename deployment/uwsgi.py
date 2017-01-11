@@ -4,8 +4,6 @@ from fabric.contrib import files
 
 @task
 def setup():
-    # sudo('service uwsgi status')
-
     if not files.is_link('/etc/uwsgi/apps-enabled/staticpage.ini'):
         update_conf_file()
         sudo('ln -s /etc/uwsgi/apps-available/staticpage.ini /etc/uwsgi/apps-enabled')
@@ -32,4 +30,17 @@ def update_conf_file():
     }
 
     files.upload_template( **kwargs )
-    # sudo('service uwsgi restart')
+
+
+@task
+def start():
+    sudo('service uwsgi start')
+@task
+def restart():
+    sudo('service uwsgi restart')
+@task
+def stop():
+    sudo('service uwsgi stop')
+@task
+def status():
+    sudo('service uwsgi status')
