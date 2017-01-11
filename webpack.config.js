@@ -6,15 +6,15 @@ module.exports = {
     debug: true,
     devtool: 'source-map',
     entry: {
-        'page-intervention': './assets/js/page/intervention.js',
-        'side-kick': './assets/js/side-kick/index.js',
-        'home': './assets/js/home.js'
+        'page-intervention': './frontend/js/page/intervention.js',
+        'side-kick': './frontend/js/side-kick/index.js',
+        'home': './frontend/js/home.js'
     },
     output: {
         filename: '[name].js'
     },
     resolve: {
-        root: path.resolve( __dirname, 'assets/js' ),
+        root: path.resolve( __dirname, 'frontend/js' ),
         modulesDirectories: [
             'web_modules',
             'node_modules',

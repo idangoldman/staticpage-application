@@ -1,0 +1,131 @@
+@charset "UTF-8";
+
+@import "frontend/scss/lib/variables";
+@import "frontend/scss/lib/reset";
+
+.background {
+    background-attachment: fixed;
+    background-position: 50% 50%;
+    display: flex;
+
+    &:before {
+        background-color: rgba( #000, 0.15 );
+        bottom: 0;
+        content: "";
+        display: block;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: -1;
+    }
+}
+
+.page {
+    margin: auto;
+    position: relative;
+    width: 90%;
+    z-index: 2;
+
+    & > * {
+        margin: 0 auto;
+        width: 100%;
+    }
+}
+
+.content {
+    margin-top: px2rem(25);
+    text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+
+    & > * {
+        @include text-break;
+        margin-bottom: px2rem(25);
+    }
+
+    .logo {
+        display: block;
+        max-height: px2rem(175);
+        max-width: px2rem(350);
+    }
+
+    .title {
+        font-size: 4em;
+        letter-spacing: px2rem(1);
+    }
+
+    .sub-title {
+        font-size: 2em;
+        // font-style: italic;
+    }
+
+    .description {
+        font-size: 1.2em;
+        font-weight: 600;
+        line-height: 1.5em;
+    }
+}
+
+.newsletter {
+    margin-bottom: px2rem(20);
+
+    .email, .submit {
+        background-color: transparent;
+        border-radius: px2rem(5);
+        border: px2rem(1) solid #fff;
+        font-weight: 600;
+        outline: 0;
+        padding: px2rem(10) px2rem(12);
+
+        &:hover, &:focus {
+            box-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+        }
+    }
+
+    .email {
+        margin-right: px2rem(5);
+
+        &, &::placeholder {
+            color: #fff;
+            text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+        }
+
+        &::placeholder {
+            opacity: 0.8;
+        }
+    }
+
+    .submit {
+        background-color: $theme-second-color;
+        border-color: $theme-second-color;
+        cursor: pointer;
+        text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+    }
+}
+
+.add-this {
+    height: 48px;
+    margin-bottom: px2rem(25);
+}
+
+// min Netbook
+@media ( min-width: 1024px ) {
+    .page > * {
+        width: 80%;
+    }
+}
+
+@media ( max-width: 768px ) {
+    .newsletter {
+        & > * {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            width: 80%;
+        }
+
+        .email {
+            margin-right: auto;
+            margin-bottom: px2rem(20);
+        }
+    }
+}

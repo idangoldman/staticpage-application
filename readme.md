@@ -1,9 +1,9 @@
-# StaticPages
+# StaticPage
 
 ## Install
 git clone
 
-cd static-pages
+cd staticpage
 
 ### Backend
 virtualenv venv
@@ -12,7 +12,7 @@ source venv/bin/activate
 
 pip install -r requirements.txt
 
-cp .env_flask.example .env_flask
+cp flask_env.example flask_env
 
 ### Frontend
 npm install
@@ -27,9 +27,17 @@ sh start.sh
 ### Frontend
 gulp
 
-### Migrate
-python migrate.py db init
+### Manager Commands
+python manage.py runserver
 
-python migrate.py db migrate
+python manage.py db init
 
-python migrate.py db upgrade
+python manage.py db migrate
+
+python manage.py db upgrade
+
+
+### Useful
+pip freeze > requirements.txt
+
+pip-autoremove -y somepackage
