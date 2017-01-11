@@ -42,20 +42,27 @@ class Page(db.Model):
         for feature in features:
             for field in feature.get('fields'):
                 page_field_value = page_dict.get( field.get('id') )
+
                 if page_field_value:
                     field['value'] = page_field_value
+                else:
+                    field['value'] = ''
 
                 if field.get('id') == 'search_results_title':
-                    field['placeholder'] = page_dict.get('content_title')
+                    field['placeholder'] = page_dict.get('content_title') \
+                                           or ''
                 if field.get('id') == 'search_results_description':
-                    field['placeholder'] = page_dict.get('content_sub_title')
+                    field['placeholder'] = page_dict.get('content_sub_title') \
+                                           or ''
 
                 if field.get('id') == 'search_results_preview':
                     field['link'] = current_app.config['HTTP_HOST'] + '/page/' + self.creator.site_name
                     field['link_title'] = page_dict.get('search_results_title') \
-                                            or page_dict.get('content_title')
+                                            or page_dict.get('content_title') \
+                                            or ''
                     field['description'] = page_dict.get('search_results_description') \
-                                            or page_dict.get('content_sub_title')
+                                            or page_dict.get('content_sub_title') \
+                                            or ''
 
         return features
 
@@ -71,10 +78,12 @@ class Page(db.Model):
                 if not page_dict.get( field.get('id') ):
                     if field.get('default'):
                         page_dict[ field.get('id') ] = field.get('default')
+                    else:
+                        page_dict[ field.get('id') ] = ''
 
-                    if field.get('id') == 'search_results_title':
-                        page_dict['search_results_title'] = page_dict.get('content_title')
-                    if field.get('id') == 'search_results_description':
-                        page_dict['search_results_description'] = page_dict.get('content_sub_title')
+                if field.get('id') == 'search_results_title':
+                    page_dict['search_results_title'] = page_dict.get('content_title')
+                if field.get('id') == 'search_results_description':
+                    page_dict['search_results_description'] = page_dict.get('content_sub_title')
 
         return page_dict
