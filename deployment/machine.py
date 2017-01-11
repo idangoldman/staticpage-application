@@ -62,4 +62,3 @@ def install_packages():
 def create_logs_folder():
     if not files.exists('/home/ubuntu/logs'):
         run('mkdir /home/ubuntu/logs')
-        sudo('chown ubuntu:www-data -R /home/ubuntu/logs')

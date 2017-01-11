@@ -7,7 +7,7 @@ chmod-socket = 660
 chown-socket = {{ user }}:{{ group }}
 die-on-term = true
 gid = {{ user }}
-logto = {{ log_path }}
+; logto = {{ log_path }}
 master = true
 module = wsgi
 plugins = python
@@ -34,7 +34,6 @@ virtualenv = {{ virtualenv_path }}
 
     </app>
     <master/>
-    <processes>4</processes>
     <harakiri>60</harakiri>
     <reload-mercy>8</reload-mercy>
     <cpu-affinity>1</cpu-affinity>
@@ -44,5 +43,4 @@ virtualenv = {{ virtualenv_path }}
     <reload-on-as>256</reload-on-as>
     <reload-on-rss>192</reload-on-rss>
     <no-orphans/>
-    <vacuum/>
 #}

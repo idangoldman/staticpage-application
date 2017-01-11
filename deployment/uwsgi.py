@@ -18,7 +18,7 @@ def update_conf_file():
         'destination': '/etc/uwsgi/apps-available/staticpage.ini',
         'template_dir': 'deployment/templates',
         'context': {
-            'log_path': '/home/ubuntu/logs/uwsgi/%n.log',
+            # 'log_path': '/home/ubuntu/logs/uwsgi.log',
             'socket_path': '/tmp/backend.sock',
             'user': 'ubuntu',
             'group': 'www-data',
@@ -33,13 +33,11 @@ def update_conf_file():
     files.upload_template( **kwargs )
 
 
-@task
-def create_logs_folder():
-    if not files.exists('/home/ubuntu/logs/uwsgi'):
-        # run('touch /home/ubuntu/logs/uwsgi.log')
-        run('mkdir /home/ubuntu/logs/uwsgi')
-        sudo('chown ubuntu:www-data /home/ubuntu/logs/uwsgi')
-
+# @task
+# def create_logs_folder():
+#     if not files.exists('/home/ubuntu/logs/uwsgi.log'):
+#         run('touch /home/ubuntu/logs/uwsgi.log')
+#         sudo('chown ubuntu:www-data -R /home/ubuntu/logs/uwsgi.log')
 
 
 @task
