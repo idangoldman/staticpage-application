@@ -74,11 +74,11 @@
         {% endif %}
 
         {% if is_intervention or content_sub_title %}
-            <h2 class="sub-title">{{ content_sub_title | nl2br }}</h2>
+            <h2 class="sub-title">{{ content_sub_title }}</h2>
         {% endif %}
 
         {% if is_intervention or content_description %}
-            <p class="description">{{ content_description | nl2br }}</p>
+            <p class="description">{{ content_description }}</p>
         {% endif %}
     </article>
 {% endblock %}

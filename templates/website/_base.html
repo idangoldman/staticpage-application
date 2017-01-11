@@ -71,15 +71,15 @@
                 {% endif %}
 
                 {% if page.content_title %}
-                    <h1 class="title">{{ page.content_title | safe }}</h1>
+                    <h1 class="title">{{ page.content_title }}</h1>
                 {% endif %}
 
                 {% if page.content_sub_title %}
-                    <h2 class="sub-title">{{ page.content_sub_title | nl2br }}</h2>
+                    <h2 class="sub-title">{{ page.content_sub_title }}</h2>
                 {% endif %}
 
                 {% if page.content_description %}
-                    <p class="description">{{ page.content_description | nl2br }}</p>
+                    <p class="description">{{ page.content_description }}</p>
                 {% endif %}
             </article>
         {% endblock %}
