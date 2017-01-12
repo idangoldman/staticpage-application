@@ -4,7 +4,7 @@ from fabric.contrib import files
 
 @task
 def setup():
-    create_logs_folder()
+    # create_logs_folder()
     if not files.is_link('/etc/uwsgi/apps-enabled/staticpage.ini'):
         update_conf_file()
         sudo('ln -s /etc/uwsgi/apps-available/staticpage.ini /etc/uwsgi/apps-enabled')
