@@ -20,7 +20,7 @@ def create_ssh_key(overwrite = False):
         }
 
         with settings(prompts = prompts_dict):
-            run('ssh-keygen -t rsa -b 4096 -C "ubuntu@ubuntu.vagrant"')
+            run( 'ssh-keygen -t rsa -b 4096 -C "%(ssh_key_email)s"' % env )
 
         id_rsa_pub = run('cat /home/ubuntu/.ssh/id_rsa.pub')
         print '###'
@@ -33,19 +33,21 @@ def create_ssh_key(overwrite = False):
 
 @task
 def clone():
-    if not files.exists('/home/ubuntu/staticpage'):
+    if not files.exists( env.remote_folder ):
         prompts_dict = {
             'Are you sure you want to continue connecting (yes/no)? ': 'yes'
         }
-        with cd('/home/ubuntu'), settings(prompts = prompts_dict):
-            run('git clone %s' % 'git@github.com:idangoldman/staticpage.git')
-            sudo('chown ubuntu:www-data staticpage')
+
+        with cd( env.home_folder ), settings(prompts = prompts_dict):
+            run( 'git clone %(repository)s' % env )
+
+        sudo('chown %(user)s:%(user_group)s %(remote_folder)s' % env )
 
 
 @task
 def update():
-    with cd('/home/ubuntu/staticpage'):
-        run('git checkout master')
+    with cd( env.remote_folder ):
+        run( 'git checkout %(branch)s' % env )
         run('git pull')
 
 

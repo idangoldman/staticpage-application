@@ -4,7 +4,7 @@ from fabric.contrib import files
 
 @task
 def setup():
-    with cd('/home/ubuntu/staticpage'):
+    with cd( env.remote_folder ):
         if not files.exists('venv'):
             run('virtualenv venv')
         if not files.exists('flask_env'):

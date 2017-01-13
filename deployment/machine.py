@@ -25,9 +25,10 @@ def update_and_upgrade():
 
 @task
 def set_hostname():
-    sudo('echo "staticpage.vagrant" > /etc/hostname')
+    sudo( 'echo "%(domain)s" > /etc/hostname' % env )
     sudo('hostname -F /etc/hostname')
-    files.append('/etc/hosts', '127.0.0.1 staticpage.vagrant', use_sudo=True, escape=True)
+    host = env.domain_ip + ' ' + env.domain
+    files.append( '/etc/hosts', host, use_sudo=True, escape=True )
 
 
 @task
@@ -46,7 +47,8 @@ def install_packages():
             'python',
             'software-properties-common',
             'uwsgi',
-            'uwsgi-plugin-python'
+            'uwsgi-plugin-python',
+            'vim'
         ]),
         'pip': ' '.join([
             'pip',
@@ -60,5 +62,5 @@ def install_packages():
 
 @task
 def create_logs_folder():
-    if not files.exists('/home/ubuntu/logs'):
-        run('mkdir /home/ubuntu/logs')
+    if not files.exists( env.logs_folder ):
+        run( 'mkdir %(logs_folder)s' % env )

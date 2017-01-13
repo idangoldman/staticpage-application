@@ -9,12 +9,12 @@ def setup():
 
 @task
 def create_static_folder():
-    if not files.exists('/home/ubuntu/staticpage/static'):
-        run('mkdir /home/ubuntu/staticpage/static')
-        sudo('chown ubuntu:www-data /home/ubuntu/staticpage/static')
+    if not files.exists( env.static_folder ):
+        run( 'mkdir %(static_folder)s' % env )
+        sudo( 'chown %(user)s:%(user_group)s %(static_folder)s' % env )
 
 
 @task
 def deploy():
     local('gulp build --dist')
-    put('dist/*', '/home/ubuntu/staticpage/static')
+    put( 'dist/*', env.static_folder )

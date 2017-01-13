@@ -26,4 +26,15 @@
             margin-right: 0;
         }
     }
+
+    .link {
+        min-width: 0;
+
+
+        .title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
 }

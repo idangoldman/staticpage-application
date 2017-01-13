@@ -17,7 +17,7 @@
                 <svg class="icon">
                     <use class="use" xlink:href="#preview"></use>
                 </svg>
-                <span class="title">Page {{ 'Preview' if on_phone }}</span>
+                <span class="title">{{ site_name }}</span>
             </a>
 
             <a href="/mobile" class="device {{ 'none' if on_phone }}">
@@ -71,7 +71,7 @@
         <button class="download none" type="button">Download</button>
 
         <footer class="footer">
-            version 0.0.1 / <a href={{ url_for('auth.logout') }} target="_parent">logout</a>.
+            version 1.0.1 / <a href={{ url_for('auth.logout') }} target="_parent">logout</a>.
         </footer>
     </section>
 
