@@ -5,9 +5,9 @@ from fabric.contrib import files
 @task
 def setup():
     # create_logs_folder()
-    if not files.is_link('/etc/uwsgi/apps-enabled/staticpage.ini'):
+    if not files.is_link('/etc/uwsgi/apps-enabled/%(product_name)s.ini' % env):
         update_conf_file()
-        sudo('ln -s /etc/uwsgi/apps-available/staticpage.ini /etc/uwsgi/apps-enabled')
+        sudo('ln -s /etc/uwsgi/apps-available/%(product_name)s.ini /etc/uwsgi/apps-enabled' % env)
         sudo('service uwsgi restart')
 
 
@@ -15,15 +15,15 @@ def setup():
 def update_conf_file():
     kwargs = {
         'filename': 'uwsgi.jnj',
-        'destination': '/etc/uwsgi/apps-available/staticpage.ini',
+        'destination': '/etc/uwsgi/apps-available/%(product_name)s.ini' % env,
         'template_dir': 'deployment/templates',
         'context': {
             # 'log_path': '/home/ubuntu/logs/uwsgi.log',
             'socket_path': '/tmp/backend.sock',
-            'user': 'ubuntu',
-            'group': 'www-data',
-            'virtualenv_path': '/home/ubuntu/staticpage/venv',
-            'www_path': '/home/ubuntu/staticpage'
+            'user': env.user,
+            'group': env.user_group,
+            'virtualenv_path': env.remote_folder + '/venv',
+            'www_path': env.remote_folder
         },
         'use_jinja': True,
         'use_sudo': True,

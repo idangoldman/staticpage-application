@@ -6,9 +6,9 @@ from fabric.contrib import files
 def setup():
     if files.exists('rm -f /etc/nginx/sites-enabled/default'):
         sudo('rm -f /etc/nginx/sites-enabled/default')
-    if not files.is_link('/etc/nginx/sites-enabled/staticpage'):
+    if not files.is_link('/etc/nginx/sites-enabled/%(product_name)s' % env):
         update_conf_file()
-        sudo('ln -s /etc/nginx/sites-available/staticpage /etc/nginx/sites-enabled')
+        sudo('ln -s /etc/nginx/sites-available/%(product_name)s /etc/nginx/sites-enabled' % env)
         restart()
 
 
@@ -16,14 +16,14 @@ def setup():
 def update_conf_file():
     kwargs = {
         'filename': 'nginx.jnj',
-        'destination': '/etc/nginx/sites-available/staticpage',
+        'destination': '/etc/nginx/sites-available/' + env.product_name,
         'template_dir': 'deployment/templates',
         'context': {
-            'access_log_path': '/home/ubuntu/logs/nginx_access',
-            'domain': 'staticpage.vagrant',
-            'error_log_path': '/home/ubuntu/logs/nginx_error',
+            'access_log_path': env.logs_folder + '/nginx_access',
+            'domain': env.domain,
+            'error_log_path': env.logs_folder + '/nginx_error',
             'socket_path': '/tmp/backend.sock',
-            'www_path': '/home/ubuntu/staticpage'
+            'www_path': env.remote_folder
         },
         'use_jinja': True,
         'use_sudo': True,

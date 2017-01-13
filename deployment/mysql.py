@@ -37,7 +37,7 @@ def create_db():
 
 @task
 def migrate():
-    with cd('/home/ubuntu/staticpage'), prefix('source venv/bin/activate'):
+    with cd( env.remote_folder ), prefix('source venv/bin/activate'):
         run('python manage.py db upgrade')
 
 
