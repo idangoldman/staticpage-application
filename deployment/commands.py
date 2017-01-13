@@ -1,6 +1,6 @@
 from fabric.api import *
 
-from deployment import machine, nginx, uwsgi, git, virtualenv, mysql, frontend
+from deployment import machine, nginx, uwsgi, git, virtualenv, mysql, frontend, uploads_folder_backup
 
 
 @task
@@ -26,3 +26,4 @@ def deploy():
 @task
 def backup():
     mysql.backup()
+    uploads_folder_backup()
