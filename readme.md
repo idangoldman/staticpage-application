@@ -40,10 +40,10 @@
 `fab production deploy`
 
 ### Steps of setup
-- Copy and paste ssh key to github repo
-- Generate Mysql password for root and enter it couple of times
-- Edit flask_env file
-- Run `sudo service uwsgi restart`
+- Copy and paste ssh key to github repo.
+- Generate Mysql password for root and enter it couple of times.
+- Edit `flask_env` file.
+- Run `sudo service uwsgi restart`.
 
 
 ## Manager Commands
