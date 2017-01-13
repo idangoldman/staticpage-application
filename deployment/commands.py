@@ -21,3 +21,8 @@ def deploy():
     git.deploy()
     uwsgi.restart()
     mysql.migrate()
+
+
+@task
+def backup():
+    mysql.backup()

@@ -38,7 +38,7 @@ def clone():
             'Are you sure you want to continue connecting (yes/no)? ': 'yes'
         }
 
-        with cd( env.remote_home_folder ), settings(prompts = prompts_dict):
+        with cd( env.home_folder ), settings(prompts = prompts_dict):
             run( 'git clone %(git_repo)s' % env )
 
         sudo('chown %(user)s:%(user_group)s %(remote_folder)s' % env )

@@ -6,7 +6,7 @@ from fabric.contrib import files
 def setup():
     install()
     secure_installation()
-    create_db()
+    create()
     restart()
 
 
@@ -31,9 +31,20 @@ def secure_installation():
 
 
 @task
-def create_db():
-    run('mysql -u root -p -e "CREATE DATABASE staticpage;"')
+def create():
+    run( 'mysql -u %(db_user)s -p -e "CREATE DATABASE %(db_name)s;"' % env )
 
+@task
+def backup():
+    with cd( env.home_folder ):
+        remote_file = '/'.join([ env.home_folder, 'dump.sql.gz' ])
+        local_file = '/'.join([ env.local_folder, 'backups', env.name, env.timestamp, 'dump.sql.gz' ])
+
+        run( 'mysqldump -u %(db_user)s -p %(db_name)s > dump.sql' % env )
+        # gzip --decompress filename
+        run( 'gzip --best dump.sql' )
+        get( remote_file, local_file )
+        run('rm -f dump.sql.gz')
 
 @task
 def migrate():

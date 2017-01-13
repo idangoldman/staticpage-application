@@ -30,4 +30,8 @@ server {
     # location /static {
     #     alias {{ www_path }}/static;
     # }
+
+    # location /uploads {
+    #     alias {{ www_path }}/uploads;
+    # }
 }
