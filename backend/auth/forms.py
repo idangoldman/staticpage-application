@@ -22,7 +22,7 @@ class RegisterForm(FlaskForm):
                             Length( 3,64 ), \
                             unique_site_name ] )
     email = StringField('Email', validators=[ Required(), Length(1,64), Email(), unique_email ])
-    password = PasswordField('Password', validators=[ Required(), Length(8) ])
+    password = PasswordField('Password', validators=[ Required(), Length(3) ])
     submit = SubmitField('Register')
 
 
