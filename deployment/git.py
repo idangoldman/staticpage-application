@@ -39,7 +39,7 @@ def clone():
         }
 
         with cd( env.home_folder ), settings(prompts = prompts_dict):
-            run( 'git clone %(git_repo)s' % env )
+            run( 'git clone %(repository)s' % env )
 
         sudo('chown %(user)s:%(user_group)s %(remote_folder)s' % env )
 
@@ -47,7 +47,7 @@ def clone():
 @task
 def update():
     with cd( env.remote_folder ):
-        run('git checkout master')
+        run( 'git checkout %(branch)s' % env )
         run('git pull')
 
 

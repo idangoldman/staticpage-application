@@ -14,7 +14,7 @@ def config():
     env.db_user = 'root'
 
     env.branch = 'master'
-    env.git_repo = 'git@github.com:idangoldman/staticpage.git'
+    env.repository = 'git@github.com:idangoldman/staticpage.git'
 
     env.local_folder = '~/Documents/' + env.product_name
     env.remote_folder = '/home/ubuntu/staticpage'
