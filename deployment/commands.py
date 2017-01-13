@@ -17,6 +17,7 @@ def setup():
 
 @task
 def deploy():
+    backup()
     frontend.deploy()
     git.deploy()
     uwsgi.restart()
