@@ -125,7 +125,7 @@ function handleFontFamily( { value } ) {
 
     if ( googleFonts.indexOf( fontFamily ) !== -1 ) {
         fontFamily = fontFamily.split(' ').join('+');
-        css( '@import url("http://fonts.googleapis.com/css?family=' + fontFamily + ':400,600,700,800&subset=latin");' );
+        css( '@import url("//fonts.googleapis.com/css?family=' + fontFamily + ':400,600,700,800&subset=latin");' );
     }
 
     css( 'body, button, input, select, textarea', 'fontFamily', value );

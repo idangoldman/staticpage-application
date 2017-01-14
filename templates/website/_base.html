@@ -18,7 +18,7 @@
                 {% set font_family = page.design_font_family.split(', ')[0] %}
                 {% if font_family is equalto google_font %}
                     {% set font_family = font_family.split(' ') %}
-                    @import url("http://fonts.googleapis.com/css?family={{ font_family | join('+') }}:400,600,700,800&subset=latin");
+                    @import url("//fonts.googleapis.com/css?family={{ font_family | join('+') }}:400,600,700,800&subset=latin");
                 {% endif %}
             {% endfor %}
         {% endif %}

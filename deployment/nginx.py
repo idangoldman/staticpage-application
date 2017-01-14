@@ -7,13 +7,26 @@ def setup():
     if files.exists('rm -f /etc/nginx/sites-enabled/default'):
         sudo('rm -f /etc/nginx/sites-enabled/default')
     if not files.is_link('/etc/nginx/sites-enabled/%(product_name)s' % env):
-        update_conf_file()
+        update_gzip_file()
+        update_site_file()
         sudo('ln -s /etc/nginx/sites-available/%(product_name)s /etc/nginx/sites-enabled' % env)
         restart()
 
 
 @task
-def update_conf_file():
+def update_gzip_file():
+    kwargs = {
+        'filename': 'gzip.jnj',
+        'destination': '/etc/nginx/snippets/gzip.conf',
+        'template_dir': 'deployment/templates',
+        'use_sudo': True,
+        'backup': False
+    }
+
+    files.upload_template( **kwargs )
+
+@task
+def update_site_file():
     kwargs = {
         'filename': 'nginx.jnj',
         'destination': '/etc/nginx/sites-available/' + env.product_name,
@@ -45,3 +58,6 @@ def stop():
 @task
 def status():
     sudo('service nginx status')
+@task
+def test():
+    sudo('nginx -t')

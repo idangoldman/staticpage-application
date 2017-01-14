@@ -47,8 +47,8 @@ def clone():
 @task
 def update():
     with cd( env.remote_folder ):
-        run( 'git checkout %(branch)s' % env )
         run('git pull')
+        run('git checkout %(branch)s' % env)
 
 
 @task

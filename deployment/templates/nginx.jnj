@@ -1,12 +1,43 @@
 server {
-    server_tokens off;
-
     listen 80;
     server_name {{ domain }} www.{{ domain }};
     root {{ www_path }};
 
+    # location ~ /.well-known/acme-challenge {
+    #     default_type 'text/plain';
+    #     root {{ www_path }}/.well-known/acme-challenge;
+    #     allow all;
+    # }
+
+    location ~ /.well-known {
+        allow all;
+    }
+
+    location / {
+        return 301 https://{{ domain }}$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name www.{{ domain }};
+    return 301 https://{{ domain }}$request_uri;
+}
+
+server {
+    charset utf-8;
+
+    server_tokens off;
+
+    listen 443 ssl default_server;
+    server_name {{ domain }};
+    root {{ www_path }};
+
     access_log {{ access_log_path }};
     error_log {{ error_log_path }};
+
+    include snippets/gzip.conf;
+    include snippets/ssl.conf;
 
     location / { try_files $uri @flask_app; }
     location @flask_app {
@@ -15,16 +46,17 @@ server {
         uwsgi_param UWSGI_SCHEME $scheme;
         uwsgi_param SERVER_SOFTWARE nginx/$nginx_version;
 
-        proxy_buffers 8 64k;
         proxy_buffer_size 128k;
-        proxy_temp_file_write_size 10M;
-        proxy_max_temp_file_size 10M;
         proxy_buffering on;
-
-        # proxy_set_header X-Real-IP $remote_addr;
-        # proxy_set_header HOST $http_host;
-        # proxy_set_header X-NginX-Proxy true;
-        # proxy_redirect off;
+        proxy_buffers 8 64k;
+        proxy_max_temp_file_size 10M;
+        proxy_redirect off;
+        proxy_pass_header X-Transmission-Session-Id;
+        proxy_set_header HOST $http_host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-NginX-Proxy true;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_temp_file_write_size 10M;
     }
 
     # location /static {

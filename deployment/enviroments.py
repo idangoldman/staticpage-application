@@ -4,7 +4,9 @@ from fabric.api import *
 
 def config():
     env.timestamp = datetime.now().strftime('%Y.%m.%d %H:%M')
+    env.company_name = 'StaticPage'
     env.product_name = 'staticpage'
+    env.email = 'root@staticpage.info'
 
     env.use_ssh_config = True
     env.user = 'ubuntu'
@@ -29,8 +31,12 @@ def staging():
     env.name = 'staging'
     env.hosts = ['vagrant_ubuntu']
     env.ssh_key_email = 'ubuntu@ubuntu.vagrant'
+
     env.domain = 'staticpage.vagrant'
     env.domain_ip = '127.0.0.1'
+
+    env.ssl_crt_path = '/etc/ssl/certs/nginx-selfsigned.crt'
+    env.ssl_key_path = '/etc/ssl/private/nginx-selfsigned.key'
 
 
 @task
@@ -39,5 +45,9 @@ def production():
     env.name = 'production'
     env.hosts = ['linode']
     env.ssh_key_email = 'ubuntu@ubuntu.linode'
+
     env.domain = 'staticpage.info'
     env.domain_ip = '139.162.173.136'
+
+    env.ssl_crt_path = '/etc/letsencrypt/live/' + env.domain + '/fullchain.pem'
+    env.ssl_key_path = '/etc/letsencrypt/live/' + env.domain + '/privkey.pem'
