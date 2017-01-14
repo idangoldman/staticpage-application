@@ -20,7 +20,15 @@ if __name__ == '__main__':
     manager = Manager( app )
     migrate = Migrate( app, db )
 
+    server_options = {
+        'host': '0.0.0.0',
+        'port': 5000,
+        # 'ssl_crt': './server.crt',
+        # 'ssl_key': './server.key'
+        # 'ssl_context': ('./server.crt', './server.key')
+    }
+
     manager.add_command( 'db', MigrateCommand )
-    manager.add_command( 'runserver', Server( host = '0.0.0.0', port = 5000 ) )
+    manager.add_command( 'runserver', Server( **server_options ) )
 
     manager.run()
