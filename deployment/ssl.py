@@ -4,13 +4,14 @@ from fabric.contrib import files
 
 @task
 def setup():
+    sudo('openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048')
+    update_conf_file()
+
     if env.name == 'staging':
         fake_certificate()
     elif env.name == 'production':
         real_certificate()
 
-    sudo('openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048')
-    update_conf_file()
 
 
 def fake_certificate():
@@ -27,9 +28,12 @@ def fake_certificate():
     with settings( prompts = prompts_dict ):
         sudo( 'openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout %(ssl_key_path)s -out %(ssl_crt_path)s' % env )
 
-
+@task
 def real_certificate():
-    print "not created yet."
+    # print "not created yet."
+    sudo( 'letsencrypt certonly -a webroot --webroot-path=%(remote_folder)s -d %(domain)s -d www.%(domain)s' % env )
+
+
 
 
 @task

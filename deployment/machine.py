@@ -37,6 +37,7 @@ def install_packages():
         'ubuntu': ' '.join([
             'build-essential',
             'git',
+            'letsencrypt',
             'libffi-dev',
             'libmysqlclient-dev',
             'libssl-dev',

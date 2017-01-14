@@ -6,8 +6,8 @@ from deployment import machine, ssl, nginx, uwsgi, git, virtualenv, mysql, front
 @task
 def setup():
     machine.setup()
-    ssl.setup()
     nginx.setup()
+    ssl.setup()
     git.setup()
     virtualenv.setup()
     uwsgi.setup()

@@ -1,7 +1,21 @@
 server {
     listen 80;
     server_name {{ domain }} www.{{ domain }};
-    return 301 https://{{ domain }}$request_uri;
+    root {{ www_path }};
+
+    # location ~ /.well-known/acme-challenge {
+    #     default_type 'text/plain';
+    #     root {{ www_path }}/.well-known/acme-challenge;
+    #     allow all;
+    # }
+
+    location ~ /.well-known {
+        allow all;
+    }
+
+    location / {
+        return 301 https://{{ domain }}$request_uri;
+    }
 }
 
 server {
@@ -35,7 +49,9 @@ server {
         proxy_buffers 8 64k;
         proxy_max_temp_file_size 10M;
         proxy_redirect off;
+        proxy_pass_header X-Transmission-Session-Id;
         proxy_set_header HOST $http_host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-NginX-Proxy true;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_temp_file_write_size 10M;

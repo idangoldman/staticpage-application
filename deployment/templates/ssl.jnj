@@ -1,3 +1,4 @@
+# https://www.ssllabs.com/ssltest/analyze.html?d=staticpage.info
 ssl_certificate {{ ssl_crt_path }};
 ssl_certificate_key {{ ssl_key_path }};
 ssl_dhparam /etc/ssl/certs/dhparam.pem;

@@ -49,5 +49,5 @@ def production():
     env.domain = 'staticpage.info'
     env.domain_ip = '139.162.173.136'
 
-    env.ssl_crt_path = ''
-    env.ssl_key_path = ''
+    env.ssl_crt_path = '/etc/letsencrypt/live/' + env.domain + '/fullchain.pem'
+    env.ssl_key_path = '/etc/letsencrypt/live/' + env.domain + '/privkey.pem'
