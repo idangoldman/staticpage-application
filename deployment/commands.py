@@ -1,11 +1,12 @@
 from fabric.api import *
 
-from deployment import machine, nginx, uwsgi, git, virtualenv, mysql, frontend, uploads_folder_backup
+from deployment import machine, ssl, nginx, uwsgi, git, virtualenv, mysql, frontend, uploads_folder_backup
 
 
 @task
 def setup():
     machine.setup()
+    ssl.setup()
     nginx.setup()
     git.setup()
     virtualenv.setup()
