@@ -58,3 +58,6 @@ def stop():
 @task
 def status():
     sudo('service nginx status')
+@task
+def test():
+    sudo('nginx -t')
