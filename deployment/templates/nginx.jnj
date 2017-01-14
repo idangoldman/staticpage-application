@@ -1,5 +1,4 @@
 include snippets/gzip.conf;
-include snippets/ssl.conf;
 
 server {
     listen 80 default_server;
@@ -26,6 +25,8 @@ server {
 
     access_log {{ access_log_path }};
     error_log {{ error_log_path }};
+
+    include snippets/ssl.conf;
 
     location / { try_files $uri @flask_app; }
     location @flask_app {
