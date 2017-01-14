@@ -10,6 +10,7 @@ def setup():
         real_certificate()
 
     sudo('openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048')
+    update_conf_file()
 
 
 def fake_certificate():
@@ -29,3 +30,21 @@ def fake_certificate():
 
 def real_certificate():
     print "not created yet."
+
+
+@task
+def update_conf_file():
+    kwargs = {
+        'filename': 'ssl.jnj',
+        'destination': '/etc/nginx/snippets/ssl.conf',
+        'template_dir': 'deployment/templates',
+        'context': {
+            'ssl_crt_path': env.ssl_crt_path
+            'ssl_key_path': env.ssl_key_path
+        },
+        'use_jinja': True,
+        'use_sudo': True,
+        'backup': False
+    }
+
+    files.upload_template( **kwargs )
