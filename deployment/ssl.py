@@ -10,8 +10,7 @@ def setup():
     if env.name == 'staging':
         fake_certificate()
     elif env.name == 'production':
-        real_certificate()
-
+        letsencrypt()
 
 
 def fake_certificate():
@@ -28,12 +27,10 @@ def fake_certificate():
     with settings( prompts = prompts_dict ):
         sudo( 'openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout %(ssl_key_path)s -out %(ssl_crt_path)s' % env )
 
-@task
-def real_certificate():
+
+def letsencrypt():
     # print "not created yet."
     sudo( 'letsencrypt certonly -a webroot --webroot-path=%(remote_folder)s -d %(domain)s -d www.%(domain)s' % env )
-
-
 
 
 @task

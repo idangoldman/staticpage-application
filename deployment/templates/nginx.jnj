@@ -25,6 +25,8 @@ server {
 }
 
 server {
+    charset utf-8;
+
     server_tokens off;
 
     listen 443 ssl default_server;

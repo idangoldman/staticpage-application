@@ -44,6 +44,7 @@
 - Generate Mysql password for root and enter it couple of times.
 - Edit `flask_env` file.
 - Run `sudo service uwsgi restart`.
+- SSL should be done by hand for now.
 
 
 ## Manager Commands
