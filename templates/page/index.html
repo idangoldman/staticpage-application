@@ -86,6 +86,11 @@
 {% block footer %}
     {{ super() }}
 
+    {% if google_analytics_code %}
+        {% from 'macros/3rd-party.html' import google_analytics %}
+        {{ google_analytics( google_analytics_code ) }}
+    {% endif %}
+
     {% if is_intervention %}
         <script src="{{ url_for('static', filename='page-intervention.js') }}"></script>
     {% endif %}
