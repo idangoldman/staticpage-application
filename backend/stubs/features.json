@@ -178,6 +178,22 @@
         ]
     },
     {
+        "name": "google-analytics",
+        "title": "Google Analytics",
+        "fields": [
+            {
+                "id": "google_analytics_code",
+                "name": "code",
+                "title": "Code",
+                "type": "text",
+                "placeholder": "UA-12345-1",
+                "validation": {
+                    "ua_code": "Not valid Google Analytics code"
+                }
+            }
+        ]
+    },
+    {
         "name": "search-results",
         "title": "Search Results",
         "fields": [

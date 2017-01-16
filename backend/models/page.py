@@ -10,7 +10,6 @@ class Page(db.Model):
     id = db.Column('id', db.Integer, primary_key=True, index=True)
     user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column('created_at', db.DateTime(), default=datetime.utcnow)
-    updated_at = db.Column('updated_at', db.DateTime(), default=datetime.utcnow)
 
     file_type = db.Column('file_type', db.String(16), nullable=False, default='welcome')
     file_name = db.Column('file_name', db.String(128), default='index')
@@ -31,6 +30,8 @@ class Page(db.Model):
 
     search_results_title = db.Column('search_results_title', db.Text())
     search_results_description = db.Column('search_results_description', db.Text())
+
+    google_analytics_code = db.Column('google_analytics_code', db.String(24))
 
 
     def with_features(self):
