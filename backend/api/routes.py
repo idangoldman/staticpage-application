@@ -9,7 +9,7 @@ from backend.models.page import Page
 
 @api.route('/download/<site_name>', methods=['GET'])
 def download(site_name):
-    return jsonify( { 'status': 'ok', 'data': site_name } )
+    return jsonify( { 'status': 'ok', 'data': { 'site_name': site_name } } )
 
 @api.route('/page/update/<int:id>', methods=['POST'])
 def page(id):

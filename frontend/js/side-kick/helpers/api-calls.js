@@ -9,18 +9,18 @@ var apiCalls = component( function() {
         setCsrfHeader();
 
         this.on( document, 'updateField', this.updateField );
-        this.on( document, 'startDownload', this.startDownload );
+        this.on( document, 'siteDownload', this.siteDownload );
     });
 
-    this.startDownload = function( event, data ) {
+    this.siteDownload = function( event, data ) {
         $.ajax({
             url: SITE_DOWNLOAD_URL,
             type: 'GET',
             success: function requestSuccess( response ) {
-                this.trigger( document, 'finishDownload_success', response.data );
+                this.trigger( document, 'siteDownload_success', response.data );
             }.bind(this),
             error: function requestError( jqXHR, textStatus, errorThrown ) {
-                this.trigger( document, 'finishDownload_error', jqXHR.responseJSON );
+                this.trigger( document, 'siteDownload_error', jqXHR.responseJSON );
             }.bind(this)
         });
     };

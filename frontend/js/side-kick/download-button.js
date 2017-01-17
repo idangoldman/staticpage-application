@@ -11,8 +11,8 @@ var downloadButton = component( withState, function() {
 
     this.after('initialize', function() {
         this.on( 'click', this.siteDownload.bind( this ) );
-        this.on( document, 'siteDownload_success', this.siteDownload.bind( this ) );
-        this.on( document, 'siteDownload_error', this.siteDownload.bind( this ) );
+        this.on( document, 'siteDownload_success', this.siteDownloadSuccess.bind( this ) );
+        // this.on( document, 'siteDownload_error', this.siteDownloadError.bind( this ) );
     });
 
     this.siteDownload = function( event ) {
@@ -24,10 +24,10 @@ var downloadButton = component( withState, function() {
         event.preventDefault();
     };
 
-    this.siteDownload = function( event, data ) {
+    this.siteDownloadSuccess = function( event, data ) {
         console.log( 'download games are done! :)', data );
-        this.mergeState({ disabled: false })
-    }
+        this.mergeState({ disabled: false });
+    };
 });
 
 downloadButton.attachTo( '.download-button' );
