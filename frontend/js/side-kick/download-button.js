@@ -10,22 +10,22 @@ var downloadButton = component( withState, function() {
     });
 
     this.after('initialize', function() {
-        this.on( 'click', this.startDownload.bind() );
-        this.on( document, 'finishDownload', this.finishDownload.bind() );
+        this.on( 'click', this.siteDownload.bind( this ) );
+        this.on( document, 'siteDownload_success', this.siteDownload.bind( this ) );
+        this.on( document, 'siteDownload_error', this.siteDownload.bind( this ) );
     });
 
-    this.startDownload = function( event ) {
-        if ( !! this.state.disabled ) {
+    this.siteDownload = function( event ) {
+        if ( ! this.state.disabled ) {
             this.mergeState({ disabled: true });
-            console.log('Let the download games begin! :)');
-            this.trigger( document, 'startDownload', {} );
+            this.trigger( document, 'siteDownload', {} );
         }
 
         event.preventDefault();
     };
 
-    this.finishDownload = function() {
-        console.log('download games are done! :)');
+    this.siteDownload = function( event, data ) {
+        console.log( 'download games are done! :)', data );
         this.mergeState({ disabled: false })
     }
 });

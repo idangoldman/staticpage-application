@@ -2,7 +2,7 @@ import $ from 'jquery';
 import { component, utils } from 'imports?$=jquery!flightjs';
 
 const PAGE_UPDATE_URL = window.page_update_url;
-const PAGE_DOWNLOAD_URL = window.page_download_url;
+const SITE_DOWNLOAD_URL = window.site_download_url;
 
 var apiCalls = component( function() {
     this.after('initialize', function() {
@@ -13,7 +13,16 @@ var apiCalls = component( function() {
     });
 
     this.startDownload = function( event, data ) {
-        console.log('startDownload event', data );
+        $.ajax({
+            url: SITE_DOWNLOAD_URL,
+            type: 'GET',
+            success: function requestSuccess( response ) {
+                this.trigger( document, 'finishDownload_success', response.data );
+            }.bind(this),
+            error: function requestError( jqXHR, textStatus, errorThrown ) {
+                this.trigger( document, 'finishDownload_error', jqXHR.responseJSON );
+            }.bind(this)
+        });
     };
 
     this.updateField = function( event, field ) {
