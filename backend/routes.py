@@ -64,6 +64,7 @@ def side_kick( page_id ):
         'is_email_confirmed': current_user.email_confirmed,
         'on_phone': is_phone( request.user_agent ),
         'page_api_url': current_app.config['API_URL'] + '/page/' + str( page_id ),
+        'page_id': page_id,
         'site_name': current_user.site_name,
         'svg_sprite': svg_sprite,
         'user_id': current_user.id

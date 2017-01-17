@@ -7,6 +7,9 @@ from backend.helpers.folder_maker import user_folder_path
 from backend.helpers.upload_file import upload_file
 from backend.models.page import Page
 
+@api.route('/page/download/<int:id>', methods=['POST'])
+def download(id):
+    return jsonify( { 'status': 'ok', 'data': request.get_json() } )
 
 @api.route('/page/<int:id>', methods=['POST'])
 def page(id):

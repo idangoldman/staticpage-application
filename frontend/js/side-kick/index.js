@@ -8,3 +8,4 @@ import 'side-kick/features/content';
 import 'side-kick/features/design';
 import 'side-kick/features/google-analytics';
 import 'side-kick/features/search-results';
+import 'side-kick/download-button';
