@@ -11,7 +11,7 @@ from backend.models.page import Page
 def download(id):
     return jsonify( { 'status': 'ok', 'data': request.get_json() } )
 
-@api.route('/page/<int:id>', methods=['POST'])
+@api.route('/page/update/<int:id>', methods=['POST'])
 def page(id):
     # if page.creator != g.current_user \
     #         and not g.current_user.is_admin:

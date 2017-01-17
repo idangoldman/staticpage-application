@@ -62,9 +62,11 @@ def side_kick( page_id ):
     payload = {
         'features': page_with_features,
         'is_email_confirmed': current_user.email_confirmed,
-        'on_phone': is_phone( request.user_agent ),
+        'on_phone': is_phone( request.user_agent )
         'page_api_url': current_app.config['API_URL'] + '/page/' + str( page_id ),
+        'page_download_url': current_app.config['API_URL'] + '/page/download/' + str(page_id),
         'page_id': page_id,
+        'page_update_url': current_app.config['API_URL'] + '/page/update/' + str(page_id),
         'site_name': current_user.site_name,
         'svg_sprite': svg_sprite,
         'user_id': current_user.id
