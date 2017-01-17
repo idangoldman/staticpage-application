@@ -61,3 +61,5 @@
 `pip freeze > requirements.txt`
 
 `pip-autoremove -y somepackage`
+
+`pip install -r requirements.txt --upgrade`
