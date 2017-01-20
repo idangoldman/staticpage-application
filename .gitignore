@@ -13,3 +13,4 @@ uploads/
 *.swp
 dist/
 backups/
+user_data/
