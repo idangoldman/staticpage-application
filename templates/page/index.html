@@ -13,7 +13,7 @@
                 {% set font_family = design_font_family.split(', ')[0] %}
                 {% if font_family is equalto google_font %}
                     {% set font_family = font_family.split(' ') %}
-                    @import url("//fonts.googleapis.com/css?family={{ font_family | join('+') }}:400,600,700,800&subset=latin");
+        @import url("//fonts.googleapis.com/css?family={{ font_family | join('+') }}:400,600,700,800&subset=latin");
                 {% endif %}
             {% endfor %}
         {% endif %}
@@ -33,7 +33,7 @@
             background-size: {{ 'cover' if design_background_repeat == 'no-repeat' else 'auto' }};
 
             {% if design_background_image %}
-                background-image: url('{{ design_background_image }}');
+            background-image: url('{{ design_background_image }}');
             {% endif %}
         }
 
@@ -43,14 +43,14 @@
 
         .logo {
             {% if design_content_alignment == "left" %}
-                margin-left: 0;
-                margin-right: auto;
+            margin-left: 0;
+            margin-right: auto;
             {% elif design_content_alignment == "right" %}
-                margin-left: auto;
-                margin-right: 0;
+            margin-left: auto;
+            margin-right: 0;
             {% else %}
-                margin-left: auto;
-                margin-right: auto;
+            margin-left: auto;
+            margin-right: auto;
             {% endif %}
         }
     </style>
@@ -66,19 +66,19 @@
 {% block content %}
     <article class="content">
         {% if content_logo %}
-            <img class="logo" src="{{ content_logo }}" />
+        <img class="logo" src="{{ content_logo }}" />
         {% endif %}
 
         {% if is_intervention or content_title %}
-            <h1 class="title">{{ content_title }}</h1>
+        <h1 class="title">{{ content_title }}</h1>
         {% endif %}
 
         {% if is_intervention or content_sub_title %}
-            <h2 class="sub-title">{{ content_sub_title }}</h2>
+        <h2 class="sub-title">{{ content_sub_title }}</h2>
         {% endif %}
 
         {% if is_intervention or content_description %}
-            <p class="description">{{ content_description }}</p>
+        <p class="description">{{ content_description }}</p>
         {% endif %}
     </article>
 {% endblock %}

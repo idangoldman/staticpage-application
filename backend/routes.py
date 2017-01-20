@@ -84,6 +84,7 @@ def user_uploads( user_hash, timestamp, file_name ):
     return send_from_directory( upload_folder_path, file_name )
 
 
+<<<<<<< HEAD
 @current_app.errorhandler(401)
 def page_unauthorized(e):
     return render_template('website/_base.html', \
@@ -112,3 +113,10 @@ def page_internal_server_error(e):
 def page_service_unavailable(e):
     return render_template('website/_base.html', \
                             page=get_page_stub('errors/503')), 503
+
+                            
+@current_app.route('/uploads/<file_name>')
+def user_zip( file_name ):
+    upload_folder_path = path_builder( current_app.config['BASE_PATH'], \
+                                current_app.config['UPLOAD_FOLDER'] )
+    return send_from_directory( upload_folder_path, file_name )

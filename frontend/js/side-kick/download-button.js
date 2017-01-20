@@ -24,9 +24,11 @@ var downloadButton = component( withState, function() {
         event.preventDefault();
     };
 
-    this.siteDownloadSuccess = function( event, data ) {
-        console.log( 'download games are done! :)', data );
+    this.siteDownloadSuccess = function( event, { url } ) {
         this.mergeState({ disabled: false });
+        if ( !! url ) {
+            window.location = url;
+        }
     };
 });
 
