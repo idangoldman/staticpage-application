@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html><head>
+
+    <meta charset="UTF-8" />
+    <title>It's your friendly side-kick!</title>
+
+    <link href="{{ url_for('static', filename='side-kick.css') }}" rel="stylesheet" type="text/css" />
+
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+    {% block head %}{% endblock %}
+</head><body>
+    {{ svg_sprite | safe }}
+
+    <section class="side-kick">
+        {% block content %}
+        {% endblock %}
+
+        <footer class="footer">
+            version 1.3.0 / <a href={{ url_for('auth.logout') }} target="_parent">logout</a>.
+        </footer>
+    </section>
+
+    <script>var page_api_url = '{{ page_api_url }}';</script>
+    <script src="{{ url_for('static', filename='side-kick.js') }}"></script>
+
+    {% block footer %}{% endblock %}
+</body></html>
