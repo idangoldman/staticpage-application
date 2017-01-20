@@ -30,9 +30,6 @@ def create_app( config_name ):
     from backend.auth import auth as auth_blueprint
     app.register_blueprint( auth_blueprint )
 
-    from backend.root import root as root_blueprint
-    app.register_blueprint( root_blueprint )
-
     from backend.api import api as api_blueprint
     app.register_blueprint( api_blueprint )
 
