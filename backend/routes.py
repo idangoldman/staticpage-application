@@ -1,9 +1,17 @@
-from flask import render_template, current_app, json, jsonify, send_from_directory, request
+from flask import render_template, current_app, json, send_from_directory, request, redirect, url_for
 from flask_login import login_required, current_user
 
 from backend.helpers import path_builder, is_phone
 from backend.models.user import User
 from backend.models.page import Page
+
+
+@current_app.route('/')
+def index_route():
+    if current_user.is_authenticated:
+        return redirect( url_for('home') )
+    else:
+        return redirect( url_for('website.welcome') )
 
 
 @current_app.route('/page_intervention/<int:page_id>')
@@ -65,3 +73,33 @@ def user_uploads( user_hash, timestamp, file_name ):
                                 user_hash, \
                                 timestamp )
     return send_from_directory( upload_folder_path, file_name )
+
+
+@current_app.errorhandler(401)
+def page_unauthorized(e):
+    return render_template('website/_base.html', \
+                            page=get_page_stub('errors/401')), 401
+
+
+@current_app.errorhandler(403)
+def page_forbidden(e):
+    return render_template('website/_base.html', \
+                            page=get_page_stub('errors/403')), 403
+
+
+@current_app.errorhandler(404)
+def page_not_found(e):
+    return render_template('website/_base.html', \
+                            page=get_page_stub('errors/404')), 404
+
+
+@current_app.errorhandler(500)
+def page_internal_server_error(e):
+    return render_template('website/_base.html', \
+                            page=get_page_stub('errors/500')), 500
+
+
+@current_app.errorhandler(503)
+def page_service_unavailable(e):
+    return render_template('website/_base.html', \
+                            page=get_page_stub('errors/503')), 503

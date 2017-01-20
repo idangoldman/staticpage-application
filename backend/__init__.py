@@ -2,7 +2,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from flask_wtf.csrf import CsrfProtect
+from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager
 
 db = SQLAlchemy()
@@ -16,21 +16,24 @@ def create_app( config_name ):
 
     Bootstrap(app)
     CORS(app)
-    CsrfProtect(app)
+    CSRFProtect(app)
     db.init_app(app)
     login_manager.init_app(app)
 
     with app.app_context():
+        from backend.website import website as website_blueprint
+        app.register_blueprint( website_blueprint )
+
         from backend.helpers import jinja_filters
-        from backend import website, routes
+        from backend import routes
 
     from backend.auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
+    app.register_blueprint( auth_blueprint )
 
     from backend.root import root as root_blueprint
-    app.register_blueprint(root_blueprint)
+    app.register_blueprint( root_blueprint )
 
     from backend.api import api as api_blueprint
-    app.register_blueprint(api_blueprint)
+    app.register_blueprint( api_blueprint )
 
     return app
