@@ -50,4 +50,23 @@ def is_phone( user_agent ):
         if detected_phone:
             break
 
-    return bool(detected_phone)
+    return bool( detected_phone )
+
+
+def get_page_stub( name ):
+    with open('backend/stubs/features.json', 'r') as json_file:
+        features = json.load( json_file )
+    with open('backend/stubs/website/' + name + '.json', 'r') as json_file:
+        page_stub = json.load( json_file )
+
+    for feature in features:
+        for field in feature.get('fields'):
+            if not page_stub.get( field.get('id') ):
+                if field.get('default'):
+                    page_stub[ field.get('id') ] = field.get('default')
+                if field.get('id') == 'search_results_title':
+                    page_stub['search_results_title'] = page_stub.get('content_title')
+                if field.get('id') == 'search_results_description':
+                    page_stub['search_results_description'] = page_stub.get('content_sub_title')
+
+    return page_stub

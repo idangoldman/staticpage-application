@@ -1,7 +1,7 @@
 from flask import render_template, current_app, json, send_from_directory, request, redirect, url_for
 from flask_login import login_required, current_user
 
-from backend.helpers import path_builder, is_phone
+from backend.helpers import path_builder, is_phone, get_page_stub
 from backend.models.user import User
 from backend.models.page import Page
 
@@ -63,7 +63,7 @@ def side_kick( page_id ):
         'on_phone': is_phone( request.user_agent )
     }
 
-    return render_template( 'side-kick.html', **payload )
+    return render_template( 'side-kick/index.html', **payload )
 
 
 @current_app.route('/uploads/<user_hash>/<timestamp>/<file_name>')
