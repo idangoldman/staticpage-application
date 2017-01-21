@@ -2,7 +2,7 @@
 <html><head>
 
     <meta charset="UTF-8" />
-    <title>It's your friendly side-kick!</title>
+    <title>{{ title }}</title>
 
     <link href="{{ url_for('static', filename='side-kick.css') }}" rel="stylesheet" type="text/css" />
 
@@ -13,8 +13,7 @@
     {{ svg_sprite | safe }}
 
     <section class="side-kick">
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
 
         <footer class="footer">
             version 1.3.0 / <a href={{ url_for('auth.logout') }} target="_parent">logout</a>.
