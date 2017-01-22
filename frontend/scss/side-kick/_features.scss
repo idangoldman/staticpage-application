@@ -215,28 +215,34 @@
                 }
             }
 
-            .validation li,
-            .errors,
-            .message {
-                display: block;
-                font-size: 11px;
-                margin-top: 5px;
-            }
-
-            .validation li {
-                display: none;
-
-                &.error { display: block; }
-            }
-
-            .validation.error,
-            .errors {
-                color: #ca0000;
-            }
-
-            .message {
-                color: rgba( #000, 0.5 );
-            }
         }
+        
+        .validation li,
+        .errors,
+        .message {
+            display: block;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .validation li {
+            display: none;
+
+            &.error { display: block; }
+        }
+
+        .validation.error,
+        .errors {
+            color: #ca0000;
+        }
+
+        .message {
+            color: rgba( #000, 0.5 );
+        }
+    }
+
+    .fine-print {
+        font-size: 12px;
+        margin-bottom: 15px;
     }
 }

@@ -6,14 +6,14 @@
             <h3 class="title">{{ side_kick.title }}</h3>
         </header>
         {% from 'macros/form/base.html' import base_form %}
-        {% call base_form( fields=side_kick.fields, action=url_for('auth.register'), autocomplete='on' ) %}
+        {% call base_form( fields=side_kick.fields, action=url_for('auth.login'), autocomplete='on' ) %}
             {% from 'macros/form/validation.html' import wtf_errors %}
             {{ wtf_errors( get_flashed_messages() ) }}
             {{ form.csrf_token }}
         {% endcall %}
 
         <p class="fine-print">
-            Have an account? <a href="{{ url_for('auth.login') }}">Login Here</a>.
+            Don't have an account? <a href="{{ url_for('auth.register') }}">Register Here</a>.
         </p>
     </div>
 {% endblock %}

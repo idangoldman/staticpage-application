@@ -1,0 +1,23 @@
+{
+    "name": "login",
+    "title": "Login",
+    "fields": [
+        {
+            "id": "email",
+            "label": "Email",
+            "type": "email",
+            "required": true
+        },
+        {
+            "id": "password",
+            "label": "Password",
+            "type": "password",
+            "required": true
+        },
+        {
+            "id": "submit",
+            "label": "Login to Get Stuff Done",
+            "type": "submit"
+        }
+    ]
+}

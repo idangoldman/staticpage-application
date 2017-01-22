@@ -4,7 +4,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from backend import db
 from backend.auth import auth
 from backend.auth.forms import RegisterForm, LoginForm
-from backend.helpers import get_a_stub, get_page_stub
+from backend.helpers import get_a_stub, get_page_stub, is_phone
 from backend.models.page import Page
 from backend.models.user import User
 
@@ -45,6 +45,8 @@ def register():
 
     payload = {
         'form': form,
+        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
+        'on_phone': is_phone( request.user_agent ),
         'page': get_page_stub('auth/register/page'),
         'side_kick': side_kick
     }
@@ -56,14 +58,34 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user is None or not user.verify_password(form.password.data):
+        user = User.query.filter_by( email=form.email.data ).first()
+
+        if user is None or not user.verify_password( form.password.data ):
             flash('Invalid email or password.')
-            return redirect(url_for('auth.login'))
-        login_user(user, form.remember_me.data)
-        redirect_url = url_for('home') if not user.is_admin else url_for('root.index')
-        return redirect(request.args.get('next') or redirect_url)
-    return render_template('auth/login.html', form=form)
+            return redirect( url_for('auth.login') )
+
+        login_user( user, form.remember_me.data )
+        return redirect( request.args.get('next') or url_for('home') )
+
+    side_kick = get_a_stub('auth/login/side-kick')
+
+    for field in side_kick.get('fields'):
+        if field.get('id') == 'email' or field.get('id') == 'site_name':
+            if form[ field.get('id') ].data:
+                field['value'] = form[ field.get('id') ].data
+
+        if form[ field.get('id') ]:
+            field['errors'] = form[ field.get('id') ].errors
+
+    payload = {
+        'form': form,
+        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
+        'on_phone': is_phone( request.user_agent ),
+        'page': get_page_stub('auth/login/page'),
+        'side_kick': side_kick
+    }
+
+    return render_template( 'auth/login.html', **payload )
 
 
 @auth.route('/logout')

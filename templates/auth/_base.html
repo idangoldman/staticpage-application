@@ -91,7 +91,7 @@
     </div>
     {% endif %}
 
-    <section class="side-kick">
+    <section class="side-kick {{ 'full-width' if on_phone }}">
         {% block side_kick %}{% endblock %}
 
         <footer class="footer">
@@ -99,5 +99,8 @@
         </footer>
     </section>
 
-    {% block footer %}{% endblock %}
+    {% block footer %}
+        {% from 'macros/3rd-party.html' import google_analytics %}
+        {{ google_analytics( ga_id ) }}
+    {% endblock %}
 </body></html>
