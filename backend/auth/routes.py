@@ -70,7 +70,7 @@ def login():
     side_kick = get_a_stub('auth/login/side-kick')
 
     for field in side_kick.get('fields'):
-        if field.get('id') == 'email' or field.get('id') == 'site_name':
+        if field.get('id') == 'email' or field.get('id') == 'remember_me':
             if form[ field.get('id') ].data:
                 field['value'] = form[ field.get('id') ].data
 
