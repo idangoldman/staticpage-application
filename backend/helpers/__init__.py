@@ -61,7 +61,7 @@ def get_a_stub( name ):
 def get_page_stub( name ):
     with open('backend/stubs/features.json', 'r') as json_file:
         features = json.load( json_file )
-    with open('backend/stubs/website/' + name + '.json', 'r') as json_file:
+    with open('backend/stubs/' + name + '.json', 'r') as json_file:
         page_stub = json.load( json_file )
 
     for feature in features:

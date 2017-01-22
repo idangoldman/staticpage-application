@@ -4,6 +4,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from backend import db
 from backend.auth import auth
 from backend.auth.forms import RegisterForm, LoginForm
+from backend.helpers import get_a_stub, get_page_stub
 from backend.models.page import Page
 from backend.models.user import User
 
@@ -25,14 +26,20 @@ def register():
         db.session.add( user )
         db.session.commit()
 
-        user = User.query.filter_by( email = form.email.data ).first()
+        user = User.query.filter_by(email=form.email.data).first()
         page = Page( user_id = user.id )
         db.session.add( page )
         db.session.commit()
 
         return redirect( url_for('auth.login') )
 
-    return render_template( 'side-kick/auth/register.html', form = form )
+    payload = {
+        'form': form,
+        'page': get_page_stub('auth/register/page'),
+        'side_kick': get_a_stub('auth/register/side-kick')
+    }
+
+    return render_template( 'auth/register.html', **payload )
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -46,7 +53,7 @@ def login():
         login_user(user, form.remember_me.data)
         redirect_url = url_for('home') if not user.is_admin else url_for('root.index')
         return redirect(request.args.get('next') or redirect_url)
-    return render_template('side-kick/auth/login.html', form=form)
+    return render_template('auth/login.html', form=form)
 
 
 @auth.route('/logout')

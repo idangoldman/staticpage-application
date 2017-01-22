@@ -1,0 +1,13 @@
+{% extends "auth/_base.html" %}
+
+{% block side_kick %}
+    <div class="feature {{ side_kick.name }}">
+        <header class="header">
+            <h3 class="title">{{ side_kick.title }}</h3>
+        </header>
+        {% from 'macros/form/base.html' import base_form %}
+        {% call base_form( fields=side_kick.fields, action=url_for('auth.register'), target='_parent', autocomplete='on' ) %}
+            {{ form.csrf_token }}
+        {% endcall %}
+    </div>
+{% endblock %}

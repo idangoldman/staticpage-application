@@ -13,28 +13,14 @@ def welcome():
 
     if request.method == 'POST' and form.validate():
         if mailchimp_subscribe(form.email.data):
-            return redirect( url_for('website.create_a_page') )
+            return redirect( url_for('auth.register') )
 
     payload = {
         'form': form,
         'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'pub_id': current_app.config['ADDTHIS_PUBID'],
         'has_subscribed': request.cookies.get('has_subscribed'),
-        'page': get_page_stub('welcome'),
+        'page': get_page_stub('website/welcome'),
     }
 
     return render_template('website/welcome.html', **payload)
-
-
-@website.route('/create-a-page')
-def create_a_page():
-    return render_template('website/create-a-page.html')
-
-
-@website.route('/register')
-def register():
-    payload = {
-        'page': get_page_stub('register'),
-    }
-
-    return render_template('website/_base.html', **payload)

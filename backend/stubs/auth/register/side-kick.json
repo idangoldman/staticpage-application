@@ -1,0 +1,29 @@
+{
+    "name": "register",
+    "title": "Register a User",
+    "fields": [
+        {
+            "id": "site_name",
+            "label": "Site name",
+            "type": "text",
+            "required": true
+        },
+        {
+            "id": "email",
+            "label": "Email",
+            "type": "email",
+            "required": true
+        },
+        {
+            "id": "password",
+            "label": "Password",
+            "type": "password",
+            "required": true
+        },
+        {
+            "id": "send",
+            "label": "Become a User",
+            "type": "submit"
+        }
+    ]
+}
