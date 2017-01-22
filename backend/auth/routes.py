@@ -33,10 +33,20 @@ def register():
 
         return redirect( url_for('auth.login') )
 
+    side_kick = get_a_stub('auth/register/side-kick')
+
+    for field in side_kick.get('fields'):
+        if field.get('id') == 'email' or field.get('id') == 'site_name':
+            if form[ field.get('id') ].data:
+                field['value'] = form[ field.get('id') ].data
+
+        if form[ field.get('id') ]:
+            field['errors'] = form[ field.get('id') ].errors
+
     payload = {
         'form': form,
         'page': get_page_stub('auth/register/page'),
-        'side_kick': get_a_stub('auth/register/side-kick')
+        'side_kick': side_kick
     }
 
     return render_template( 'auth/register.html', **payload )

@@ -21,7 +21,7 @@
             "required": true
         },
         {
-            "id": "send",
+            "id": "submit",
             "label": "Become a User",
             "type": "submit"
         }

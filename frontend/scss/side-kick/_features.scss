@@ -216,6 +216,7 @@
             }
 
             .validation li,
+            .errors,
             .message {
                 display: block;
                 font-size: 11px;
@@ -225,10 +226,12 @@
             .validation li {
                 display: none;
 
-                &.error {
-                    color: #ca0000;
-                    display: block;
-                }
+                &.error { display: block; }
+            }
+
+            .validation.error,
+            .errors {
+                color: #ca0000;
             }
 
             .message {
