@@ -1,7 +1,7 @@
 import os
 
 
-class Config(object):
+class Config( object ):
     API_URL = os.getenv('API_URL')
     BASE_PATH = os.path.dirname( os.path.abspath( __file__ ) )
     HTTP_HOST = os.getenv('HTTP_HOST')
@@ -21,7 +21,7 @@ class Config(object):
     MAILCHIMP_USERNAME = os.getenv('MAILCHIMP_USERNAME')
 
 
-class DevelopmentConfig(Config):
+class DevelopmentConfig( Config ):
     DEBUG = True
     SECRET_KEY = os.getenv('FLASK_SECRET_KEY') or 'blah'
     SQLALCHEMY_ECHO = False
