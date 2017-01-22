@@ -53,6 +53,11 @@ def is_phone( user_agent ):
     return bool( detected_phone )
 
 
+def get_a_stub( name ):
+    with open('backend/stubs/' + name + '.json', 'r') as json_file:
+        return json.load( json_file )
+
+
 def get_page_stub( name ):
     with open('backend/stubs/features.json', 'r') as json_file:
         features = json.load( json_file )
