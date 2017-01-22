@@ -39,7 +39,7 @@
                         <use class="use" xlink:href="#caret-up"></use>
                     </svg>
                 </header>
-                <div class="body" action="blah.php" method="post">
+                <form class="body" action="blah.php" method="post">
                     {% for field in feature.fields %}
                         {% if field.type == "text" %}
                             {% from 'macros/form/text.html' import text %}
@@ -58,7 +58,7 @@
                             {{ search_preview( field ) }}
                         {% endif %}
                     {% endfor %}
-                </div>
+                </form>
             </li>
         {% endfor %}
     </ul>

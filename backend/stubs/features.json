@@ -6,7 +6,7 @@
             {
                 "id": "content_logo",
                 "name": "logo",
-                "title": "Logo",
+                "label": "Logo",
                 "type": "file",
                 "accepted": {
                     "formats": [
@@ -28,19 +28,19 @@
             {
                 "id": "content_title",
                 "name": "title",
-                "title": "Title",
+                "label": "Title",
                 "type": "text"
             },
             {
                 "id": "content_sub_title",
                 "name": "sub_title",
-                "title": "Sub Title",
+                "label": "Sub Title",
                 "type": "textarea"
             },
             {
                 "id": "content_description",
                 "name": "description",
-                "title": "Description",
+                "label": "Description",
                 "type": "textarea"
             }
         ]
@@ -52,7 +52,7 @@
             {
                 "id": "design_background_image",
                 "name": "background_image",
-                "title": "Background image",
+                "label": "Background image",
                 "type": "file",
                 "accepted": {
                     "formats": [
@@ -74,7 +74,7 @@
             {
                 "id": "design_background_color",
                 "name": "background_color",
-                "title": "Background color",
+                "label": "Background color",
                 "type": "text",
                 "default": "#fff",
                 "validation": {
@@ -84,7 +84,7 @@
             {
                 "id": "design_background_repeat",
                 "name": "background_repeat",
-                "title": "Background repeat",
+                "label": "Background repeat",
                 "type": "select",
                 "default": "no-repeat",
                 "options": [
@@ -95,7 +95,7 @@
             {
                 "id": "design_font_family",
                 "name": "font_family",
-                "title": "Font family",
+                "label": "Font family",
                 "type": "select",
                 "default": "Open Sans, helvetica neue, helvetica, arial, sans-serif",
                 "groups": [
@@ -134,7 +134,7 @@
             {
                 "id": "design_font_color",
                 "name": "font_color",
-                "title": "Font color",
+                "label": "Font color",
                 "type": "text",
                 "default": "#fff",
                 "validation": {
@@ -144,7 +144,7 @@
             {
                 "id": "design_content_alignment",
                 "name": "content_alignment",
-                "title": "Content alignment",
+                "label": "Content alignment",
                 "type": "select",
                 "default": "center",
                 "options": [
@@ -156,7 +156,7 @@
             {
                 "id": "design_content_direction",
                 "name": "content_direction",
-                "title": "Content direction",
+                "label": "Content direction",
                 "type": "select",
                 "default": "ltr",
                 "options": [
@@ -167,7 +167,7 @@
             {
                 "id": "design_additional_styles",
                 "name": "additional_styles",
-                "title": "Additional styles",
+                "label": "Additional styles",
                 "message": "Show your CSS Kong Fu skills.",
                 "type": "textarea",
                 "placeholder": "#element { ... }",
@@ -184,7 +184,7 @@
             {
                 "id": "google_analytics_code",
                 "name": "code",
-                "title": "Code",
+                "label": "Code",
                 "type": "text",
                 "placeholder": "UA-12345-1",
                 "validation": {
@@ -200,20 +200,20 @@
             {
                 "id": "search_results_title",
                 "name": "title",
-                "title": "Title",
+                "label": "Title",
                 "type": "text",
                 "message": "Recommended **70** characters."
             },
             {
                 "id": "search_results_description",
                 "name": "description",
-                "title": "Description",
+                "label": "Description",
                 "type": "textarea",
                 "message": "Recommended **156** characters."
             },
             {
                 "id": "search_results_preview",
-                "title": "Preview",
+                "label": "Preview",
                 "type": "search_preview",
                 "description": "",
                 "link": "",
