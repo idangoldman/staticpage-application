@@ -57,6 +57,16 @@
                 &:after { content: "\003A"; }
             }
 
+            input[type="checkbox"] {
+                & + .label:after {
+                    display: none;
+                }
+
+                & + .label {
+                    margin-left: 5px;
+                }
+            }
+
             .field-wrap,
             .textarea-wrap,
             .select-wrap,
@@ -216,7 +226,7 @@
             }
 
         }
-        
+
         .validation li,
         .errors,
         .message {

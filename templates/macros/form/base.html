@@ -21,6 +21,9 @@
             {% elif field.type == "select" %}
                 {% from 'macros/form/select.html' import select %}
                 {{ select( field ) }}
+            {% elif field.type == "checkbox" %}
+                {% from 'macros/form/checkbox.html' import checkbox %}
+                {{ checkbox( field ) }}
             {% elif field.type == "file" %}
                 {% from 'macros/form/file.html' import file %}
                 {{ file( field ) }}
