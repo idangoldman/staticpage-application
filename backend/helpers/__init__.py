@@ -1,6 +1,10 @@
-from flask import json
+from flask import json, current_app
+from itsdangerous import URLSafeTimedSerializer
 import os, hashlib, time, re
 
+
+def timed_url_safe():
+    return URLSafeTimedSerializer( current_app.config["SECRET_KEY"] )
 
 def load_env_var( env_file = 'flask_env' ):
     if os.path.exists(env_file):

@@ -1,10 +1,11 @@
 from flask import render_template, request, redirect, url_for, flash, current_app
 from flask_login import login_user, logout_user, login_required, current_user
+from flask_mail import Message
 
-from backend import db
+from backend import db, mail
 from backend.auth import auth
 from backend.auth.forms import RegisterForm, LoginForm
-from backend.helpers import get_a_stub, get_page_stub, is_phone
+from backend.helpers import get_a_stub, get_page_stub, is_phone, timed_url_safe
 from backend.models.page import Page
 from backend.models.user import User
 
@@ -31,7 +32,14 @@ def register():
         db.session.add( page )
         db.session.commit()
 
+        # Now we'll send the email confirmation link
+        token = timed_url_safe().dumps( user.email, salt='email-confirm-key' )
+        confirm_url = url_for( 'auth.confirm_email', token=token, _external=True )
+        text = render_template( 'auth/emails/confirm.txt', confirm_url=confirm_url, site_name=user.site_name )
+        mail.send(Message("Confirm your email", recipients=[ user.email ], body=text))
+
         return redirect( url_for('auth.login') )
+
 
     side_kick = get_a_stub('auth/register/side-kick')
 
@@ -93,3 +101,19 @@ def login():
 def logout():
     logout_user()
     return redirect( url_for('website.welcome') )
+
+
+@auth.route('/confirm/<token>')
+def confirm_email( token ):
+    try:
+        email = timed_url_safe().loads( token, salt = "email-confirm-key", max_age=86400 ) # 24hr
+    except:
+        abort(404)
+
+    user = User.query.filter_by( email=email ).first_or_404()
+    user.email_confirmed = True
+
+    db.session.add(user)
+    db.session.commit()
+
+    return redirect( url_for( 'home' ) )

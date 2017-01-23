@@ -14,6 +14,7 @@ class User(UserMixin, db.Model):
     password_hash = db.Column('password_hash', db.String(128), nullable=False)
     is_admin = db.Column('is_admin', db.Boolean, default=False)
     joined_at = db.Column('joined_at', db.DateTime(), default=datetime.utcnow)
+    email_confirmed = db.Column('email_confirmed', db.Boolean, default=False)
 
     pages = db.relationship('Page', lazy='dynamic', backref='creator')
 
