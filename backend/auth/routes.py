@@ -10,10 +10,10 @@ from backend.models.page import Page
 from backend.models.user import User
 
 
-@auth.before_request
-def before_request():
-    if current_user.is_authenticated and not request.endpoint == 'auth.logout':
-        return redirect( url_for('home') )
+# @auth.before_request
+# def before_request():
+#     if current_user.is_authenticated and not request.endpoint == 'auth.logout':
+#         return redirect( url_for('home') )
 
 
 @auth.route('/register', methods=['GET', 'POST'])
@@ -32,13 +32,17 @@ def register():
         db.session.add( page )
         db.session.commit()
 
-        # Now we'll send the email confirmation link
-        token = timed_url_safe().dumps( user.email, salt='email-confirm-key' )
-        confirm_url = url_for( 'auth.confirm_email', token=token, _external=True )
-        text = render_template( 'auth/emails/confirm.txt', confirm_url=confirm_url, site_name=user.site_name )
-        mail.send(Message("Confirm your email", recipients=[ user.email ], body=text))
+        try:
+            token = timed_url_safe().dumps( user.email, salt='email-confirm-key' )
+            confirm_url = url_for( 'auth.confirm_email', token=token, _external=True )
+            text = render_template( 'auth/emails/confirm.txt', confirm_url=confirm_url )
+            mail.send(Message("Confirm your email", recipients=[ user.email ], body=text))
+        except:
+            print "Shit."
 
-        return redirect( url_for('auth.login') )
+        login_user( user )
+
+        return redirect( url_for('home') )
 
 
     side_kick = get_a_stub('auth/register/side-kick')
@@ -102,6 +106,16 @@ def logout():
     logout_user()
     return redirect( url_for('website.welcome') )
 
+
+@auth.route('/resend_confirm')
+@login_required
+def resend_confirm():
+    token = timed_url_safe().dumps( current_user.email, salt='email-confirm-key' )
+    confirm_url = url_for( 'auth.confirm_email', token=token, _external=True )
+    text = render_template( 'auth/emails/confirm.txt', confirm_url=confirm_url )
+    mail.send(Message("Confirm your email", recipients=[ current_user.email ], body=text))
+
+    return redirect( request.referrer )
 
 @auth.route('/confirm/<token>')
 def confirm_email( token ):

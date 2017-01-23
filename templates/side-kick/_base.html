@@ -13,6 +13,12 @@
     {{ svg_sprite | safe }}
 
     <section class="side-kick">
+        {% if not is_email_confirmed %}
+            <p class="message">
+                Please confirm your email address with the confirmation link that was sent to you.<br/>
+                <a href="{{ url_for( 'auth.resend_confirm' ) }}">Resend email</a>.
+            </p>
+        {% endif %}
         {% block content %}{% endblock %}
 
         <footer class="footer">

@@ -60,11 +60,13 @@ def side_kick( page_id ):
     page_with_features = current_user.pages.first().with_features()
 
     payload = {
-        'svg_sprite': svg_sprite,
         'features': page_with_features,
+        'is_email_confirmed': current_user.email_confirmed,
+        'on_phone': is_phone( request.user_agent ),
+        'page_api_url': current_app.config['API_URL'] + '/page/' + str( page_id ),
         'site_name': current_user.site_name,
-        'page_api_url': current_app.config['API_URL'] + '/page/' + str(page_id),
-        'on_phone': is_phone( request.user_agent )
+        'svg_sprite': svg_sprite,
+        'user_id': current_user.id
     }
 
     return render_template( 'side-kick/index.html', **payload )
