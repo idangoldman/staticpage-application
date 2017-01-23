@@ -1,5 +1,4 @@
 from flask import Flask
-from flask_bootstrap import Bootstrap
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_mail import Mail
@@ -16,7 +15,6 @@ def create_app( config_name ):
     app = Flask(__name__, template_folder='../templates', static_folder='../static')
     app.config.from_object(config_name)
 
-    Bootstrap(app)
     CORS(app)
     CSRFProtect(app)
     db.init_app(app)
