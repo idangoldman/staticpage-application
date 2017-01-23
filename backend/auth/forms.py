@@ -33,3 +33,11 @@ class LoginForm( FlaskForm ):
     password = PasswordField( 'Password', validators=[ Required() ] )
     remember_me = BooleanField('Keep me logged in')
     submit = SubmitField('Enter')
+
+class ForgotPasswordForm( FlaskForm ):
+    email = StringField( 'Email', validators=[ Required(), Length(1, 64), Email() ] )
+    submit = SubmitField('Confirm Email')
+
+class ResetPasswordForm( FlaskForm ):
+    password = PasswordField( 'Password', validators=[ Required() ] )
+    submit = SubmitField('Reset Password')

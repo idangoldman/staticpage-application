@@ -1,10 +1,10 @@
-from flask import render_template, request, redirect, url_for, flash, current_app
+from flask import render_template, request, redirect, url_for, flash, current_app, abort
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_mail import Message
 
 from backend import db, mail
 from backend.auth import auth
-from backend.auth.forms import RegisterForm, LoginForm
+from backend.auth.forms import RegisterForm, LoginForm, ForgotPasswordForm, ResetPasswordForm
 from backend.helpers import get_a_stub, get_page_stub, is_phone, timed_url_safe
 from backend.models.page import Page
 from backend.models.user import User
@@ -117,6 +117,7 @@ def resend_confirm():
 
     return redirect( request.referrer )
 
+
 @auth.route('/confirm/<token>')
 def confirm_email( token ):
     try:
@@ -131,3 +132,73 @@ def confirm_email( token ):
     db.session.commit()
 
     return redirect( url_for( 'home' ) )
+
+
+@auth.route('/forgot_password', methods=['GET', 'POST'])
+def forgot_password():
+    form = ForgotPasswordForm()
+    if form.validate_on_submit():
+        flash('Check your email.')
+
+        user = User.query.filter_by( email=form.email.data ).first()
+        if user:
+            token = timed_url_safe().dumps( user.email, salt='recover-key' )
+            reset_url = url_for( 'auth.reset_password', token=token, _external=True )
+            text = render_template( 'auth/emails/reset.txt', reset_url=reset_url )
+            mail.send(Message("Password reset requested", recipients=[ user.email ], body=text))
+
+        return redirect( url_for('auth.login') )
+
+    side_kick = get_a_stub('auth/forgot-password/side-kick')
+
+    for field in side_kick.get('fields'):
+        if field.get('id') == 'email':
+            field['errors'] = form[ field.get('id') ].errors
+            if form[ field.get('id') ].data:
+                field['value'] = form[ field.get('id') ].data
+
+    payload = {
+        'form': form,
+        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
+        'on_phone': is_phone( request.user_agent ),
+        'page': get_page_stub('auth/forgot-password/page'),
+        'side_kick': side_kick
+    }
+
+    return render_template( 'auth/forgot-password.html', **payload )
+
+
+@auth.route('/reset_password/<token>', methods=["GET", "POST"])
+def reset_password( token ):
+    try:
+        email = timed_url_safe().loads(token, salt="recover-key", max_age=86400) # 24hr
+    except:
+        abort(404)
+
+    form = ResetPasswordForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by( email=email ).first_or_404()
+        user.password = form.password.data
+        db.session.add( user )
+        db.session.commit()
+
+        return redirect( url_for('auth.login') )
+
+
+    side_kick = get_a_stub('auth/reset-password/side-kick')
+
+    for field in side_kick.get('fields'):
+        if field.get('id') == 'password':
+            field['errors'] = form[ field.get('id') ].errors
+
+    payload = {
+        'form': form,
+        'token': token,
+        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
+        'on_phone': is_phone( request.user_agent ),
+        'page': get_page_stub('auth/reset-password/page'),
+        'side_kick': side_kick
+    }
+
+    return render_template( 'auth/reset-password.html', **payload )

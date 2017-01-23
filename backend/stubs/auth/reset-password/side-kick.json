@@ -1,0 +1,17 @@
+{
+    "name": "forgot_password",
+    "title": "Forgot Password",
+    "fields": [
+        {
+            "id": "password",
+            "label": "Password",
+            "type": "password",
+            "required": true
+        },
+        {
+            "id": "submit",
+            "label": "Reset Password",
+            "type": "submit"
+        }
+    ]
+}
