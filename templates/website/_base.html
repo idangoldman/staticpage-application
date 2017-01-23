@@ -58,10 +58,32 @@
                 margin-right: auto;
             {% endif %}
         }
+
+        .login {
+            position: absolute;
+            z-index: 3;
+            text-decoration: none;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 5px;
+            border: 2px solid #fff;
+            padding: 5px 10px;
+            font-size: 14px;
+            opacity: 0.5;
+
+        }
+        
+        .login:hover { opacity: 1; }
     </style>
 
     {% block head %}{% endblock %}
 </head><body class="background">
+
+    {% if show_login_link %}
+        <a class="login" href="{{ url_for('auth.login') }}">Login</a>
+    {% endif %}
 
     <section class="page">
         {% block content %}

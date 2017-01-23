@@ -14,7 +14,6 @@ class Config( object ):
 
     # 3rd Party
     # TODO: make them part of DB table - page
-    ADDTHIS_PUBID = os.getenv('ADDTHIS_PUBID')
     GOOGLE_ANALYTICS_ID = os.getenv('GOOGLE_ANALYTICS_ID')
     MAILCHIMP_API_KEY = os.getenv('MAILCHIMP_API_KEY')
     MAILCHIMP_LIST_ID = os.getenv('MAILCHIMP_LIST_ID')

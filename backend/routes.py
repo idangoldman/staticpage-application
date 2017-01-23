@@ -1,4 +1,4 @@
-from flask import render_template, current_app, json, send_from_directory, request, redirect, url_for
+from flask import render_template, current_app, json, send_from_directory, make_response, request, redirect, url_for
 from flask_login import login_required, current_user
 
 from backend.helpers import path_builder, is_phone, get_page_stub
@@ -42,7 +42,11 @@ def home():
         'on_phone': is_phone( request.user_agent )
     }
 
-    return render_template( 'home.html', **payload )
+    response = make_response( render_template( 'home.html', **payload ) )
+    if not request.cookies.get('show_login_link'):
+        response.set_cookie( 'show_login_link', value='1', max_age=30585600 ) #one year expiration
+
+    return response
 
 
 @current_app.route('/side-kick/<int:page_id>')
