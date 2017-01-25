@@ -17,6 +17,6 @@ def create():
 
 @task
 def install_packages():
-    with prefix('source venv/bin/activate'):
+    with cd( env.remote_folder ), prefix('source venv/bin/activate'):
         run('pip install -r requirements.txt')
         run('deactivate')
