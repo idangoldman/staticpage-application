@@ -78,7 +78,7 @@
                 "type": "text",
                 "default": "#fff",
                 "validation": {
-                    "hex_color":  "Not valid Hex color"
+                    "hex_color":  "Not a valid Hex color"
                 }
             },
             {
@@ -138,7 +138,7 @@
                 "type": "text",
                 "default": "#fff",
                 "validation": {
-                    "hex_color":  "Not valid Hex color"
+                    "hex_color":  "Not a valid Hex color"
                 }
             },
             {
@@ -172,7 +172,7 @@
                 "type": "textarea",
                 "placeholder": "#element { ... }",
                 "validation": {
-                    "css": "Not valid CSS"
+                    "css": "Not a valid CSS"
                 }
             }
         ]
@@ -188,7 +188,7 @@
                 "type": "text",
                 "placeholder": "UA-12345-1",
                 "validation": {
-                    "ua_code": "Not valid Google Analytics code"
+                    "ua_code": "Not a valid Google Analytics code"
                 }
             }
         ]
