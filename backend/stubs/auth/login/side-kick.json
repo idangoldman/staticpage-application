@@ -1,0 +1,29 @@
+{
+    "name": "login",
+    "title": "Login",
+    "fields": [
+        {
+            "id": "email",
+            "label": "Email",
+            "type": "email",
+            "required": true
+        },
+        {
+            "id": "password",
+            "label": "Password",
+            "type": "password",
+            "required": true
+        },
+        {
+            "id": "remember_me",
+            "label": "Keep me logged in",
+            "type": "checkbox",
+            "value": "y"
+        },
+        {
+            "id": "submit",
+            "label": "Login to Get Stuff Done",
+            "type": "submit"
+        }
+    ]
+}

@@ -17,11 +17,6 @@
             <p>{{ message }}</p>
         {% endfor %}
     </form>
-
-    {% if has_subscribed == 'true' %}
-        {% from 'macros/3rd-party.html' import add_this %}
-        {{ add_this( pub_id ) }}
-    {% endif %}
 {% endblock %}
 
 {% block footer %}

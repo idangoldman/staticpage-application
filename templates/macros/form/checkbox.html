@@ -1,0 +1,14 @@
+{% macro checkbox( field ) -%}
+    <fieldset class="fieldset {{ field.id }}">
+        <input type="checkbox"
+            class="field"
+            id="{{ field.id }}"
+            name="{{ field.id }}"
+            value="{{ field.value }}"
+            {{ 'required' if field.required }}
+        /><label class="label" for="{{ field.id }}">{{ field.label }}</label>
+        {% if field.message %}
+            <span class="message">{{ field.message | markdown }}</span>
+        {% endif %}
+    </fieldset>
+{%- endmacro %}

@@ -1,0 +1,17 @@
+{
+    "name": "forgot_password",
+    "title": "Forgot Password",
+    "fields": [
+        {
+            "id": "email",
+            "label": "Email",
+            "type": "email",
+            "required": true
+        },
+        {
+            "id": "submit",
+            "label": "Email Confirm",
+            "type": "submit"
+        }
+    ]
+}

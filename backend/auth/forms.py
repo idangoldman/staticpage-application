@@ -10,12 +10,14 @@ def unique_site_name( form, field ):
     if user:
         raise ValidationError( 'Site name already exist, try another one.' )
 
+
 def unique_email( form, field ):
     user = User.query.filter_by( email = field.data ).first()
     if user:
         raise ValidationError( 'Email already exist, try another one.' )
 
-class RegisterForm(FlaskForm):
+
+class RegisterForm( FlaskForm ):
     site_name = StringField('Site Name', validators=[ Required(), \
                             Regexp( r'^[a-zA-Z0-9_-]+$', \
                                     message = 'Site Name can only use a-zA-Z0-9-_ characters' ), \
@@ -31,3 +33,11 @@ class LoginForm( FlaskForm ):
     password = PasswordField( 'Password', validators=[ Required() ] )
     remember_me = BooleanField('Keep me logged in')
     submit = SubmitField('Enter')
+
+class ForgotPasswordForm( FlaskForm ):
+    email = StringField( 'Email', validators=[ Required(), Length(1, 64), Email() ] )
+    submit = SubmitField('Confirm Email')
+
+class ResetPasswordForm( FlaskForm ):
+    password = PasswordField( 'Password', validators=[ Required() ] )
+    submit = SubmitField('Reset Password')

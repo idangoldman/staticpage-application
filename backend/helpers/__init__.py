@@ -1,6 +1,10 @@
-from flask import json
+from flask import json, current_app
+from itsdangerous import URLSafeTimedSerializer
 import os, hashlib, time, re
 
+
+def timed_url_safe():
+    return URLSafeTimedSerializer( current_app.config["SECRET_KEY"] )
 
 def load_env_var( env_file = 'flask_env' ):
     if os.path.exists(env_file):
@@ -50,4 +54,28 @@ def is_phone( user_agent ):
         if detected_phone:
             break
 
-    return bool(detected_phone)
+    return bool( detected_phone )
+
+
+def get_a_stub( name ):
+    with open('backend/stubs/' + name + '.json', 'r') as json_file:
+        return json.load( json_file )
+
+
+def get_page_stub( name ):
+    with open('backend/stubs/features.json', 'r') as json_file:
+        features = json.load( json_file )
+    with open('backend/stubs/' + name + '.json', 'r') as json_file:
+        page_stub = json.load( json_file )
+
+    for feature in features:
+        for field in feature.get('fields'):
+            if not page_stub.get( field.get('id') ):
+                if field.get('default'):
+                    page_stub[ field.get('id') ] = field.get('default')
+                if field.get('id') == 'search_results_title':
+                    page_stub['search_results_title'] = page_stub.get('content_title')
+                if field.get('id') == 'search_results_description':
+                    page_stub['search_results_description'] = page_stub.get('content_sub_title')
+
+    return page_stub

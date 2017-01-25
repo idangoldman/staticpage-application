@@ -1,0 +1,4 @@
+Welcome to StaticPage!
+
+Please confirm your email through the link below:
+{{ confirm_url }}

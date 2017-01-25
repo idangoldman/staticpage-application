@@ -6,9 +6,10 @@ from mailchimp3 import MailChimp
 from validate_email import validate_email
 
 
-def mailchimp_subscribe(email):
-    if email and validate_email(email):
-        client = MailChimp(current_app.config['MAILCHIMP_USERNAME'], current_app.config['MAILCHIMP_API_KEY'])
+def mailchimp_subscribe( email ):
+    if email and validate_email( email ):
+        client = MailChimp( current_app.config['MAILCHIMP_USERNAME'], \
+                            current_app.config['MAILCHIMP_API_KEY'])
         try:
             client.lists.members.create(current_app.config['MAILCHIMP_LIST_ID'], {
                 'email_address': email,

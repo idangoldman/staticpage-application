@@ -9,8 +9,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="theme-color" content="#233733">
 
-    <link type="text/css" rel="stylesheet" class="css-page" href="{{ url_for('static', filename='page.css') }}" />
+    <link href="{{ url_for('static', filename='auth.css') }}" rel="stylesheet" type="text/css" />
 
+    {% if not on_phone %}
     <style type="text/css" class="css-intervention">
         {% set google_fonts = ("Arvo", "Lato", "Lora", "Merriweather", "Merriweather Sans", "Noticia Text", "Open Sans", "Playfair Display", "Roboto", "Source Sans Pro") %}
         {% if page.design_font_family is not none %}
@@ -58,54 +59,48 @@
                 margin-right: auto;
             {% endif %}
         }
-
-        .login {
-            position: absolute;
-            z-index: 3;
-            text-decoration: none;
-            top: 20px;
-            right: 20px;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 5px;
-            border: 2px solid #fff;
-            padding: 5px 10px;
-            font-size: 14px;
-            opacity: 0.5;
-
-        }
-        
-        .login:hover { opacity: 1; }
     </style>
-
-    {% block head %}{% endblock %}
-</head><body class="background">
-
-    {% if show_login_link %}
-        <a class="login" href="{{ url_for('auth.login') }}">Login</a>
     {% endif %}
 
-    <section class="page">
-        {% block content %}
-            <article class="content">
-                {% if page.content_logo %}
-                    <img class="logo" src="{{ page.content_logo }}" />
-                {% endif %}
+    {% block head %}{% endblock %}
+</head><body>
 
-                {% if page.content_title %}
-                    <h1 class="title">{{ page.content_title }}</h1>
-                {% endif %}
+    {% if not on_phone %}
+    <div class="page-view background">
+        <section class="page">
+            {% block content %}
+                <article class="content">
+                    {% if page.content_logo %}
+                        <img class="logo" src="{{ page.content_logo }}" />
+                    {% endif %}
 
-                {% if page.content_sub_title %}
-                    <h2 class="sub-title">{{ page.content_sub_title }}</h2>
-                {% endif %}
+                    {% if page.content_title %}
+                        <h1 class="title">{{ page.content_title }}</h1>
+                    {% endif %}
 
-                {% if page.content_description %}
-                    <p class="description">{{ page.content_description }}</p>
-                {% endif %}
-            </article>
-        {% endblock %}
+                    {% if page.content_sub_title %}
+                        <h2 class="sub-title">{{ page.content_sub_title }}</h2>
+                    {% endif %}
+
+                    {% if page.content_description %}
+                        <p class="description">{{ page.content_description }}</p>
+                    {% endif %}
+                </article>
+            {% endblock %}
+        </section>
+    </div>
+    {% endif %}
+
+    <section class="side-kick {{ 'full-width' if on_phone }}">
+        {% block side_kick %}{% endblock %}
+
+        <footer class="footer">
+            {% include 'version.html' %}
+        </footer>
     </section>
 
-    {% block footer %}{% endblock %}
+    {% block footer %}
+        {% from 'macros/3rd-party.html' import google_analytics %}
+        {{ google_analytics( ga_id ) }}
+    {% endblock %}
 </body></html>
