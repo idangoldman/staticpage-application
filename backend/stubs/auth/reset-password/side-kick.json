@@ -1,6 +1,6 @@
 {
     "name": "forgot_password",
-    "title": "Forgot Password",
+    "title": "Change Password",
     "fields": [
         {
             "id": "password",
