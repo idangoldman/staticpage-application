@@ -1,9 +1,9 @@
 {
     "content_logo": "",
-    "content_title": "404",
-    "content_sub_title": "Ooops you got us, we don't haven\nthe page you are asking for.",
-    "content_description": "If you want, you can create this page yourself.",
-    "design_background_image": "/static/images/backgrounds/003.jpeg",
+    "content_title": "Ooops Page Not Found.",
+    "content_sub_title": "Maybe you want to create your own page instead of looking for other’s?",
+    "content_description": "",
+    "design_background_image": "/static/images/backgrounds/004.jpeg",
     "design_background_color": "",
     "design_background_repeat": "",
     "design_font_family": "",
@@ -11,6 +11,6 @@
     "design_content_alignment": "",
     "design_content_direction": "",
     "design_additional_styles": "",
-    "search_results_title": "404 Not Found",
+    "search_results_title": "",
     "search_results_description": ""
 }

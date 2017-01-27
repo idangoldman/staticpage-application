@@ -1,6 +1,6 @@
 {
     "name": "register",
-    "title": "Register a User",
+    "title": "Register Yourself",
     "fields": [
         {
             "id": "site_name",
@@ -22,7 +22,7 @@
         },
         {
             "id": "submit",
-            "label": "Become a User",
+            "label": "Join in",
             "type": "submit"
         }
     ]

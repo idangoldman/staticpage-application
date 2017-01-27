@@ -1,6 +1,6 @@
 {
     "name": "login",
-    "title": "Login",
+    "title": "Log In",
     "fields": [
         {
             "id": "email",
@@ -22,7 +22,7 @@
         },
         {
             "id": "submit",
-            "label": "Login to Get Stuff Done",
+            "label": "Enter",
             "type": "submit"
         }
     ]

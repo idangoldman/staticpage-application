@@ -7,7 +7,7 @@
     <meta name="description" content="{{ description }}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="theme-color" content="#233733">
+    <meta name="theme-color" content="#3D5E57">
 
     <link type="text/css" rel="stylesheet" class="css-page" href="{{ url_for('static', filename='page.css') }}" />
 
@@ -60,29 +60,31 @@
         }
 
         .login {
+            border-radius: 5px;
+            border: 2px solid #eee;
+            color: #eee;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.9;
+            padding: 5px 10px;
             position: absolute;
-            z-index: 3;
+            right: 20px;
             text-decoration: none;
             top: 20px;
-            right: 20px;
-            color: #fff;
-            font-weight: 600;
-            border-radius: 5px;
-            border: 2px solid #fff;
-            padding: 5px 10px;
-            font-size: 14px;
-            opacity: 0.5;
-
+            z-index: 3;
         }
-        
-        .login:hover { opacity: 1; }
+
+        .login:hover {
+            border-color: #3D5E57;
+            color: #3D5E57;
+        }
     </style>
 
     {% block head %}{% endblock %}
 </head><body class="background">
 
     {% if show_login_link %}
-        <a class="login" href="{{ url_for('auth.login') }}">Login</a>
+        <a class="login" href="{{ url_for('auth.login') }}">Log In</a>
     {% endif %}
 
     <section class="page">

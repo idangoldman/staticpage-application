@@ -1,6 +1,6 @@
 {
-    "name": "forgot_password",
-    "title": "Change Password",
+    "name": "reset_password",
+    "title": "Reset Password",
     "fields": [
         {
             "id": "password",
@@ -10,7 +10,7 @@
         },
         {
             "id": "submit",
-            "label": "Reset Password",
+            "label": "Done",
             "type": "submit"
         }
     ]
