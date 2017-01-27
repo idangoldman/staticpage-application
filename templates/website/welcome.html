@@ -12,7 +12,7 @@
     <form action="/welcome" method="POST" class="newsletter">
         {{ form.csrf_token }}
         {{ form.email(class="email", placeholder="your@email.work") }}
-        <button type="submit" class="submit">Keep me posted!</button>
+        <button type="submit" class="submit">Get Early Access</button>
         {% for message in form.email.errors %}
             <p>{{ message }}</p>
         {% endfor %}
