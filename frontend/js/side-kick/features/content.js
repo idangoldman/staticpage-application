@@ -1,15 +1,12 @@
-import $ from 'jquery';
-import { component, utils } from 'imports?$=jquery!flightjs';
-
-// mixins
-import withChildComponents from 'flight-with-child-components' ;
-import withToggle from 'side-kick/features/mixins/toggle';
+// base component
+import baseBox from 'side-kick/features/components/base-box';
 
 // child components
 import fileFieldComponent from 'side-kick/features/components/file-field';
 import textFieldComponent from 'side-kick/features/components/text-field';
 
-var contentFeature = component( withChildComponents, withToggle, function() {
+
+var contentFeature = baseBox.mixin( function box() {
 
     this.attributes({
         'logoField': '.content_logo',
@@ -41,6 +38,7 @@ var contentFeature = component( withChildComponents, withToggle, function() {
             'fieldName': 'content_description'
         });
     });
+
 });
 
 contentFeature.attachTo( '.feature.content' );

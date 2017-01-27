@@ -1,16 +1,13 @@
-import $ from 'jquery';
-import { component, utils } from 'imports?$=jquery!flightjs';
-
-// mixins
-import withChildComponents from 'flight-with-child-components' ;
-import withToggle from 'side-kick/features/mixins/toggle';
+// base component
+import baseBox from 'side-kick/features/components/base-box';
 
 // child components
 import titleComponent from 'side-kick/features/components/search-results/title';
 import descriptionComponent from 'side-kick/features/components/search-results/description';
 import previewComponent from 'side-kick/features/components/search-results/preview';
 
-var serchResultsFeature = component( withChildComponents, withToggle, function() {
+
+var serchResultsFeature = baseBox.mixin( function box() {
 
     this.attributes({
         'titleField': '.search_results_title',

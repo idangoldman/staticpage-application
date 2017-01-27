@@ -1,14 +1,11 @@
-import $ from 'jquery';
-import { component, utils } from 'imports?$=jquery!flightjs';
-
-// mixins
-import withChildComponents from 'flight-with-child-components' ;
-import withToggle from 'side-kick/features/mixins/toggle';
+// base component
+import baseBox from 'side-kick/features/components/base-box';
 
 // child components
 import codeComponent from 'side-kick/features/components/text-field';
 
-var googleAnalyticsFeature = component( withChildComponents, withToggle, function() {
+
+var googleAnalyticsFeature = baseBox.mixin( function box() {
 
     this.attributes({
         'codeField': '.google_analytics_code'

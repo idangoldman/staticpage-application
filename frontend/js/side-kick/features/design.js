@@ -1,16 +1,13 @@
-import $ from 'jquery';
-import { component, utils } from 'imports?$=jquery!flightjs';
-
-// mixins
-import withChildComponents from 'flight-with-child-components' ;
-import withToggle from 'side-kick/features/mixins/toggle';
+// base component
+import baseBox from 'side-kick/features/components/base-box';
 
 // child components
 import fileFieldComponent from 'side-kick/features/components/file-field';
 import textFieldComponent from 'side-kick/features/components/text-field';
 import selectFieldComponent from 'side-kick/features/components/select-field';
 
-var designFeature = component( withChildComponents, withToggle, function() {
+
+var designFeature = baseBox.mixin( function box() {
 
     this.attributes({
         'backgroundImageField': '.design_background_image',
@@ -69,6 +66,7 @@ var designFeature = component( withChildComponents, withToggle, function() {
             // 'toValidate': ['css']
         });
     });
+
 });
 
 designFeature.attachTo( '.feature.design' );
