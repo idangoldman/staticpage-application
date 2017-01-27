@@ -7,7 +7,7 @@ import descriptionComponent from 'side-kick/features/components/search-results/d
 import previewComponent from 'side-kick/features/components/search-results/preview';
 
 
-var serchResultsFeature = baseBox.mixin( function box() {
+var searchResultsFeature = baseBox.mixin( function box() {
 
     this.attributes({
         'titleField': '.search_results_title',
@@ -39,4 +39,4 @@ var serchResultsFeature = baseBox.mixin( function box() {
     });
 });
 
-serchResultsFeature.attachTo( '.feature.search-results' );
+searchResultsFeature.attachTo( '.feature.search-results' );

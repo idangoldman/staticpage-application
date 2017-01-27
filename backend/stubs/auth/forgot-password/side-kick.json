@@ -1,6 +1,6 @@
 {
     "name": "forgot_password",
-    "title": "Forgot Password",
+    "title": "Reset Your Password",
     "fields": [
         {
             "id": "email",
@@ -10,7 +10,7 @@
         },
         {
             "id": "submit",
-            "label": "Email Confirm",
+            "label": "Send a reset link",
             "type": "submit"
         }
     ]
