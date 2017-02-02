@@ -48,6 +48,9 @@ def register():
     side_kick = get_a_stub('auth/register/side-kick')
 
     for field in side_kick.get('fields'):
+        if field.get('id') == 'email' and request.args.get('email'):
+            field['value'] = request.args.get('email')
+            
         if field.get('id') == 'email' or field.get('id') == 'site_name':
             if form[ field.get('id') ].data:
                 field['value'] = form[ field.get('id') ].data

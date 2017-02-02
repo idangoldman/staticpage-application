@@ -12,7 +12,7 @@ def welcome():
     form = NewsletterForm()
 
     if form.validate_on_submit() and mailchimp_subscribe( form.email.data ):
-        return redirect( url_for('auth.register') )
+        return redirect( url_for('auth.register', email=form.email.data) )
 
     payload = {
         'form': form,
