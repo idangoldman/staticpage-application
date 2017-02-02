@@ -8,6 +8,16 @@
     {% endif %}
 {%- endmacro %}
 
+{% macro flashed_messages( messages ) %}
+    {% if messages %}
+        <ul class="messages">
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{%- endmacro %}
+
 {% macro wtf_errors( errors ) %}
     {% if errors %}
         <ul class="errors">

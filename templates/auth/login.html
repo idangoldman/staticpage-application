@@ -7,8 +7,8 @@
         </header>
         {% from 'macros/form/base.html' import base_form %}
         {% call base_form( fields=side_kick.fields, action=url_for('auth.login'), autocomplete='on' ) %}
-            {% from 'macros/form/validation.html' import wtf_errors %}
-            {{ wtf_errors( get_flashed_messages() ) }}
+            {% from 'macros/form/validation.html' import flashed_messages %}
+            {{ flashed_messages( get_flashed_messages( with_categories = true ) ) }}
             {{ form.csrf_token }}
         {% endcall %}
 

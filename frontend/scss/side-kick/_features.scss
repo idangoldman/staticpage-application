@@ -229,6 +229,8 @@
 
         .validation li,
         .errors,
+        .messages .error,
+        .messages .notice,
         .message {
             display: block;
             font-size: 11px;
@@ -242,6 +244,7 @@
         }
 
         .validation .error,
+        .messages .error,
         .errors {
             color: #ca0000;
         }

@@ -73,7 +73,7 @@ def login():
         user = User.query.filter_by( email=form.email.data ).first()
 
         if user is None or not user.verify_password( form.password.data ):
-            flash('Invalid email or password.')
+            flash('Invalid email or password.', 'error')
             return redirect( url_for('auth.login') )
 
         login_user( user, form.remember_me.data )
@@ -138,7 +138,7 @@ def confirm_email( token ):
 def forgot_password():
     form = ForgotPasswordForm()
     if form.validate_on_submit():
-        flash('Check your email.')
+        flash('Check your email.', 'notice')
 
         user = User.query.filter_by( email=form.email.data ).first()
         if user:
