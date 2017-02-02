@@ -83,8 +83,12 @@ class Page(db.Model):
                         page_dict[ field.get('id') ] = ''
 
                 if field.get('id') == 'search_results_title':
-                    page_dict['search_results_title'] = page_dict.get('content_title')
+                    page_dict['search_results_title'] = page_dict.get('search_results_title') \
+                                            or page_dict.get('content_title') \
+                                            or ''
                 if field.get('id') == 'search_results_description':
-                    page_dict['search_results_description'] = page_dict.get('content_sub_title')
+                    page_dict['search_results_description'] = page_dict.get('search_results_description') \
+                                            or page_dict.get('content_sub_title') \
+                                            or ''
 
         return page_dict
