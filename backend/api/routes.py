@@ -79,10 +79,6 @@ def download(site_name):
 
 @api.route('/page/update/<int:id>', methods=['POST'])
 def page(id):
-    # if page.creator != g.current_user \
-    #         and not g.current_user.is_admin:
-    #     return errors.unauthorized
-
     page = Page.query.get_or_404(id)
 
     if request.files:
