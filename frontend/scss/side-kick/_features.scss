@@ -11,6 +11,10 @@
     position: relative;
     margin-bottom: 15px;
 
+    &.close .header .caret {
+        transform: rotate( 90deg );
+    }
+
     .header {
         cursor: pointer;
         margin-bottom: 15px;
@@ -27,16 +31,13 @@
             position: absolute;
             right: 1px;
             top: 1px;
-            transform: rotate( 0deg );
+            transform: rotate( 180deg );
             transition: transform 400ms ease-out;
-        }
-
-        &.close .caret {
-            transform: rotate( -180deg );
         }
     }
 
     .body {
+        display: none;
         margin-bottom: 15px;
 
         .fieldset {
