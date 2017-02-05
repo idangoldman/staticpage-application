@@ -1,4 +1,3 @@
-from flask import current_app
 from werkzeug.utils import secure_filename
 
 from backend.helpers import path_builder

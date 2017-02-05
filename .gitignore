@@ -14,3 +14,4 @@ uploads/
 dist/
 backups/
 user_data/
+*.zip

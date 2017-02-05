@@ -78,8 +78,8 @@ def download(site_name):
 
 
 @api.route('/page/update/<int:id>', methods=['POST'])
-def page(id):
-    page = Page.query.get_or_404(id)
+def page( id ):
+    page = Page.query.get_or_404( id )
 
     if request.files:
         creator_email = page.creator.email
