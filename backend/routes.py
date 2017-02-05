@@ -62,11 +62,10 @@ def side_kick( page_id ):
     payload = {
         'features': page_with_features,
         'is_email_confirmed': current_user.email_confirmed,
-        'on_phone': is_phone( request.user_agent )
-        'page_api_url': current_app.config['API_URL'] + '/page/' + str( page_id ),
+        'on_phone': is_phone( request.user_agent ),
+        'page_update_url': current_app.config['API_URL'] + '/page/update/' + str( page_id ),
         'site_download_url': current_app.config['API_URL'] + '/download/' + current_user.site_name,
         'page_id': page_id,
-        'page_update_url': current_app.config['API_URL'] + '/page/update/' + str(page_id),
         'site_name': current_user.site_name,
         'svg_sprite': svg_sprite,
         'user_id': current_user.id
@@ -84,7 +83,6 @@ def user_uploads( user_hash, timestamp, file_name ):
     return send_from_directory( upload_folder_path, file_name )
 
 
-<<<<<<< HEAD
 @current_app.errorhandler(401)
 def page_unauthorized(e):
     return render_template('website/_base.html', \
@@ -114,7 +112,7 @@ def page_service_unavailable(e):
     return render_template('website/_base.html', \
                             page=get_page_stub('errors/503')), 503
 
-                            
+
 @current_app.route('/uploads/<file_name>')
 def user_zip( file_name ):
     upload_folder_path = path_builder( current_app.config['BASE_PATH'], \

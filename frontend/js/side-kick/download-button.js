@@ -32,4 +32,4 @@ var downloadButton = component( withState, function() {
     };
 });
 
-downloadButton.attachTo( '.download-button' );
+downloadButton.attachTo( '#download-button' );
