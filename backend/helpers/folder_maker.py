@@ -4,10 +4,11 @@ import os
 from backend.helpers import path_builder, path_slicer, md5_identifier, timestamp
 
 
-def user_folder_path( identifier ):
+def create_uploads_folder( identifier ):
     folder_path = path_builder( current_app.config['BASE_PATH'], \
-                                current_app.config['UPLOAD_FOLDER'], \
+                                current_app.config['USER_FOLDER'], \
                                 md5_identifier( identifier ), \
+                                'uploads', \
                                 timestamp() )
 
     if not os.path.isdir( folder_path ):
@@ -17,7 +18,8 @@ def user_folder_path( identifier ):
 
 
 def user_folder_uri( folder_path ):
-    base_path = current_app.config['BASE_PATH']
+    base_path = path_builder( current_app.config['BASE_PATH'], \
+                              current_app.config['USER_FOLDER'] )
     folder_uri = path_slicer( folder_path, base_path )
 
     return folder_uri

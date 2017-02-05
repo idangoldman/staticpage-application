@@ -6,7 +6,7 @@ import requests, re
 from backend import db
 from backend.api import api, errors
 from backend.helpers import path_builder
-from backend.helpers.folder_maker import user_folder_path
+from backend.helpers.folder_maker import create_uploads_folder
 from backend.helpers.upload_file import upload_file
 from backend.models.page import Page
 
@@ -83,7 +83,7 @@ def page(id):
 
     if request.files:
         creator_email = page.creator.email
-        upload_folder_path = user_folder_path( creator_email )
+        upload_folder_path = create_uploads_folder( creator_email )
 
         for field_name in request.files:
             upload_file_uri = upload_file( request.files[ field_name ], upload_folder_path )

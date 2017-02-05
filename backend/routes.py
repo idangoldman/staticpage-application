@@ -74,12 +74,23 @@ def side_kick( page_id ):
     return render_template( 'side-kick/index.html', **payload )
 
 
-@current_app.route('/uploads/<user_hash>/<timestamp>/<file_name>')
+@current_app.route('/<user_hash>/uploads/<timestamp>/<file_name>')
 def user_uploads( user_hash, timestamp, file_name ):
     upload_folder_path = path_builder( current_app.config['BASE_PATH'], \
-                                current_app.config['UPLOAD_FOLDER'], \
+                                current_app.config['USER_FOLDER'], \
                                 user_hash, \
+                                'uploads', \
                                 timestamp )
+    return send_from_directory( upload_folder_path, file_name )
+
+
+@current_app.route('/<user_hash>/downloads/<file_name>')
+def user_downloads( file_name ):
+    upload_folder_path = path_builder( current_app.config['BASE_PATH'], \
+                                current_app.config['USER_FOLDER'], \
+                                user_hash, \
+                                'downloads'
+                                )
     return send_from_directory( upload_folder_path, file_name )
 
 
@@ -111,10 +122,3 @@ def page_internal_server_error(e):
 def page_service_unavailable(e):
     return render_template('website/_base.html', \
                             page=get_page_stub('errors/503')), 503
-
-
-@current_app.route('/uploads/<file_name>')
-def user_zip( file_name ):
-    upload_folder_path = path_builder( current_app.config['BASE_PATH'], \
-                                current_app.config['UPLOAD_FOLDER'] )
-    return send_from_directory( upload_folder_path, file_name )
