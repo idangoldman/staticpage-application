@@ -9,13 +9,13 @@ var withToggle = function mixin() {
 
     this.after('initialize', function() {
         // toggle feature box
-        this.select('toggleClick').on( 'click', toggle.bind(this) );
+        this.select('toggleClick').on( 'click', toggle.bind( this ) );
     });
 
     function toggle( event ) {
         $( event.currentTarget )
-            .toggleClass( this.attr.toggleClass )
             .parent()
+                .toggleClass( this.attr.toggleClass )
                 .children( this.attr.toggleBox )
                     .slideToggle();
     }

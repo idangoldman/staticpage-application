@@ -16,6 +16,7 @@
     }
 
     .button {
+        align-items: center;
         background-color: #0085BA;
         border-radius: 3px;
         border: 0;
@@ -27,9 +28,11 @@
             0 1px 0 #006799;
         color: #fff;
         cursor: pointer;
+        display: flex;
         font-size: 14px;
         font-weight: 600;
         height: 36px;
+        justify-content: center;
         line-height: 34px;
         outline: none;
         text-shadow:
@@ -38,6 +41,13 @@
             0 1px 1px #006799,
             0 -1px 0 #006799;
         width: 100%;
+
+        .icon { display: none; }
+
+        &.loading {
+            .title { display: none; }
+            .icon { display: inline-block; }
+        }
     }
 
     .footer {

@@ -1,24 +1,39 @@
 import $ from 'jquery';
 import { component, utils } from 'imports?$=jquery!flightjs';
 
-const PAGE_API_URL = window.page_api_url;
+const PAGE_UPDATE_URL = window.page_update_url;
+const SITE_DOWNLOAD_URL = window.site_download_url;
 
 var apiCalls = component( function() {
     this.after('initialize', function() {
         setCsrfHeader();
 
         this.on( document, 'updateField', this.updateField );
+        this.on( document, 'siteDownload', this.siteDownload );
     });
+
+    this.siteDownload = function( event, data ) {
+        $.ajax({
+            url: SITE_DOWNLOAD_URL,
+            type: 'GET',
+            success: function requestSuccess( response ) {
+                this.trigger( document, 'siteDownload_success', response.data );
+            }.bind(this),
+            error: function requestError( jqXHR, textStatus, errorThrown ) {
+                this.trigger( document, 'siteDownload_error', jqXHR.responseJSON );
+            }.bind(this)
+        });
+    };
 
     this.updateField = function( event, field ) {
         var eventName = event.type + '_' + field.name;
 
-        utils.throttle( $.ajax( this.requestConfig( eventName, field ) ) );
+        utils.throttle( $.ajax( this.updateFieldRequestConfig( eventName, field ) ) );
     };
 
-    this.requestConfig = function( eventName, field ) {
+    this.updateFieldRequestConfig = function( eventName, field ) {
         var config = {
-                url: PAGE_API_URL,
+                url: PAGE_UPDATE_URL,
                 type: 'POST',
                 success: function requestSuccess( response ) {
                     this.trigger( document, eventName + '_success', response.data );

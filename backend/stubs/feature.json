@@ -72,3 +72,8 @@
         "description": ""
     }
 }
+
+this.get('/component/:name', ( html, css, js ) => {});
+this.post('/component/:name', { html, css, js });
+this.update('/component/:name', { css });
+this.delete('/component/:name');

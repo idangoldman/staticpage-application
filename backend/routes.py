@@ -37,9 +37,10 @@ def page_view( site_name ):
 @login_required
 def home():
     payload = {
-        'site_name': current_user.site_name,
+        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
+        'on_phone': is_phone( request.user_agent ),
         'page_id': current_user.pages.first().id,
-        'on_phone': is_phone( request.user_agent )
+        'site_name': current_user.site_name
     }
 
     response = make_response( render_template( 'home.html', **payload ) )
@@ -63,7 +64,9 @@ def side_kick( page_id ):
         'features': page_with_features,
         'is_email_confirmed': current_user.email_confirmed,
         'on_phone': is_phone( request.user_agent ),
-        'page_api_url': current_app.config['API_URL'] + '/page/' + str( page_id ),
+        'page_update_url': current_app.config['API_URL'] + '/page/update/' + str( page_id ),
+        'site_download_url': current_app.config['API_URL'] + '/download/' + current_user.site_name,
+        'page_id': page_id,
         'site_name': current_user.site_name,
         'svg_sprite': svg_sprite,
         'user_id': current_user.id
@@ -72,13 +75,24 @@ def side_kick( page_id ):
     return render_template( 'side-kick/index.html', **payload )
 
 
-@current_app.route('/uploads/<user_hash>/<timestamp>/<file_name>')
+@current_app.route('/<user_hash>/uploads/<timestamp>/<file_name>')
 def user_uploads( user_hash, timestamp, file_name ):
     upload_folder_path = path_builder( current_app.config['BASE_PATH'], \
-                                current_app.config['UPLOAD_FOLDER'], \
+                                current_app.config['USER_FOLDER'], \
                                 user_hash, \
+                                'uploads', \
                                 timestamp )
     return send_from_directory( upload_folder_path, file_name )
+
+
+@current_app.route('/<user_hash>/downloads/<timestamp>/<file_name>')
+def user_downloads( user_hash, timestamp, file_name ):
+    donwload_folder_path = path_builder( current_app.config['BASE_PATH'], \
+                                current_app.config['USER_FOLDER'], \
+                                user_hash, \
+                                'downloads', \
+                                timestamp )
+    return send_from_directory( donwload_folder_path, file_name )
 
 
 @current_app.errorhandler(401)

@@ -23,6 +23,7 @@ if __name__ == '__main__':
     server_options = {
         'host': '0.0.0.0',
         'port': 5000,
+        'threaded': True
         # 'ssl_crt': './server.crt',
         # 'ssl_key': './server.key'
         # 'ssl_context': ('./server.crt', './server.key')
