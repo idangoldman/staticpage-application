@@ -25,8 +25,8 @@ def create_download_folder( identifier ):
                                 timestamp() )
 
     paths = [ folder_path, \
-              folder_path + '/css', \
-              folder_path + '/images' ]
+              folder_path + '/page/css', \
+              folder_path + '/page/images' ]
 
     for path in paths:
         if not os.path.isdir( path ):

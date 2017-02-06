@@ -10,6 +10,9 @@ from backend.helpers.folder_maker import user_folder_uri
 def zip_a_page( page_content, dest_path, file_name ):
     user_folder_path = path_builder( current_app.config['BASE_PATH'], \
                                      current_app.config['USER_FOLDER'] )
+    archive_name = path_builder( dest_path, file_name )
+    archive_root = path_builder( dest_path, 'page' )
+
     soup = BeautifulSoup( page_content, 'html5lib' )
 
     file_paths = []
@@ -26,7 +29,7 @@ def zip_a_page( page_content, dest_path, file_name ):
 
         file_paths.append({
             'original': path_builder( user_folder_path, original_path ),
-            'new': path_builder( dest_path, new_path )
+            'new': path_builder( archive_root, new_path )
         })
 
 
@@ -37,7 +40,7 @@ def zip_a_page( page_content, dest_path, file_name ):
         link['href'] = new_path
         file_paths.append({
             'original': path_builder( current_app.config['BASE_PATH'], original_path ),
-            'new': path_builder( dest_path, new_path )
+            'new': path_builder( archive_root, new_path )
         })
 
 
@@ -52,7 +55,7 @@ def zip_a_page( page_content, dest_path, file_name ):
 
             file_paths.append({
                 'original': path_builder( user_folder_path, original_path ),
-                'new': path_builder( dest_path, new_path )
+                'new': path_builder( archive_root, new_path )
             })
 
 
@@ -60,14 +63,14 @@ def zip_a_page( page_content, dest_path, file_name ):
         copyfile( path['original'], path['new'] )
 
 
-    with open( dest_path + '/index.html', 'w' ) as file:
+    with open( archive_root + '/index.html', 'w' ) as file:
         encoded_html = soup.encode('utf-8')
         filtered_html = filter( lambda line_of_code: line_of_code.strip(), encoded_html.split('\n') )
         html = '\n'.join( filtered_html )
 
         file.write( html )
 
-    file_path = make_archive( dest_path + '/' + file_name, 'zip',  dest_path )
+    file_path = make_archive( archive_name, 'zip', archive_root )
 
 
     file_uri = user_folder_uri( file_path )
