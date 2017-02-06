@@ -18,6 +18,7 @@ var downloadButton = component( withState, function() {
     this.siteDownload = function( event ) {
         if ( ! this.state.disabled ) {
             this.mergeState({ disabled: true });
+            this.toggleLoadingClass();
             this.trigger( document, 'siteDownload', {} );
         }
 
@@ -26,9 +27,14 @@ var downloadButton = component( withState, function() {
 
     this.siteDownloadSuccess = function( event, { url } ) {
         this.mergeState({ disabled: false });
+        this.toggleLoadingClass();
         if ( !! url ) {
             window.location = url;
         }
+    };
+
+    this.toggleLoadingClass = function() {
+        this.$node.toggleClass('loading');
     };
 });
 
