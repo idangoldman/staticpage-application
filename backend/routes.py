@@ -37,9 +37,10 @@ def page_view( site_name ):
 @login_required
 def home():
     payload = {
-        'site_name': current_user.site_name,
+        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
+        'on_phone': is_phone( request.user_agent ),
         'page_id': current_user.pages.first().id,
-        'on_phone': is_phone( request.user_agent )
+        'site_name': current_user.site_name
     }
 
     response = make_response( render_template( 'home.html', **payload ) )
