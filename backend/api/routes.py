@@ -1,77 +1,30 @@
-from bs4 import BeautifulSoup
-from flask import current_app, request, jsonify, escape, g
-from shutil import copyfile, make_archive
-import requests, re
+from flask import current_app, request, jsonify
+import requests
 
 from backend import db
 from backend.api import api, errors
 from backend.helpers import path_builder
-from backend.helpers.folder_maker import create_uploads_folder
+from backend.helpers.folder_maker import create_uploads_folder, create_download_folder
 from backend.helpers.upload_file import upload_file
+from backend.helpers.download_file import zip_a_page
 from backend.models.page import Page
+from backend.models.user import User
 
 
 @api.route('/download/<site_name>', methods=['GET'])
 def download(site_name):
-    page = requests.get( 'http://127.0.0.1:5000/page/' + site_name, timeout = 1 );
-    soup = BeautifulSoup(page.content, 'html5lib')
+    user = User.query.filter( site_name == site_name ).first_or_404()
 
-    file_paths = []
-    img_tags = soup.find_all('img')
-    link_tags = soup.find_all('link', { 'class', 'css-page' })
-    styles_tag = soup.find_all('style', { 'class', 'css-intervention' })
+    try:
+        page = requests.get( current_app.config['HTTP_HOST'] + '/page/' + site_name, timeout = 1 );
+    except requests.exceptions.RequestException as e:
+        return errors.bad_request('page can\'t be reached')
 
-    for img in img_tags:
-        original_path = img.get('src')
-        new_path = 'images/' + original_path.split('/')[-1]
-
-        img['src'] = new_path
-
-        file_paths.append({
-            'original': original_path,
-            'new': new_path
-        })
-
-    for link in link_tags:
-        original_path = link.get('href')
-        new_path = 'css/' + original_path.split('/')[-1]
-
-        link['href'] = new_path
-
-        file_paths.append({
-            'original': original_path,
-            'new': new_path
-        })
-
-    for style in styles_tag:
-        background_images = re.findall(r"(?:\(['\"]?)(\/uploads\/.*?)(?:['\"]?\))", style.text);
-
-        for background_image in background_images:
-            original_path = background_image
-            new_path = 'images/' + original_path.split('/')[-1]
-
-            style.string = style.text.replace( original_path, new_path )
-
-            file_paths.append({
-                'original': original_path,
-                'new': new_path
-            })
-
-    for path in file_paths:
-        copyfile( current_app.config['BASE_PATH'] + path['original'], current_app.config['BASE_PATH'] + '/user_data/' + path['new'] )
-
-    with open( current_app.config['BASE_PATH'] + '/user_data/index.html', 'w' ) as file:
-        # encoded_html = soup.prettify( formatter = "html" ).encode('utf-8')
-        encoded_html = soup.encode('utf-8')
-        filtered_html = filter( lambda line_of_code: line_of_code.strip(), encoded_html.split('\n') )
-        html = '\n'.join( filtered_html )
-
-        file.write( html )
-
-    make_archive( current_app.config['BASE_PATH'] + '/' + site_name + '_website', 'zip',  current_app.config['BASE_PATH'] + '/user_data/' )
+    download_folder_path = create_download_folder( user.email )
+    zip_uri = zip_a_page( page.content, download_folder_path, site_name + '_page' )
 
     payload = {
-        'url': '/uploads/blah_website.zip'
+        'url': current_app.config['HTTP_HOST'] + zip_uri
     }
 
     return jsonify( { 'status': 'ok', 'data': payload } )

@@ -10,12 +10,6 @@ from backend.models.page import Page
 from backend.models.user import User
 
 
-# @auth.before_request
-# def before_request():
-#     if current_user.is_authenticated and not request.endpoint == 'auth.logout':
-#         return redirect( url_for('home') )
-
-
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -50,7 +44,7 @@ def register():
     for field in side_kick.get('fields'):
         if field.get('id') == 'email' and request.args.get('email'):
             field['value'] = request.args.get('email')
-            
+
         if field.get('id') == 'email' or field.get('id') == 'site_name':
             if form[ field.get('id') ].data:
                 field['value'] = form[ field.get('id') ].data

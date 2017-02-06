@@ -17,6 +17,24 @@ def create_uploads_folder( identifier ):
     return folder_path
 
 
+def create_download_folder( identifier ):
+    folder_path = path_builder( current_app.config['BASE_PATH'], \
+                                current_app.config['USER_FOLDER'], \
+                                md5_identifier( identifier ), \
+                                'downloads', \
+                                timestamp() )
+
+    paths = [ folder_path, \
+              folder_path + '/css', \
+              folder_path + '/images' ]
+
+    for path in paths:
+        if not os.path.isdir( path ):
+            os.makedirs( path )
+
+    return folder_path
+
+
 def user_folder_uri( folder_path ):
     base_path = path_builder( current_app.config['BASE_PATH'], \
                               current_app.config['USER_FOLDER'] )
