@@ -16,7 +16,7 @@ def download(site_name):
     user = User.query.filter( site_name == site_name ).first_or_404()
 
     try:
-        page = requests.get( current_app.config['HTTP_HOST'] + '/page/' + site_name, timeout = 1 );
+        page = requests.get( current_app.config['HTTP_HOST'] + '/page/' + site_name, timeout = 10 );
     except requests.exceptions.RequestException as e:
         return errors.bad_request('page can\'t be reached')
 
