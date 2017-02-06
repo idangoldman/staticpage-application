@@ -11,8 +11,13 @@
     position: relative;
     margin-bottom: 15px;
 
-    &.close .header .caret {
-        transform: rotate( 90deg );
+    &.close {
+        .body {
+            display: none;
+        }
+        .header .caret {
+            transform: rotate( 90deg );
+        }
     }
 
     .header {
@@ -37,7 +42,6 @@
     }
 
     .body {
-        display: none;
         margin-bottom: 15px;
 
         .fieldset {
