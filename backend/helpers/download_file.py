@@ -4,7 +4,7 @@ from shutil import copyfile, make_archive
 import re
 
 from backend.helpers import path_builder
-from backend.helpers.folder_maker import user_folder_uri
+from backend.helpers.folder_maker import user_file_uri
 
 
 def zip_a_page( page_content, dest_path, file_name ):
@@ -45,7 +45,7 @@ def zip_a_page( page_content, dest_path, file_name ):
 
 
     for style in styles_tag:
-        background_images = re.findall( r"(?:\(['\"]?)(\/uploads\/.*?)(?:['\"]?\))", style.text );
+        background_images = re.findall( r"background-image: url(?:\(['\"]?)(.*?)(?:['\"]?\))", style.text );
 
         for background_image in background_images:
             original_path = background_image
@@ -73,5 +73,5 @@ def zip_a_page( page_content, dest_path, file_name ):
     file_path = make_archive( archive_name, 'zip', archive_root )
 
 
-    file_uri = user_folder_uri( file_path )
+    file_uri = user_file_uri( file_path )
     return file_uri

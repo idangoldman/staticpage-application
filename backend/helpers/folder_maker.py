@@ -35,9 +35,9 @@ def create_download_folder( identifier ):
     return folder_path
 
 
-def user_folder_uri( folder_path ):
+def user_file_uri( folder_path ):
     base_path = path_builder( current_app.config['BASE_PATH'], \
                               current_app.config['USER_FOLDER'] )
-    folder_uri = path_slicer( folder_path, base_path )
+    file_uri = path_slicer( folder_path, base_path )
 
-    return folder_uri
+    return file_uri
