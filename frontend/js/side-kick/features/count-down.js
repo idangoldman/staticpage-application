@@ -4,8 +4,7 @@ import baseBox from 'side-kick/features/components/base-box';
 // child components
 // import checkboxFieldComponent from 'side-kick/features/components/checkbox-field';
 import selectFieldComponent from 'side-kick/features/components/select-field';
-// import dateFieldComponent from 'side-kick/features/components/date-field';
-// import timeFieldComponent from 'side-kick/features/components/time-field';
+// import datepickerFieldComponent from 'side-kick/features/components/datepicker-field';
 
 
 var countDownFeature = baseBox.mixin( function box() {
@@ -13,31 +12,26 @@ var countDownFeature = baseBox.mixin( function box() {
     this.attributes({
         'enableField': '.count_down_enable',
         'timezoneField': '.count_down_timezone',
-        'dateField': '.count_down_date',
-        'timeField': '.count_down_time'
+        'datetimeField': '.count_down_datetime'
     });
 
     this.after('initialize', function() {
 
         // Enable
-        this.attachChild( checkboxFieldComponent, this.select('enableField'), {
-            'fieldName': 'count_down_enable'
-        });
+        // this.attachChild( checkboxFieldComponent, this.select('enableField'), {
+        //     'fieldName': 'count_down_enable'
+        // });
+
+        // Datepicker
+        // this.attachChild( datepickerFieldComponent, this.select('datetimeField'), {
+        //     'fieldName': 'count_down_datetime'
+        // });
 
         // Timezone
         this.attachChild( selectFieldComponent, this.select('timezoneField'), {
             'fieldName': 'count_down_timezone'
         });
 
-        // // Date
-        // this.attachChild( dateFieldComponent, this.select('dateField'), {
-        //     'fieldName': 'count_down_date'
-        // });
-        //
-        // // Time
-        // this.attachChild( timeFieldComponent, this.select('timeField'), {
-        //     'fieldName': 'count_down_time'
-        // });
     });
 });
 

@@ -1,0 +1,27 @@
+{% from 'macros/form/validation.html' import validation, wtf_errors %}
+
+{% macro datepicker( field ) -%}
+    <fieldset class="fieldset {{ field.id }}">
+        <label class="label" for="{{ field.id }}">{{ field.label }}</label>
+        <div class="datepicker-wrap">
+            <input type="text"
+                class="field datepicker-here"
+                data-language="en"
+                value="{{ field.value }}"
+                placeholder="{{ field.placeholder | default( field.default or '' ) }}"
+                {{ 'readonly' if field.readonly }}
+            />
+            <svg class="icon front">
+                <use class="use" xlink:href="#calendar"></use>
+            </svg>
+            <svg class="icon close">
+                <use class="use" xlink:href="#close"></use>
+            </svg>
+        </div>
+        {{ validation( field.validation ) }}
+        {{ wtf_errors( field.errors ) }}
+        {% if field.message %}
+            <span class="message">{{ field.message | markdown }}</span>
+        {% endif %}
+    </fieldset>
+{%- endmacro %}
