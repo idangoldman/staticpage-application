@@ -1,12 +1,12 @@
 from fabric.api import *
 
 @task
-def uploads_folder_backup():
+def user_folder_backup():
     with cd( env.remote_folder ):
-        remote_file = '/'.join([ env.remote_folder, 'uploads.tar.gz' ])
-        local_file = '/'.join([ env.local_folder, 'backups', env.name, env.timestamp, 'uploads.tar.gz' ])
+        remote_file = '/'.join([ env.remote_folder, 'user_data.tar.gz' ])
+        local_file = '/'.join([ env.local_folder, 'backups', env.name, env.timestamp, 'user_data.tar.gz' ])
 
-        # unzip tar -zxvf uploads.tar.gz
-        run('tar -zcvf uploads.tar.gz uploads/')
+        # unzip tar -zxvf user_data.tar.gz
+        run('tar -zcvf user_data.tar.gz user_data/')
         get( remote_file, local_file )
-        run('rm -f uploads.tar.gz')
+        run('rm -f user_data.tar.gz')
