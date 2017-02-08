@@ -178,22 +178,6 @@
         ]
     },
     {
-        "name": "google-analytics",
-        "title": "Google Analytics",
-        "fields": [
-            {
-                "id": "google_analytics_code",
-                "name": "code",
-                "label": "Code",
-                "type": "text",
-                "placeholder": "UA-12345-1",
-                "validation": {
-                    "ua_code": "Not a valid Google Analytics code"
-                }
-            }
-        ]
-    },
-    {
         "name": "count-down",
         "title": "Count Down Clock",
         "fields": [
@@ -405,6 +389,22 @@
                 "description": "",
                 "link": "",
                 "link_title": ""
+            }
+        ]
+    },
+    {
+        "name": "google-analytics",
+        "title": "Google Analytics",
+        "fields": [
+            {
+                "id": "google_analytics_code",
+                "name": "code",
+                "label": "Code",
+                "type": "text",
+                "placeholder": "UA-12345-1",
+                "validation": {
+                    "ua_code": "Not a valid Google Analytics code"
+                }
             }
         ]
     }
