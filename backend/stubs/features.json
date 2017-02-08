@@ -362,18 +362,21 @@
                 ]
             },
             {
-                "id": "count_down_date",
-                "name": "date",
-                "label": "Date",
-                "type": "date",
-                "default": "tomorrow"
+                "id": "count_down_datetime",
+                "name": "datetime",
+                "label": "Date and Time",
+                "type": "datetime",
+                "default": "Tomorrow",
+                "readonly": true,
+                "value": "dude"
             },
             {
-                "id": "count_down_time",
-                "name": "time",
-                "label": "Time",
-                "type": "time",
-                "default": "10:00"
+                "id": "count_down_redirect",
+                "name": "redirect",
+                "label": "Redirect URL",
+                "type": "text",
+                "placeholder": "https://staticpage.info",
+                "message": "After count down is done redirect to this url."
             }
         ]
     },
