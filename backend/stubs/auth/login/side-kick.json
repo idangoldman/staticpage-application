@@ -18,7 +18,7 @@
             "id": "remember_me",
             "label": "Keep me logged in",
             "type": "checkbox",
-            "value": "y"
+            "default": "y"
         },
         {
             "id": "submit",
