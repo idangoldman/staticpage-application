@@ -12,9 +12,6 @@
     margin-bottom: 15px;
 
     &.close {
-        .body {
-            display: none;
-        }
         .header .caret {
             transform: rotate( 90deg );
         }
@@ -42,7 +39,12 @@
     }
 
     .body {
+        display: none;
         margin-bottom: 15px;
+
+        &.auth-form {
+            display: block;
+        }
 
         .fieldset {
             border: 0;
