@@ -42,12 +42,7 @@ class Page(db.Model):
 
         for feature in features:
             for field in feature.get('fields'):
-                page_field_value = page_dict.get( field.get('id') )
-
-                if page_field_value:
-                    field['value'] = page_field_value
-                else:
-                    field['value'] = ''
+                field['value'] = page_dict.get( field.get('id') ) or field.get('value') or ''
 
                 if field.get('id') == 'search_results_title':
                     field['placeholder'] = page_dict.get('content_title') \
