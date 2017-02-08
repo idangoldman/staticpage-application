@@ -63,3 +63,9 @@
 `pip-autoremove -y somepackage`
 
 `pip install -r requirements.txt --upgrade`
+
+`ncu` - check npm package updates
+
+`ncu -u` - upgrade
+
+`ncu -a` - upgrade core
