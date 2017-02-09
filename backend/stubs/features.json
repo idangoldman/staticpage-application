@@ -182,13 +182,6 @@
         "title": "Count Down Clock",
         "fields": [
             {
-                "id": "count_down_enable",
-                "name": "enable",
-                "label": "Enable",
-                "type": "checkbox",
-                "default": ""
-            },
-            {
                 "id": "count_down_timezone",
                 "name": "timezone",
                 "label": "Timezone",

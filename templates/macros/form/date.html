@@ -5,10 +5,11 @@
         <label class="label" for="{{ field.id }}">{{ field.label }}</label>
         <div class="datepicker-wrap">
             <input type="text"
-                class="field datepicker-here"
-                data-language="en"
-                value="{{ field.value }}"
+                class="field"
+                id="{{ field.id }}"
+                name="{{ field.id }}"
                 placeholder="{{ field.placeholder | default( field.default or '' ) }}"
+                value="{{ field.value }}"
                 {{ 'readonly' if field.readonly }}
             />
             <svg class="icon front">
