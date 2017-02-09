@@ -351,8 +351,7 @@
                 "label": "Date and Time",
                 "type": "datetime",
                 "default": "Tomorrow",
-                "readonly": true,
-                "value": "dude"
+                "readonly": true
             },
             {
                 "id": "count_down_redirect",
