@@ -10,3 +10,4 @@ export const UPDATE_FONT_COLOR = 'design_font_color';
 export const UPDATE_CONTENT_ALIGNMENT = 'design_content_alignment';
 export const UPDATE_CONTENT_DIRECTION = 'design_content_direction';
 export const UPDATE_ADDITIONAL_STYLES = 'design_additional_styles';
+export const UPDATE_COUNT_DOWN = 'count_down_datetime';

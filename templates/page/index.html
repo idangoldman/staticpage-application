@@ -77,9 +77,14 @@
         <h2 class="sub-title">{{ content_sub_title }}</h2>
         {% endif %}
 
+        {% if is_intervention or count_down_datetime %}
+        
+        {% endif %}
+
         {% if is_intervention or content_description %}
         <p class="description">{{ content_description }}</p>
         {% endif %}
+
     </article>
 {% endblock %}
 
