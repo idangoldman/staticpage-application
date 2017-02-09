@@ -211,21 +211,21 @@
             }
 
             .datepicker-wrap .field {
-                &[value=""] + .icon.front + .icon.close {
+                &[class~="filled"] + .icon.calendar {
                     display: none;
                 }
 
-                &:not([value=""]) + .icon.front {
+                &:not([class~="filled"]) + .icon.calendar + .icon.close {
                     display: none;
                 }
             }
 
             .file-wrap .choosen-file-name {
-                &:empty + .icon.front + .icon.close {
+                &:empty + .icon.upload + .icon.close {
                     display: none;
                 }
 
-                &:not(:empty) + .icon.front {
+                &:not(:empty) + .icon.upload {
                     display: none;
                 }
             }
