@@ -12,6 +12,9 @@
             {% elif field.type == "email" %}
                 {% from "macros/form/email.html" import email %}
                 {{ email( field ) }}
+            {% elif field.type == "url" %}
+                {% from "macros/form/url.html" import url %}
+                {{ url( field ) }}
             {% elif field.type == "password" %}
                 {% from "macros/form/password.html" import password %}
                 {{ password( field ) }}

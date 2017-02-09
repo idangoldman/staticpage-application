@@ -4,7 +4,7 @@ import baseBox from 'side-kick/features/components/base-box';
 // child components
 import selectFieldComponent from 'side-kick/features/components/select-field';
 import datepickerFieldComponent from 'side-kick/features/components/datepicker-field';
-// import urlFieldComponent from 'side-kick/features/components/url-field';
+import urlFieldComponent from 'side-kick/features/components/url-field';
 
 
 var countDownFeature = baseBox.mixin( function box() {
@@ -27,10 +27,11 @@ var countDownFeature = baseBox.mixin( function box() {
             'fieldName': 'count_down_datetime'
         });
 
-        // // Redirect URL
-        // this.attachChild( selectFieldComponent, this.select('redirectUrlField'), {
-        //     'fieldName': 'count_down_redirect_url'
-        // });
+        // Redirect URL
+        this.attachChild( urlFieldComponent, this.select('redirectUrlField'), {
+            'fieldName': 'count_down_redirect_url',
+            'toValidate': ['url']
+        });
 
     });
 });

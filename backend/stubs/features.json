@@ -346,11 +346,15 @@
                 "readonly": true
             },
             {
-                "id": "count_down_redirect",
-                "name": "redirect",
+                "id": "count_down_redirect_url",
+                "name": "redirect_url",
                 "label": "Redirect URL",
-                "type": "text",
-                "placeholder": "https://staticpage.info"
+                "type": "url",
+                "placeholder": "https://...",
+                "message": "After count down is done redirect to this url.",
+                "validation": {
+                    "url": "Not a valid URL."
+                }
             }
         ]
     },

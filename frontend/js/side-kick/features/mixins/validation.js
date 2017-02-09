@@ -3,7 +3,8 @@ import $ from 'jquery';
 let regexPatterns = {
     'name': /^[a-zA-Z0-9_]*$/,
     'hex_color': /^#([0-9a-f]{3}|[0-9a-f]{6})$/i,
-    'ua_code': /^ua-\d{4,10}-\d{1,4}$/i
+    'ua_code': /^ua-\d{4,10}-\d{1,4}$/i,
+    'url': /(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,12}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/
     // https://regex101.com/r/fK9mY3/1
     // 'css': /([#.@]?[\w.:> ]+)[\s]?{[\r\n]?([A-Za-z\- \r\n\t]+[:][\s]*[\w .\/()\-!]+;[\r\n]*)*}/gi
 };
@@ -52,6 +53,7 @@ var withValidation = function mixin() {
                     case 'css':
                     case 'hex_color':
                     case 'ua_code':
+                    case 'url':
                         isValid = this.regexValidation( rule, value );
                         break;
                     case 'file_format':

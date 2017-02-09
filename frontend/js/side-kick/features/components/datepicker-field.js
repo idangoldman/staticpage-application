@@ -9,7 +9,7 @@ import withValidation from 'side-kick/features/mixins/validation';
 let startDate = new Date( new Date().getTime() + 24 * 60 * 60 * 1000 ); // 24 Hours ahead
 
 
-export default component( withFocus, withState, withValidation, function fileField() {
+export default component( withFocus, withState, withValidation, function datePickerField() {
 
     this.attributes({
         'field': '.field',
