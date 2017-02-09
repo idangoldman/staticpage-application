@@ -16,15 +16,32 @@ export default component( withFocus, withState, withValidation, function fileFie
 
     this.initialState({
         name: this.fromAttr('fieldName'),
-        value: ''
+        value: '',
+
+        datePicker: {}
     });
 
     this.after('initialize', function() {
 
-        this.select('field').datepicker({
-            'language': 'en',
-            'timepicker': true,
-            'timeFormat': 'hh:ii'
-        });
+        this.state.datePicker = this.initDatePicker();
     });
+
+    this.initDatePicker = function() {
+        var startDate = new Date( new Date().getTime() + 24 * 60 * 60 * 1000 ); // 24 Hours ahead
+
+        return this.select('field')
+            .datepicker({
+                'language': 'en',
+                'minDate': new Date(),
+                'startDate': startDate,
+                'timeFormat': 'hh:ii',
+                'timepicker': true,
+                'onShow': function( instance ) {
+                    if ( ! instance.selectedDates.length ) {
+                        instance.selectDate( startDate );
+                    }
+                }
+            })
+            .data('datepicker');
+    }
 });
