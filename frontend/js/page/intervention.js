@@ -162,5 +162,5 @@ function handleAdditionalStyles( { value } ) {
 }
 
 function handleCountDown( { value } ) {
-    console.log( value );
+    console.log( 'intervention:', value );
 }
