@@ -6,8 +6,6 @@ import withFocus from 'side-kick/features/mixins/focus';
 import withState from 'flight-with-state';
 import withValidation from 'side-kick/features/mixins/validation';
 
-let startDate = new Date( new Date().getTime() + 24 * 60 * 60 * 1000 ); // 24 Hours ahead
-
 
 export default component( withFocus, withState, withValidation, function datePickerField() {
 
@@ -16,6 +14,7 @@ export default component( withFocus, withState, withValidation, function datePic
         'fieldName': null,
         'closeIcon': '.icon.close',
 
+        'startDate': new Date( new Date().getTime() + 24 * 60 * 60 * 1000 ), // 24 Hours ahead
         'datePicker': {}
     });
 
@@ -55,11 +54,12 @@ export default component( withFocus, withState, withValidation, function datePic
             .datepicker({
                 'language': 'en',
                 'minDate': new Date(),
-                'startDate': startDate,
+                'startDate': this.attr.startDate,
+                'dateFormat': 'yyyy/mm/dd',
                 'timeFormat': 'hh:ii',
                 'timepicker': true,
                 'onSelect': this.onSelect.bind( this ),
-                'onShow': this.onShow
+                'onShow': this.onShow.bind( this )
             })
             .data('datepicker');
     };
@@ -70,7 +70,13 @@ export default component( withFocus, withState, withValidation, function datePic
 
     this.onShow = function( instance ) {
         if ( ! instance.selectedDates.length ) {
-            instance.selectDate( startDate );
+            var fieldValue = this.select('field').val();
+
+            if ( fieldValue.length ) {
+                this.attr.startDate = new Date( fieldValue );
+            }
+
+            instance.selectDate( this.attr.startDate );
         }
     };
 
