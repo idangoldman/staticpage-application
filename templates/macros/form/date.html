@@ -9,7 +9,7 @@
                 id="{{ field.id }}"
                 name="{{ field.id }}"
                 placeholder="{{ field.placeholder | default( field.default or '' ) }}"
-                value="{{ field.value }}"
+                value="{{ field.value | strftime('%Y/%m/%d %H:%M') }}"
                 {{ 'readonly' if field.readonly }}
             />
             <svg class="icon calendar">
