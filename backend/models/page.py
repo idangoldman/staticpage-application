@@ -33,6 +33,10 @@ class Page(db.Model):
 
     google_analytics_code = db.Column('google_analytics_code', db.String(24))
 
+    count_down_timezone = db.Column('count_down_timezone', db.String(64))
+    count_down_datetime = db.Column('count_down_datetime', db.DateTime())
+    count_down_redirect_url = db.Column('count_down_redirect_url', db.String(128))
+
 
     def with_features(self):
         with open('backend/stubs/features.json', 'r') as json_file:
