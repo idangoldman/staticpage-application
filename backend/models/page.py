@@ -75,11 +75,9 @@ class Page(db.Model):
 
         for feature in features:
             for field in feature.get('fields'):
+
                 if not page_dict.get( field.get('id') ):
-                    if field.get('default'):
-                        page_dict[ field.get('id') ] = field.get('default')
-                    else:
-                        page_dict[ field.get('id') ] = ''
+                    page_dict[ field.get('id') ] = field.get('default') or ''
 
                 if field.get('id') == 'search_results_title':
                     page_dict['search_results_title'] = page_dict.get('search_results_title') \
@@ -90,7 +88,10 @@ class Page(db.Model):
                                             or page_dict.get('content_sub_title') \
                                             or ''
 
-        # if page_dict.get('count_down_datetime'):
-        #     page_dict['count_down_clock'] =
+        if page_dict.get('count_down_datetime'):
+            page_dict['count_down_datetime_with_timezone'] = " ".join([
+                str( page_dict['count_down_datetime'] ),
+                page_dict['count_down_timezone'].split('|')[1]
+            ])
 
         return page_dict

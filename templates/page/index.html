@@ -77,14 +77,27 @@
         <h2 class="sub-title">{{ content_sub_title }}</h2>
         {% endif %}
 
-        {% if is_intervention or count_down_clock %}
+        {% if is_intervention or count_down_datetime %}
         <div class="count-down-clock">
-            {% for count in count_down_clock %}
-            <div class="unit">
-                <strong>{{ count.unit }}</strong>
-                {{ count.name }}
-            </div>
-            {% endfor %}
+            <span class="unit">
+                <strong id="days">00</strong>
+                <i>days</i>
+            </span>
+            <span class="seperator">:</span>
+            <span class="unit">
+                <strong id="hours">00</strong>
+                <i>hours</i>
+            </span>
+            <span class="seperator">:</span>
+            <span class="unit">
+                <strong id="minutes">00</strong>
+                <i>minutes</i>
+            </span>
+            <span class="seperator">:</span>
+            <span class="unit">
+                <strong id="seconds">00</strong>
+                <i>seconds</i>
+            </span>
         </div>
         {% endif %}
 
@@ -101,6 +114,40 @@
     {% if google_analytics_code %}
         {% from 'macros/3rd-party.html' import google_analytics %}
         {{ google_analytics( google_analytics_code ) }}
+    {% endif %}
+
+    {% if is_intervention or count_down_datetime %}
+        <script>
+            var countDownData = {
+                'deadline': new Date('{{ count_down_datetime_with_timezone }}').getTime(),
+                'now': function() { return new Date().getTime(); },
+                'redirectURL': '{{ count_down_redirect_url }}'
+            };
+
+            function countDownClock( deadline, now ) {
+                var timeDelta = deadline - now;
+
+                if ( timeDelta > 0 ) {
+                    clock = {
+                        'seconds': Math.floor( ( timeDelta / 1000 ) % 60 ),
+                        'minutes': Math.floor( ( timeDelta / 1000 / 60 ) % 60 ),
+                        'hours': Math.floor( ( timeDelta / ( 1000 * 60 * 60 ) ) % 24 ),
+                        'days': Math.floor( timeDelta / ( 1000 * 60 * 60 * 24 ) ),
+                    };
+
+                    for ( var unit in clock ) {
+                        document.getElementById( unit ).innerHTML = clock[ unit ] < 10 ? '0' + clock[ unit ] : clock[ unit ];
+                    }
+
+                    setTimeout( function() { countDownClock( countDownData.deadline, countDownData.now() ) }, 1000 );
+                } else {
+                    console.log("it's over");
+                }
+            }
+
+            countDownClock( countDownData.deadline, countDownData.now() );
+
+        </script>
     {% endif %}
 
     {% if is_intervention %}
