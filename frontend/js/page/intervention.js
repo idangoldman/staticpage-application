@@ -12,7 +12,8 @@ import {
     UPDATE_CONTENT_ALIGNMENT,
     UPDATE_CONTENT_DIRECTION,
     UPDATE_ADDITIONAL_STYLES,
-    UPDATE_COUNT_DOWN
+    UPDATE_COUNT_DOWN_DATETIME,
+    UPDATE_COUNT_DOWN_TIMEZONE
 } from 'page/constants';
 
 import StyleSheet from 'page/styles';
@@ -36,7 +37,8 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case UPDATE_CONTENT_ALIGNMENT: handleContentAlignmnet( data ); break;
             case UPDATE_CONTENT_DIRECTION: handleContentDirection( data ); break;
             case UPDATE_ADDITIONAL_STYLES: handleAdditionalStyles( data ); break;
-            case UPDATE_COUNT_DOWN: handleCountDown( data ); break;
+            case UPDATE_COUNT_DOWN_DATETIME: handleCountDownDatetime( data ); break;
+            case UPDATE_COUNT_DOWN_TIMEZONE: handleCountDownTimezone( data ); break;
         }
     }
 });
@@ -161,6 +163,22 @@ function handleAdditionalStyles( { value } ) {
     $('.css-additional').html( escapeHtml( value ) );
 }
 
-function handleCountDown( { value } ) {
-    console.log( 'intervention:', value );
+function handleCountDownDatetime( { value } ) {
+    var datetime = value,
+        timezone = window.countDownData.datetime.split(' ').pop();
+
+    window.countDownTimeoutID = 0;
+    window.countDownData.datetime = [ datetime, timezone ].join(' ');
+    window.countDownTimeoutID = null;
+    window.countDownClock();
+}
+
+function handleCountDownTimezone( { value } ) {
+    var timezone = value.split('|').pop(),
+        reTimezone = /GMT[+|-][0-9]{2}:[0-9]{2}$/;
+
+    window.countDownTimeoutID = 0;
+    window.countDownData.datetime = window.countDownData.datetime.replace( reTimezone, timezone );
+    window.countDownTimeoutID = null;
+    window.countDownClock();
 }

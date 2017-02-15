@@ -38,7 +38,10 @@
     text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
 
     & > * {
-        @include text-break;
+        &:not(.count-down-clock) {
+            @include text-break;
+        }
+        
         margin-bottom: px2rem(25);
     }
 
@@ -105,6 +108,30 @@
 .add-this {
     height: 48px;
     margin-bottom: px2rem(25);
+}
+
+.count-down-clock {
+    display: flex;
+    align-items: top;
+    justify-content: center;
+
+    .time .unit,
+    .separator {
+        font-size: 4em;
+    }
+
+    .time {
+        .label {
+            display: block;
+            font-size: 1em;
+            font-style: normal;
+            font-weight: 600;
+        }
+    }
+    .separator {
+        line-height: px2rem(80);
+        padding: 0 px2rem(10);
+    }
 }
 
 // min Netbook

@@ -79,24 +79,24 @@
 
         {% if is_intervention or count_down_datetime %}
         <div class="count-down-clock">
-            <span class="unit">
-                <strong id="days">00</strong>
-                <i>days</i>
+            <span class="time">
+                <strong class="unit" id="days">00</strong>
+                <i class="label">days</i>
             </span>
-            <span class="seperator">:</span>
-            <span class="unit">
-                <strong id="hours">00</strong>
-                <i>hours</i>
+            <span class="separator">:</span>
+            <span class="time">
+                <strong class="unit" id="hours">00</strong>
+                <i class="label">hours</i>
             </span>
-            <span class="seperator">:</span>
-            <span class="unit">
-                <strong id="minutes">00</strong>
-                <i>minutes</i>
+            <span class="separator">:</span>
+            <span class="time">
+                <strong class="unit" id="minutes">00</strong>
+                <i class="label">minutes</i>
             </span>
-            <span class="seperator">:</span>
-            <span class="unit">
-                <strong id="seconds">00</strong>
-                <i>seconds</i>
+            <span class="separator">:</span>
+            <span class="time">
+                <strong class="unit" id="seconds">00</strong>
+                <i class="label">seconds</i>
             </span>
         </div>
         {% endif %}
@@ -112,42 +112,63 @@
     {{ super() }}
 
     {% if google_analytics_code %}
-        {% from 'macros/3rd-party.html' import google_analytics %}
-        {{ google_analytics( google_analytics_code ) }}
+    {% from 'macros/3rd-party.html' import google_analytics %}
+    {{ google_analytics( google_analytics_code ) }}
     {% endif %}
 
     {% if is_intervention or count_down_datetime %}
-        <script>
-            var countDownData = {
-                'deadline': new Date('{{ count_down_datetime_with_timezone }}').getTime(),
-                'now': function() { return new Date().getTime(); },
-                'redirectURL': '{{ count_down_redirect_url }}'
-            };
+    <script>
+        var countDownData = {
+            'datetime': '{{ count_down_datetime_with_timezone }}',
+            'redirectURL': '{{ count_down_redirect_url }}'
+        },
+            countDownTimeoutID = null;
 
-            function countDownClock( deadline, now ) {
-                var timeDelta = deadline - now;
+        function countDownClock() {
+            var deadlineTimestamp = new Date( countDownData.datetime ).getTime(),
+                nowTimestamp = new Date().getTime(),
+                deltaTimestamp = deadlineTimestamp - nowTimestamp;
 
-                if ( timeDelta > 0 ) {
-                    clock = {
-                        'seconds': Math.floor( ( timeDelta / 1000 ) % 60 ),
-                        'minutes': Math.floor( ( timeDelta / 1000 / 60 ) % 60 ),
-                        'hours': Math.floor( ( timeDelta / ( 1000 * 60 * 60 ) ) % 24 ),
-                        'days': Math.floor( timeDelta / ( 1000 * 60 * 60 * 24 ) ),
-                    };
+            if ( 0 <= deltaTimestamp && 0 !== countDownTimeoutID ) {
+                var clock = {
+                    'seconds': Math.floor( ( deltaTimestamp / 1000 ) % 60 ),
+                    'minutes': Math.floor( ( deltaTimestamp / 1000 / 60 ) % 60 ),
+                    'hours': Math.floor( ( deltaTimestamp / ( 1000 * 60 * 60 ) ) % 24 ),
+                    'days': Math.floor( deltaTimestamp / ( 1000 * 60 * 60 * 24 ) )
+                };
 
-                    for ( var unit in clock ) {
-                        document.getElementById( unit ).innerHTML = clock[ unit ] < 10 ? '0' + clock[ unit ] : clock[ unit ];
-                    }
+                for ( var unit in clock ) {
+                    var time_unit = clock[ unit ] < 10 ? '0' + clock[ unit ] : clock[ unit ]; // adding zero
+                    document.getElementById( unit ).innerHTML = time_unit;
+                }
 
-                    setTimeout( function() { countDownClock( countDownData.deadline, countDownData.now() ) }, 1000 );
-                } else {
-                    console.log("it's over");
+                countDownTimeoutID = setTimeout( function() { countDownClock() }, 1000 );
+            } else {
+                var clock = {
+                    'seconds': 0,
+                    'minutes': 0,
+                    'hours': 0,
+                    'days': 0
+                };
+
+                for ( var unit in clock ) {
+                    var time_unit = clock[ unit ] < 10 ? '0' + clock[ unit ] : clock[ unit ]; // adding zero
+                    document.getElementById( unit ).innerHTML = time_unit;
+                }
+
+                console.log("it's over");
+                countDownTimeoutID = clearTimeout( countDownTimeoutID );
+
+                if ( countDownData.redirectURL.length ) {
+                    window.location.href = countDownData.redirectURL;
                 }
             }
 
-            countDownClock( countDownData.deadline, countDownData.now() );
+        }
 
-        </script>
+        countDownClock();
+
+    </script>
     {% endif %}
 
     {% if is_intervention %}
