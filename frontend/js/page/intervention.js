@@ -164,21 +164,21 @@ function handleAdditionalStyles( { value } ) {
 }
 
 function handleCountDownDatetime( { value } ) {
-    var datetime = value,
-        timezone = window.countDownData.datetime.split(' ').pop();
+    if ( ! value.length ) {
+        window.countDown.stop();
+    }
 
-    window.countDownTimeoutID = 0;
-    window.countDownData.datetime = [ datetime, timezone ].join(' ');
-    window.countDownTimeoutID = null;
-    window.countDownClock();
+    var datetime = value,
+        timezone = window.countDown.datetime.split(' ').pop(),
+        newDatetime = [ datetime, timezone ].join(' ');
+
+    window.countDown.update( newDatetime );
 }
 
 function handleCountDownTimezone( { value } ) {
     var timezone = value.split('|').pop(),
-        reTimezone = /GMT[+|-][0-9]{2}:[0-9]{2}$/;
+        reTimezone = /GMT[+|-][0-9]{2}:[0-9]{2}$/,
+        newDatetime = window.countDown.datetime.replace( reTimezone, timezone );
 
-    window.countDownTimeoutID = 0;
-    window.countDownData.datetime = window.countDownData.datetime.replace( reTimezone, timezone );
-    window.countDownTimeoutID = null;
-    window.countDownClock();
+    window.countDown.update( newDatetime );
 }
