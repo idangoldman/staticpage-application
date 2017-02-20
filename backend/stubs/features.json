@@ -178,6 +178,73 @@
         ]
     },
     {
+        "name": "mailing-list",
+        "title": "Mailing List",
+        "fields": [
+            {
+                "id": "mailing_list_service",
+                "name": "service",
+                "label": "Service",
+                "type": "select",
+                "default": "no",
+                "options": [
+                    { "key": "no", "value": "Pick a service to use" },
+                    { "key": "mailchimp", "value": "MailChimp" },
+                    { "key": "getresponse", "value": "GetResponse" }
+                ]
+            },
+            {
+                "id": "mailing_list_mailchimp",
+                "name": "mailing-list-mailchimp",
+                "type": "fieldset",
+                "fields": [
+                    {
+                        "id": "mailing_list_mailchimp_username",
+                        "name": "username",
+                        "label": "Username",
+                        "type": "text"
+                    },
+                    {
+                        "id": "mailing_list_mailchimp_api_key",
+                        "name": "api_key",
+                        "label": "API Key",
+                        "type": "text"
+                    },
+                    {
+                        "id": "mailing_list_mailchimp_list_id",
+                        "name": "list_id",
+                        "label": "List Id",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "id": "mailing_list_getresponse",
+                "name": "mailing-list-getresponse",
+                "type": "fieldset",
+                "fields": [
+                    {
+                        "id": "mailing_list_getresponse_api_key",
+                        "name": "api_key",
+                        "label": "API Key",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "id": "mailing_list_completion_url",
+                "name": "completion_url",
+                "label": "Completion URL",
+                "type": "url",
+                "placeholder": "https://...",
+                "message": "After form submission redirect to this url.",
+                "validation": {
+                    "url": "Not a valid URL."
+                }
+            }
+        ]
+    },
+    {
         "name": "count-down",
         "title": "Count Down Clock",
         "fields": [
