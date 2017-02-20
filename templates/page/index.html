@@ -77,6 +77,10 @@
         <h2 class="sub-title">{{ content_sub_title }}</h2>
         {% endif %}
 
+        {% if is_intervention or content_description %}
+        <p class="description">{{ content_description }}</p>
+        {% endif %}
+
         {% if is_intervention or count_down_datetime %}
         <div class="count-down-clock">
             <span class="time">
@@ -99,10 +103,6 @@
                 <i class="label">seconds</i>
             </span>
         </div>
-        {% endif %}
-
-        {% if is_intervention or content_description %}
-        <p class="description">{{ content_description }}</p>
         {% endif %}
 
     </article>
