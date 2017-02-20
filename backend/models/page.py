@@ -88,10 +88,13 @@ class Page(db.Model):
                                             or page_dict.get('content_sub_title') \
                                             or ''
 
+        if page_dict.get('count_down_timezone'):
+            page_dict['count_down_timezone'] = page_dict['count_down_timezone'].split('|')[1]
+
         if page_dict.get('count_down_datetime'):
             page_dict['count_down_datetime_with_timezone'] = " ".join([
                 str( page_dict['count_down_datetime'] ),
-                page_dict['count_down_timezone'].split('|')[1]
+                page_dict['count_down_timezone']
             ])
 
         return page_dict

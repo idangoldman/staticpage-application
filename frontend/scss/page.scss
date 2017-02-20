@@ -41,7 +41,7 @@
         &:not(.count-down-clock) {
             @include text-break;
         }
-        
+
         margin-bottom: px2rem(25);
     }
 
@@ -111,7 +111,7 @@
 }
 
 .count-down-clock {
-    display: flex;
+    display: none;
     align-items: top;
     justify-content: center;
 

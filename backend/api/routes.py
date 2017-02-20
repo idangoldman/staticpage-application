@@ -60,8 +60,11 @@ def page( id ):
         if request_data['name'] in page.__dict__:
 
             if 'count_down_datetime' == request_data['name']:
-                request_data['value'] = datetime.strptime( request_data['value'], '%Y/%m/%d %H:%M' )
-
+                if request_data['value']:
+                    request_data['value'] = datetime.strptime( request_data['value'], '%Y/%m/%d %H:%M' )
+                else:
+                    request_data['value'] = None
+                    
             try:
                 setattr( page, request_data['name'], request_data['value'] )
                 db.session.commit()

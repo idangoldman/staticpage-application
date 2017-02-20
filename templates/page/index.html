@@ -128,38 +128,32 @@
             }
         }
 
-        function countDownClock( datetime, redirectURL ) {
-            this.countDownTimeoutID = null;
+        function countDownClock( datetime, timezone, redirectURL ) {
             this.datetime = datetime || new Date();
+            this.timezone = timezone || '';
             this.redirectURL = redirectURL || '';
+            this.countDownTimeoutID = null;
             this.node = document.querySelector('.count-down-clock');
 
             this.tick = function() {
-                var deadlineTimestamp = new Date( this.datetime ).getTime(),
-                    nowTimestamp = new Date().getTime(),
-                    deltaTimestamp = deadlineTimestamp - nowTimestamp;
+                if ( this.datetime.length ) {
+                    var fullDatetime = [ this.datetime, this.timezone ].join(' '),
+                        deadlineTimestamp = new Date( fullDatetime ).getTime(),
+                        nowTimestamp = new Date().getTime(),
+                        deltaTimestamp = deadlineTimestamp - nowTimestamp;
 
-                this.node.style.display = 'block';
+                    if ( 0 <= deltaTimestamp || 0 === this.countDownTimeoutID ) {
+                        this.render( this.clock( deltaTimestamp ) );
+                        this.node.style.display = 'flex';
+                        this.countDownTimeoutID = setTimeout( function() { this.tick() }, 1000 );
+                    } else if ( 0 >= deltaTimestamp ) {
+                        this.render( this.clock( 0 ) );
+                        this.countDownTimeoutID = clearTimeout( this.countDownTimeoutID );
 
-                if ( 0 <= deltaTimestamp && 0 !== this.countDownTimeoutID ) {
-                    this.render( this.clock( deltaTimestamp ) );
-                    this.countDownTimeoutID = setTimeout( function() { this.tick() }, 1000 );
-                } else if ( 0 >= deltaTimestamp ) {
-                    this.render( this.clock( 0 ) );
-                    this.countDownTimeoutID = clearTimeout( this.countDownTimeoutID );
-
-                    redirect( this.redirectURL );
+                        redirect( this.redirectURL );
+                    }
                 }
-            };
 
-            this.update = function( datetime ) {
-                this.datetime = datetime;
-                this.countDownTimeoutID = null;
-            };
-
-            this.stop = function() {
-                this.countDownTimeoutID = 0;
-                this.node.style.display = 'none';
             };
 
             this.clock = function( timestamp ) {
@@ -173,17 +167,26 @@
 
             this.render = function( clock ) {
                 for ( var unit in clock ) {
-                    document.getElementById( unit ).innerHTML = add_zero( clock[ unit ] );
+                    this.node.querySelector( '#' + unit ).innerHTML = add_zero( clock[ unit ] );
                 }
             };
 
             return this;
         }
 
+        var countDownData = {
+            'datetime': '{{ count_down_datetime | default('') }}',
+            'timezone': '{{ count_down_timezone | default('') }}',
+            'redirectURL': '{{ count_down_redirect_url | default('') }}'
+        };
+
         var countDown = countDownClock(
-                '{{ count_down_datetime_with_timezone | default('') }}', '{{ count_down_redirect_url | default('') }}'
-            )
-            countDown.tick();
+            countDownData.datetime,
+            countDownData.timezone,
+            countDownData.redirectURL
+        );
+
+        countDown.tick();
     </script>
     {% endif %}
 
