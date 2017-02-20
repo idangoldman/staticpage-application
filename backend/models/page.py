@@ -33,6 +33,10 @@ class Page(db.Model):
 
     google_analytics_code = db.Column('google_analytics_code', db.String(24))
 
+    count_down_timezone = db.Column('count_down_timezone', db.String(64))
+    count_down_datetime = db.Column('count_down_datetime', db.DateTime())
+    count_down_redirect_url = db.Column('count_down_redirect_url', db.String(128))
+
 
     def with_features(self):
         with open('backend/stubs/features.json', 'r') as json_file:
@@ -42,12 +46,7 @@ class Page(db.Model):
 
         for feature in features:
             for field in feature.get('fields'):
-                page_field_value = page_dict.get( field.get('id') )
-
-                if page_field_value:
-                    field['value'] = page_field_value
-                else:
-                    field['value'] = ''
+                field['value'] = page_dict.get( field.get('id') ) or field.get('value') or ''
 
                 if field.get('id') == 'search_results_title':
                     field['placeholder'] = page_dict.get('content_title') \
@@ -76,11 +75,9 @@ class Page(db.Model):
 
         for feature in features:
             for field in feature.get('fields'):
+
                 if not page_dict.get( field.get('id') ):
-                    if field.get('default'):
-                        page_dict[ field.get('id') ] = field.get('default')
-                    else:
-                        page_dict[ field.get('id') ] = ''
+                    page_dict[ field.get('id') ] = field.get('default') or ''
 
                 if field.get('id') == 'search_results_title':
                     page_dict['search_results_title'] = page_dict.get('search_results_title') \
@@ -90,5 +87,14 @@ class Page(db.Model):
                     page_dict['search_results_description'] = page_dict.get('search_results_description') \
                                             or page_dict.get('content_sub_title') \
                                             or ''
+
+        if page_dict.get('count_down_timezone'):
+            page_dict['count_down_timezone'] = page_dict['count_down_timezone'].split('|')[1]
+
+        if page_dict.get('count_down_datetime'):
+            page_dict['count_down_datetime_with_timezone'] = " ".join([
+                str( page_dict['count_down_datetime'] ),
+                page_dict['count_down_timezone']
+            ])
 
         return page_dict

@@ -1,18 +1,23 @@
 {% from 'macros/form/validation.html' import validation, wtf_errors %}
 
-{% macro text( field ) -%}
+{% macro datepicker( field ) -%}
     <fieldset class="fieldset {{ field.id }}">
         <label class="label" for="{{ field.id }}">{{ field.label }}</label>
-        <div class="field-wrap">
+        <div class="datepicker-wrap">
             <input type="text"
-                class="field"
+                class="field {{ 'filled' if field.value }}"
                 id="{{ field.id }}"
                 name="{{ field.id }}"
-                value="{{ field.value }}"
                 placeholder="{{ field.placeholder | default( field.default or '' ) }}"
+                value="{{ field.value | strftime('%Y/%m/%d %H:%M') }}"
                 {{ 'readonly' if field.readonly }}
-                {{ 'required' if field.required }}
             />
+            <svg class="icon calendar">
+                <use class="use" xlink:href="#calendar"></use>
+            </svg>
+            <svg class="icon close">
+                <use class="use" xlink:href="#close"></use>
+            </svg>
         </div>
         {{ validation( field.validation ) }}
         {{ wtf_errors( field.errors ) }}

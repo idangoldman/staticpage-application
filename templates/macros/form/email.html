@@ -10,6 +10,7 @@
                 name="{{ field.id }}"
                 value="{{ field.value }}"
                 placeholder="{{ field.placeholder | default( field.default or '' ) }}"
+                {{ 'readonly' if field.readonly }}
                 {{ 'required' if field.required }}
             />
         </div>

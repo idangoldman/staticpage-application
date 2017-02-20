@@ -1,10 +1,10 @@
 {% from 'macros/form/validation.html' import validation, wtf_errors %}
 
-{% macro text( field ) -%}
+{% macro url( field ) -%}
     <fieldset class="fieldset {{ field.id }}">
         <label class="label" for="{{ field.id }}">{{ field.label }}</label>
         <div class="field-wrap">
-            <input type="text"
+            <input type="url"
                 class="field"
                 id="{{ field.id }}"
                 name="{{ field.id }}"

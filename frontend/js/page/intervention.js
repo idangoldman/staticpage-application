@@ -11,7 +11,9 @@ import {
     UPDATE_FONT_COLOR,
     UPDATE_CONTENT_ALIGNMENT,
     UPDATE_CONTENT_DIRECTION,
-    UPDATE_ADDITIONAL_STYLES
+    UPDATE_ADDITIONAL_STYLES,
+    UPDATE_COUNT_DOWN_DATETIME,
+    UPDATE_COUNT_DOWN_TIMEZONE
 } from 'page/constants';
 
 import StyleSheet from 'page/styles';
@@ -35,6 +37,8 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case UPDATE_CONTENT_ALIGNMENT: handleContentAlignmnet( data ); break;
             case UPDATE_CONTENT_DIRECTION: handleContentDirection( data ); break;
             case UPDATE_ADDITIONAL_STYLES: handleAdditionalStyles( data ); break;
+            case UPDATE_COUNT_DOWN_DATETIME: handleCountDownDatetime( data ); break;
+            case UPDATE_COUNT_DOWN_TIMEZONE: handleCountDownTimezone( data ); break;
         }
     }
 });
@@ -42,7 +46,7 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
 // http://shebang.brandonmintern.com/foolproof-html-escaping-in-javascript/
 function escapeHtml(str) {
     var div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
+    div.appendChild( document.createTextNode( str ) );
     return div.innerHTML;
 }
 
@@ -157,4 +161,22 @@ function handleContentDirection( { value } ) {
 
 function handleAdditionalStyles( { value } ) {
     $('.css-additional').html( escapeHtml( value ) );
+}
+
+function handleCountDownDatetime( { value } ) {
+    if ( value.length ) {
+        window.countDown.datetime = value;
+        window.countDown.tick();
+    } else {
+        window.countDown.datetime = '';
+        window.countDown.countDownTimeoutID = 0;
+        window.countDown.node.style.display = 'none';
+    }
+}
+
+function handleCountDownTimezone( { value } ) {
+    var timezone = value.split('|').pop();
+
+    window.countDown.timezone = timezone;
+    window.countDown.tick();
 }

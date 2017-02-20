@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import current_app, request, jsonify
 import requests
 
@@ -54,9 +55,23 @@ def page( id ):
 
     else:
         request_data = request.get_json()
-        setattr( page, request_data['name'], request_data['value'] )
-        db.session.commit()
 
-        response_data = request_data
+        if request_data['name'] in page.__dict__:
+
+            if 'count_down_datetime' == request_data['name']:
+                if request_data['value']:
+                    request_data['value'] = datetime.strptime( request_data['value'], '%Y/%m/%d %H:%M' )
+                else:
+                    request_data['value'] = None
+
+            try:
+                setattr( page, request_data['name'], request_data['value'] )
+                db.session.commit()
+            except Exception, e:
+                return errors.bad_request( 'field was not saved' )
+
+            response_data = request_data
+        else:
+            return errors.bad_request('field can\'t be reached')
 
     return jsonify( { 'status': 'ok', 'data': response_data } )

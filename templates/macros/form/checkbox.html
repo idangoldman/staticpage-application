@@ -4,9 +4,11 @@
             class="field"
             id="{{ field.id }}"
             name="{{ field.id }}"
-            value="{{ field.value }}"
+            value="{{ field.value | default( field.default or '' ) }}"
+            {{ 'checked' if field.value or field.default != '' }}
             {{ 'required' if field.required }}
         /><label class="label" for="{{ field.id }}">{{ field.label }}</label>
+        
         {% if field.message %}
             <span class="message">{{ field.message | markdown }}</span>
         {% endif %}

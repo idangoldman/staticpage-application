@@ -77,9 +77,34 @@
         <h2 class="sub-title">{{ content_sub_title }}</h2>
         {% endif %}
 
+        {% if is_intervention or count_down_datetime %}
+        <div class="count-down-clock">
+            <span class="time">
+                <strong class="unit" id="days">00</strong>
+                <i class="label">days</i>
+            </span>
+            <span class="separator">:</span>
+            <span class="time">
+                <strong class="unit" id="hours">00</strong>
+                <i class="label">hours</i>
+            </span>
+            <span class="separator">:</span>
+            <span class="time">
+                <strong class="unit" id="minutes">00</strong>
+                <i class="label">minutes</i>
+            </span>
+            <span class="separator">:</span>
+            <span class="time">
+                <strong class="unit" id="seconds">00</strong>
+                <i class="label">seconds</i>
+            </span>
+        </div>
+        {% endif %}
+
         {% if is_intervention or content_description %}
         <p class="description">{{ content_description }}</p>
         {% endif %}
+
     </article>
 {% endblock %}
 
@@ -87,8 +112,82 @@
     {{ super() }}
 
     {% if google_analytics_code %}
-        {% from 'macros/3rd-party.html' import google_analytics %}
-        {{ google_analytics( google_analytics_code ) }}
+    {% from 'macros/3rd-party.html' import google_analytics %}
+    {{ google_analytics( google_analytics_code ) }}
+    {% endif %}
+
+    {% if is_intervention or count_down_datetime %}
+    <script>
+        function add_zero( unit ) {
+            return unit < 10 ? '0' + unit : unit;
+        }
+
+        function redirect( url ) {
+            if ( url.trim().length ) {
+                window.location.href = url;
+            }
+        }
+
+        function countDownClock( datetime, timezone, redirectURL ) {
+            this.datetime = datetime || new Date();
+            this.timezone = timezone || '';
+            this.redirectURL = redirectURL || '';
+            this.countDownTimeoutID = null;
+            this.node = document.querySelector('.count-down-clock');
+
+            this.tick = function() {
+                if ( this.datetime.length ) {
+                    var fullDatetime = [ this.datetime, this.timezone ].join(' '),
+                        deadlineTimestamp = new Date( fullDatetime ).getTime(),
+                        nowTimestamp = new Date().getTime(),
+                        deltaTimestamp = deadlineTimestamp - nowTimestamp;
+
+                    if ( 0 <= deltaTimestamp || 0 === this.countDownTimeoutID ) {
+                        this.render( this.clock( deltaTimestamp ) );
+                        this.node.style.display = 'flex';
+                        this.countDownTimeoutID = setTimeout( function() { this.tick() }, 1000 );
+                    } else if ( 0 >= deltaTimestamp ) {
+                        this.render( this.clock( 0 ) );
+                        this.countDownTimeoutID = clearTimeout( this.countDownTimeoutID );
+
+                        redirect( this.redirectURL );
+                    }
+                }
+
+            };
+
+            this.clock = function( timestamp ) {
+                return {
+                    'seconds': Math.floor( ( timestamp / 1000 ) % 60 ),
+                    'minutes': Math.floor( ( timestamp / 1000 / 60 ) % 60 ),
+                    'hours': Math.floor( ( timestamp / ( 1000 * 60 * 60 ) ) % 24 ),
+                    'days': Math.floor( timestamp / ( 1000 * 60 * 60 * 24 ) )
+                };
+            };
+
+            this.render = function( clock ) {
+                for ( var unit in clock ) {
+                    this.node.querySelector( '#' + unit ).innerHTML = add_zero( clock[ unit ] );
+                }
+            };
+
+            return this;
+        }
+
+        var countDownData = {
+            'datetime': '{{ count_down_datetime | default('') }}',
+            'timezone': '{{ count_down_timezone | default('') }}',
+            'redirectURL': '{{ count_down_redirect_url | default('') }}'
+        };
+
+        var countDown = countDownClock(
+            countDownData.datetime,
+            countDownData.timezone,
+            countDownData.redirectURL
+        );
+
+        countDown.tick();
+    </script>
     {% endif %}
 
     {% if is_intervention %}

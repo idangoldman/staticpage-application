@@ -1,34 +1,7 @@
 import $ from 'jquery';
 import { component } from 'imports?$=jquery!flightjs';
-import {
-    UPDATE_LOGO,
-    UPDATE_TITLE,
-    UPDATE_SUB_TITLE,
-    UPDATE_DESCRIPTION,
-    UPDATE_BACKGROUND_IMAGE,
-    UPDATE_BACKGROUND_COLOR,
-    UPDATE_BACKGROUND_REPEAT,
-    UPDATE_FONT_FAMILY,
-    UPDATE_FONT_COLOR,
-    UPDATE_CONTENT_ALIGNMENT,
-    UPDATE_CONTENT_DIRECTION,
-    UPDATE_ADDITIONAL_STYLES
-} from 'page/constants';
+import * as pageUpdateFields from 'page/constants';
 
-let pageUpdateFieldsFilter = [
-    UPDATE_LOGO,
-    UPDATE_TITLE,
-    UPDATE_SUB_TITLE,
-    UPDATE_DESCRIPTION,
-    UPDATE_BACKGROUND_IMAGE,
-    UPDATE_BACKGROUND_COLOR,
-    UPDATE_BACKGROUND_REPEAT,
-    UPDATE_FONT_FAMILY,
-    UPDATE_FONT_COLOR,
-    UPDATE_CONTENT_ALIGNMENT,
-    UPDATE_CONTENT_DIRECTION,
-    UPDATE_ADDITIONAL_STYLES
-];
 
 var postMessaging = component( function() {
     this.after('initialize', function() {
@@ -43,9 +16,11 @@ var postMessaging = component( function() {
     }
 
     function updatePage( event, data ) {
-        if ( pageUpdateFieldsFilter.indexOf( data.name ) !== -1 ) {
-            message( 'updatePageContent', data );
-        }
+        Object.keys(pageUpdateFields).forEach(function( key ) {
+            if ( pageUpdateFields[ key ] === data.name ) {
+                message( 'updatePageContent', data );
+            }
+        });
     }
 });
 

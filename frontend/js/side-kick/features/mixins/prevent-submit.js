@@ -1,6 +1,4 @@
-import $ from 'jquery';
-
-var withPreventSubmit = function mixin() {
+export default function withPreventSubmit() {
     this.attributes({
         'form': 'form',
     });
@@ -11,5 +9,3 @@ var withPreventSubmit = function mixin() {
         } );
     });
 };
-
-export default withPreventSubmit;
