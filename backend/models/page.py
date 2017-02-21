@@ -69,6 +69,9 @@ class Page(db.Model):
                     field['description'] = page_dict.get('search_results_description') \
                                             or page_dict.get('content_sub_title') \
                                             or ''
+                if field.get('type') == 'fieldset':
+                    for second_field in field.get('fields'):
+                        second_field['value'] = page_dict.get( second_field.get('id') ) or second_field.get('value') or ''
 
         return features
 
