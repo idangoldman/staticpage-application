@@ -37,6 +37,12 @@ class Page(db.Model):
     count_down_datetime = db.Column('count_down_datetime', db.DateTime())
     count_down_redirect_url = db.Column('count_down_redirect_url', db.String(128))
 
+    mailing_list_service = db.Column('mailing_list_service', db.String(128))
+    mailing_list_completion_url = db.Column('mailing_list_completion_url', db.String(128))
+    mailing_list_mailchimp_username = db.Column('mailing_list_mailchimp_username', db.String(128))
+    mailing_list_mailchimp_api_key = db.Column('mailing_list_mailchimp_api_key', db.String(128))
+    mailing_list_mailchimp_list_id = db.Column('mailing_list_mailchimp_list_id', db.String(128))
+
 
     def with_features(self):
         with open('backend/stubs/features.json', 'r') as json_file:
