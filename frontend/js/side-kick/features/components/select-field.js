@@ -14,7 +14,9 @@ export default component( withFocus, withState, function textField() {
 
     this.initialState({
         name: this.fromAttr('fieldName'),
-        value: ''
+        value: function() {
+            return this.select('field').val();
+        }
     });
 
     this.after('initialize', function() {

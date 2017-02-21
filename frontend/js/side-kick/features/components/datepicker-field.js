@@ -22,7 +22,7 @@ export default component( withFocus, withState, withValidation, function datePic
         name: this.fromAttr('fieldName'),
         value: function() {
             return this.select('field').val();
-        },
+        }
     });
 
     this.after('initialize', function() {
@@ -43,7 +43,7 @@ export default component( withFocus, withState, withValidation, function datePic
 
     this.fieldClear = function( event ) {
         this.attr.datePicker.clear();
-        
+
         this.select('field').trigger('fieldChanged');
     };
 

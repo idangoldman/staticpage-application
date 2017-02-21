@@ -186,16 +186,16 @@
                 "name": "service",
                 "label": "Service",
                 "type": "select",
-                "default": "no",
+                "default": "",
                 "options": [
-                    { "key": "no", "value": "Pick a service to use" },
+                    { "key": "", "value": "Select a service" },
                     { "key": "mailchimp", "value": "MailChimp" },
                     { "key": "getresponse", "value": "GetResponse" }
                 ]
             },
             {
                 "id": "mailing_list_mailchimp",
-                "name": "mailing-list-mailchimp",
+                "name": "mailchimp",
                 "type": "fieldset",
                 "fields": [
                     {
@@ -220,7 +220,7 @@
             },
             {
                 "id": "mailing_list_getresponse",
-                "name": "mailing-list-getresponse",
+                "name": "getresponse",
                 "type": "fieldset",
                 "fields": [
                     {
