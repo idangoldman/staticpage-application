@@ -106,6 +106,15 @@
         {% endif %}
 
     </article>
+
+    {% if is_intervention or mailing_list_service %}
+    <form action="#" method="POST" class="newsletter">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <input type="text" class="email" name="email" placeholder="your@email.work">
+        <button type="submit" class="submit">Get Early Access</button>
+    </form>
+    {% endif %}
+    
 {% endblock %}
 
 {% block footer %}
@@ -187,6 +196,30 @@
         );
 
         countDown.tick();
+    </script>
+    {% endif %}
+
+    {% if is_intervention or mailing_list_service %}
+    <script>
+        function isEmail( address ) {
+            return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test( address );
+        }
+
+        function haveValue( value ) {
+            return !! value.trim().length;
+        }
+
+        function submitCallback( event ) {
+            var emailElement = event.currentTarget.querySelector('.email');
+
+            if ( ! haveValue( emailElement.value ) && ! isEmail( emailElement.value ) ) {
+                event.preventDefault();
+                emailElement.style.borderColor = '#f00';
+            }
+        }
+
+        document.querySelector('.newsletter')
+                .addEventListener( 'submit', submitCallback );
     </script>
     {% endif %}
 
