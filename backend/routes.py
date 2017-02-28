@@ -50,6 +50,26 @@ def page_view( site_name ):
                      .first_or_404() \
                      .with_defaults()
 
+
+    form = NewsletterForm()
+
+    if form.validate_on_submit():
+        has_subscribed = mailchimp_subscribe(
+            form.email.data,
+            payload['mailing_list_mailchimp_username'],
+            payload['mailing_list_mailchimp_api_key'],
+            payload['mailing_list_mailchimp_list_id']
+        )
+
+        if has_subscribed:
+            if payload.get('mailing_list_successful_submission') == 'successful-submission-message' \
+                and payload.get('mailing_list_message'):
+                flash( payload.get('mailing_list_message') )
+            elif payload.get('mailing_list_successful_submission') == 'successful-submission-redirect' \
+                and payload.get('mailing_list_redirect_url'):
+                return redirect( payload.get('mailing_list_redirect_url') )
+
+
     return render_template( 'page/index.html', **payload )
 
 
