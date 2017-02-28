@@ -58,7 +58,6 @@
 
     .sub-title {
         font-size: 2em;
-        // font-style: italic;
     }
 
     .description {
@@ -88,7 +87,6 @@
         margin-right: px2rem(5);
 
         &, &::placeholder {
-            color: #fff;
             text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
         }
 
@@ -98,9 +96,16 @@
     }
 
     .submit {
-        background-color: $theme-second-color;
-        border-color: $theme-second-color;
         cursor: pointer;
+        text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+    }
+
+    .message {
+        @include text-break;
+
+        font-size: 1.5em;
+        font-weight: 600;
+        line-height: 1.5em;
         text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
     }
 }

@@ -125,6 +125,18 @@ function handleFontFamily( { value } ) {
 
 function handleFontColor( { value } ) {
     css( 'body, button, input, select, textarea', 'color', value );
+
+    var placeholder = '.newsletter .email',
+        placeholder_prefixes = [
+            '::-webkit-input-placeholder',
+            '::-moz-placeholder',
+            ':-ms-input-placeholder',
+            '::placeholder'
+        ];
+
+    for ( var index = 0; index < placeholder_prefixes.length; index++ ) {
+        css( placeholder + placeholder_prefixes[ index ], 'color', value );
+    }
 }
 
 function handleContentAlignmnet( { value } ) {
@@ -167,4 +179,19 @@ function handleCountDownTimezone( { value } ) {
 
     window.countDown.timezone = timezone;
     window.countDown.tick();
+}
+
+function handleMailingListCtaColor( { value } ) {
+    css('.newsletter .submit', {
+        'background-color': value,
+        'border-color': value
+    });
+}
+
+function handleMailingListCtaText( { value } ) {
+    $('.newsletter .submit').html( escapeHtml( value ) );
+}
+
+function handleMailingListPlaceholderText( { value } ) {
+    $('.newsletter .email').attr( 'placeholder', escapeHtml( value ) );
 }

@@ -23,9 +23,24 @@
         }
 
         body, button, input, select, textarea {
-            font-family: {{ design_font_family }};
             color: {{ design_font_color }};
+            font-family: {{ design_font_family }};
         }
+
+        {% if is_inter or mailing_list_service != '' %}
+            {% set placeholder = '.newsletter .email' %}
+            {% set placeholder_prefixes = [
+                        '::-webkit-input-placeholder',
+                        '::-moz-placeholder',
+                        ':-ms-input-placeholder',
+                        '::placeholder'
+            ] %}
+            {% for prefix in placeholder_prefixes %}
+        {{ placeholder + prefix }} {
+            color: {{ design_font_color }}
+        }
+            {% endfor %}
+        {% endif %}
 
         .background {
             background-color: {{ design_background_color }};
@@ -53,6 +68,12 @@
             margin-right: auto;
             {% endif %}
         }
+
+        .newsletter .submit {
+            background-color: {{ mailing_list_cta_color }};
+            border-color: {{ mailing_list_cta_color }};
+        }
+
     </style>
 
     {% if design_additional_styles %}
@@ -108,13 +129,19 @@
     </article>
 
     {% if is_intervention or mailing_list_service %}
-    <form action="#" method="POST" class="newsletter">
+    <form action="#" method="POST" class="newsletter" {% if mailing_list_service == '' %}style="display: none"{% endif %}>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}<h2 class="message">{{ message }}</h2>{% endfor %}
+        {% else %}
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <input type="text" class="email" name="email" placeholder="your@email.work">
-        <button type="submit" class="submit">Get Early Access</button>
+        <input type="text" class="email" name="email" placeholder="{{ mailing_list_placeholder_text }}">
+        <button type="submit" class="submit">{{ mailing_list_cta_text }}</button>
+        {% endif %}
+    {% endwith %}
     </form>
     {% endif %}
-    
+
 {% endblock %}
 
 {% block footer %}
