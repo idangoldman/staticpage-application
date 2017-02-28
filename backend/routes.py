@@ -1,9 +1,11 @@
-from flask import render_template, current_app, json, send_from_directory, make_response, request, redirect, url_for
+from flask import render_template, current_app, json, send_from_directory, make_response, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 
 from backend.helpers import path_builder, is_phone, get_page_stub
-from backend.models.user import User
 from backend.models.page import Page
+from backend.models.user import User
+from backend.third_party import mailchimp_subscribe
+from backend.website.forms import NewsletterForm
 
 
 @current_app.route('/')
@@ -14,13 +16,31 @@ def index_route():
         return redirect( url_for('website.welcome') )
 
 
-@current_app.route('/page_intervention/<int:page_id>')
+@current_app.route( '/page_intervention/<int:page_id>', methods=['GET', 'POST'] )
 @login_required
-def page_intervention(page_id):
+def page_intervention( page_id ):
     payload = current_user.pages.first().with_defaults()
     payload['is_intervention'] = True
 
-    return render_template('page/index.html', **payload)
+    form = NewsletterForm()
+
+    if form.validate_on_submit():
+        has_subscribed = mailchimp_subscribe(
+            form.email.data,
+            payload['mailing_list_mailchimp_username'],
+            payload['mailing_list_mailchimp_api_key'],
+            payload['mailing_list_mailchimp_list_id']
+        )
+
+        if has_subscribed:
+            if payload.get('mailing_list_successful_submission') == 'successful-submission-message' \
+                and payload.get('mailing_list_message'):
+                flash( payload.get('mailing_list_message') )
+            elif payload.get('mailing_list_successful_submission') == 'successful-submission-redirect' \
+                and payload.get('mailing_list_redirect_url'):
+                return redirect( payload.get('mailing_list_redirect_url') )
+
+    return render_template( 'page/index.html', **payload )
 
 
 @current_app.route('/page/<site_name>')
