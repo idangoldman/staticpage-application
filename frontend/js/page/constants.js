@@ -12,3 +12,6 @@ export const UPDATE_CONTENT_DIRECTION = 'design_content_direction';
 export const UPDATE_ADDITIONAL_STYLES = 'design_additional_styles';
 export const UPDATE_COUNT_DOWN_DATETIME = 'count_down_datetime';
 export const UPDATE_COUNT_DOWN_TIMEZONE = 'count_down_timezone';
+export const UPDATE_MAILING_LIST_CTA_COLOR = 'mailing_list_cta_color';
+export const UPDATE_MAILING_LIST_CTA_TEXT = 'mailing_list_cta_text';
+export const UPDATE_MAILING_LIST_PLACEHOLDER_TEXT = 'mailing_list_placeholder_text';

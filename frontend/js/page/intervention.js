@@ -1,20 +1,5 @@
 import $ from 'jquery';
-import {
-    UPDATE_LOGO,
-    UPDATE_TITLE,
-    UPDATE_SUB_TITLE,
-    UPDATE_DESCRIPTION,
-    UPDATE_BACKGROUND_IMAGE,
-    UPDATE_BACKGROUND_COLOR,
-    UPDATE_BACKGROUND_REPEAT,
-    UPDATE_FONT_FAMILY,
-    UPDATE_FONT_COLOR,
-    UPDATE_CONTENT_ALIGNMENT,
-    UPDATE_CONTENT_DIRECTION,
-    UPDATE_ADDITIONAL_STYLES,
-    UPDATE_COUNT_DOWN_DATETIME,
-    UPDATE_COUNT_DOWN_TIMEZONE
-} from 'page/constants';
+import * as C from 'page/constants';
 
 import StyleSheet from 'page/styles';
 var css = new StyleSheet('intervention'),
@@ -25,20 +10,23 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
 
     if ( ! $.isEmptyObject( data ) ) {
         switch( data.name ) {
-            case UPDATE_LOGO: handleLogo( data ); break;
-            case UPDATE_TITLE: handleTitle( data ); break;
-            case UPDATE_SUB_TITLE: handleSubTitle( data ); break;
-            case UPDATE_DESCRIPTION: handleDescription( data ); break;
-            case UPDATE_BACKGROUND_IMAGE: handleBackgroundImage( data ); break;
-            case UPDATE_BACKGROUND_COLOR: handleBackgroundColor( data ); break;
-            case UPDATE_BACKGROUND_REPEAT: handleBackgroundRepeat( data ); break;
-            case UPDATE_FONT_FAMILY: handleFontFamily( data ); break;
-            case UPDATE_FONT_COLOR: handleFontColor( data ); break;
-            case UPDATE_CONTENT_ALIGNMENT: handleContentAlignmnet( data ); break;
-            case UPDATE_CONTENT_DIRECTION: handleContentDirection( data ); break;
-            case UPDATE_ADDITIONAL_STYLES: handleAdditionalStyles( data ); break;
-            case UPDATE_COUNT_DOWN_DATETIME: handleCountDownDatetime( data ); break;
-            case UPDATE_COUNT_DOWN_TIMEZONE: handleCountDownTimezone( data ); break;
+            case C.UPDATE_LOGO: handleLogo( data ); break;
+            case C.UPDATE_TITLE: handleTitle( data ); break;
+            case C.UPDATE_SUB_TITLE: handleSubTitle( data ); break;
+            case C.UPDATE_DESCRIPTION: handleDescription( data ); break;
+            case C.UPDATE_BACKGROUND_IMAGE: handleBackgroundImage( data ); break;
+            case C.UPDATE_BACKGROUND_COLOR: handleBackgroundColor( data ); break;
+            case C.UPDATE_BACKGROUND_REPEAT: handleBackgroundRepeat( data ); break;
+            case C.UPDATE_FONT_FAMILY: handleFontFamily( data ); break;
+            case C.UPDATE_FONT_COLOR: handleFontColor( data ); break;
+            case C.UPDATE_CONTENT_ALIGNMENT: handleContentAlignmnet( data ); break;
+            case C.UPDATE_CONTENT_DIRECTION: handleContentDirection( data ); break;
+            case C.UPDATE_ADDITIONAL_STYLES: handleAdditionalStyles( data ); break;
+            case C.UPDATE_COUNT_DOWN_DATETIME: handleCountDownDatetime( data ); break;
+            case C.UPDATE_COUNT_DOWN_TIMEZONE: handleCountDownTimezone( data ); break;
+            case C.UPDATE_MAILING_LIST_CTA_COLOR: handleMailingListCtaColor( data ); break;
+            case C.UPDATE_MAILING_LIST_CTA_TEXT: handleMailingListCtaText( data ); break;
+            case C.UPDATE_MAILING_LIST_PLACEHOLDER_TEXT: handleMailingListPlaceholderText( data ); break;
         }
     }
 });
