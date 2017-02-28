@@ -24,6 +24,7 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case C.UPDATE_ADDITIONAL_STYLES: handleAdditionalStyles( data ); break;
             case C.UPDATE_COUNT_DOWN_DATETIME: handleCountDownDatetime( data ); break;
             case C.UPDATE_COUNT_DOWN_TIMEZONE: handleCountDownTimezone( data ); break;
+            case C.UPDATE_MAILING_LIST_SERVICE: handleMailingListService( data ); break;
             case C.UPDATE_MAILING_LIST_CTA_COLOR: handleMailingListCtaColor( data ); break;
             case C.UPDATE_MAILING_LIST_CTA_TEXT: handleMailingListCtaText( data ); break;
             case C.UPDATE_MAILING_LIST_PLACEHOLDER_TEXT: handleMailingListPlaceholderText( data ); break;
@@ -179,6 +180,11 @@ function handleCountDownTimezone( { value } ) {
 
     window.countDown.timezone = timezone;
     window.countDown.tick();
+}
+
+function handleMailingListService( { value } ) {
+    var displayValue = value.length ? 'block' : 'none';
+    css( '.newsletter', 'display', displayValue );
 }
 
 function handleMailingListCtaColor( { value } ) {

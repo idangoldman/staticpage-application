@@ -27,21 +27,6 @@
             font-family: {{ design_font_family }};
         }
 
-        {% if is_inter or mailing_list_service != '' %}
-            {% set placeholder = '.newsletter .email' %}
-            {% set placeholder_prefixes = [
-                        '::-webkit-input-placeholder',
-                        '::-moz-placeholder',
-                        ':-ms-input-placeholder',
-                        '::placeholder'
-            ] %}
-            {% for prefix in placeholder_prefixes %}
-        {{ placeholder + prefix }} {
-            color: {{ design_font_color }}
-        }
-            {% endfor %}
-        {% endif %}
-
         .background {
             background-color: {{ design_background_color }};
             background-repeat: {{ design_background_repeat }};
@@ -69,11 +54,31 @@
             {% endif %}
         }
 
+        {% if is_intervention or mailing_list_service != '' %}
+            {% set placeholder = '.newsletter .email' %}
+            {% set placeholder_prefixes = [
+                        '::-webkit-input-placeholder',
+                        '::-moz-placeholder',
+                        ':-ms-input-placeholder',
+                        '::placeholder'
+            ] %}
+            {% for prefix in placeholder_prefixes %}
+        {{ placeholder + prefix }} {
+            color: {{ design_font_color }}
+        }
+            {% endfor %}
+
         .newsletter .submit {
             background-color: {{ mailing_list_cta_color }};
             border-color: {{ mailing_list_cta_color }};
         }
+        {% endif %}
 
+        {% if is_intervention and mailing_list_service == '' %}
+        .newsletter {
+            display: none;
+        }
+        {% endif %}
     </style>
 
     {% if design_additional_styles %}
@@ -129,7 +134,7 @@
     </article>
 
     {% if is_intervention or mailing_list_service %}
-    <form action="#" method="POST" class="newsletter" {% if mailing_list_service == '' %}style="display: none"{% endif %}>
+    <form action="#" method="POST" class="newsletter">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% for message in messages %}<h2 class="message">{{ message }}</h2>{% endfor %}
@@ -180,7 +185,6 @@
 
                     if ( 0 <= deltaTimestamp || 0 === this.countDownTimeoutID ) {
                         this.render( this.clock( deltaTimestamp ) );
-                        this.node.style.display = 'flex';
                         this.countDownTimeoutID = setTimeout( function() { this.tick() }, 1000 );
                     } else if ( 0 >= deltaTimestamp ) {
                         this.render( this.clock( 0 ) );
@@ -205,6 +209,7 @@
                 for ( var unit in clock ) {
                     this.node.querySelector( '#' + unit ).innerHTML = add_zero( clock[ unit ] );
                 }
+                this.node.style.display = 'flex';
             };
 
             return this;
