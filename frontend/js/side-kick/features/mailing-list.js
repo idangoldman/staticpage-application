@@ -11,10 +11,15 @@ var mailingList = baseBox.mixin( function box() {
 
     this.attributes({
         'serviceField': '.mailing_list_service',
-        'completionUrlField': '.mailing_list_completion_url',
         'mailChimpUsernameField': '.mailing_list_mailchimp_username',
         'mailChimpAPIKeyField': '.mailing_list_mailchimp_api_key',
-        'mailChimpListIdField': '.mailing_list_mailchimp_list_id'
+        'mailChimpListIdField': '.mailing_list_mailchimp_list_id',
+        'successfulSubmissionField': '.mailing_list_successful_submission',
+        'messageField': '.mailing_list_message',
+        'redirectUrlField': '.mailing_list_redirect_url',
+        'ctaColorField': '.mailing_list_cta_color',
+        'ctaTextField': '.mailing_list_cta_text',
+        'placeholderTextField': '.mailing_list_placeholder_text'
     });
 
     this.after('initialize', function() {
@@ -39,10 +44,36 @@ var mailingList = baseBox.mixin( function box() {
             'fieldName': 'mailing_list_mailchimp_list_id'
         });
 
-        // Completion URL
-        this.attachChild( urlFieldComponent, this.select('completionUrlField'), {
-            'fieldName': 'mailing_list_completion_url',
+        // Successful Submission
+        this.attachChild( selectGroupFieldComponent, this.select('successfulSubmissionField'), {
+            'fieldName': 'mailing_list_successful_submission'
+        });
+
+        // Message
+        this.attachChild( textFieldComponent, this.select('messageField'), {
+            'fieldName': 'mailing_list_message'
+        });
+
+        // Redirect URL
+        this.attachChild( urlFieldComponent, this.select('redirectUrlField'), {
+            'fieldName': 'mailing_list_redirect_url',
             'toValidate': ['url']
+        });
+
+        // CTA Button Color
+        this.attachChild( textFieldComponent, this.select('ctaColorField'), {
+            'fieldName': 'mailing_list_cta_color',
+            'toValidate': ['hex_color']
+        });
+
+        // CTA Button Text
+        this.attachChild( textFieldComponent, this.select('ctaTextField'), {
+            'fieldName': 'mailing_list_cta_text'
+        });
+
+        // Placeholer Text
+        this.attachChild( textFieldComponent, this.select('placeholderTextField'), {
+            'fieldName': 'mailing_list_placeholder_text'
         });
 
     });

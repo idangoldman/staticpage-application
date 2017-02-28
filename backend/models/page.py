@@ -38,10 +38,15 @@ class Page(db.Model):
     count_down_redirect_url = db.Column('count_down_redirect_url', db.String(128))
 
     mailing_list_service = db.Column('mailing_list_service', db.String(128))
-    mailing_list_completion_url = db.Column('mailing_list_completion_url', db.String(128))
     mailing_list_mailchimp_username = db.Column('mailing_list_mailchimp_username', db.String(128))
     mailing_list_mailchimp_api_key = db.Column('mailing_list_mailchimp_api_key', db.String(128))
     mailing_list_mailchimp_list_id = db.Column('mailing_list_mailchimp_list_id', db.String(128))
+    mailing_list_successful_submission = db.Column('mailing_list_successful_submission', db.String(128), default='successful-submission-message')
+    mailing_list_message = db.Column('mailing_list_message', db.String(128))
+    mailing_list_redirect_url = db.Column('mailing_list_redirect_url', db.String(128))
+    mailing_list_cta_color = db.Column('mailing_list_cta_color', db.String(8))
+    mailing_list_cta_text = db.Column('mailing_list_cta_text', db.String(128))
+    mailing_list_placeholder_text = db.Column('mailing_list_placeholder_text', db.String(128))
 
 
     def with_features(self):
@@ -97,8 +102,13 @@ class Page(db.Model):
                                             or page_dict.get('content_sub_title') \
                                             or ''
 
+                if field.get('type') == 'fieldset':
+                    for second_field in field.get('fields'):
+                        if not page_dict.get( second_field.get('id') ):
+                            page_dict[ second_field.get('id') ] = second_field.get('default') or ''
+
         if page_dict.get('count_down_timezone'):
-            page_dict['count_down_timezone'] = page_dict['count_down_timezone'].split('|')[1]
+            page_dict['count_down_timezone'] = page_dict['count_down_timezone'].split('|')[ 1 ]
 
         if page_dict.get('count_down_datetime'):
             page_dict['count_down_datetime_with_timezone'] = " ".join([
