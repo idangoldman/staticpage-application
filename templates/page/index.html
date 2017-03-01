@@ -139,9 +139,11 @@
         {% if messages %}
             {% for message in messages %}<h2 class="message">{{ message }}</h2>{% endfor %}
         {% else %}
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <input type="text" class="email" name="email" placeholder="{{ mailing_list_placeholder_text }}">
-        <button type="submit" class="submit">{{ mailing_list_cta_text }}</button>
+        <div>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="text" class="email" name="email" placeholder="{{ mailing_list_placeholder_text }}">
+            <button type="submit" class="submit">{{ mailing_list_cta_text }}</button>
+        </div>
         {% endif %}
     {% endwith %}
     </form>
