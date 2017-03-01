@@ -69,3 +69,5 @@
 `ncu -u` - upgrade
 
 `ncu -a` - upgrade core
+
+`cd ~/public_html; php -S localhost:8000` - simple php server

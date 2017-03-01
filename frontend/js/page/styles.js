@@ -14,7 +14,7 @@
 function StyleSheet( stylesheetTitle ) {
     this.CSSOM = this.findStyle( stylesheetTitle );
 
-    return this.select.bind(this);
+    return this.select.bind( this );
 }
 
 StyleSheet.prototype.CSSOM = null;
@@ -35,12 +35,13 @@ StyleSheet.prototype.findStyle = function( cssClass ) {
     if ( null === CSSOM ) {
         var newStyleSheet = document.createElement('style');
         newStyleSheet.className = prefix + cssClass;
-        document.getElementsByTagName('head')[0].appendChild( newStyleSheet );
-        CSSOM = document.styleSheets[ document.styleSheets.length -1 ];
+        document.getElementsByTagName('head')[ 0 ].appendChild( newStyleSheet );
+        CSSOM = document.styleSheets[ document.styleSheets.length - 1 ];
     }
 
     return CSSOM
 };
+
 StyleSheet.prototype.findRuleIndex = function( selector ) {
     var rules = this.CSSOM.cssRules,
         ruleIndex = null;
@@ -54,37 +55,68 @@ StyleSheet.prototype.findRuleIndex = function( selector ) {
     return ruleIndex;
 
 };
+
+StyleSheet.prototype.addRule = function( selector, property, value ) {
+    var newRule, ruleIndex;
+
+    switch( typeof property ) {
+        case 'string':
+            newRule = [ selector, '{', property, ':', value, ';', '}' ];
+            break;
+
+        case 'object':
+            newRule = [ selector, '{' ];
+
+            for ( var key in property ) {
+                newRule.push( key, ':', property[ key ], ';' );
+            }
+
+            newRule.push('}');
+            break;
+    }
+
+    ruleIndex = this.CSSOM.insertRule( newRule.join(''), this.CSSOM.cssRules.length );
+
+    return this.CSSOM.cssRules[ ruleIndex ];
+};
+
 StyleSheet.prototype.select = function( selector, property, value ) {
-    var ruleIndex = this.findRuleIndex( selector );
+    var ruleIndex = this.findRuleIndex( selector ),
+        output = null;
 
     if ( null === ruleIndex ) {
-        this.CSSOM.insertRule( selector, 0 );
-        return this.CSSOM;
+        output = this.addRule( selector, property, value );
     } else {
         var rule = this.CSSOM.cssRules[ ruleIndex ];
+
         switch ( typeof property ) {
             case 'undefined':
-                return rule;
+                output = rule;
                 break;
+
             case 'string':
                 if ( '' === property ) {
                     this.CSSOM.deleteRule( ruleIndex );
-                    return this.CSSOM;
+                    output = this.CSSOM;
                 } else if ( undefined === value ) {
-                    return rule.style[ property ];
+                    output = rule.style[ property ];
                 } else {
                     rule.style[ property ] = value;
-                    return rule;
+                    output = rule;
                 }
                 break;
+
             case 'object':
                 for ( var key in property ) {
                     rule.style[ key ] = property[ key ];
                 }
-                return rule;
+
+                output = rule;
                 break;
         }
     }
+
+    return output;
 };
 
 export default StyleSheet;

@@ -23,8 +23,8 @@
         }
 
         body, button, input, select, textarea {
-            font-family: {{ design_font_family }};
             color: {{ design_font_color }};
+            font-family: {{ design_font_family }};
         }
 
         .background {
@@ -53,6 +53,32 @@
             margin-right: auto;
             {% endif %}
         }
+
+        {% if is_intervention or mailing_list_service != '' %}
+            {% set placeholder = '.newsletter .email' %}
+            {% set placeholder_prefixes = [
+                        '::-webkit-input-placeholder',
+                        '::-moz-placeholder',
+                        ':-ms-input-placeholder',
+                        '::placeholder'
+            ] %}
+            {% for prefix in placeholder_prefixes %}
+        {{ placeholder + prefix }} {
+            color: {{ design_font_color }}
+        }
+            {% endfor %}
+
+        .newsletter .submit {
+            background-color: {{ mailing_list_cta_color }};
+            border-color: {{ mailing_list_cta_color }};
+        }
+        {% endif %}
+
+        {% if is_intervention and mailing_list_service == '' %}
+        .newsletter {
+            display: none;
+        }
+        {% endif %}
     </style>
 
     {% if design_additional_styles %}
@@ -106,6 +132,23 @@
         {% endif %}
 
     </article>
+
+    {% if is_intervention or mailing_list_service %}
+    <form action="#" method="POST" class="newsletter">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}<h2 class="message">{{ message }}</h2>{% endfor %}
+        {% else %}
+        <div>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="text" class="email" name="email" placeholder="{{ mailing_list_placeholder_text }}">
+            <button type="submit" class="submit">{{ mailing_list_cta_text }}</button>
+        </div>
+        {% endif %}
+    {% endwith %}
+    </form>
+    {% endif %}
+
 {% endblock %}
 
 {% block footer %}
@@ -144,7 +187,6 @@
 
                     if ( 0 <= deltaTimestamp || 0 === this.countDownTimeoutID ) {
                         this.render( this.clock( deltaTimestamp ) );
-                        this.node.style.display = 'flex';
                         this.countDownTimeoutID = setTimeout( function() { this.tick() }, 1000 );
                     } else if ( 0 >= deltaTimestamp ) {
                         this.render( this.clock( 0 ) );
@@ -169,6 +211,7 @@
                 for ( var unit in clock ) {
                     this.node.querySelector( '#' + unit ).innerHTML = add_zero( clock[ unit ] );
                 }
+                this.node.style.display = 'flex';
             };
 
             return this;
@@ -187,6 +230,30 @@
         );
 
         countDown.tick();
+    </script>
+    {% endif %}
+
+    {% if is_intervention or mailing_list_service %}
+    <script>
+        function isEmail( address ) {
+            return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test( address );
+        }
+
+        function haveValue( value ) {
+            return !! value.trim().length;
+        }
+
+        function submitCallback( event ) {
+            var emailElement = event.currentTarget.querySelector('.email');
+
+            if ( ! haveValue( emailElement.value ) && ! isEmail( emailElement.value ) ) {
+                event.preventDefault();
+                emailElement.style.borderColor = '#f00';
+            }
+        }
+
+        document.querySelector('.newsletter')
+                .addEventListener( 'submit', submitCallback );
     </script>
     {% endif %}
 

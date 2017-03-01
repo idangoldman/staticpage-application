@@ -178,6 +178,116 @@
         ]
     },
     {
+        "name": "mailing-list",
+        "title": "Mailing List",
+        "fields": [
+            {
+                "id": "mailing_list_service",
+                "name": "service",
+                "label": "Service",
+                "type": "select",
+                "default": "",
+                "options": [
+                    { "key": "", "value": "Select a service" },
+                    { "key": "mailchimp", "value": "MailChimp" }
+                ]
+            },
+            {
+                "id": "mailing_list_mailchimp",
+                "name": "mailchimp",
+                "type": "fieldset",
+                "fields": [
+                    {
+                        "id": "mailing_list_mailchimp_username",
+                        "name": "mailing-list-mailchimp-username",
+                        "label": "Username",
+                        "type": "text"
+                    },
+                    {
+                        "id": "mailing_list_mailchimp_api_key",
+                        "name": "mailing-list-mailchimp-api-key",
+                        "label": "API Key",
+                        "type": "text"
+                    },
+                    {
+                        "id": "mailing_list_mailchimp_list_id",
+                        "name": "mailing-list-mailchimp-list-id",
+                        "label": "List Id",
+                        "type": "text"
+                    }
+                ]
+            },
+            {
+                "id": "mailing_list_successful_submission",
+                "name": "successful-submission",
+                "label": "On Successful Submission",
+                "type": "select",
+                "default": "successful-submission-message",
+                "options": [
+                    { "key": "successful-submission-message", "value": "Message" },
+                    { "key": "successful-submission-redirect", "value": "Redirect URL" }
+                ]
+            },
+            {
+                "id": "mailing_list_message_fieldset",
+                "name": "successful-submission-message",
+                "type": "fieldset",
+                "fields": [
+                    {
+                        "id": "mailing_list_message",
+                        "name": "mailing-list-message",
+                        "label": "Message",
+                        "type": "text",
+                        "default": "Thank you!",
+                        "placeholder": "Thank you!"
+                    }
+                ]
+            },
+            {
+                "id": "mailing_list_redirect_url_fieldset",
+                "name": "successful-submission-redirect",
+                "type": "fieldset",
+                "fields": [
+                    {
+                        "id": "mailing_list_redirect_url",
+                        "name": "mailing_list-redirect-url",
+                        "label": "Redirect URL",
+                        "type": "url",
+                        "placeholder": "https://...",
+                        "message": "After form submission redirect to this url.",
+                        "validation": {
+                            "url": "Not a valid URL."
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "mailing_list_cta_color",
+                "name": "mailing-list-cta-color",
+                "label": "CTA background color",
+                "type": "text",
+                "default": "#000",
+                "validation": {
+                    "hex_color":  "Not a valid Hex color"
+                }
+            },
+            {
+                "id": "mailing_list_cta_text",
+                "name": "mailing-list-cta-text",
+                "label": "CTA button text",
+                "type": "text",
+                "default": "Submit"
+            },
+            {
+                "id": "mailing_list_placeholder_text",
+                "name": "mailing-list-placeholer-text",
+                "label": "Placeholder text",
+                "type": "text",
+                "default": "your@email.work"
+            }
+        ]
+    },
+    {
         "name": "count-down",
         "title": "Count Down Clock",
         "fields": [

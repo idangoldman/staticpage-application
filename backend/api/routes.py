@@ -14,15 +14,20 @@ from backend.models.user import User
 
 @api.route('/download/<site_name>', methods=['GET'])
 def download(site_name):
-    user = User.query.filter( site_name == site_name ).first_or_404()
+    page = Page.query.join( Page.creator ) \
+                     .filter( User.site_name == site_name ) \
+                     .first_or_404();
+
 
     try:
-        page = requests.get( current_app.config['HTTP_HOST'] + '/page/' + site_name, timeout = 10, verify = False );
+        page_response = requests.get( current_app.config['HTTP_HOST'] + '/page/' + site_name, timeout = 10, verify = False );
     except requests.exceptions.RequestException as e:
         return errors.bad_request('page can\'t be reached')
 
-    download_folder_path = create_download_folder( user.email )
-    zip_uri = zip_a_page( page.content, download_folder_path, site_name + '_page' )
+    page_data = page.with_defaults()
+    page_data['file_name'] = page.creator.site_name + '_page'
+    download_folder_path = create_download_folder( page.creator.email )
+    zip_uri = zip_a_page( page_response.content, download_folder_path, page_data )
 
     payload = {
         'url': current_app.config['HTTP_HOST'] + zip_uri
