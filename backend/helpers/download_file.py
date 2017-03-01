@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from flask import current_app
+from flask import current_app, render_template
 from shutil import copyfile, make_archive
 import re
 
@@ -7,19 +7,20 @@ from backend.helpers import path_builder
 from backend.helpers.folder_maker import user_file_uri
 
 
-def zip_a_page( page_content, dest_path, file_name ):
+def zip_a_page( markup, dest_path, page ):
     user_folder_path = path_builder( current_app.config['BASE_PATH'], \
                                      current_app.config['USER_FOLDER'] )
-    archive_name = path_builder( dest_path, file_name )
+    archive_name = path_builder( dest_path, page.get('file_name') )
     archive_root = path_builder( dest_path, 'page' )
+    index_file_extention = 'html'
 
-    soup = BeautifulSoup( page_content, 'html5lib' )
+    soup = BeautifulSoup( markup, 'html5lib' )
 
     file_paths = []
     img_tags = soup.find_all('img')
     link_tags = soup.find_all('link', { 'class', 'css-page' })
-    styles_tag = soup.find_all('style', { 'class', 'css-intervention' })
-
+    style_tags = soup.find_all('style', { 'class', 'css-intervention' })
+    mailing_list = soup.find('form', { 'class', 'newsletter' })
 
     for img in img_tags:
         original_path = img.get('src')
@@ -44,7 +45,7 @@ def zip_a_page( page_content, dest_path, file_name ):
         })
 
 
-    for style in styles_tag:
+    for style in style_tags:
         background_images = re.findall( r"background-image: url(?:\(['\"]?)(.*?)(?:['\"]?\))", style.text );
 
         for background_image in background_images:
@@ -59,16 +60,42 @@ def zip_a_page( page_content, dest_path, file_name ):
             })
 
 
+    if mailing_list:
+        index_file_extention = 'php'
+        soup.insert(0, "<?php require_once( './mailing-list.php' ); ?>")
+        mailing_list.find('div')['style'] = '<?php hide_form(); ?>'
+        mailing_list.select('input[name="csrf_token"]')[0]['value'] = '<?php csrf_token(); ?>'
+        mailing_list.append('<?php print_message(); ?>')
+
+        file_paths.append({
+            'original': 'third-party/mailchimp.php',
+            'new': path_builder( archive_root, 'mailing-list.php' ),
+            'data': {
+                'api_key': page.get('mailing_list_mailchimp_api_key'),
+                'list_id': page.get('mailing_list_mailchimp_list_id'),
+                'username': page.get('mailing_list_mailchimp_username'),
+                'successful_submission': page.get('mailing_list_successful_submission'),
+                'redirect_url': page.get('mailing_list_redirect_url'),
+                'message': page.get('mailing_list_message')
+            }
+        })
+
     for path in file_paths:
-        copyfile( path['original'], path['new'] )
+        if path.get('data'):
+            template = render_template( path.get('original'), **path.get('data') )
+
+            with open( path.get('new'), 'wb' ) as file:
+                file.write( template )
+        else:
+            copyfile( path.get('original'), path.get('new') )
 
 
-    with open( archive_root + '/index.html', 'w' ) as file:
-        encoded_html = soup.encode('utf-8')
-        filtered_html = filter( lambda line_of_code: line_of_code.strip(), encoded_html.split('\n') )
-        html = '\n'.join( filtered_html )
+    with open( archive_root + '/index.' + index_file_extention, 'w' ) as file:
+        encoded_file = soup.encode(formatter=None)
+        filtered_file = filter( lambda line_of_code: line_of_code.strip(), encoded_file.split('\n') )
+        output = '\n'.join( filtered_file )
 
-        file.write( html )
+        file.write( output )
 
     file_path = make_archive( archive_name, 'zip', archive_root )
 
