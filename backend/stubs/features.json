@@ -266,7 +266,7 @@
                 "name": "mailing-list-cta-color",
                 "label": "CTA background color",
                 "type": "text",
-                "default": "#fff",
+                "default": "#000",
                 "validation": {
                     "hex_color":  "Not a valid Hex color"
                 }
