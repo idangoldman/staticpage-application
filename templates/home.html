@@ -7,6 +7,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="theme-color" content="#3D5E57">
 
+    {% from 'macros/favicon.html' import favicon %}
+    {{ favicon() }}
+
     <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet" type="text/css" />
 
 </head><body>

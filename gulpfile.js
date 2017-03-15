@@ -18,12 +18,18 @@ var destFolder = !! argv.dist ? 'dist' : 'static';
 // Default task with watch
 gulp.task('default');
 
-gulp.task('build', ['webpack', 'style', 'svg-sprite', 'background-images']);
+gulp.task('build', ['webpack', 'style', 'svg-sprite', 'background-images', 'images']);
 
 gulp.task('w', ['build'], function() {
     gulp.watch('frontend/scss/**/*.scss', ['style']);
     gulp.watch('frontend/js/**/*.js', ['webpack']);
     gulp.watch('frontend/images/icons/**/*.svg', ['svg-sprite']);
+});
+
+// Move favicon and logo images to static/images folder
+gulp.task('images', function() {
+    return gulp.src('*.png', { cwd: 'frontend/images' })
+        .pipe( gulp.dest( destFolder + '/images'  ) );
 });
 
 // SVG sprite from set of icons
@@ -48,7 +54,7 @@ gulp.task('svg-sprite', function() {
     return gulp.src('**/*.svg', { cwd: 'frontend/images/icons' })
         .pipe( svgSprite( spriteConfig ) )
         .pipe( rename( spriteRename ) )
-        .pipe( gulp.dest( destFolder + '/images') );
+        .pipe( gulp.dest( destFolder + '/images' ) );
 });
 
 //  Background images optimized

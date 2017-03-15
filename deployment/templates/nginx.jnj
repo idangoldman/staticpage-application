@@ -3,25 +3,13 @@ server {
     server_name {{ domain }} www.{{ domain }};
     root {{ www_path }};
 
-    # location ~ /.well-known/acme-challenge {
-    #     default_type 'text/plain';
-    #     root {{ www_path }}/.well-known/acme-challenge;
-    #     allow all;
-    # }
-
     location ~ /.well-known {
         allow all;
     }
 
     location / {
-        return 301 https://{{ domain }}$request_uri;
+        return 301 https://$host$request_uri;
     }
-}
-
-server {
-    listen 443 ssl;
-    server_name www.{{ domain }};
-    return 301 https://{{ domain }}$request_uri;
 }
 
 server {
@@ -30,7 +18,7 @@ server {
     server_tokens off;
 
     listen 443 ssl default_server;
-    server_name {{ domain }};
+    server_name www.{{ domain }} {{ domain }};
     root {{ www_path }};
 
     access_log {{ access_log_path }};
