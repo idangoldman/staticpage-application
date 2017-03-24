@@ -288,11 +288,11 @@
         ]
     },
     {
-        "name": "count-down",
-        "title": "Count Down Clock",
+        "name": "countdown",
+        "title": "Countdown Clock",
         "fields": [
             {
-                "id": "count_down_timezone",
+                "id": "countdown_timezone",
                 "name": "timezone",
                 "label": "Timezone",
                 "type": "select",
@@ -449,19 +449,19 @@
                 ]
             },
             {
-                "id": "count_down_datetime",
+                "id": "countdown_datetime",
                 "name": "datetime",
                 "label": "Date and Time",
                 "type": "datetime",
                 "readonly": true
             },
             {
-                "id": "count_down_redirect_url",
+                "id": "countdown_redirect_url",
                 "name": "redirect_url",
                 "label": "Redirect URL",
                 "type": "url",
                 "placeholder": "https://...",
-                "message": "After count down is done redirect to this url.",
+                "message": "After countdown is done redirect to this url.",
                 "validation": {
                     "url": "Not a valid URL."
                 }

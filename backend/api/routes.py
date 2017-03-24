@@ -63,7 +63,7 @@ def page( id ):
 
         if request_data['name'] in page.__dict__:
 
-            if 'count_down_datetime' == request_data['name']:
+            if 'countdown_datetime' == request_data['name']:
                 if request_data['value']:
                     request_data['value'] = datetime.strptime( request_data['value'], '%Y/%m/%d %H:%M' )
                 else:

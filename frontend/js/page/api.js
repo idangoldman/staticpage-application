@@ -41,17 +41,17 @@ element('.title').off()
 element('.title').trigger()
 
 
-// api.create('count-down:id', { 'id': 'foobar' });
-// api.create('.count-down', { 'id': 'foobar' });
+// api.create('countdown:id', { 'id': 'foobar' });
+// api.create('.countdown', { 'id': 'foobar' });
 
-// api.element('.count-down').then( model, view => {
-//     this.view = view || 'templates/count-down'; // support html, jinja
-//     this.model = model || 'stubs/count-down'; // support json
+// api.element('.countdown').then( model, view => {
+//     this.view = view || 'templates/countdown'; // support html, jinja
+//     this.model = model || 'stubs/countdown'; // support json
 //
 //     return render_template( this.view, this.model );
 // });
 //
-// api.put('count-down/datetime/', { 'timestamp': 14222 }).then( timestamp => {
+// api.put('countdown/datetime/', { 'timestamp': 14222 }).then( timestamp => {
 //
 //     this.view;
 //     this.model;
@@ -59,10 +59,10 @@ element('.title').trigger()
 // }).catch(( message ) => {
 //     console.log( message );
 //
-//     api.get('count-down', {
+//     api.get('countdown', {
 //         model: 'stubs/something',
 //         view: 'template/other'
 //     });
 // });
 //
-// api.remove('count-down');
+// api.remove('countdown');
