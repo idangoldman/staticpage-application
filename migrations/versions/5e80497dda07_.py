@@ -21,10 +21,6 @@ def upgrade():
     op.alter_column('pages', 'count_down_timezone', new_column_name='countdown_timezone', existing_type=sa.String(length=64))
     op.alter_column('pages', 'count_down_redirect_url', new_column_name='countdown_redirect_url', existing_type=sa.String(length=128))
     op.alter_column('pages', 'count_down_datetime', new_column_name='countdown_datetime', existing_type=sa.DateTime())
-
-    # op.add_column('pages', sa.Column('countdown_timezone', sa.String(length=64), nullable=True))
-    # op.add_column('pages', sa.Column('countdown_redirect_url', sa.String(length=128), nullable=True))
-    # op.add_column('pages', sa.Column('countdown_datetime', sa.DateTime(), nullable=True))
     # ### end Alembic commands ###
 
 

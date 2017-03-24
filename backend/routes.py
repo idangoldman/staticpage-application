@@ -102,6 +102,7 @@ def side_kick( page_id ):
 
     payload = {
         'features': page_with_features,
+        'blog_url': current_app.config['BLOG_URL'],
         'is_email_confirmed': current_user.email_confirmed,
         'on_phone': is_phone( request.user_agent ),
         'page_update_url': current_app.config['API_URL'] + '/page/update/' + str( page_id ),
