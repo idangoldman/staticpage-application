@@ -11,8 +11,14 @@ from backend.website.forms import NewsletterForm
 def welcome():
     form = NewsletterForm()
 
-    if form.validate_on_submit() and mailchimp_subscribe( form.email.data ):
-        return redirect( url_for('auth.register', email=form.email.data) )
+    if form.validate_on_submit():
+        if mailchimp_subscribe(
+            form.email.data,
+            current_app.config['MAILCHIMP_USERNAME'],
+            current_app.config['MAILCHIMP_API_KEY'],
+            current_app.config['MAILCHIMP_LIST_ID']
+        ):
+            return redirect( url_for('auth.register', email=form.email.data) )
 
     payload = {
         'form': form,
