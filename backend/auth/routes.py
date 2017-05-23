@@ -176,7 +176,7 @@ def reset_password( token ):
 
     if form.validate_on_submit():
         user = User.query.filter_by( email=email ).first_or_404()
-        user.password = form.password.data
+        user.password = form.new_password.data
         db.session.add( user )
         db.session.commit()
 

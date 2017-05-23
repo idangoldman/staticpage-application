@@ -3,7 +3,7 @@
     "title": "Reset Password",
     "fields": [
         {
-            "id": "password",
+            "id": "new_password",
             "label": "Password",
             "type": "password",
             "required": true
