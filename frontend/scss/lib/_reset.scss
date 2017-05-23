@@ -83,7 +83,7 @@ body, button, input, select, textarea {
 }
 
 @mixin text-break {
-    hyphens: auto;
+    // hyphens: auto;
     white-space: pre-line;
     word-break: break-word;
     word-wrap: break-word;
