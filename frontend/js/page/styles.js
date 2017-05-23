@@ -57,7 +57,8 @@ StyleSheet.prototype.findRuleIndex = function( selector ) {
 };
 
 StyleSheet.prototype.addRule = function( selector, property, value ) {
-    var newRule, ruleIndex;
+    var newRule,
+        ruleIndex = this.CSSOM.cssRules.length;
 
     switch( typeof property ) {
         case 'string':
@@ -73,9 +74,16 @@ StyleSheet.prototype.addRule = function( selector, property, value ) {
 
             newRule.push('}');
             break;
+
+        case 'undefined':
+            if ( selector.length ) {
+                newRule = [ selector ];
+                ruleIndex = 0;
+            }
+            break;
     }
 
-    ruleIndex = this.CSSOM.insertRule( newRule.join(''), this.CSSOM.cssRules.length );
+    ruleIndex = this.CSSOM.insertRule( newRule.join(''), ruleIndex );
 
     return this.CSSOM.cssRules[ ruleIndex ];
 };
