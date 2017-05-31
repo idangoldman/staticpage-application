@@ -1,8 +1,8 @@
 {
     "content_logo": "/static/images/logo.png",
-    "content_title": "Page Creator for You.",
-    "content_sub_title": "CC: Designers, Developers, Marketeers.",
-    "content_description": "Want to create a Coming Soon, Under Maintenance, or a 404 page?\nYou have come to the right place, but as you can see StaticPage creator is still under development and will be deployed in the near future. Meanwhile you can leave your email at the field below and get an early peek at a page creator that just works.",
+    "content_title": "Welcome to StaticPage creator!",
+    "content_sub_title": "Create your own Coming Soon, Under Maintenance, and 404 pages.",
+    "content_description": "StaticPage creator is a perfect fit for you to create an awesome looking static page. Most importantly, it keeps things simple.\nStaticPage developed as a user friendly tool with high quality results, and more features to come.",
     "design_background_image": "/static/images/backgrounds/004.jpeg",
     "design_background_color": "",
     "design_background_repeat": "",
@@ -12,5 +12,5 @@
     "design_content_direction": "",
     "design_additional_styles": "",
     "search_results_title": "",
-    "search_results_description": "Want to create a Coming Soon, Under Maintenance, or a 404 page? You have come to the right place."
+    "search_results_description": ""
 }

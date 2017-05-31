@@ -29,8 +29,8 @@ def register():
         try:
             token = timed_url_safe().dumps( user.email, salt='email-confirm-key' )
             confirm_url = url_for( 'auth.confirm_email', token=token, _external=True )
-            text = render_template( 'auth/emails/confirm.txt', confirm_url=confirm_url )
-            mail.send(Message("Confirm your email", recipients=[ user.email ], body=text))
+            text = render_template( 'auth/emails/confirm.txt', confirm_url=confirm_url, username=user.site_name )
+            mail.send(Message("Confirmation of Successful Registration!", recipients=[ user.email ], body=text))
         except:
             print "Shit."
 
@@ -144,7 +144,7 @@ def forgot_password():
             token = timed_url_safe().dumps( user.email, salt='recover-key' )
             reset_url = url_for( 'auth.reset_password', token=token, _external=True )
             text = render_template( 'auth/emails/reset.txt', reset_url=reset_url )
-            mail.send(Message("Password reset requested", recipients=[ user.email ], body=text))
+            mail.send(Message("Reset password request", recipients=[ user.email ], body=text))
 
         return redirect( url_for('auth.login') )
 

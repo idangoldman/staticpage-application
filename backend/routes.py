@@ -139,13 +139,13 @@ def user_downloads( user_hash, timestamp, file_name ):
 @current_app.errorhandler(401)
 def page_unauthorized(e):
     return render_template('website/_base.html', \
-                            page=get_page_stub('errors/401')), 401
+                            page=get_page_stub('errors/500')), 401
 
 
 @current_app.errorhandler(403)
 def page_forbidden(e):
     return render_template('website/_base.html', \
-                            page=get_page_stub('errors/403')), 403
+                            page=get_page_stub('errors/500')), 403
 
 
 @current_app.errorhandler(404)
@@ -163,4 +163,4 @@ def page_internal_server_error(e):
 @current_app.errorhandler(503)
 def page_service_unavailable(e):
     return render_template('website/_base.html', \
-                            page=get_page_stub('errors/503')), 503
+                            page=get_page_stub('errors/500')), 503
