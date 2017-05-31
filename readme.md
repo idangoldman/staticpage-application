@@ -71,3 +71,8 @@
 `ncu -a` - upgrade core
 
 `cd ~/public_html; php -S localhost:8000` - simple php server
+
+## SSL
+https://www.linode.com/docs/security/ssl/install-lets-encrypt-to-create-ssl-certificates
+`sudo service nginx stop && sudo letsencrypt renew && sudo service nginx start`
+`sudo -H ./letsencrypt-auto certonly --standalone -d staticpage.io -d www.staticpage.io -d blog.staticpage.io -d hello.staticpage.io`

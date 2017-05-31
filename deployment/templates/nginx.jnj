@@ -3,6 +3,12 @@ server {
     server_name {{ domain }} www.{{ domain }};
     root {{ www_path }};
 
+    # location ~ /.well-known/acme-challenge {
+    #     default_type 'text/plain';
+    #     root {{ www_path }}.well-known/acme-challenge;
+    #     allow all;
+    # }
+
     location ~ /.well-known {
         allow all;
     }
@@ -11,6 +17,12 @@ server {
         return 301 https://$host$request_uri;
     }
 }
+
+# server {
+#     listen 443 ssl;
+#     server_name www.{{ domain }};
+#     return 301 https://staticpage.info$request_uri;
+# }
 
 server {
     charset utf-8;

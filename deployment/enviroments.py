@@ -6,7 +6,7 @@ def config():
     env.timestamp = datetime.now().strftime('%Y.%m.%d %H:%M')
     env.company_name = 'StaticPage'
     env.product_name = 'staticpage'
-    env.email = 'root@staticpage.info'
+    env.email = 'root@staticpage.io'
 
     env.use_ssh_config = True
     env.user = 'ubuntu'
@@ -46,7 +46,7 @@ def production():
     env.hosts = ['linode']
     env.ssh_key_email = 'ubuntu@ubuntu.linode'
 
-    env.domain = 'staticpage.info'
+    env.domain = 'staticpage.io'
     env.domain_ip = '139.162.173.136'
 
     env.ssl_crt_path = '/etc/letsencrypt/live/' + env.domain + '/fullchain.pem'
