@@ -22,7 +22,7 @@
         {% block content %}{% endblock %}
 
         <footer class="footer">
-            {% include 'version.html' %} / <a href={{ url_for('auth.logout') }} target="_parent">logout</a>.
+            {% include 'version.html' %} / <a href="{{ blog_url }}" target="_blank">blog</a> / <a href={{ url_for('auth.logout') }} target="_parent">logout</a>.
         </footer>
     </section>
 

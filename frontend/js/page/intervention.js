@@ -22,8 +22,8 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case C.UPDATE_CONTENT_ALIGNMENT: handleContentAlignmnet( data ); break;
             case C.UPDATE_CONTENT_DIRECTION: handleContentDirection( data ); break;
             case C.UPDATE_ADDITIONAL_STYLES: handleAdditionalStyles( data ); break;
-            case C.UPDATE_COUNT_DOWN_DATETIME: handleCountDownDatetime( data ); break;
-            case C.UPDATE_COUNT_DOWN_TIMEZONE: handleCountDownTimezone( data ); break;
+            case C.UPDATE_COUNTDOWN_DATETIME: handleCountDownDatetime( data ); break;
+            case C.UPDATE_COUNTDOWN_TIMEZONE: handleCountDownTimezone( data ); break;
             case C.UPDATE_MAILING_LIST_SERVICE: handleMailingListService( data ); break;
             case C.UPDATE_MAILING_LIST_CTA_COLOR: handleMailingListCtaColor( data ); break;
             case C.UPDATE_MAILING_LIST_CTA_TEXT: handleMailingListCtaText( data ); break;

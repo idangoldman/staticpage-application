@@ -107,8 +107,8 @@
         <p class="description">{{ content_description }}</p>
         {% endif %}
 
-        {% if is_intervention or count_down_datetime %}
-        <div class="count-down-clock">
+        {% if is_intervention or countdown_datetime %}
+        <div class="countdown-clock">
             <span class="time">
                 <strong class="unit" id="days">00</strong>
                 <i class="label">days</i>
@@ -159,7 +159,7 @@
     {{ google_analytics( google_analytics_code ) }}
     {% endif %}
 
-    {% if is_intervention or count_down_datetime %}
+    {% if is_intervention or countdown_datetime %}
     <script>
         function add_zero( unit ) {
             return unit < 10 ? '0' + unit : unit;
@@ -176,7 +176,7 @@
             this.timezone = timezone || '';
             this.redirectURL = redirectURL || '';
             this.countDownTimeoutID = null;
-            this.node = document.querySelector('.count-down-clock');
+            this.node = document.querySelector('.countdown-clock');
 
             this.tick = function() {
                 if ( this.datetime.length ) {
@@ -218,9 +218,9 @@
         }
 
         var countDownData = {
-            'datetime': '{{ count_down_datetime | default('') }}',
-            'timezone': '{{ count_down_timezone | default('') }}',
-            'redirectURL': '{{ count_down_redirect_url | default('') }}'
+            'datetime': '{{ countdown_datetime | default('') }}',
+            'timezone': '{{ countdown_timezone | default('') }}',
+            'redirectURL': '{{ countdown_redirect_url | default('') }}'
         };
 
         var countDown = countDownClock(

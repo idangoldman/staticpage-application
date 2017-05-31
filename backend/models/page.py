@@ -33,9 +33,9 @@ class Page(db.Model):
 
     google_analytics_code = db.Column('google_analytics_code', db.String(24))
 
-    count_down_timezone = db.Column('count_down_timezone', db.String(64))
-    count_down_datetime = db.Column('count_down_datetime', db.DateTime())
-    count_down_redirect_url = db.Column('count_down_redirect_url', db.String(128))
+    countdown_timezone = db.Column('countdown_timezone', db.String(64))
+    countdown_datetime = db.Column('countdown_datetime', db.DateTime())
+    countdown_redirect_url = db.Column('countdown_redirect_url', db.String(128))
 
     mailing_list_service = db.Column('mailing_list_service', db.String(128))
     mailing_list_mailchimp_username = db.Column('mailing_list_mailchimp_username', db.String(128))
@@ -107,13 +107,13 @@ class Page(db.Model):
                         if not page_dict.get( second_field.get('id') ):
                             page_dict[ second_field.get('id') ] = second_field.get('default') or ''
 
-        if page_dict.get('count_down_timezone'):
-            page_dict['count_down_timezone'] = page_dict['count_down_timezone'].split('|')[ 1 ]
+        if page_dict.get('countdown_timezone'):
+            page_dict['countdown_timezone'] = page_dict['countdown_timezone'].split('|')[ 1 ]
 
-        if page_dict.get('count_down_datetime'):
-            page_dict['count_down_datetime_with_timezone'] = " ".join([
-                str( page_dict['count_down_datetime'] ),
-                page_dict['count_down_timezone']
+        if page_dict.get('countdown_datetime'):
+            page_dict['countdown_datetime_with_timezone'] = " ".join([
+                str( page_dict['countdown_datetime'] ),
+                page_dict['countdown_timezone']
             ])
 
         return page_dict

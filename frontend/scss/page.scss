@@ -38,7 +38,7 @@
     text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
 
     & > * {
-        &:not(.count-down-clock) {
+        &:not(.countdown-clock) {
             @include text-break;
         }
 
@@ -115,7 +115,7 @@
     margin-bottom: px2rem(25);
 }
 
-.count-down-clock {
+.countdown-clock {
     display: none;
     align-items: top;
     justify-content: center;

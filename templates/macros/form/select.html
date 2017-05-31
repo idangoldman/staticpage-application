@@ -43,7 +43,7 @@
     {% for option in options %}
         {% set selected = "selected" if selectedKey == option.key else "" %}
 
-        <option value="{{ option.key }}" {{ selected }}>{{ option.value }}</option>
+        <option value="{{ option.key }}" {{ selected }}>{{ option.value | safe }}</option>
     {% endfor %}
 {%- endmacro %}
 
