@@ -28,7 +28,7 @@ gulp.task('w', ['build'], function() {
 
 // Move favicon and logo images to static/images folder
 gulp.task('images', function() {
-    return gulp.src('*.png', { cwd: 'frontend/images' })
+    return gulp.src('**/*.{png,jpg}', { cwd: 'frontend/images' })
         .pipe( gulp.dest( destFolder + '/images'  ) );
 });
 
