@@ -17,6 +17,7 @@ def create_app( config_name ):
 
     CORS(app)
     CSRFProtect(app)
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)

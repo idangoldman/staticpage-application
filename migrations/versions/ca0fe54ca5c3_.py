@@ -1,19 +1,17 @@
 """empty message
 
-Revision ID: 1b59a63ccaa2
-Revises: 
-Create Date: 2017-01-05 13:47:49.660464
+Revision ID: ca0fe54ca5c3
+Revises: None
+Create Date: 2018-09-05 22:52:52.231708
 
 """
-from alembic import op
-import sqlalchemy as sa
-
 
 # revision identifiers, used by Alembic.
-revision = '1b59a63ccaa2'
+revision = 'ca0fe54ca5c3'
 down_revision = None
-branch_labels = None
-depends_on = None
+
+from alembic import op
+import sqlalchemy as sa
 
 
 def upgrade():
@@ -25,6 +23,7 @@ def upgrade():
     sa.Column('password_hash', sa.String(length=128), nullable=False),
     sa.Column('is_admin', sa.Boolean(), nullable=True),
     sa.Column('joined_at', sa.DateTime(), nullable=True),
+    sa.Column('email_confirmed', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)
@@ -33,7 +32,6 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
-    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.Column('file_type', sa.String(length=16), nullable=False),
     sa.Column('file_name', sa.String(length=128), nullable=True),
     sa.Column('content_logo', sa.String(length=128), nullable=True),
@@ -50,6 +48,20 @@ def upgrade():
     sa.Column('design_additional_styles', sa.Text(), nullable=True),
     sa.Column('search_results_title', sa.Text(), nullable=True),
     sa.Column('search_results_description', sa.Text(), nullable=True),
+    sa.Column('google_analytics_code', sa.String(length=24), nullable=True),
+    sa.Column('countdown_timezone', sa.String(length=64), nullable=True),
+    sa.Column('countdown_datetime', sa.DateTime(), nullable=True),
+    sa.Column('countdown_redirect_url', sa.String(length=128), nullable=True),
+    sa.Column('mailing_list_service', sa.String(length=128), nullable=True),
+    sa.Column('mailing_list_mailchimp_username', sa.String(length=128), nullable=True),
+    sa.Column('mailing_list_mailchimp_api_key', sa.String(length=128), nullable=True),
+    sa.Column('mailing_list_mailchimp_list_id', sa.String(length=128), nullable=True),
+    sa.Column('mailing_list_successful_submission', sa.String(length=128), nullable=True),
+    sa.Column('mailing_list_message', sa.String(length=128), nullable=True),
+    sa.Column('mailing_list_redirect_url', sa.String(length=128), nullable=True),
+    sa.Column('mailing_list_cta_color', sa.String(length=8), nullable=True),
+    sa.Column('mailing_list_cta_text', sa.String(length=128), nullable=True),
+    sa.Column('mailing_list_placeholder_text', sa.String(length=128), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
