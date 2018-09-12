@@ -6,7 +6,8 @@ import os, hashlib, time, re
 def timed_url_safe():
     return URLSafeTimedSerializer( current_app.config["SECRET_KEY"] )
 
-def load_env_var( env_file = 'flask_env' ):
+def load_env_var( env_file = '.env' ):
+    print os.path.exists(env_file)
     if os.path.exists(env_file):
         print(' * Importing environment from %s...' % env_file)
         for line in open(env_file):
