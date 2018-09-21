@@ -126,13 +126,11 @@ def user_uploads( user_hash, timestamp, file_name ):
     return send_from_directory( upload_folder_path, file_name )
 
 
-@current_app.route('/<user_hash>/downloads/<timestamp>/<file_name>')
-def user_downloads( user_hash, timestamp, file_name ):
+@current_app.route('/<user_hash>/<file_name>')
+def user_downloads( user_hash, file_name ):
     donwload_folder_path = path_builder( current_app.config['BASE_PATH'], \
                                 current_app.config['USER_FOLDER'], \
-                                user_hash, \
-                                'downloads', \
-                                timestamp )
+                                user_hash )
     return send_from_directory( donwload_folder_path, file_name )
 
 

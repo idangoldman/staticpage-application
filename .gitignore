@@ -14,5 +14,4 @@ node_modules/
 npm-debug.log
 ssl/
 uploads/
-user_data/
 venv/

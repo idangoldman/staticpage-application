@@ -34,4 +34,4 @@ def upload_file( _file, dest_path ):
     except:
         return None
 
-    return "{}{}".format('https://{}.s3.amazonaws.com/'.format(os.environ['AWS_S3_BUCKET']), dest_path + '.' + file_extension( _file.filename ))
+    return "{}{}".format(current_app.config['AWS_S3_BUCKET_URL'], dest_path + '.' + file_extension( _file.filename ))

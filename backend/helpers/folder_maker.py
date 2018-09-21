@@ -11,9 +11,7 @@ def create_uploads_folder( identifier ):
 def create_download_folder( identifier ):
     folder_path = path_builder( current_app.config['BASE_PATH'], \
                                 current_app.config['USER_FOLDER'], \
-                                md5_identifier( identifier ), \
-                                'downloads', \
-                                timestamp() )
+                                md5_identifier( identifier ) )
 
     paths = [ folder_path, \
               folder_path + '/page/css', \

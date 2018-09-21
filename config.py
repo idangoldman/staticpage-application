@@ -26,8 +26,10 @@ class Config( object ):
     MAIL_PORT = os.environ['MAIL_PORT']
     MAIL_SERVER = os.environ['MAIL_SERVER']
     MAIL_USE_SSL = True
-    # MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ['MAIL_USERNAME']
+
+    # AWS S3
+    AWS_S3_BUCKET_URL = 'https://{}.s3.amazonaws.com/'.format(os.environ['AWS_S3_BUCKET'])
 
 
 class DevelopmentConfig( Config ):
