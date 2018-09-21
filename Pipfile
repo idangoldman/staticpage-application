@@ -48,6 +48,7 @@ Werkzeug = "==0.14"
 WTForms = "==2.1"
 "psycopg2" = "==2.7.5"
 gunicorn = "*"
+"boto3" = "*"
 
 [dev-packages]
 

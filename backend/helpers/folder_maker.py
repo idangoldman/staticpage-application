@@ -5,16 +5,7 @@ from backend.helpers import path_builder, path_slicer, md5_identifier, timestamp
 
 
 def create_uploads_folder( identifier ):
-    folder_path = path_builder( current_app.config['BASE_PATH'], \
-                                current_app.config['USER_FOLDER'], \
-                                md5_identifier( identifier ), \
-                                'uploads', \
-                                timestamp() )
-
-    if not os.path.isdir( folder_path ):
-        os.makedirs( folder_path )
-
-    return folder_path
+    return md5_identifier( identifier ) + '/' + timestamp()
 
 
 def create_download_folder( identifier ):
