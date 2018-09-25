@@ -29,11 +29,15 @@ def download(site_name):
     download_folder_path = create_download_folder( page.creator.email )
     zip_uri = zip_a_page( page_response.content, download_folder_path, page_data )
 
-    payload = {
-        'url': current_app.config['HTTP_HOST'] + zip_uri
-    }
 
-    return jsonify( { 'status': 'ok', 'data': payload } )
+    if zip_uri:
+        payload = {
+            'url': zip_uri
+        }
+
+        return jsonify({ 'status': 'ok', 'data': payload })
+    else:
+        return errors.bad_request('something happend while trying to download the file')
 
 
 @api.route('/page/update/<int:id>', methods=['POST'])

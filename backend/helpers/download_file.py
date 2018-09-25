@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup
 from flask import current_app, render_template
-from shutil import copyfile, make_archive
+from shutil import copyfile, make_archive, rmtree
 import re
+import os
 import requests
+import boto3
 
 from backend.helpers import path_builder
-from backend.helpers.folder_maker import user_file_uri
 
 
 def zip_a_page( markup, dest_path, page ):
@@ -103,8 +104,22 @@ def zip_a_page( markup, dest_path, page ):
 
         file.write( output )
 
-    file_path = make_archive( archive_name, 'zip', archive_root )
+    archived_file_path = make_archive( archive_name, 'zip', archive_root )
+    bucket_archived_file_path = archived_file_path.rsplit( 'tmp/', 1 )[ 1 ].lower()
 
+    try:
+        boto3.client('s3').upload_file(
+            archived_file_path,
+            os.environ['AWS_S3_BUCKET'],
+            bucket_archived_file_path,
+            {
+                'ACL': 'public-read',
+                'ContentType': 'zip'
+            }
+        )
+    except Exception as e:
+        return None
 
-    file_uri = user_file_uri( file_path )
-    return file_uri
+    rmtree(dest_path[:dest_path.rfind('/')], ignore_errors=True)
+
+    return "{}{}".format(current_app.config['AWS_S3_BUCKET_URL'], bucket_archived_file_path)

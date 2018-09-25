@@ -7,7 +7,7 @@ class Config( object ):
     BASE_PATH = os.path.dirname( os.path.abspath( __file__ ) )
     HTTP_HOST = os.environ['HTTP_HOST']
     MAX_CONTENT_LENGTH = os.environ['FLASK_MAX_CONTENT_LENGTH']
-    USER_FOLDER = os.environ['USER_FOLDER']
+    TMP_FOLDER = os.environ['TMP_FOLDER']
 
     # SQLALCHEMY
     SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
