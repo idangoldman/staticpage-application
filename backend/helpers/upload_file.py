@@ -1,31 +1,39 @@
 from werkzeug.utils import secure_filename
+from flask import current_app
+import boto3
+import os
 
 from backend.helpers import path_builder
-from backend.helpers.folder_maker import user_file_uri
 
 ALLOWED_EXTENSIONS = ('png','gif','jpg','jpeg','webp')
 
 
+def file_extension( file_name ):
+    return file_name.rsplit( '.', 1 )[ 1 ].lower()
+
+
 def file_extension_allowed( file_name ):
     return '.' in file_name and \
-           file_name.rsplit( '.', 1 )[ 1 ].lower() in ALLOWED_EXTENSIONS
+           file_extension( file_name ) in ALLOWED_EXTENSIONS
 
 
 def upload_file( _file, dest_path ):
-    if not _file:
+    if not _file or not file_extension_allowed( _file.filename ):
         return None
 
-    file_name = secure_filename( _file.filename )
-
-    if not file_name \
-            or not file_extension_allowed( file_name ):
-        return None
+    file_path = dest_path + '/' + _file.filename
 
     try:
-        file_path = path_builder( dest_path, file_name )
-        _file.save( file_path )
+        boto3.client('s3').upload_fileobj(
+            _file,
+            os.environ['AWS_S3_BUCKET'],
+            file_path,
+            {
+                'ACL': 'public-read',
+                'ContentType': _file.content_type
+            }
+        )
     except:
         return None
 
-    file_uri = user_file_uri( file_path )
-    return file_uri
+    return "{}{}".format(current_app.config['AWS_S3_BUCKET_URL'], file_path)

@@ -1,15 +1,15 @@
 from bs4 import BeautifulSoup
 from flask import current_app, render_template
-from shutil import copyfile, make_archive
+from shutil import copyfile, make_archive, rmtree
 import re
+import os
+import requests
+import boto3
 
 from backend.helpers import path_builder
-from backend.helpers.folder_maker import user_file_uri
 
 
 def zip_a_page( markup, dest_path, page ):
-    user_folder_path = path_builder( current_app.config['BASE_PATH'], \
-                                     current_app.config['USER_FOLDER'] )
     archive_name = path_builder( dest_path, page.get('file_name') )
     archive_root = path_builder( dest_path, 'page' )
     index_file_extention = 'html'
@@ -29,7 +29,7 @@ def zip_a_page( markup, dest_path, page ):
         img['src'] = new_path
 
         file_paths.append({
-            'original': path_builder( user_folder_path, original_path ),
+            'original': original_path,
             'new': path_builder( archive_root, new_path )
         })
 
@@ -55,7 +55,7 @@ def zip_a_page( markup, dest_path, page ):
             style.string = style.text.replace( original_path, new_path )
 
             file_paths.append({
-                'original': path_builder( user_folder_path, original_path ),
+                'original': original_path,
                 'new': path_builder( archive_root, new_path )
             })
 
@@ -80,12 +80,19 @@ def zip_a_page( markup, dest_path, page ):
             }
         })
 
+
     for path in file_paths:
         if path.get('data'):
             template = render_template( path.get('original'), **path.get('data') )
 
             with open( path.get('new'), 'wb' ) as file:
                 file.write( template )
+
+        elif 'https://' in path.get('original'):
+            raw_file = requests.get( path.get('original'), timeout = 10, verify = False ).content;
+
+            with open( path.get('new'), 'w' ) as file:
+                file.write( raw_file )
         else:
             copyfile( path.get('original'), path.get('new') )
 
@@ -97,8 +104,22 @@ def zip_a_page( markup, dest_path, page ):
 
         file.write( output )
 
-    file_path = make_archive( archive_name, 'zip', archive_root )
+    archived_file_path = make_archive( archive_name, 'zip', archive_root )
+    bucket_archived_file_path = archived_file_path.rsplit( 'tmp/', 1 )[ 1 ].lower()
 
+    try:
+        boto3.client('s3').upload_file(
+            archived_file_path,
+            os.environ['AWS_S3_BUCKET'],
+            bucket_archived_file_path,
+            {
+                'ACL': 'public-read',
+                'ContentType': 'zip'
+            }
+        )
+    except Exception as e:
+        return None
 
-    file_uri = user_file_uri( file_path )
-    return file_uri
+    rmtree(dest_path[:dest_path.rfind('/')], ignore_errors=True)
+
+    return "{}{}".format(current_app.config['AWS_S3_BUCKET_URL'], bucket_archived_file_path)

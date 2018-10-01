@@ -119,19 +119,19 @@ def side_kick( page_id ):
 @current_app.route('/<user_hash>/uploads/<timestamp>/<file_name>')
 def user_uploads( user_hash, timestamp, file_name ):
     upload_folder_path = path_builder( current_app.config['BASE_PATH'], \
-                                current_app.config['USER_FOLDER'], \
+                                current_app.config['TMP_FOLDER'], \
                                 user_hash, \
                                 'uploads', \
                                 timestamp )
     return send_from_directory( upload_folder_path, file_name )
 
 
-@current_app.route('/<user_hash>/downloads/<timestamp>/<file_name>')
-def user_downloads( user_hash, timestamp, file_name ):
+@current_app.route('/<hash>/<timestamp>/<file_name>')
+def user_downloads( hash, timestamp, file_name ):
     donwload_folder_path = path_builder( current_app.config['BASE_PATH'], \
-                                current_app.config['USER_FOLDER'], \
-                                user_hash, \
-                                'downloads', \
+                                current_app.config['TMP_FOLDER'], \
+                                hash, \
+                                '/', \
                                 timestamp )
     return send_from_directory( donwload_folder_path, file_name )
 

@@ -2,14 +2,9 @@ from werkzeug.contrib.fixers import ProxyFix
 import os
 
 from backend import create_app, db
-from backend.helpers import load_env_var
-
-
-# loading environmental variables
-load_env_var()
 
 # creating backend app
-app = create_app( os.getenv('FLASK_CONFIG') )
+app = create_app( os.environ['FLASK_CONFIG'] )
 app.wsgi_app = ProxyFix( app.wsgi_app )
 
 
@@ -23,10 +18,9 @@ if __name__ == '__main__':
     server_options = {
         'host': '0.0.0.0',
         'port': 5000,
-        'threaded': True
-        # 'ssl_crt': './server.crt',
-        # 'ssl_key': './server.key'
-        # 'ssl_context': ('./server.crt', './server.key')
+        'threaded': True,
+        'ssl_crt': './ssl/staticpage.local.crt',
+        'ssl_key': './ssl/staticpage.local.key'
     }
 
     manager.add_command( 'db', MigrateCommand )
