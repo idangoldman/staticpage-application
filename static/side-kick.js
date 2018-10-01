@@ -10405,7 +10405,8 @@
 	
 	    function setCsrfHeader() {
 	        // code from: https://flask-wtf.readthedocs.io/en/stable/csrf.html
-	        var csrftoken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
+	        var csrftoken = (0, _jquery2.default)('meta[name=csrf-token]').attr('content');
+	
 	        _jquery2.default.ajaxSetup({
 	            beforeSend: function beforeSend(xhr, settings) {
 	                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {

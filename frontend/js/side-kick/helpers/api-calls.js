@@ -72,7 +72,7 @@ var apiCalls = component( function() {
 
     function setCsrfHeader() {
         // code from: https://flask-wtf.readthedocs.io/en/stable/csrf.html
-        var csrftoken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
+        var csrftoken = $('meta[name=csrf-token]').attr('content');
 
         $.ajaxSetup({
             beforeSend: function( xhr, settings ) {
