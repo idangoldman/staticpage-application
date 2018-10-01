@@ -6,7 +6,7 @@ const SITE_DOWNLOAD_URL = window.site_download_url;
 
 var apiCalls = component( function() {
     this.after('initialize', function() {
-        $(function() { setCsrfHeader(); });
+        setCsrfHeader();
 
         this.on( document, 'updateField', this.updateField );
         this.on( document, 'siteDownload', this.siteDownload );
@@ -72,7 +72,8 @@ var apiCalls = component( function() {
 
     function setCsrfHeader() {
         // code from: https://flask-wtf.readthedocs.io/en/stable/csrf.html
-        var csrftoken = $('meta[name=csrf-token]').attr('content');
+        var csrftoken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
+
         $.ajaxSetup({
             beforeSend: function( xhr, settings ) {
                 if ( ! /^(GET|HEAD|OPTIONS|TRACE)$/i.test( settings.type ) && ! this.crossDomain ) {

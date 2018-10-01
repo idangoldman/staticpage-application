@@ -10340,9 +10340,7 @@
 	
 	var apiCalls = (0, _imports$JqueryFlightjs.component)(function () {
 	    this.after('initialize', function () {
-	        (0, _jquery2.default)(function () {
-	            setCsrfHeader();
-	        });
+	        setCsrfHeader();
 	
 	        this.on(document, 'updateField', this.updateField);
 	        this.on(document, 'siteDownload', this.siteDownload);
@@ -10407,7 +10405,7 @@
 	
 	    function setCsrfHeader() {
 	        // code from: https://flask-wtf.readthedocs.io/en/stable/csrf.html
-	        var csrftoken = (0, _jquery2.default)('meta[name=csrf-token]').attr('content');
+	        var csrftoken = document.querySelector('meta[name=csrf-token]').getAttribute('content');
 	        _jquery2.default.ajaxSetup({
 	            beforeSend: function beforeSend(xhr, settings) {
 	                if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
