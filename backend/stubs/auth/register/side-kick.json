@@ -3,12 +3,6 @@
     "title": "Register Yourself",
     "fields": [
         {
-            "id": "site_name",
-            "label": "Username",
-            "type": "text",
-            "required": true
-        },
-        {
             "id": "email",
             "label": "Email",
             "type": "email",

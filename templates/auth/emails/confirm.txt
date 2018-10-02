@@ -1,10 +1,11 @@
-Hello {{ username }} user,
+Hey You,
 
-My name is Idan and I’m the Founder of StaticPage. I’d like to welcome you and thank you for registering to StaticPage.
+My name is Idan and I’m the Creator of StaticPage.
 
-Hope you’ll enjoy creating awesome static pages and share them with me. Also if you need any help with StaticPage let me know by replying this email or sending me a new one to root@staticpage.io.
+Hope you’ll enjoy creating awesome static pages and share them with the world.
+Also if you need any help with StaticPage let me know by replying to this email or sending me a new one to root@staticpage.io.
 
-Oh and I almost forgot! please confirm your email by clicking this link:
+Oh and I almost forgot! Please confirm your email by clicking this link:
 {{ confirm_url }}
 
 
