@@ -5,7 +5,7 @@ from flask_mail import Message
 from backend import db, mail
 from backend.auth import auth
 from backend.auth.forms import RegisterForm, LoginForm, ForgotPasswordForm, ResetPasswordForm
-from backend.helpers import get_a_stub, get_page_stub, is_phone, timed_url_safe
+from backend.helpers import get_a_stub, get_page_stub, is_phone, timed_url_safe, md5_identifier
 from backend.models.page import Page
 from backend.models.user import User
 
@@ -15,8 +15,8 @@ def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
-        user = User( site_name = form.site_name.data, \
-                     email = form.email.data, \
+        user = User( email = form.email.data, \
+                     site_name = md5_identifier(form.email.data), \
                      password = form.password.data )
         db.session.add( user )
         db.session.commit()
@@ -29,7 +29,7 @@ def register():
         try:
             token = timed_url_safe().dumps( user.email, salt='email-confirm-key' )
             confirm_url = url_for( 'auth.confirm_email', token=token, _external=True )
-            text = render_template( 'auth/emails/confirm.txt', confirm_url=confirm_url, username=user.site_name )
+            text = render_template( 'auth/emails/confirm.txt', confirm_url=confirm_url )
             mail.send(Message("Confirmation of Successful Registration!", recipients=[ user.email ], body=text))
         except:
             print "Shit."
@@ -45,9 +45,8 @@ def register():
         if field.get('id') == 'email' and request.args.get('email'):
             field['value'] = request.args.get('email')
 
-        if field.get('id') == 'email' or field.get('id') == 'site_name':
-            if form[ field.get('id') ].data:
-                field['value'] = form[ field.get('id') ].data
+        if field.get('id') == 'email' and form[ field.get('id') ].data:
+            field['value'] = form[ field.get('id') ].data
 
         if form[ field.get('id') ]:
             field['errors'] = form[ field.get('id') ].errors
