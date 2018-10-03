@@ -60,4 +60,5 @@ Procfile
 
 `cd ~/public_html; php -S localhost:8000` - simple php server
 
-## SSL
+## heroku
+`heroku repo:purge_cache -a appname` - clear cache
