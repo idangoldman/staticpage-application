@@ -62,3 +62,4 @@ Procfile
 
 ## heroku
 `heroku repo:purge_cache -a appname` - clear cache
+`heroku releases:retry` - rebuild last release
