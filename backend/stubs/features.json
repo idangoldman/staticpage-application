@@ -469,6 +469,80 @@
         ]
     },
     {
+        "name": "social-links",
+        "title": "Social Links",
+        "fields": [
+            {
+                "id": "social_links_icon_style",
+                "name": "icon_style",
+                "label": "Icon Style",
+                "type": "select",
+                "default": "colored",
+                "options": [
+                    { "key": "black", "value": "Black" },
+                    { "key": "black-circle", "value": "Black Circle" },
+                    { "key": "black-hollow-circle", "value": "Black Hollow Circle" },
+                    { "key": "black-square", "value": "Black Square" },
+                    { "key": "colored", "value": "Colored" },
+                    { "key": "white", "value": "White" },
+                    { "key": "white-circle", "value": "White Circle" },
+                    { "key": "white-hollow-circle", "value": "White Hollow Circle" },
+                    { "key": "white-square", "value": "White Square" }
+                ]
+            },
+            {
+                "id": "social_links_facebook_link",
+                "name": "facebook_link",
+                "label": "Facebook Link",
+                "type": "url",
+                "placeholder": "https://facebook...",
+                "validation": {
+                    "url": "Not a valid URL."
+                }
+            },
+            {
+                "id": "social_links_instagram_link",
+                "name": "instagram_link",
+                "label": "Instagram Link",
+                "type": "url",
+                "placeholder": "https://instagram...",
+                "validation": {
+                    "url": "Not a valid URL."
+                }
+            },
+            {
+                "id": "social_links_linkedin_link",
+                "name": "linkedin_link",
+                "label": "LinkedIn Link",
+                "type": "url",
+                "placeholder": "https://linkedin...",
+                "validation": {
+                    "url": "Not a valid URL."
+                }
+            },
+            {
+                "id": "social_links_twitter_link",
+                "name": "twitter_link",
+                "label": "Twitter Link",
+                "type": "url",
+                "placeholder": "https://twitter...",
+                "validation": {
+                    "url": "Not a valid URL."
+                }
+            },
+            {
+                "id": "social_links_youtube_link",
+                "name": "youtube_link",
+                "label": "Youtube Link",
+                "type": "url",
+                "placeholder": "https://youtube...",
+                "validation": {
+                    "url": "Not a valid URL."
+                }
+            }
+        ]
+    },
+    {
         "name": "search-results",
         "title": "Search Results",
         "fields": [

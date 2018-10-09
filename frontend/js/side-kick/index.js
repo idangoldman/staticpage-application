@@ -10,4 +10,5 @@ import 'side-kick/features/google-analytics';
 import 'side-kick/features/search-results';
 import 'side-kick/features/mailing-list';
 import 'side-kick/features/countdown';
+import 'side-kick/features/social-links';
 import 'side-kick/download-button';

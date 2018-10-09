@@ -65,6 +65,8 @@
 	__webpack_require__(28);
 	
 	__webpack_require__(32);
+	
+	__webpack_require__(33);
 
 /***/ }),
 /* 1 */
@@ -13291,6 +13293,86 @@
 
 /***/ }),
 /* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _baseBox = __webpack_require__(9);
+	
+	var _baseBox2 = _interopRequireDefault(_baseBox);
+	
+	var _selectField = __webpack_require__(19);
+	
+	var _selectField2 = _interopRequireDefault(_selectField);
+	
+	var _datepickerField = __webpack_require__(29);
+	
+	var _datepickerField2 = _interopRequireDefault(_datepickerField);
+	
+	var _urlField = __webpack_require__(27);
+	
+	var _urlField2 = _interopRequireDefault(_urlField);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	// base component
+	var socialLinksFeature = _baseBox2.default.mixin(function box() {
+	
+	    this.attributes({
+	        'iconStyleField': '.social_links_icon_style',
+	        'facebookLinkField': '.social_links_facebook_link',
+	        'instagramLinkField': '.social_links_instagram_link',
+	        'linkedinLinkField': '.social_links_linkedin_link',
+	        'twitterLinkField': '.social_links_twitter_link',
+	        'youtubeLinkField': '.social_links_youtube_link'
+	    });
+	
+	    this.after('initialize', function () {
+	
+	        // Icon Style
+	        this.attachChild(_selectField2.default, this.select('iconStyleField'), {
+	            'fieldName': 'social_links_icon_style'
+	        });
+	
+	        // Redirect URL
+	        this.attachChild(_urlField2.default, this.select('facebookLinkField'), {
+	            'fieldName': 'social_links_facebook_link',
+	            'toValidate': ['url']
+	        });
+	
+	        // Redirect URL
+	        this.attachChild(_urlField2.default, this.select('instagramLinkField'), {
+	            'fieldName': 'social_links_instagram_link',
+	            'toValidate': ['url']
+	        });
+	
+	        // Redirect URL
+	        this.attachChild(_urlField2.default, this.select('linkedinLinkField'), {
+	            'fieldName': 'social_links_linkedin_link',
+	            'toValidate': ['url']
+	        });
+	
+	        // Redirect URL
+	        this.attachChild(_urlField2.default, this.select('twitterLinkField'), {
+	            'fieldName': 'social_links_twitter_link',
+	            'toValidate': ['url']
+	        });
+	
+	        // Redirect URL
+	        this.attachChild(_urlField2.default, this.select('youtubeLinkField'), {
+	            'fieldName': 'social_links_youtube_link',
+	            'toValidate': ['url']
+	        });
+	    });
+	});
+	
+	// child components
+	
+	
+	socialLinksFeature.attachTo('.feature.social-links');
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
