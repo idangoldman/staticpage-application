@@ -479,6 +479,7 @@
                 "type": "select",
                 "default": "colored",
                 "options": [
+                    { "key": "none", "value": "None" },
                     { "key": "black", "value": "Black" },
                     { "key": "black-circle", "value": "Black Circle" },
                     { "key": "black-hollow-circle", "value": "Black Hollow Circle" },

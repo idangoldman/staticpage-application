@@ -48,7 +48,7 @@ class Page(db.Model):
     mailing_list_cta_text = db.Column('mailing_list_cta_text', db.String(128))
     mailing_list_placeholder_text = db.Column('mailing_list_placeholder_text', db.String(128))
 
-    social_links_icon_style = db.Column('social_links_icon_style', db.String(128))
+    social_links_icon_style = db.Column('social_links_icon_style', db.String(128), default='colored')
     social_links_facebook_link = db.Column('social_links_facebook_link', db.String(128))
     social_links_instagram_link = db.Column('social_links_instagram_link', db.String(128))
     social_links_linkedin_link = db.Column('social_links_linkedin_link', db.String(128))
