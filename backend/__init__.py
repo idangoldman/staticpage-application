@@ -26,7 +26,7 @@ def create_app( config_name ):
         from backend.website import website as website_blueprint
         app.register_blueprint( website_blueprint )
 
-        from backend.helpers import jinja_filters
+        from backend.helpers import jinja
         from backend import routes
 
     from backend.auth import auth as auth_blueprint
