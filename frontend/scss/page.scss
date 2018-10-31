@@ -140,6 +140,20 @@
     }
 }
 
+.social-links {
+    margin-top: px2rem(40);
+
+    a {
+        display: inline-block;
+        margin-right: px2rem(15);
+        vertical-align: middle;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
 // min Netbook
 @media ( min-width: 1024px ) {
     .page > * {

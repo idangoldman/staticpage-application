@@ -1,0 +1,29 @@
+{% if social_links_icon_style != "none" %}
+    <nav class="social-links">
+    {% if social_links_facebook_link %}
+        <a href="{{ social_links_facebook_link }}" target="_blank" title="Facebook Link">
+            {% include social_links_icon_style + '/facebook.svg' %}
+        </a>
+    {% endif %}
+    {% if social_links_instagram_link %}
+        <a href="{{ social_links_instagram_link }}" target="_blank" title="Instagram Link">
+            {% include social_links_icon_style + '/instagram.svg' %}
+        </a>
+    {% endif %}
+    {% if social_links_linkedin_link %}
+        <a href="{{ social_links_linkedin_link }}" target="_blank" title="LinkedIn Link">
+            {% include social_links_icon_style + '/linkedin.svg' %}
+        </a>
+    {% endif %}
+    {% if social_links_twitter_link %}
+        <a href="{{ social_links_twitter_link }}" target="_blank" title="Twitter Link">
+            {% include social_links_icon_style + '/twitter.svg' %}
+        </a>
+    {% endif %}
+    {% if social_links_youtube_link %}
+        <a href="{{ social_links_youtube_link }}" target="_blank" title="Youtube Link">
+            {% include social_links_icon_style + '/youtube.svg' %}
+        </a>
+    {% endif %}
+    </nav>
+{% endif %}
