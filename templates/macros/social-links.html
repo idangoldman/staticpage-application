@@ -1,29 +1,55 @@
-{% if social_links_icon_style != "none" %}
-    <nav class="social-links">
-    {% if social_links_facebook_link %}
-        <a href="{{ social_links_facebook_link }}" target="_blank" title="Facebook Link">
-            {% include social_links_icon_style + '/facebook.svg' %}
-        </a>
-    {% endif %}
-    {% if social_links_instagram_link %}
-        <a href="{{ social_links_instagram_link }}" target="_blank" title="Instagram Link">
-            {% include social_links_icon_style + '/instagram.svg' %}
-        </a>
-    {% endif %}
-    {% if social_links_linkedin_link %}
-        <a href="{{ social_links_linkedin_link }}" target="_blank" title="LinkedIn Link">
-            {% include social_links_icon_style + '/linkedin.svg' %}
-        </a>
-    {% endif %}
-    {% if social_links_twitter_link %}
-        <a href="{{ social_links_twitter_link }}" target="_blank" title="Twitter Link">
-            {% include social_links_icon_style + '/twitter.svg' %}
-        </a>
-    {% endif %}
-    {% if social_links_youtube_link %}
-        <a href="{{ social_links_youtube_link }}" target="_blank" title="Youtube Link">
-            {% include social_links_icon_style + '/youtube.svg' %}
-        </a>
-    {% endif %}
-    </nav>
+{% if is_intervention %}
+    {% set social_icon_types = [
+        "black",
+        "black-circle",
+        "black-hollow-circle",
+        "black-square",
+        "colored",
+        "white",
+        "white-circle",
+        "white-hollow-circle",
+        "white-square"
+    ] %}
+
+    <div id="social-icons-svgs" style="display: none">
+        {% for icon_type in social_icon_types %}
+            {% include icon_type + '/facebook.svg' %}
+            {% include icon_type + '/instagram.svg' %}
+            {% include icon_type + '/linkedin.svg' %}
+            {% include icon_type + '/twitter.svg' %}
+            {% include icon_type + '/youtube.svg' %}
+        {% endfor %}
+    </div>
 {% endif %}
+
+<nav class="social-links {{ 'none' if social_links_icon_style == 'none' }}">
+{% if is_intervention and social_links_icon_style == "none" %}
+    {% set social_links_icon_style = "black" %}
+{% endif %}
+
+{% if social_links_facebook_link %}
+    <a href="{{ social_links_facebook_link }}" target="_blank" title="Facebook Link" name="social_links_facebook_link">
+        {% include social_links_icon_style + '/facebook.svg' %}
+    </a>
+{% endif %}
+{% if social_links_instagram_link %}
+    <a href="{{ social_links_instagram_link }}" target="_blank" title="Instagram Link" name="social_links_instagram_link">
+        {% include social_links_icon_style + '/instagram.svg' %}
+    </a>
+{% endif %}
+{% if social_links_linkedin_link %}
+    <a href="{{ social_links_linkedin_link }}" target="_blank" title="LinkedIn Link" name="social_links_linkedin_link">
+        {% include social_links_icon_style + '/linkedin.svg' %}
+    </a>
+{% endif %}
+{% if social_links_twitter_link %}
+    <a href="{{ social_links_twitter_link }}" target="_blank" title="Twitter Link" name="social_links_twitter_link">
+        {% include social_links_icon_style + '/twitter.svg' %}
+    </a>
+{% endif %}
+{% if social_links_youtube_link %}
+    <a href="{{ social_links_youtube_link }}" target="_blank" title="Youtube Link" name="social_links_youtube_link">
+        {% include social_links_icon_style + '/youtube.svg' %}
+    </a>
+{% endif %}
+</nav>

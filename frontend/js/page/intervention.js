@@ -28,6 +28,12 @@ $( window ).on( 'message onmessage', function receiveMessage( event ) {
             case C.UPDATE_MAILING_LIST_CTA_COLOR: handleMailingListCtaColor( data ); break;
             case C.UPDATE_MAILING_LIST_CTA_TEXT: handleMailingListCtaText( data ); break;
             case C.UPDATE_MAILING_LIST_PLACEHOLDER_TEXT: handleMailingListPlaceholderText( data ); break;
+            case C.UPDATE_SOCIAL_LINKS_ICON_STYLE: handleSocialLinksIconStyle( data ); break;
+            case C.UPDATE_SOCIAL_LINKS_FACEBOOK_LINK: handleSocialLinksUpdateLink( data ); break;
+            case C.UPDATE_SOCIAL_LINKS_INSTAGRAM_LINK: handleSocialLinksUpdateLink( data ); break;
+            case C.UPDATE_SOCIAL_LINKS_LINKEDIN_LINK: handleSocialLinksUpdateLink( data ); break;
+            case C.UPDATE_SOCIAL_LINKS_TWITTER_LINK: handleSocialLinksUpdateLink( data ); break;
+            case C.UPDATE_SOCIAL_LINKS_YOUTUBE_LINK: handleSocialLinksUpdateLink( data ); break;
         }
     }
 });
@@ -200,4 +206,36 @@ function handleMailingListCtaText( { value } ) {
 
 function handleMailingListPlaceholderText( { value } ) {
     $('.newsletter .email').attr( 'placeholder', escapeHtml( value ) );
+}
+
+function handleSocialLinksIconStyle({ value }) {
+    const socialNetworksList = [
+        'facebook',
+        'instagram',
+        'linkedin',
+        'twitter',
+        'youtube'
+    ];
+
+    if ( value !== 'none' ) {
+        socialNetworksList.forEach( socialNetwork => {
+            const newSocialIconSVG = document.getElementById('social-icons-svgs').querySelector(`#${value}-${socialNetwork}`);
+            const socialLinkSelector = `.social-links a[name$="_${socialNetwork}_link"]`;
+
+            document
+                .querySelector( socialLinkSelector )
+                .replaceChild(
+                    newSocialIconSVG.cloneNode( true ),
+                    document.querySelector( socialLinkSelector + ' svg' )
+                );
+        });
+
+        document.querySelector('.social-links').classList.remove('none');
+    } else {
+        document.querySelector('.social-links').classList.add('none');
+    }
+}
+
+function handleSocialLinksUpdateLink({ name, value }) {
+    document.querySelector(`a[name=${name}]`).setAttribute('href', value);
 }

@@ -106,6 +106,18 @@
 	                handleMailingListCtaText(data);break;
 	            case C.UPDATE_MAILING_LIST_PLACEHOLDER_TEXT:
 	                handleMailingListPlaceholderText(data);break;
+	            case C.UPDATE_SOCIAL_LINKS_ICON_STYLE:
+	                handleSocialLinksIconStyle(data);break;
+	            case C.UPDATE_SOCIAL_LINKS_FACEBOOK_LINK:
+	                handleSocialLinksUpdateLink(data);break;
+	            case C.UPDATE_SOCIAL_LINKS_INSTAGRAM_LINK:
+	                handleSocialLinksUpdateLink(data);break;
+	            case C.UPDATE_SOCIAL_LINKS_LINKEDIN_LINK:
+	                handleSocialLinksUpdateLink(data);break;
+	            case C.UPDATE_SOCIAL_LINKS_TWITTER_LINK:
+	                handleSocialLinksUpdateLink(data);break;
+	            case C.UPDATE_SOCIAL_LINKS_YOUTUBE_LINK:
+	                handleSocialLinksUpdateLink(data);break;
 	        }
 	    }
 	});
@@ -295,6 +307,32 @@
 	    var value = _ref18.value;
 	
 	    (0, _jquery2.default)('.newsletter .email').attr('placeholder', escapeHtml(value));
+	}
+	
+	function handleSocialLinksIconStyle(_ref19) {
+	    var value = _ref19.value;
+	
+	    var socialNetworksList = ['facebook', 'instagram', 'linkedin', 'twitter', 'youtube'];
+	
+	    if (value !== 'none') {
+	        socialNetworksList.forEach(function (socialNetwork) {
+	            var newSocialIconSVG = document.getElementById('social-icons-svgs').querySelector('#' + value + '-' + socialNetwork);
+	            var socialLinkSelector = '.social-links a[name$="_' + socialNetwork + '_link"]';
+	
+	            document.querySelector(socialLinkSelector).replaceChild(newSocialIconSVG.cloneNode(true), document.querySelector(socialLinkSelector + ' svg'));
+	        });
+	
+	        document.querySelector('.social-links').classList.remove('none');
+	    } else {
+	        document.querySelector('.social-links').classList.add('none');
+	    }
+	}
+	
+	function handleSocialLinksUpdateLink(_ref20) {
+	    var name = _ref20.name,
+	        value = _ref20.value;
+	
+	    document.querySelector('a[name=' + name + ']').setAttribute('href', value);
 	}
 
 /***/ }),
@@ -10550,6 +10588,12 @@
 	var UPDATE_MAILING_LIST_CTA_COLOR = exports.UPDATE_MAILING_LIST_CTA_COLOR = 'mailing_list_cta_color';
 	var UPDATE_MAILING_LIST_CTA_TEXT = exports.UPDATE_MAILING_LIST_CTA_TEXT = 'mailing_list_cta_text';
 	var UPDATE_MAILING_LIST_PLACEHOLDER_TEXT = exports.UPDATE_MAILING_LIST_PLACEHOLDER_TEXT = 'mailing_list_placeholder_text';
+	var UPDATE_SOCIAL_LINKS_ICON_STYLE = exports.UPDATE_SOCIAL_LINKS_ICON_STYLE = 'social_links_icon_style';
+	var UPDATE_SOCIAL_LINKS_FACEBOOK_LINK = exports.UPDATE_SOCIAL_LINKS_FACEBOOK_LINK = 'social_links_facebook_link';
+	var UPDATE_SOCIAL_LINKS_INSTAGRAM_LINK = exports.UPDATE_SOCIAL_LINKS_INSTAGRAM_LINK = 'social_links_instagram_link';
+	var UPDATE_SOCIAL_LINKS_LINKEDIN_LINK = exports.UPDATE_SOCIAL_LINKS_LINKEDIN_LINK = 'social_links_linkedin_link';
+	var UPDATE_SOCIAL_LINKS_TWITTER_LINK = exports.UPDATE_SOCIAL_LINKS_TWITTER_LINK = 'social_links_twitter_link';
+	var UPDATE_SOCIAL_LINKS_YOUTUBE_LINK = exports.UPDATE_SOCIAL_LINKS_YOUTUBE_LINK = 'social_links_youtube_link';
 
 /***/ }),
 /* 3 */

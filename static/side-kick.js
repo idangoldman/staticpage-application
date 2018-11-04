@@ -10321,6 +10321,12 @@
 	var UPDATE_MAILING_LIST_CTA_COLOR = exports.UPDATE_MAILING_LIST_CTA_COLOR = 'mailing_list_cta_color';
 	var UPDATE_MAILING_LIST_CTA_TEXT = exports.UPDATE_MAILING_LIST_CTA_TEXT = 'mailing_list_cta_text';
 	var UPDATE_MAILING_LIST_PLACEHOLDER_TEXT = exports.UPDATE_MAILING_LIST_PLACEHOLDER_TEXT = 'mailing_list_placeholder_text';
+	var UPDATE_SOCIAL_LINKS_ICON_STYLE = exports.UPDATE_SOCIAL_LINKS_ICON_STYLE = 'social_links_icon_style';
+	var UPDATE_SOCIAL_LINKS_FACEBOOK_LINK = exports.UPDATE_SOCIAL_LINKS_FACEBOOK_LINK = 'social_links_facebook_link';
+	var UPDATE_SOCIAL_LINKS_INSTAGRAM_LINK = exports.UPDATE_SOCIAL_LINKS_INSTAGRAM_LINK = 'social_links_instagram_link';
+	var UPDATE_SOCIAL_LINKS_LINKEDIN_LINK = exports.UPDATE_SOCIAL_LINKS_LINKEDIN_LINK = 'social_links_linkedin_link';
+	var UPDATE_SOCIAL_LINKS_TWITTER_LINK = exports.UPDATE_SOCIAL_LINKS_TWITTER_LINK = 'social_links_twitter_link';
+	var UPDATE_SOCIAL_LINKS_YOUTUBE_LINK = exports.UPDATE_SOCIAL_LINKS_YOUTUBE_LINK = 'social_links_youtube_link';
 
 /***/ }),
 /* 3 */,
