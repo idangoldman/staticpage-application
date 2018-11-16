@@ -149,7 +149,9 @@
     </form>
     {% endif %}
 
-    {% include 'macros/social-links.html' %}
+    {% if is_intervention or social_links_icon_style != 'none' %}
+        {% include 'macros/social-links.html' %}
+    {% endif %}
 
 {% endblock %}
 

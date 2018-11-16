@@ -140,6 +140,13 @@
     }
 }
 
+#social-icons-svgs {
+    height: 0;
+    position: absolute;
+    visibility: hidden;
+    width: 0;
+}
+
 .social-links {
     margin-top: px2rem(40);
 
@@ -151,6 +158,11 @@
         &:last-child {
             margin-right: 0;
         }
+    }
+
+    svg {
+        height: 32px;
+        width: 32px;
     }
 }
 

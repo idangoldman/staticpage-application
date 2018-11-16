@@ -312,14 +312,14 @@
 	function handleSocialLinksIconStyle(_ref19) {
 	    var value = _ref19.value;
 	
-	    var socialNetworksList = ['facebook', 'instagram', 'linkedin', 'twitter', 'youtube'];
+	    var svgUseTags = document.querySelectorAll('.social-links use');
 	
 	    if (value !== 'none') {
-	        socialNetworksList.forEach(function (socialNetwork) {
-	            var newSocialIconSVG = document.getElementById('social-icons-svgs').querySelector('#' + value + '-' + socialNetwork);
-	            var socialLinkSelector = '.social-links a[name$="_' + socialNetwork + '_link"]';
+	        svgUseTags.forEach(function (useTag) {
+	            var socialNetwork = useTag.getAttribute('xlink:href').split('-').pop();
+	            var xLinkHrefValue = '#' + value + '-' + socialNetwork;
 	
-	            document.querySelector(socialLinkSelector).replaceChild(newSocialIconSVG.cloneNode(true), document.querySelector(socialLinkSelector + ' svg'));
+	            useTag.setAttribute('xlink:href', xLinkHrefValue);
 	        });
 	
 	        document.querySelector('.social-links').classList.remove('none');
