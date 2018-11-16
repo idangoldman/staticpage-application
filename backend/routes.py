@@ -50,7 +50,6 @@ def page_view( site_name ):
                      .first_or_404() \
                      .with_defaults()
 
-
     form = NewsletterForm()
 
     if form.validate_on_submit():
@@ -76,11 +75,13 @@ def page_view( site_name ):
 @current_app.route('/home')
 @login_required
 def home():
+    page = current_user.pages.first()
     payload = {
         'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone( request.user_agent ),
-        'page_id': current_user.pages.first().id,
-        'site_name': current_user.site_name
+        'page_id': page.id,
+        'site_name': current_user.site_name,
+        'title': page.content_title
     }
 
     response = make_response( render_template( 'home.html', **payload ) )

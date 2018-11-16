@@ -1,4 +1,6 @@
+.cache
 .DS_Store
+.env
 *.egg
 *.egg-info
 *.icloud
@@ -7,11 +9,9 @@
 *.pyo
 *.swp
 *.zip
-backups/
-dist/
-.env
-node_modules/
-npm-debug.log
+dist
+DS_Store
+node_modules
+package-lock.json
 ssl/
-uploads/
-venv/
+yarn-error.log

@@ -6,7 +6,8 @@
     "url": "git+https://github.com/idangoldman/staticpage.git"
   },
   "scripts": {
-    "preinstall": "npm install -g gulp"
+    "start": "pipenv run sh start.sh",
+    "watch": "gulp w"
   },
   "devDependencies": {
     "air-datepicker": "2.2.3",
