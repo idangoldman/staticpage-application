@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { component } from 'imports?$=jquery!flightjs';
+import { component } from 'flightjs';
 import * as pageUpdateFields from 'page/constants';
 
 

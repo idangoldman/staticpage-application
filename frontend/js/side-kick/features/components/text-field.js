@@ -1,4 +1,5 @@
-import { component } from 'imports?$=jquery!flightjs';
+import $ from 'jquery';
+import { component } from 'flightjs';
 
 import withFocus from 'side-kick/features/mixins/focus';
 import withState from 'flight-with-state';

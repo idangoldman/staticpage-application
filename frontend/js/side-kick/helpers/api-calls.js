@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { component, utils } from 'imports?$=jquery!flightjs';
+import { component, utils } from 'flightjs';
 
 const PAGE_UPDATE_URL = window.page_update_url;
 const SITE_DOWNLOAD_URL = window.site_download_url;

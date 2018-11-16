@@ -1,6 +1,7 @@
-import { component } from 'imports?$=jquery!flightjs';
-import 'imports?jQuery=jquery!air-datepicker/dist/js/datepicker.min';
-import 'imports?jQuery=jquery!air-datepicker/dist/js/i18n/datepicker.en.js';
+import jQuery from 'jquery';
+import { component } from 'flightjs';
+import 'air-datepicker/dist/js/datepicker.min';
+import 'air-datepicker/dist/js/i18n/datepicker.en.js';
 
 import withFocus from 'side-kick/features/mixins/focus';
 import withState from 'flight-with-state';

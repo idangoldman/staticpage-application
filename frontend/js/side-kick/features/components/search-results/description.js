@@ -1,4 +1,5 @@
-import { component } from 'imports?$=jquery!flightjs';
+import $ from 'jquery';
+import { component } from 'flightjs';
 
 import textFieldComponent from 'side-kick/features/components/text-field';
 

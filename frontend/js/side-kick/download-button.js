@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { component, utils } from 'imports?$=jquery!flightjs';
+import { component, utils } from 'flightjs';
 
 import withState from 'flight-with-state';
 

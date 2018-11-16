@@ -1,6 +1,6 @@
 var path = require("path");
 
-export default = {
+module.exports = {
   watch: false,
   cache: false,
   debug: true,
@@ -21,10 +21,10 @@ export default = {
       'bower_components'
     ],
     alias: {
-      jquery: "jquery/dist/jquery.min"
+      jquery: 'jquery/src/jquery'
     }
+  },
   module: {
-},
     loaders: [
       {
         test: /\.js$/,
@@ -40,4 +40,4 @@ export default = {
       }
     ]
   }
-}
+};
