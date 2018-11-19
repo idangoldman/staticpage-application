@@ -1,14 +1,14 @@
 // import 'side-kick/storage';
 
-import 'side-kick/helpers/api-calls';
-import 'side-kick/helpers/post-messaging';
+import './helpers/api-calls';
+import './helpers/post-messaging';
 
-import 'side-kick/devices';
-import 'side-kick/features/content';
-import 'side-kick/features/design';
-import 'side-kick/features/google-analytics';
-import 'side-kick/features/search-results';
-import 'side-kick/features/mailing-list';
-import 'side-kick/features/countdown';
-import 'side-kick/features/social-links';
-import 'side-kick/download-button';
+import './devices';
+import './features/content';
+import './features/design';
+import './features/google-analytics';
+import './features/search-results';
+import './features/mailing-list';
+import './features/countdown';
+import './features/social-links';
+import './download-button';

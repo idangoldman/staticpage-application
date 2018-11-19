@@ -1,31 +1,28 @@
-import $ from 'jquery';
 import { component } from 'flightjs';
 
+export default component(function searchPreview() {
+  this.attributes({
+    titleEl: '.link-title',
+    descriptionEl: '.description',
 
-export default component( function searchPreview() {
+    changedTitle: null,
+    changedDescription: null,
+    changedPlaceholderTitle: null,
+    changedPlaceholderDescription: null,
+  });
 
-    this.attributes({
-        'titleEl': '.link-title',
-        'descriptionEl': '.description',
+  this.after('initialize', () => {
+    this.on(document, this.attr.changedTitle, this.changeTitle.bind(this));
+    this.on(document, this.attr.changedDescription, this.changeDescription.bind(this));
+    this.on(document, this.attr.changedPlaceholderTitle, this.changeTitle.bind(this));
+    this.on(document, this.attr.changedPlaceholderDescription, this.changeDescription.bind(this));
+  });
 
-        'changedTitleEvent': null,
-        'changedDescriptionEvent': null,
-        'changedPlaceholderTitleEvent': null,
-        'changedPlaceholderDescriptionEvent': null
-    });
+  this.changeTitle = (event, { value, placeholder }) => {
+    this.select('titleEl').html(value || placeholder);
+  };
 
-    this.after('initialize', function() {
-        this.on( document, this.attr.changedTitleEvent, this.changeTitle.bind(this) );
-        this.on( document, this.attr.changedDescriptionEvent, this.changeDescription.bind(this) );
-        this.on( document, this.attr.changedPlaceholderTitleEvent, this.changeTitle.bind(this) );
-        this.on( document, this.attr.changedPlaceholderDescriptionEvent, this.changeDescription.bind(this) );
-    });
-
-    this.changeTitle = function( event, { value, placeholder } ) {
-        this.select('titleEl').html( value || placeholder );
-    };
-
-    this.changeDescription = function( event, { value, placeholder } ) {
-        this.select('descriptionEl').html( value || placeholder );
-    };
+  this.changeDescription = (event, { value, placeholder }) => {
+    this.select('descriptionEl').html(value || placeholder);
+  };
 });

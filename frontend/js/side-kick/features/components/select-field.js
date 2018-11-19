@@ -1,49 +1,47 @@
-import $ from 'jquery';
 import { component } from 'flightjs';
 
 import withFocus from 'side-kick/features/mixins/focus';
 import withState from 'flight-with-state';
 
-export default component( withFocus, withState, function textField() {
+export default component(withFocus, withState, function textField() {
+  this.attributes({
+    field: '.field',
+    fieldName: null,
+    optionSelected: 'option:selected',
+    selectTextField: '.selected-text',
+  });
 
-    this.attributes({
-        'field': '.field',
-        'fieldName': null,
-        'optionSelected': 'option:selected',
-        'selectTextField': '.selected-text'
+  this.initialState({
+    name: this.fromAttr('fieldName'),
+    value() {
+      return this.select('field').val();
+    },
+  });
+
+  this.after('initialize', () => {
+    this.select('field').on('change', this.fieldChanged.bind(this));
+
+    this.after('stateChanged', this.updateField);
+    // this.on( document, 'updateField_' + this.attr.fieldName + '_success', console.log('Yay!'));
+    // this.on( document, 'updateField_' + this.attr.fieldName + '_error', console.log('Nay!'));
+  });
+
+  this.fieldChanged = (event) => {
+    this.selectText();
+
+    this.mergeState({
+      value: event.currentTarget.value.trim(),
     });
+  };
 
-    this.initialState({
-        name: this.fromAttr('fieldName'),
-        value: function() {
-            return this.select('field').val();
-        }
-    });
+  this.updateField = (state, previousState) => {
+    if (previousState.value !== state.value) {
+      this.trigger(document, 'updateField', state);
+    }
+  };
 
-    this.after('initialize', function() {
-        this.select('field').on( 'change', this.fieldChanged.bind(this) );
-
-        this.after( 'stateChanged', this.updateField );
-        // this.on( document, 'updateField_' + this.attr.fieldName + '_success', function() { console.log('Yay!'); });
-        // this.on( document, 'updateField_' + this.attr.fieldName + '_error', function() { console.log('Nay!'); });
-    });
-
-    this.fieldChanged = function() {
-        this.selectText();
-
-        this.mergeState({
-            value: event.currentTarget.value.trim()
-        });
-    };
-
-    this.updateField = function( state, previousState ) {
-        if ( previousState.value !== state.value ) {
-            this.trigger( document, 'updateField', state );
-        }
-    };
-
-    this.selectText = function() {
-        this.select('selectTextField')
-            .html( this.select('optionSelected').text() );
-    };
+  this.selectText = () => {
+    this.select('selectTextField')
+      .html(this.select('optionSelected').text());
+  };
 });

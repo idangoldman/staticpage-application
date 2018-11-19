@@ -4,127 +4,136 @@
 // console.log( 'find a rule:', css('.background') );
 // console.log( 'find rule\'s property:', css('.background', 'backgroundImage') );
 // console.log( 'delete rule\'s property:', css('.background', 'backgroundImage', '') );
-// console.log( 'set rule\'s property:', css('.background', 'backgroundImage', 'url("/static/images/backgrounds/001.jpeg")') );
+// console.log( 'set rule\'s property:', css('.background', 'backgroundImage',
+// 'url("/static/images/backgrounds/001.jpeg")') );
 // console.log( 'delete a rule:', css('.background', '') );
 // console.log( 'set a rule with properties object:', css('.background', {
 //     'backgroundColor': '#fff',
 //     'color': '#000'
 // }) );
 
-function StyleSheet( stylesheetTitle ) {
-    this.CSSOM = this.findStyle( stylesheetTitle );
+function StyleSheet(stylesheetTitle) {
+  this.CSSOM = this.findStyle(stylesheetTitle);
 
-    return this.select.bind( this );
+  return this.select.bind(this);
 }
 
 StyleSheet.prototype.CSSOM = null;
-StyleSheet.prototype.findStyle = function( cssClass ) {
-    var CSSOM = null,
-        prefix = 'css-';
+StyleSheet.prototype.findStyle = function findStyle(cssClass) {
+  let CSSOM = null;
 
-    for ( var index = 0; index < document.styleSheets.length; index++ ) {
 
-        var styleSheet = document.styleSheets[ index ];
+  const prefix = 'css-';
 
-        if ( styleSheet.ownerNode.className === prefix + cssClass ) {
-            CSSOM = styleSheet;
-            break;
-        }
+  for (let index = 0; index < document.styleSheets.length; index += 1) {
+    const styleSheet = document.styleSheets[index];
+
+    if (styleSheet.ownerNode.className === prefix + cssClass) {
+      CSSOM = styleSheet;
+      break;
     }
+  }
 
-    if ( null === CSSOM ) {
-        var newStyleSheet = document.createElement('style');
-        newStyleSheet.className = prefix + cssClass;
-        document.getElementsByTagName('head')[ 0 ].appendChild( newStyleSheet );
-        CSSOM = document.styleSheets[ document.styleSheets.length - 1 ];
-    }
+  if (CSSOM === null) {
+    const newStyleSheet = document.createElement('style');
+    newStyleSheet.className = prefix + cssClass;
+    document.getElementsByTagName('head')[0].appendChild(newStyleSheet);
+    CSSOM = document.styleSheets[document.styleSheets.length - 1];
+  }
 
-    return CSSOM
+  return CSSOM;
 };
 
-StyleSheet.prototype.findRuleIndex = function( selector ) {
-    var rules = this.CSSOM.cssRules,
-        ruleIndex = null;
+StyleSheet.prototype.findRuleIndex = function findRuleIndex(selector) {
+  const rules = this.CSSOM.cssRules;
 
-    for ( var index = 0; index < rules.length; index++ ) {
-        if ( rules[ index ].selectorText === selector ) {
-            ruleIndex = index;
-        }
+
+  let ruleIndex = null;
+
+  for (let index = 0; index < rules.length; index += 1) {
+    if (rules[index].selectorText === selector) {
+      ruleIndex = index;
     }
+  }
 
-    return ruleIndex;
-
+  return ruleIndex;
 };
 
-StyleSheet.prototype.addRule = function( selector, property, value ) {
-    var newRule,
-        ruleIndex = this.CSSOM.cssRules.length;
+StyleSheet.prototype.addRule = function addRule(selector, property, value) {
+  let newRule;
 
-    switch( typeof property ) {
-        case 'string':
-            newRule = [ selector, '{', property, ':', value, ';', '}' ];
-            break;
 
-        case 'object':
-            newRule = [ selector, '{' ];
+  let ruleIndex = this.CSSOM.cssRules.length;
 
-            for ( var key in property ) {
-                newRule.push( key, ':', property[ key ], ';' );
-            }
+  switch (typeof property) {
+    case 'string':
+      newRule = [selector, '{', property, ':', value, ';', '}'];
+      break;
 
-            newRule.push('}');
-            break;
+    case 'object':
+      newRule = [selector, '{'];
 
-        case 'undefined':
-            if ( selector.length ) {
-                newRule = [ selector ];
-                ruleIndex = 0;
-            }
-            break;
-    }
+      Object.keys(property).forEach((key) => {
+        newRule.push(key, ':', property[key], ';');
+      });
 
-    ruleIndex = this.CSSOM.insertRule( newRule.join(''), ruleIndex );
+      newRule.push('}');
+      break;
 
-    return this.CSSOM.cssRules[ ruleIndex ];
+    case 'undefined':
+      if (selector.length) {
+        newRule = [selector];
+        ruleIndex = 0;
+      }
+      break;
+    default: break;
+  }
+
+  ruleIndex = this.CSSOM.insertRule(newRule.join(''), ruleIndex);
+
+  return this.CSSOM.cssRules[ruleIndex];
 };
 
-StyleSheet.prototype.select = function( selector, property, value ) {
-    var ruleIndex = this.findRuleIndex( selector ),
-        output = null;
+StyleSheet.prototype.select = function select(selector, property, value) {
+  const ruleIndex = this.findRuleIndex(selector);
 
-    if ( null === ruleIndex ) {
-        output = this.addRule( selector, property, value );
-    } else {
-        var rule = this.CSSOM.cssRules[ ruleIndex ];
 
-        switch ( typeof property ) {
-            case 'undefined':
-                output = rule;
-                break;
+  let output = null;
 
-            case 'string':
-                if ( '' === property ) {
-                    this.CSSOM.deleteRule( ruleIndex );
-                    output = this.CSSOM;
-                } else if ( undefined === value ) {
-                    output = rule.style[ property ];
-                } else {
-                    rule.style[ property ] = value;
-                    output = rule;
-                }
-                break;
+  if (ruleIndex === null) {
+    output = this.addRule(selector, property, value);
+  } else {
+    const rule = this.CSSOM.cssRules[ruleIndex];
 
-            case 'object':
-                for ( var key in property ) {
-                    rule.style[ key ] = property[ key ];
-                }
+    switch (typeof property) {
+      case 'undefined':
+        output = rule;
+        break;
 
-                output = rule;
-                break;
+      case 'string':
+        if (property === '') {
+          this.CSSOM.deleteRule(ruleIndex);
+          output = this.CSSOM;
+        } else if (undefined === value) {
+          output = rule.style[property];
+        } else {
+          rule.style[property] = value;
+          output = rule;
         }
-    }
+        break;
 
-    return output;
+      case 'object':
+        Object.keys(property).forEach((key) => {
+          rule.style[key] = property[key];
+        });
+
+        output = rule;
+        break;
+      default: break;
+    }
+  }
+
+  return output;
 };
 
 export default StyleSheet;

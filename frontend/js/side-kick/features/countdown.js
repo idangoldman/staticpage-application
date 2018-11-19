@@ -7,33 +7,30 @@ import datepickerFieldComponent from 'side-kick/features/components/datepicker-f
 import urlFieldComponent from 'side-kick/features/components/url-field';
 
 
-var countDownFeature = baseBox.mixin( function box() {
+const countDownFeature = baseBox.mixin(function box() {
+  this.attributes({
+    timezoneField: '.countdown_timezone',
+    datetimeField: '.countdown_datetime',
+    redirectUrlField: '.countdown_redirect_url',
+  });
 
-    this.attributes({
-        'timezoneField': '.countdown_timezone',
-        'datetimeField': '.countdown_datetime',
-        'redirectUrlField': '.countdown_redirect_url'
+  this.after('initialize', () => {
+    // Timezone
+    this.attachChild(selectFieldComponent, this.select('timezoneField'), {
+      fieldName: 'countdown_timezone',
     });
 
-    this.after('initialize', function() {
-
-        // Timezone
-        this.attachChild( selectFieldComponent, this.select('timezoneField'), {
-            'fieldName': 'countdown_timezone'
-        });
-
-        // Datepicker
-        this.attachChild( datepickerFieldComponent, this.select('datetimeField'), {
-            'fieldName': 'countdown_datetime'
-        });
-
-        // Redirect URL
-        this.attachChild( urlFieldComponent, this.select('redirectUrlField'), {
-            'fieldName': 'countdown_redirect_url',
-            'toValidate': ['url']
-        });
-
+    // Datepicker
+    this.attachChild(datepickerFieldComponent, this.select('datetimeField'), {
+      fieldName: 'countdown_datetime',
     });
+
+    // Redirect URL
+    this.attachChild(urlFieldComponent, this.select('redirectUrlField'), {
+      fieldName: 'countdown_redirect_url',
+      toValidate: ['url'],
+    });
+  });
 });
 
-countDownFeature.attachTo( '.feature.countdown' );
+countDownFeature.attachTo('.feature.countdown');

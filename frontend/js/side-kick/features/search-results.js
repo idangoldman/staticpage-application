@@ -7,36 +7,34 @@ import descriptionComponent from 'side-kick/features/components/search-results/d
 import previewComponent from 'side-kick/features/components/search-results/preview';
 
 
-var searchResultsFeature = baseBox.mixin( function box() {
+const searchResultsFeature = baseBox.mixin(function box() {
+  this.attributes({
+    titleField: '.search_results_title',
+    descriptionField: '.search_results_description',
+    preview: '.search_results_preview',
+  });
 
-    this.attributes({
-        'titleField': '.search_results_title',
-        'descriptionField': '.search_results_description',
-        'preview': '.search_results_preview'
+  this.after('initialize', () => {
+    // Title
+    this.attachChild(titleComponent, this.select('titleField'), {
+      fieldName: 'search_results_title',
+      changedContentTitleEvent: 'fieldChanged_content_title',
     });
 
-    this.after('initialize', function() {
-
-        // Title
-        this.attachChild( titleComponent, this.select('titleField'), {
-            'fieldName': 'search_results_title',
-            'changedContentTitleEvent': 'fieldChanged_content_title'
-        });
-
-        // Description
-        this.attachChild( descriptionComponent, this.select('descriptionField'), {
-            'fieldName': 'search_results_description',
-            'changedContentSubTitleEvent': 'fieldChanged_content_sub_title'
-        });
-
-        // Search Preview
-        this.attachChild( previewComponent, this.select('preview'), {
-            'changedTitleEvent': 'fieldChanged_search_results_title',
-            'changedDescriptionEvent': 'fieldChanged_search_results_description',
-            'changedPlaceholderTitleEvent': 'placeholderChanged_search_results_title',
-            'changedPlaceholderDescriptionEvent': 'placeholderChanged_search_results_description',
-        });
+    // Description
+    this.attachChild(descriptionComponent, this.select('descriptionField'), {
+      fieldName: 'search_results_description',
+      changedContentSubTitle: 'fieldChanged_content_sub_title',
     });
+
+    // Search Preview
+    this.attachChild(previewComponent, this.select('preview'), {
+      changedTitle: 'fieldChanged_search_results_title',
+      changedDescription: 'fieldChanged_search_results_description',
+      changedPlaceholderTitle: 'placeholderChanged_search_results_title',
+      changedPlaceholderDescription: 'placeholderChanged_search_results_description',
+    });
+  });
 });
 
-searchResultsFeature.attachTo( '.feature.search-results' );
+searchResultsFeature.attachTo('.feature.search-results');
