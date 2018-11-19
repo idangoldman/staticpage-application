@@ -21,7 +21,7 @@ const mailingList = baseBox.mixin(function box() {
     placeholderTextField: '.mailing_list_placeholder_text',
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     // Service
     this.attachChild(selectGroupFieldComponent, this.select('serviceField'), {
       fieldName: 'mailing_list_service',

@@ -18,7 +18,7 @@ export default component(withFocus, withState, withValidation, function fileFiel
     value: '',
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     this.select('field').on('change', this.fieldChanged.bind(this));
     this.select('closeIcon').on('click', this.resetField.bind(this));
 
@@ -28,29 +28,29 @@ export default component(withFocus, withState, withValidation, function fileFiel
     // this.on( document, 'updateField_' + this.attr.fieldName + '_error', console.log('Nay!'));
   });
 
-  this.fieldChanged = (event) => {
+  this.fieldChanged = function fieldChanged(event) {
     const file = this.setFile(event.currentTarget);
 
     if (file.name !== 'empty') {
       this.getFileContent(file)
-        .then((rawFile) => {
+        .then(function callback(rawFile) {
           this.setChoosenFileName(file.name);
           this.mergeState({
             base64: rawFile,
             value: file,
           });
-        })
-        .catch(() => {
-          // console.log('something went wrong...')
         });
+      // .catch(function callback() {
+      //   console.log('something went wrong...')
+      // });
     }
   };
 
-  this.updateField = (state) => {
+  this.updateField = function updateField(state) {
     this.trigger(document, 'updateField', state);
   };
 
-  this.resetField = () => {
+  this.resetField = function resetField() {
     this.removeErrorClass();
     this.setChoosenFileName('');
     this.mergeState({
@@ -59,16 +59,16 @@ export default component(withFocus, withState, withValidation, function fileFiel
     });
   };
 
-  this.updateFileName = (event, data) => {
+  this.updateFileName = function updateFileName(event, data) {
     const fileName = data.value.split('/').pop();
     this.setChoosenFileName(fileName);
   };
 
-  this.setChoosenFileName = (fileName) => {
+  this.setChoosenFileName = function setChoosenFileName(fileName) {
     this.select('choosenFileName').html(fileName);
   };
 
-  this.setFile = (element) => {
+  this.setFile = function setFile(element) {
     let file = new File([], 'empty');
 
     if (element.files.length) {
@@ -81,13 +81,13 @@ export default component(withFocus, withState, withValidation, function fileFiel
     return file;
   };
 
-  this.getFileContent = file => new Promise(((resolve, reject) => {
+  this.getFileContent = file => new Promise((function callback(resolve, reject) {
     const fileReader = new FileReader();
 
     if (!this.validate(file)) {
       reject();
     } else {
-      fileReader.onload = (event) => {
+      fileReader.onload = function onload(event) {
         resolve(event.target.result);
       };
 

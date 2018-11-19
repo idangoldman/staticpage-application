@@ -14,7 +14,7 @@ const searchResultsFeature = baseBox.mixin(function box() {
     preview: '.search_results_preview',
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     // Title
     this.attachChild(titleComponent, this.select('titleField'), {
       fieldName: 'search_results_title',

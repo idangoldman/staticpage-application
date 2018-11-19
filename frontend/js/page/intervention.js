@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import * as C from './constants';
 import StyleSheet from './styles';
 

@@ -11,18 +11,18 @@ export default component(function searchPreview() {
     changedPlaceholderDescription: null,
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     this.on(document, this.attr.changedTitle, this.changeTitle.bind(this));
     this.on(document, this.attr.changedDescription, this.changeDescription.bind(this));
     this.on(document, this.attr.changedPlaceholderTitle, this.changeTitle.bind(this));
     this.on(document, this.attr.changedPlaceholderDescription, this.changeDescription.bind(this));
   });
 
-  this.changeTitle = (event, { value, placeholder }) => {
+  this.changeTitle = function changeTitle(event, { value, placeholder }) {
     this.select('titleEl').html(value || placeholder);
   };
 
-  this.changeDescription = (event, { value, placeholder }) => {
+  this.changeDescription = function changeDescription(event, { value, placeholder }) {
     this.select('descriptionEl').html(value || placeholder);
   };
 });

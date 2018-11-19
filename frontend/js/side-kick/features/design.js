@@ -19,7 +19,7 @@ const designFeature = baseBox.mixin(function box() {
     additionalStyleField: '.design_additional_styles',
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     // Background Image
     this.attachChild(fileFieldComponent, this.select('backgroundImageField'), {
       fieldName: 'design_background_image',

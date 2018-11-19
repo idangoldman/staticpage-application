@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const switchDeviceView = ({ deviceType }) => {
   $('.page')
     .removeClass((index, css) => (css.match(/\w+-view/g) || []).join(' '))

@@ -24,7 +24,7 @@ export default component(withFocus, withState, withValidation, function datePick
     },
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     this.select('field').on('fieldChanged', this.fieldChanged.bind(this));
     this.select('closeIcon').on('click', this.fieldClear.bind(this));
 
@@ -33,19 +33,19 @@ export default component(withFocus, withState, withValidation, function datePick
     this.attr.datePicker = this.initDatePicker();
   });
 
-  this.fieldChanged = (event) => {
+  this.fieldChanged = function fieldChanged(event) {
     const value = event.currentTarget.value.trim();
 
     this.toggleFilledClass(value);
     this.mergeState({ value });
   };
 
-  this.fieldClear = () => {
+  this.fieldClear = function fieldChanged() {
     this.attr.datePicker.clear();
     this.select('field').trigger('fieldChanged');
   };
 
-  this.updateField = (state, previousState) => {
+  this.updateField = function updateField(state, previousState) {
     if (previousState.value !== state.value) {
       this.trigger(document, 'updateField', state);
     }
@@ -66,11 +66,11 @@ export default component(withFocus, withState, withValidation, function datePick
       .data('datepicker');
   };
 
-  this.onSelect = () => {
+  this.onSelect = function onSelect() {
     this.select('field').trigger('fieldChanged');
   };
 
-  this.onShow = (instance) => {
+  this.onShow = function onShow(instance) {
     if (!instance.selectedDates.length) {
       const fieldValue = this.select('field').val();
 
@@ -82,7 +82,7 @@ export default component(withFocus, withState, withValidation, function datePick
     }
   };
 
-  this.toggleFilledClass = (value) => {
+  this.toggleFilledClass = function toggleFilledClass(value) {
     if (value.length) {
       this.select('field').addClass('filled');
     } else {

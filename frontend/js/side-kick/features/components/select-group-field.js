@@ -1,7 +1,7 @@
 import selectField from 'side-kick/features/components/select-field';
 
 export default selectField.mixin(function selectGroupField() {
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     this.select('field').on('change', this.changeGroup.bind(this));
 
     if (this.state.value) {
@@ -9,11 +9,11 @@ export default selectField.mixin(function selectGroupField() {
     }
   });
 
-  this.changeGroup = (event) => {
+  this.changeGroup = function changeGroup(event) {
     this.showGroup(event.currentTarget.value);
   };
 
-  this.showGroup = (value) => {
+  this.showGroup = function showGroup(value) {
     let groupClass = '';
 
     if (value.length) {

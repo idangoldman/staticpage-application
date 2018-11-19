@@ -19,7 +19,7 @@ export default component(withFocus, withState, withValidation, function textFiel
     },
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     this.select('field').on('keyup keypress blur', this.fieldChanged.bind(this));
 
     this.after('stateChanged', this.updateField);
@@ -27,7 +27,7 @@ export default component(withFocus, withState, withValidation, function textFiel
     // this.on( document, 'updateField_' + this.attr.fieldName + '_error', console.log('Nay!'));
   });
 
-  this.fieldChanged = (event) => {
+  this.fieldChanged = function fieldChanged(event) {
     const value = event.currentTarget.value.trim();
 
     if (!this.validate(value)) {
@@ -44,7 +44,7 @@ export default component(withFocus, withState, withValidation, function textFiel
     return false;
   };
 
-  this.updateField = (state, previousState) => {
+  this.updateField = function updateField(state, previousState) {
     if (previousState.value !== state.value) {
       this.trigger(document, 'updateField', state);
     }

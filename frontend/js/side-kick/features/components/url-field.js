@@ -19,14 +19,14 @@ export default component(withFocus, withState, withValidation, function urlField
     },
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     this.select('field').on('keyup keypress fieldChanged', this.fieldChanged.bind(this));
     this.select('field').on('blur', this.fieldBlur.bind(this));
 
     this.after('stateChanged', this.updateField);
   });
 
-  this.fieldChanged = (event) => {
+  this.fieldChanged = function fieldChanged(event) {
     const value = event.currentTarget.value.trim();
 
     if (!this.validate(value)) {
@@ -37,13 +37,13 @@ export default component(withFocus, withState, withValidation, function urlField
     return false;
   };
 
-  this.updateField = (state, previousState) => {
+  this.updateField = function updateField(state, previousState) {
     if (previousState.value !== state.value) {
       this.trigger(document, 'updateField', state);
     }
   };
 
-  this.fieldBlur = (event) => {
+  this.fieldBlur = function fieldBlur(event) {
     const value = event.currentTarget.value.trim();
     const httpRegex = /^(https?:\/\/)/;
 

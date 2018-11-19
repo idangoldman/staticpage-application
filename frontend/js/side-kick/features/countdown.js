@@ -14,7 +14,7 @@ const countDownFeature = baseBox.mixin(function box() {
     redirectUrlField: '.countdown_redirect_url',
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     // Timezone
     this.attachChild(selectFieldComponent, this.select('timezoneField'), {
       fieldName: 'countdown_timezone',

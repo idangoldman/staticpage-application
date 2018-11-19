@@ -14,7 +14,7 @@ const contentFeature = baseBox.mixin(function box() {
     descriptionField: '.content_description',
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     // Logo
     this.attachChild(fileFieldComponent, this.select('logoField'), {
       fieldName: 'content_logo',

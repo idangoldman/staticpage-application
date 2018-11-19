@@ -5,7 +5,7 @@ export default textFieldComponent.mixin(function searchPreview() {
     changedContentSubTitle: null,
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     this.on(
       document,
       this.attr.changedContentSubTitle,
@@ -13,7 +13,7 @@ export default textFieldComponent.mixin(function searchPreview() {
     );
   });
 
-  this.changeDescriptionPlaceholder = (event, { value }) => {
+  this.changeDescriptionPlaceholder = function changeDescriptionPlaceholder(event, { value }) {
     this.select('field').attr('placeholder', value);
 
     if (!this.select('field').val().length) {

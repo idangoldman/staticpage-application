@@ -16,7 +16,7 @@ const socialLinksFeature = baseBox.mixin(function box() {
     youtubeLinkField: '.social_links_youtube_link',
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     // Icon Style
     this.attachChild(selectFieldComponent, this.select('iconStyleField'), {
       fieldName: 'social_links_icon_style',

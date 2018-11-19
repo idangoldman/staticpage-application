@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const regexPatterns = {
   name: /^[a-zA-Z0-9_]*$/,
   hex_color: /^#([0-9a-f]{3}|[0-9a-f]{6})$/i,
@@ -15,7 +17,7 @@ const withValidation = function mixin() {
     toValidate: [],
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     // var attrs = this.attr;
     // this.select('validationEL').children().each(function() {
     //     attrs.toValidate.push( this.className );
@@ -25,7 +27,7 @@ const withValidation = function mixin() {
     this.after('validate', this.addErrorClass);
   });
 
-  this.valueIsNotEmpty = (value) => {
+  this.valueIsNotEmpty = function valueIsNotEmpty(value) {
     let isNotEmpty = false;
 
     switch (typeof value) {
@@ -41,11 +43,11 @@ const withValidation = function mixin() {
     return !!isNotEmpty;
   };
 
-  this.validate = (value) => {
+  this.validate = function validate(value) {
     let isValid = true;
 
     if (!!this.attr.toValidate.length && this.valueIsNotEmpty(value)) {
-      this.attr.toValidate.some((rule) => {
+      this.attr.toValidate.some(function callback(rule) {
         switch (rule) {
           case 'css':
           case 'hex_color':
@@ -74,7 +76,7 @@ const withValidation = function mixin() {
     return isValid;
   };
 
-  this.addErrorClass = () => {
+  this.addErrorClass = function addErrorClass() {
     if (this.attr.errorClass.length) {
       this.select('validationEL')
         .children(`.${this.attr.errorClass}`)
@@ -84,26 +86,26 @@ const withValidation = function mixin() {
     }
   };
 
-  this.removeErrorClass = () => {
+  this.removeErrorClass = function removeErrorClass() {
     this.select('validationEL')
       .children()
       .removeClass('error');
   };
 
-  this.regexValidation = (patternName, value) => {
+  this.regexValidation = function regexValidation(patternName, value) {
     if (patternName === 'css') {
       // console.log(regexPatterns[patternName].test(value));
     }
     return regexPatterns[patternName].test(value);
   };
 
-  this.isFileFormatAccepted = (fileFormat) => {
+  this.isFileFormatAccepted = function isFileFormatAccepted(fileFormat) {
     const acceptedFormats = this.select('field').attr('accept').split(/,\s?/g);
 
     return acceptedFormats.indexOf(fileFormat) !== -1;
   };
 
-  this.isFileSizeAccepted = (fileSize) => {
+  this.isFileSizeAccepted = function isFileSizeAccepted(fileSize) {
     const acceptedSize = this.select('field').attr('data-accept-size');
 
     return acceptedSize >= fileSize;

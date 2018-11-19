@@ -1,9 +1,10 @@
+import $ from 'jquery';
 import { component, utils } from 'flightjs';
 
 const PAGE_UPDATE_URL = window.page_update_url;
 const SITE_DOWNLOAD_URL = window.site_download_url;
 
-const setCsrfHeader = () => {
+const setCsrfHeader = function setCsrfHeader() {
   // code from: https://flask-wtf.readthedocs.io/en/stable/csrf.html
   const csrftoken = $('meta[name=csrf-token]').attr('content');
 
@@ -17,7 +18,7 @@ const setCsrfHeader = () => {
 };
 
 const apiCalls = component(function apiCalls() {
-  this.siteDownload = () => {
+  this.siteDownload = function siteDownload() {
     $.ajax({
       url: SITE_DOWNLOAD_URL,
       type: 'GET',
@@ -30,13 +31,13 @@ const apiCalls = component(function apiCalls() {
     });
   };
 
-  this.updateField = (event, field) => {
+  this.updateField = function updateField(event, field) {
     const eventName = `${event.type}_${field.name}`;
 
     utils.throttle($.ajax(this.updateFieldRequestConfig(eventName, field)));
   };
 
-  this.updateFieldRequestConfig = (eventName, field) => {
+  this.updateFieldRequestConfig = function updateFieldRequestConfig(eventName, field) {
     let config = {
       url: PAGE_UPDATE_URL,
       type: 'POST',
@@ -75,7 +76,7 @@ const apiCalls = component(function apiCalls() {
     return config;
   };
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     setCsrfHeader();
 
     this.on(document, 'updateField', this.updateField);

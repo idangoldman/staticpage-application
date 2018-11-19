@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 const withToggle = function mixin() {
   this.attributes({
     toggleBox: '.body',
@@ -5,7 +7,7 @@ const withToggle = function mixin() {
     toggleClick: '.header',
   });
 
-  const toggle = (event) => {
+  const toggle = function toggle(event) {
     $(event.currentTarget)
       .parent()
       .toggleClass(this.attr.toggleClass)
@@ -13,7 +15,7 @@ const withToggle = function mixin() {
       .slideToggle();
   };
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     // toggle feature box
     this.select('toggleClick').on('click', toggle.bind(this));
   });

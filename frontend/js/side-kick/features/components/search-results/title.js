@@ -5,11 +5,11 @@ export default textFieldComponent.mixin(function searchPreview() {
     changedContentTitleEvent: null,
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     this.on(document, this.attr.changedContentTitleEvent, this.changeTitlePlaceholder.bind(this));
   });
 
-  this.changeTitlePlaceholder = (event, { value }) => {
+  this.changeTitlePlaceholder = function changeTitlePlaceholder(event, { value }) {
     this.select('field').attr('placeholder', value);
 
     if (!this.select('field').val().length) {

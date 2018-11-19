@@ -1,13 +1,10 @@
+import $ from 'jquery';
 import { component } from 'flightjs';
 
 let currentDeviceType = 'desktop';
 
 const devicesComponent = component(function flightDevices() {
-  this.after('initialize', () => {
-    this.on('.device', 'click', this.switch);
-  });
-
-  this.switch = (event) => {
+  this.switchDevice = function switchDevice(event) {
     const $device = $(event.currentTarget);
     const deviceType = $device.text().trim().toLowerCase();
 
@@ -28,6 +25,10 @@ const devicesComponent = component(function flightDevices() {
 
     event.preventDefault();
   };
+
+  this.after('initialize', function initialize() {
+    this.on('.device', 'click', this.switchDevice);
+  });
 });
 
 devicesComponent.attachTo('.devices');

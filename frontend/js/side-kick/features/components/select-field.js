@@ -18,7 +18,7 @@ export default component(withFocus, withState, function textField() {
     },
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     this.select('field').on('change', this.fieldChanged.bind(this));
 
     this.after('stateChanged', this.updateField);
@@ -26,7 +26,7 @@ export default component(withFocus, withState, function textField() {
     // this.on( document, 'updateField_' + this.attr.fieldName + '_error', console.log('Nay!'));
   });
 
-  this.fieldChanged = (event) => {
+  this.fieldChanged = function fieldChanged(event) {
     this.selectText();
 
     this.mergeState({
@@ -34,13 +34,13 @@ export default component(withFocus, withState, function textField() {
     });
   };
 
-  this.updateField = (state, previousState) => {
+  this.updateField = function updateField(state, previousState) {
     if (previousState.value !== state.value) {
       this.trigger(document, 'updateField', state);
     }
   };
 
-  this.selectText = () => {
+  this.selectText = function selectText() {
     this.select('selectTextField')
       .html(this.select('optionSelected').text());
   };

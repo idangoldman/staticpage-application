@@ -10,7 +10,7 @@ const googleAnalyticsFeature = baseBox.mixin(function box() {
     codeField: '.google_analytics_code',
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     // Code
     this.attachChild(codeComponent, this.select('codeField'), {
       fieldName: 'google_analytics_code',

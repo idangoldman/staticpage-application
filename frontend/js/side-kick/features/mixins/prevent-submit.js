@@ -3,7 +3,7 @@ export default function withPreventSubmit() {
     form: 'form',
   });
 
-  this.after('initialize', () => {
+  this.after('initialize', function initialize() {
     this.select('form').on('submit', (event) => {
       event.preventDefault();
     });
