@@ -3,7 +3,6 @@ import os
 
 class Config( object ):
     API_URL = os.environ['API_URL']
-    BLOG_URL = os.environ['BLOG_URL']
     BASE_PATH = os.path.dirname( os.path.abspath( __file__ ) )
     HTTP_HOST = os.environ['HTTP_HOST']
     MAX_CONTENT_LENGTH = os.environ['FLASK_MAX_CONTENT_LENGTH']

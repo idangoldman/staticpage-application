@@ -53,7 +53,6 @@ def register():
 
     payload = {
         'form': form,
-        'blog_url': current_app.config['BLOG_URL'],
         'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone( request.user_agent ),
         'page': get_page_stub('auth/register/page'),
@@ -88,7 +87,6 @@ def login():
 
     payload = {
         'form': form,
-        'blog_url': current_app.config['BLOG_URL'],
         'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone( request.user_agent ),
         'page': get_page_stub('auth/login/page'),
@@ -157,7 +155,6 @@ def forgot_password():
 
     payload = {
         'form': form,
-        'blog_url': current_app.config['BLOG_URL'],
         'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone( request.user_agent ),
         'page': get_page_stub('auth/forgot-password/page'),
@@ -193,7 +190,6 @@ def reset_password( token ):
 
     payload = {
         'form': form,
-        'blog_url': current_app.config['BLOG_URL'],
         'token': token,
         'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone( request.user_agent ),
