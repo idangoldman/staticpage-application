@@ -1,13 +1,13 @@
 from flask import current_app
 from jinja2 import evalcontextfilter, Markup, escape
 import markdown as markdown_lib
-import re, jinja2
+import re, jinja2, os
 
 
 # social icons
 svg_social_icons = jinja2.ChoiceLoader([
     current_app.jinja_loader,
-    jinja2.FileSystemLoader('frontend/images/social-icons'),
+    jinja2.FileSystemLoader('frontend/images/social-icons')
 ])
 current_app.jinja_loader = svg_social_icons
 
