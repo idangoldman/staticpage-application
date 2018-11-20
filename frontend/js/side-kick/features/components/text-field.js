@@ -40,8 +40,6 @@ export default component(withFocus, withState, withValidation, function textFiel
     });
 
     this.mergeState({ value });
-
-    return false;
   };
 
   this.updateField = function updateField(state, previousState) {

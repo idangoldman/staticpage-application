@@ -30,11 +30,11 @@ export default component(withFocus, withState, withValidation, function urlField
     const value = event.currentTarget.value.trim();
 
     if (!this.validate(value)) {
+      // eslint-disable-next-line consistent-return
       return true;
     }
 
     this.mergeState({ value });
-    return false;
   };
 
   this.updateField = function updateField(state, previousState) {

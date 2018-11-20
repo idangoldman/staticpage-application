@@ -47,7 +47,7 @@ const withValidation = function mixin() {
     let isValid = true;
 
     if (!!this.attr.toValidate.length && this.valueIsNotEmpty(value)) {
-      this.attr.toValidate.some(function callback(rule) {
+      this.attr.toValidate.some((rule) => {
         switch (rule) {
           case 'css':
           case 'hex_color':
