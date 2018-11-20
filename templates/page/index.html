@@ -149,6 +149,10 @@
     </form>
     {% endif %}
 
+    {% if is_intervention or social_links_icon_style != 'none' %}
+        {% include 'macros/social-links.html' %}
+    {% endif %}
+
 {% endblock %}
 
 {% block footer %}

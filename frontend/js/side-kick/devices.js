@@ -1,35 +1,34 @@
 import $ from 'jquery';
-import { component } from 'imports?$=jquery!flightjs';
+import { component } from 'flightjs';
 
 let currentDeviceType = 'desktop';
 
-var devicesComponent = component( function() {
-    this.after('initialize', function() {
-        this.on( '.device', 'click', this.switch );
-    });
+const devicesComponent = component(function flightDevices() {
+  this.switchDevice = function switchDevice(event) {
+    const $device = $(event.currentTarget);
+    const deviceType = $device.text().trim().toLowerCase();
 
-    this.switch = function( event ) {
-        var $device = $( event.currentTarget ),
-            deviceType = $device.text().trim().toLowerCase();
+    // TODO: href regex and not text.trim
+    // \/(\w+)$
 
-        // TODO: href regex and not text.trim
-        // \/(\w+)$
+    if (deviceType !== currentDeviceType) {
+      this.$node
+        .children()
+        .removeClass('current');
 
-        if ( deviceType !== currentDeviceType ) {
-            this.$node
-                .children()
-                    .removeClass('current');
+      $device
+        .addClass('current');
 
-            $device
-                .addClass('current');
-
-            this.trigger( document, 'switchDeviceView', { deviceType } );
-
-            currentDeviceType = deviceType;
-        }
-
-        event.preventDefault();
+      this.trigger(document, 'switchDeviceView', { deviceType });
+      currentDeviceType = deviceType;
     }
+
+    event.preventDefault();
+  };
+
+  this.after('initialize', function initialize() {
+    this.on('.device', 'click', this.switchDevice);
+  });
 });
 
-devicesComponent.attachTo( '.devices' );
+devicesComponent.attachTo('.devices');

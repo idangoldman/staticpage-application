@@ -1,30 +1,29 @@
 import $ from 'jquery';
 
-var withSelect = function mixin() {
-    this.attributes({
-        focusField: '.field',
-    });
+const withSelect = function mixin() {
+  this.attributes({
+    focusField: '.field',
+  });
 
-    this.after('initialize', function() {
-        // focus click
-        this.select('focusField').on( 'focus', focus );
+  const focus = function focus(event) {
+    $(event.currentTarget)
+      .parent()
+      .addClass('focus');
+  };
 
-        // blur click
-        this.select('focusField').on( 'blur', blur );
-    });
+  const blur = function blur(event) {
+    $(event.currentTarget)
+      .parent()
+      .removeClass('focus');
+  };
 
-    function focus( event ) {
-        $( event.currentTarget )
-            .parent()
-                .addClass('focus');
-    }
+  this.after('initialize', function initialize() {
+    // focus click
+    this.select('focusField').on('focus', focus);
 
-    function blur( event ) {
-        $( event.currentTarget )
-            .parent()
-                .removeClass('focus');
-    }
-
+    // blur click
+    this.select('focusField').on('blur', blur);
+  });
 };
 
 export default withSelect;
