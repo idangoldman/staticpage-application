@@ -199,7 +199,14 @@ function handleSocialLinksIconStyle({ value }) {
 }
 
 function handleSocialLinksUpdateLink({ name, value }) {
-  document.querySelector(`a[name=${name}]`).setAttribute('href', value);
+  const socialLinkElement = document.querySelector(`a[name=${name}]`);
+
+  if ( value.trim().length ) {
+    socialLinkElement.classList.remove('none');
+    socialLinkElement.setAttribute('href', value);
+  } else {
+    socialLinkElement.classList.add('none');
+  }
 }
 
 $(window).on('message onmessage', (event) => {

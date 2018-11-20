@@ -277,7 +277,14 @@
 	  var name = _ref20.name,
 	      value = _ref20.value;
 
-	  document.querySelector('a[name=' + name + ']').setAttribute('href', value);
+	  var socialLinkElement = document.querySelector('a[name=' + name + ']');
+
+	  if (value.trim().length) {
+	    socialLinkElement.classList.remove('none');
+	    socialLinkElement.setAttribute('href', value);
+	  } else {
+	    socialLinkElement.classList.add('none');
+	  }
 	}
 
 	(0, _jquery2.default)(window).on('message onmessage', function (event) {
