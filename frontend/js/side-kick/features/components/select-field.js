@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import { component } from 'flightjs';
 
 import withFocus from 'side-kick/features/mixins/focus';
@@ -43,5 +44,13 @@ export default component(withFocus, withState, function textField() {
   this.selectText = function selectText() {
     this.select('selectTextField')
       .html(this.select('optionSelected').text());
+  };
+
+  this.resetSelectedIndex = function resetSelectedIndex() {
+    this.select('field').children('option').each(function(index) {
+      $(this).prop('selected', index === 0);
+    });
+
+    this.selectText();
   };
 });

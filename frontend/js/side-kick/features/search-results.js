@@ -18,7 +18,7 @@ const searchResultsFeature = baseBox.mixin(function box() {
     // Title
     this.attachChild(titleComponent, this.select('titleField'), {
       fieldName: 'search_results_title',
-      changedContentTitleEvent: 'fieldChanged_content_title',
+      changedContentTitle: 'fieldChanged_content_title',
     });
 
     // Description

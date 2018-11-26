@@ -4,6 +4,7 @@ import './helpers/api-calls';
 import './helpers/post-messaging';
 
 import './devices';
+import './features/manage-pages';
 import './features/content';
 import './features/design';
 import './features/google-analytics';

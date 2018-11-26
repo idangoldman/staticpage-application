@@ -56,17 +56,19 @@
 
 	__webpack_require__(18);
 
-	__webpack_require__(20);
+	__webpack_require__(22);
 
-	__webpack_require__(21);
+	__webpack_require__(23);
 
-	__webpack_require__(25);
+	__webpack_require__(24);
 
 	__webpack_require__(28);
 
-	__webpack_require__(32);
+	__webpack_require__(31);
 
-	__webpack_require__(33);
+	__webpack_require__(35);
+
+	__webpack_require__(36);
 
 /***/ }),
 /* 1 */
@@ -12136,51 +12138,39 @@
 
 	var _baseBox2 = _interopRequireDefault(_baseBox);
 
-	var _fileField = __webpack_require__(13);
+	var _pages = __webpack_require__(13);
 
-	var _fileField2 = _interopRequireDefault(_fileField);
+	var _pages2 = _interopRequireDefault(_pages);
 
-	var _textField = __webpack_require__(17);
+	var _actions = __webpack_require__(17);
 
-	var _textField2 = _interopRequireDefault(_textField);
+	var _actions2 = _interopRequireDefault(_actions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// child components
-	var contentFeature = _baseBox2.default.mixin(function box() {
+	var managePagesFeature = _baseBox2.default.mixin(function box() {
 	  this.attributes({
-	    logoField: '.content_logo',
-	    titleField: '.content_title',
-	    subTitleField: '.content_sub_title',
-	    descriptionField: '.content_description'
+	    pagesField: '.manage_pages_pages',
+	    actionsField: '.manage_pages_actions'
 	  });
 
 	  this.after('initialize', function initialize() {
-	    // Logo
-	    this.attachChild(_fileField2.default, this.select('logoField'), {
-	      fieldName: 'content_logo',
-	      toValidate: ['file_size', 'file_format']
+
+	    // Page List
+	    this.attachChild(_pages2.default, this.select('pagesField'), {
+	      fieldName: 'manage_pages_pages'
 	    });
 
-	    // Title
-	    this.attachChild(_textField2.default, this.select('titleField'), {
-	      fieldName: 'content_title'
-	    });
-
-	    // Sub-title
-	    this.attachChild(_textField2.default, this.select('subTitleField'), {
-	      fieldName: 'content_sub_title'
-	    });
-
-	    // Description
-	    this.attachChild(_textField2.default, this.select('descriptionField'), {
-	      fieldName: 'content_description'
+	    // Page Actions
+	    this.attachChild(_actions2.default, this.select('actionsField'), {
+	      fieldName: 'manage_pages_actions'
 	    });
 	  });
 	}); // base component
 
 
-	contentFeature.attachTo('.feature.content');
+	managePagesFeature.attachTo('.feature.manage-pages');
 
 /***/ }),
 /* 9 */
@@ -12488,17 +12478,286 @@
 	  value: true
 	});
 
+	var _selectField = __webpack_require__(14);
+
+	var _selectField2 = _interopRequireDefault(_selectField);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _selectField2.default.mixin(function searchPreview() {
+	  this.attributes({});
+
+	  this.updateField = function updateField(state, previousState) {
+	    if (previousState.value !== state.value) {
+	      console.log('updateField', state.value);
+	    }
+	  };
+
+	  this.after('initialize', function initialize() {});
+	});
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	var _flightjs = __webpack_require__(5);
 
-	var _focus = __webpack_require__(14);
+	var _focus = __webpack_require__(15);
 
 	var _focus2 = _interopRequireDefault(_focus);
 
-	var _flightWithState = __webpack_require__(15);
+	var _flightWithState = __webpack_require__(16);
 
 	var _flightWithState2 = _interopRequireDefault(_flightWithState);
 
-	var _validation = __webpack_require__(16);
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = (0, _flightjs.component)(_focus2.default, _flightWithState2.default, function textField() {
+	  this.attributes({
+	    field: '.field',
+	    fieldName: null,
+	    optionSelected: 'option:selected',
+	    selectTextField: '.selected-text'
+	  });
+
+	  this.initialState({
+	    name: this.fromAttr('fieldName'),
+	    value: function value() {
+	      return this.select('field').val();
+	    }
+	  });
+
+	  this.after('initialize', function initialize() {
+	    this.select('field').on('change', this.fieldChanged.bind(this));
+
+	    this.after('stateChanged', this.updateField);
+	    // this.on( document, 'updateField_' + this.attr.fieldName + '_success', console.log('Yay!'));
+	    // this.on( document, 'updateField_' + this.attr.fieldName + '_error', console.log('Nay!'));
+	  });
+
+	  this.fieldChanged = function fieldChanged(event) {
+	    this.selectText();
+
+	    this.mergeState({
+	      value: event.currentTarget.value.trim()
+	    });
+	  };
+
+	  this.updateField = function updateField(state, previousState) {
+	    if (previousState.value !== state.value) {
+	      this.trigger(document, 'updateField', state);
+	    }
+	  };
+
+	  this.selectText = function selectText() {
+	    this.select('selectTextField').html(this.select('optionSelected').text());
+	  };
+
+	  this.resetSelectedIndex = function resetSelectedIndex() {
+	    this.select('field').children('option').each(function (index) {
+	      (0, _jquery2.default)(this).prop('selected', index === 0);
+	    });
+
+	    this.selectText();
+	  };
+	});
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var withSelect = function mixin() {
+	  this.attributes({
+	    focusField: '.field'
+	  });
+
+	  var focus = function focus(event) {
+	    (0, _jquery2.default)(event.currentTarget).parent().addClass('focus');
+	  };
+
+	  var blur = function blur(event) {
+	    (0, _jquery2.default)(event.currentTarget).parent().removeClass('focus');
+	  };
+
+	  this.after('initialize', function initialize() {
+	    // focus click
+	    this.select('focusField').on('focus', focus);
+
+	    // blur click
+	    this.select('focusField').on('blur', blur);
+	  });
+	};
+
+	exports.default = withSelect;
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	!function(t,n){ true?module.exports=n():"function"==typeof define&&define.amd?define([],n):"object"==typeof exports?exports.withState=n():t.withState=n()}(this,function(){return function(t){function n(e){if(r[e])return r[e].exports;var o=r[e]={exports:{},id:e,loaded:!1};return t[e].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var r={};return n.m=t,n.c=r,n.p="",n(0)}([function(t,n,r){"use strict";function e(t){return t&&t.__esModule?t:{"default":t}}function o(t){return t=t||{},function(){var n=this;return Object.keys(t).reduce(function(r,e){var o=t[e];return r[e]="function"==typeof o?o.call(n):o,r},{})}}function u(){this.initialState=function(t){if(this._stateDef)throw new Error("initialState can only be defined once");this._stateDef="function"==typeof t?t:o(t)},this.replaceState=function(t){if(t&&"object"==typeof t){var n=this.state;return this.state=t,this.stateChanged(this.state,n),this.state}},this.mergeState=function(t){return this.replaceState((0,c.default)({},this.state,t))},this.fromState=function(t){return function(){return this.state[t]}},this.toState=function(t){return function(n){var r={};r[t]=n,this.mergeState(r)}},this.fromAttr=function(t){return function(n){return this.attr[t]}},this.stateChanged=function(t,n){},this.after("initialize",function(){this._stateDef=this._stateDef||f,this.replaceState(this._stateDef())})}Object.defineProperty(n,"__esModule",{value:!0}),n.default=u;var i=r(2),c=e(i),f=function(){return{}};t.exports=n.default},function(t,n,r){function e(t){return function(n){return null==n?void 0:n[t]}}function o(t){return null!=t&&i(g(t))}function u(t,n){return t="number"==typeof t||h.test(t)?+t:-1,n=null==n?b:n,t>-1&&t%1==0&&n>t}function i(t){return"number"==typeof t&&t>-1&&t%1==0&&b>=t}function c(t){for(var n=a(t),r=n.length,e=r&&t.length,o=!!e&&i(e)&&(p(t)||s(t)),c=-1,f=[];++c<r;){var l=n[c];(o&&u(l,e)||y.call(t,l))&&f.push(l)}return f}function f(t){var n=typeof t;return!!t&&("object"==n||"function"==n)}function a(t){if(null==t)return[];f(t)||(t=Object(t));var n=t.length;n=n&&i(n)&&(p(t)||s(t))&&n||0;for(var r=t.constructor,e=-1,o="function"==typeof r&&r.prototype===t,c=Array(n),a=n>0;++e<n;)c[e]=e+"";for(var l in t)a&&u(l,n)||"constructor"==l&&(o||!y.call(t,l))||c.push(l);return c}var l=r(9),s=r(10),p=r(11),h=/^\d+$/,v=Object.prototype,y=v.hasOwnProperty,d=l(Object,"keys"),b=9007199254740991,g=e("length"),j=d?function(t){var n=null==t?void 0:t.constructor;return"function"==typeof n&&n.prototype===t||"function"!=typeof t&&o(t)?c(t):f(t)?d(t):[]}:c;t.exports=j},function(t,n,r){function e(t,n,r){for(var e=-1,o=i(n),u=o.length;++e<u;){var c=o[e],f=t[c],a=r(f,n[c],c,t,n);(a===a?a===f:f!==f)&&(void 0!==f||c in t)||(t[c]=a)}return t}var o=r(3),u=r(5),i=r(1),c=u(function(t,n,r){return r?e(t,n,r):o(t,n)});t.exports=c},function(t,n,r){function e(t,n){return null==n?t:o(n,u(n),t)}var o=r(4),u=r(1);t.exports=e},function(t,n){function r(t,n,r){r||(r={});for(var e=-1,o=n.length;++e<o;){var u=n[e];r[u]=t[u]}return r}t.exports=r},function(t,n,r){function e(t){return i(function(n,r){var e=-1,i=null==n?0:r.length,c=i>2?r[i-2]:void 0,f=i>2?r[2]:void 0,a=i>1?r[i-1]:void 0;for("function"==typeof c?(c=o(c,a,5),i-=2):(c="function"==typeof a?a:void 0,i-=c?1:0),f&&u(r[0],r[1],f)&&(c=3>i?void 0:c,i=1);++e<i;){var l=r[e];l&&t(n,l,c)}return n})}var o=r(6),u=r(7),i=r(8);t.exports=e},function(t,n){function r(t,n,r){if("function"!=typeof t)return e;if(void 0===n)return t;switch(r){case 1:return function(r){return t.call(n,r)};case 3:return function(r,e,o){return t.call(n,r,e,o)};case 4:return function(r,e,o,u){return t.call(n,r,e,o,u)};case 5:return function(r,e,o,u,i){return t.call(n,r,e,o,u,i)}}return function(){return t.apply(n,arguments)}}function e(t){return t}t.exports=r},function(t,n){function r(t){return function(n){return null==n?void 0:n[t]}}function e(t){return null!=t&&i(l(t))}function o(t,n){return t="number"==typeof t||f.test(t)?+t:-1,n=null==n?a:n,t>-1&&t%1==0&&n>t}function u(t,n,r){if(!c(r))return!1;var u=typeof n;if("number"==u?e(r)&&o(n,r.length):"string"==u&&n in r){var i=r[n];return t===t?t===i:i!==i}return!1}function i(t){return"number"==typeof t&&t>-1&&t%1==0&&a>=t}function c(t){var n=typeof t;return!!t&&("object"==n||"function"==n)}var f=/^\d+$/,a=9007199254740991,l=r("length");t.exports=u},function(t,n){function r(t,n){if("function"!=typeof t)throw new TypeError(e);return n=o(void 0===n?t.length-1:+n||0,0),function(){for(var r=arguments,e=-1,u=o(r.length-n,0),i=Array(u);++e<u;)i[e]=r[n+e];switch(n){case 0:return t.call(this,i);case 1:return t.call(this,r[0],i);case 2:return t.call(this,r[0],r[1],i)}var c=Array(n+1);for(e=-1;++e<n;)c[e]=r[e];return c[n]=i,t.apply(this,c)}}var e="Expected a function",o=Math.max;t.exports=r},function(t,n){function r(t){return!!t&&"object"==typeof t}function e(t,n){var r=null==t?void 0:t[n];return i(r)?r:void 0}function o(t){return u(t)&&p.call(t)==c}function u(t){var n=typeof t;return!!t&&("object"==n||"function"==n)}function i(t){return null==t?!1:o(t)?h.test(l.call(t)):r(t)&&f.test(t)}var c="[object Function]",f=/^\[object .+?Constructor\]$/,a=Object.prototype,l=Function.prototype.toString,s=a.hasOwnProperty,p=a.toString,h=RegExp("^"+l.call(s).replace(/[\\^$.*+?()[\]{}|]/g,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$");t.exports=e},function(t,n){function r(t){return function(n){return null==n?void 0:n[t]}}function e(t){return u(t)&&y.call(t,"callee")&&(!b.call(t,"callee")||d.call(t)==s)}function o(t){return null!=t&&c(g(t))&&!i(t)}function u(t){return a(t)&&o(t)}function i(t){var n=f(t)?d.call(t):"";return n==p||n==h}function c(t){return"number"==typeof t&&t>-1&&t%1==0&&l>=t}function f(t){var n=typeof t;return!!t&&("object"==n||"function"==n)}function a(t){return!!t&&"object"==typeof t}var l=9007199254740991,s="[object Arguments]",p="[object Function]",h="[object GeneratorFunction]",v=Object.prototype,y=v.hasOwnProperty,d=v.toString,b=v.propertyIsEnumerable,g=r("length");t.exports=e},function(t,n){function r(t){return!!t&&"object"==typeof t}function e(t,n){var r=null==t?void 0:t[n];return c(r)?r:void 0}function o(t){return"number"==typeof t&&t>-1&&t%1==0&&b>=t}function u(t){return i(t)&&v.call(t)==a}function i(t){var n=typeof t;return!!t&&("object"==n||"function"==n)}function c(t){return null==t?!1:u(t)?y.test(p.call(t)):r(t)&&l.test(t)}var f="[object Array]",a="[object Function]",l=/^\[object .+?Constructor\]$/,s=Object.prototype,p=Function.prototype.toString,h=s.hasOwnProperty,v=s.toString,y=RegExp("^"+p.call(h).replace(/[\\^$.*+?()[\]{}|]/g,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$"),d=e(Array,"isArray"),b=9007199254740991,g=d||function(t){return r(t)&&o(t.length)&&v.call(t)==f};t.exports=g}])});
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _selectField = __webpack_require__(14);
+
+	var _selectField2 = _interopRequireDefault(_selectField);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _selectField2.default.mixin(function searchPreview() {
+	  this.updateField = function updateField(state, previousState) {
+	    switch (state.value) {
+	      case 'create_page':
+	        this.createPage();
+	        break;
+	      case 'rename_page':
+	        this.renamePage();
+	        break;
+	      case 'delete_page':
+	        this.deletePage();
+	        break;
+	      default:
+	        this.resetSelectedIndex();
+	        break;
+	    }
+	  };
+
+	  this.createPage = function createPage() {
+	    var pageName = prompt('How you want to name your page?');
+
+	    if (pageName !== null && pageName.trim().length) {
+	      console.log('create page');
+	    }
+
+	    this.resetSelectedIndex();
+	  };
+
+	  this.renamePage = function renamePage() {
+	    var pageRename = prompt('How you want to rename your page?');
+
+	    if (pageRename !== null && pageRename.trim().length) {
+	      console.log('rename page');
+	    }
+
+	    this.resetSelectedIndex();
+	  };
+
+	  this.deletePage = function deletePage() {
+	    if (confirm('Are you sure?')) {
+	      console.log('yes');
+	    }
+
+	    this.resetSelectedIndex();
+	  };
+	});
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _baseBox = __webpack_require__(9);
+
+	var _baseBox2 = _interopRequireDefault(_baseBox);
+
+	var _fileField = __webpack_require__(19);
+
+	var _fileField2 = _interopRequireDefault(_fileField);
+
+	var _textField = __webpack_require__(21);
+
+	var _textField2 = _interopRequireDefault(_textField);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// child components
+	var contentFeature = _baseBox2.default.mixin(function box() {
+	  this.attributes({
+	    logoField: '.content_logo',
+	    titleField: '.content_title',
+	    subTitleField: '.content_sub_title',
+	    descriptionField: '.content_description'
+	  });
+
+	  this.after('initialize', function initialize() {
+	    // Logo
+	    this.attachChild(_fileField2.default, this.select('logoField'), {
+	      fieldName: 'content_logo',
+	      toValidate: ['file_size', 'file_format']
+	    });
+
+	    // Title
+	    this.attachChild(_textField2.default, this.select('titleField'), {
+	      fieldName: 'content_title'
+	    });
+
+	    // Sub-title
+	    this.attachChild(_textField2.default, this.select('subTitleField'), {
+	      fieldName: 'content_sub_title'
+	    });
+
+	    // Description
+	    this.attachChild(_textField2.default, this.select('descriptionField'), {
+	      fieldName: 'content_description'
+	    });
+	  });
+	}); // base component
+
+
+	contentFeature.attachTo('.feature.content');
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _flightjs = __webpack_require__(5);
+
+	var _focus = __webpack_require__(15);
+
+	var _focus2 = _interopRequireDefault(_focus);
+
+	var _flightWithState = __webpack_require__(16);
+
+	var _flightWithState2 = _interopRequireDefault(_flightWithState);
+
+	var _validation = __webpack_require__(20);
 
 	var _validation2 = _interopRequireDefault(_validation);
 
@@ -12598,53 +12857,7 @@
 	});
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _jquery = __webpack_require__(1);
-
-	var _jquery2 = _interopRequireDefault(_jquery);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var withSelect = function mixin() {
-	  this.attributes({
-	    focusField: '.field'
-	  });
-
-	  var focus = function focus(event) {
-	    (0, _jquery2.default)(event.currentTarget).parent().addClass('focus');
-	  };
-
-	  var blur = function blur(event) {
-	    (0, _jquery2.default)(event.currentTarget).parent().removeClass('focus');
-	  };
-
-	  this.after('initialize', function initialize() {
-	    // focus click
-	    this.select('focusField').on('focus', focus);
-
-	    // blur click
-	    this.select('focusField').on('blur', blur);
-	  });
-	};
-
-	exports.default = withSelect;
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	!function(t,n){ true?module.exports=n():"function"==typeof define&&define.amd?define([],n):"object"==typeof exports?exports.withState=n():t.withState=n()}(this,function(){return function(t){function n(e){if(r[e])return r[e].exports;var o=r[e]={exports:{},id:e,loaded:!1};return t[e].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var r={};return n.m=t,n.c=r,n.p="",n(0)}([function(t,n,r){"use strict";function e(t){return t&&t.__esModule?t:{"default":t}}function o(t){return t=t||{},function(){var n=this;return Object.keys(t).reduce(function(r,e){var o=t[e];return r[e]="function"==typeof o?o.call(n):o,r},{})}}function u(){this.initialState=function(t){if(this._stateDef)throw new Error("initialState can only be defined once");this._stateDef="function"==typeof t?t:o(t)},this.replaceState=function(t){if(t&&"object"==typeof t){var n=this.state;return this.state=t,this.stateChanged(this.state,n),this.state}},this.mergeState=function(t){return this.replaceState((0,c.default)({},this.state,t))},this.fromState=function(t){return function(){return this.state[t]}},this.toState=function(t){return function(n){var r={};r[t]=n,this.mergeState(r)}},this.fromAttr=function(t){return function(n){return this.attr[t]}},this.stateChanged=function(t,n){},this.after("initialize",function(){this._stateDef=this._stateDef||f,this.replaceState(this._stateDef())})}Object.defineProperty(n,"__esModule",{value:!0}),n.default=u;var i=r(2),c=e(i),f=function(){return{}};t.exports=n.default},function(t,n,r){function e(t){return function(n){return null==n?void 0:n[t]}}function o(t){return null!=t&&i(g(t))}function u(t,n){return t="number"==typeof t||h.test(t)?+t:-1,n=null==n?b:n,t>-1&&t%1==0&&n>t}function i(t){return"number"==typeof t&&t>-1&&t%1==0&&b>=t}function c(t){for(var n=a(t),r=n.length,e=r&&t.length,o=!!e&&i(e)&&(p(t)||s(t)),c=-1,f=[];++c<r;){var l=n[c];(o&&u(l,e)||y.call(t,l))&&f.push(l)}return f}function f(t){var n=typeof t;return!!t&&("object"==n||"function"==n)}function a(t){if(null==t)return[];f(t)||(t=Object(t));var n=t.length;n=n&&i(n)&&(p(t)||s(t))&&n||0;for(var r=t.constructor,e=-1,o="function"==typeof r&&r.prototype===t,c=Array(n),a=n>0;++e<n;)c[e]=e+"";for(var l in t)a&&u(l,n)||"constructor"==l&&(o||!y.call(t,l))||c.push(l);return c}var l=r(9),s=r(10),p=r(11),h=/^\d+$/,v=Object.prototype,y=v.hasOwnProperty,d=l(Object,"keys"),b=9007199254740991,g=e("length"),j=d?function(t){var n=null==t?void 0:t.constructor;return"function"==typeof n&&n.prototype===t||"function"!=typeof t&&o(t)?c(t):f(t)?d(t):[]}:c;t.exports=j},function(t,n,r){function e(t,n,r){for(var e=-1,o=i(n),u=o.length;++e<u;){var c=o[e],f=t[c],a=r(f,n[c],c,t,n);(a===a?a===f:f!==f)&&(void 0!==f||c in t)||(t[c]=a)}return t}var o=r(3),u=r(5),i=r(1),c=u(function(t,n,r){return r?e(t,n,r):o(t,n)});t.exports=c},function(t,n,r){function e(t,n){return null==n?t:o(n,u(n),t)}var o=r(4),u=r(1);t.exports=e},function(t,n){function r(t,n,r){r||(r={});for(var e=-1,o=n.length;++e<o;){var u=n[e];r[u]=t[u]}return r}t.exports=r},function(t,n,r){function e(t){return i(function(n,r){var e=-1,i=null==n?0:r.length,c=i>2?r[i-2]:void 0,f=i>2?r[2]:void 0,a=i>1?r[i-1]:void 0;for("function"==typeof c?(c=o(c,a,5),i-=2):(c="function"==typeof a?a:void 0,i-=c?1:0),f&&u(r[0],r[1],f)&&(c=3>i?void 0:c,i=1);++e<i;){var l=r[e];l&&t(n,l,c)}return n})}var o=r(6),u=r(7),i=r(8);t.exports=e},function(t,n){function r(t,n,r){if("function"!=typeof t)return e;if(void 0===n)return t;switch(r){case 1:return function(r){return t.call(n,r)};case 3:return function(r,e,o){return t.call(n,r,e,o)};case 4:return function(r,e,o,u){return t.call(n,r,e,o,u)};case 5:return function(r,e,o,u,i){return t.call(n,r,e,o,u,i)}}return function(){return t.apply(n,arguments)}}function e(t){return t}t.exports=r},function(t,n){function r(t){return function(n){return null==n?void 0:n[t]}}function e(t){return null!=t&&i(l(t))}function o(t,n){return t="number"==typeof t||f.test(t)?+t:-1,n=null==n?a:n,t>-1&&t%1==0&&n>t}function u(t,n,r){if(!c(r))return!1;var u=typeof n;if("number"==u?e(r)&&o(n,r.length):"string"==u&&n in r){var i=r[n];return t===t?t===i:i!==i}return!1}function i(t){return"number"==typeof t&&t>-1&&t%1==0&&a>=t}function c(t){var n=typeof t;return!!t&&("object"==n||"function"==n)}var f=/^\d+$/,a=9007199254740991,l=r("length");t.exports=u},function(t,n){function r(t,n){if("function"!=typeof t)throw new TypeError(e);return n=o(void 0===n?t.length-1:+n||0,0),function(){for(var r=arguments,e=-1,u=o(r.length-n,0),i=Array(u);++e<u;)i[e]=r[n+e];switch(n){case 0:return t.call(this,i);case 1:return t.call(this,r[0],i);case 2:return t.call(this,r[0],r[1],i)}var c=Array(n+1);for(e=-1;++e<n;)c[e]=r[e];return c[n]=i,t.apply(this,c)}}var e="Expected a function",o=Math.max;t.exports=r},function(t,n){function r(t){return!!t&&"object"==typeof t}function e(t,n){var r=null==t?void 0:t[n];return i(r)?r:void 0}function o(t){return u(t)&&p.call(t)==c}function u(t){var n=typeof t;return!!t&&("object"==n||"function"==n)}function i(t){return null==t?!1:o(t)?h.test(l.call(t)):r(t)&&f.test(t)}var c="[object Function]",f=/^\[object .+?Constructor\]$/,a=Object.prototype,l=Function.prototype.toString,s=a.hasOwnProperty,p=a.toString,h=RegExp("^"+l.call(s).replace(/[\\^$.*+?()[\]{}|]/g,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$");t.exports=e},function(t,n){function r(t){return function(n){return null==n?void 0:n[t]}}function e(t){return u(t)&&y.call(t,"callee")&&(!b.call(t,"callee")||d.call(t)==s)}function o(t){return null!=t&&c(g(t))&&!i(t)}function u(t){return a(t)&&o(t)}function i(t){var n=f(t)?d.call(t):"";return n==p||n==h}function c(t){return"number"==typeof t&&t>-1&&t%1==0&&l>=t}function f(t){var n=typeof t;return!!t&&("object"==n||"function"==n)}function a(t){return!!t&&"object"==typeof t}var l=9007199254740991,s="[object Arguments]",p="[object Function]",h="[object GeneratorFunction]",v=Object.prototype,y=v.hasOwnProperty,d=v.toString,b=v.propertyIsEnumerable,g=r("length");t.exports=e},function(t,n){function r(t){return!!t&&"object"==typeof t}function e(t,n){var r=null==t?void 0:t[n];return c(r)?r:void 0}function o(t){return"number"==typeof t&&t>-1&&t%1==0&&b>=t}function u(t){return i(t)&&v.call(t)==a}function i(t){var n=typeof t;return!!t&&("object"==n||"function"==n)}function c(t){return null==t?!1:u(t)?y.test(p.call(t)):r(t)&&l.test(t)}var f="[object Array]",a="[object Function]",l=/^\[object .+?Constructor\]$/,s=Object.prototype,p=Function.prototype.toString,h=s.hasOwnProperty,v=s.toString,y=RegExp("^"+p.call(h).replace(/[\\^$.*+?()[\]{}|]/g,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$"),d=e(Array,"isArray"),b=9007199254740991,g=d||function(t){return r(t)&&o(t.length)&&v.call(t)==f};t.exports=g}])});
-
-/***/ }),
-/* 16 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12774,7 +12987,7 @@
 	exports.default = withValidation;
 
 /***/ }),
-/* 17 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12785,15 +12998,15 @@
 
 	var _flightjs = __webpack_require__(5);
 
-	var _focus = __webpack_require__(14);
+	var _focus = __webpack_require__(15);
 
 	var _focus2 = _interopRequireDefault(_focus);
 
-	var _flightWithState = __webpack_require__(15);
+	var _flightWithState = __webpack_require__(16);
 
 	var _flightWithState2 = _interopRequireDefault(_flightWithState);
 
-	var _validation = __webpack_require__(16);
+	var _validation = __webpack_require__(20);
 
 	var _validation2 = _interopRequireDefault(_validation);
 
@@ -12845,7 +13058,7 @@
 	});
 
 /***/ }),
-/* 18 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -12854,15 +13067,15 @@
 
 	var _baseBox2 = _interopRequireDefault(_baseBox);
 
-	var _fileField = __webpack_require__(13);
+	var _fileField = __webpack_require__(19);
 
 	var _fileField2 = _interopRequireDefault(_fileField);
 
-	var _textField = __webpack_require__(17);
+	var _textField = __webpack_require__(21);
 
 	var _textField2 = _interopRequireDefault(_textField);
 
-	var _selectField = __webpack_require__(19);
+	var _selectField = __webpack_require__(14);
 
 	var _selectField2 = _interopRequireDefault(_selectField);
 
@@ -12934,71 +13147,7 @@
 	designFeature.attachTo('.feature.design');
 
 /***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _flightjs = __webpack_require__(5);
-
-	var _focus = __webpack_require__(14);
-
-	var _focus2 = _interopRequireDefault(_focus);
-
-	var _flightWithState = __webpack_require__(15);
-
-	var _flightWithState2 = _interopRequireDefault(_flightWithState);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	exports.default = (0, _flightjs.component)(_focus2.default, _flightWithState2.default, function textField() {
-	  this.attributes({
-	    field: '.field',
-	    fieldName: null,
-	    optionSelected: 'option:selected',
-	    selectTextField: '.selected-text'
-	  });
-
-	  this.initialState({
-	    name: this.fromAttr('fieldName'),
-	    value: function value() {
-	      return this.select('field').val();
-	    }
-	  });
-
-	  this.after('initialize', function initialize() {
-	    this.select('field').on('change', this.fieldChanged.bind(this));
-
-	    this.after('stateChanged', this.updateField);
-	    // this.on( document, 'updateField_' + this.attr.fieldName + '_success', console.log('Yay!'));
-	    // this.on( document, 'updateField_' + this.attr.fieldName + '_error', console.log('Nay!'));
-	  });
-
-	  this.fieldChanged = function fieldChanged(event) {
-	    this.selectText();
-
-	    this.mergeState({
-	      value: event.currentTarget.value.trim()
-	    });
-	  };
-
-	  this.updateField = function updateField(state, previousState) {
-	    if (previousState.value !== state.value) {
-	      this.trigger(document, 'updateField', state);
-	    }
-	  };
-
-	  this.selectText = function selectText() {
-	    this.select('selectTextField').html(this.select('optionSelected').text());
-	  };
-	});
-
-/***/ }),
-/* 20 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13007,7 +13156,7 @@
 
 	var _baseBox2 = _interopRequireDefault(_baseBox);
 
-	var _textField = __webpack_require__(17);
+	var _textField = __webpack_require__(21);
 
 	var _textField2 = _interopRequireDefault(_textField);
 
@@ -13034,7 +13183,7 @@
 	googleAnalyticsFeature.attachTo('.feature.google-analytics');
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13043,15 +13192,15 @@
 
 	var _baseBox2 = _interopRequireDefault(_baseBox);
 
-	var _title = __webpack_require__(22);
+	var _title = __webpack_require__(25);
 
 	var _title2 = _interopRequireDefault(_title);
 
-	var _description = __webpack_require__(23);
+	var _description = __webpack_require__(26);
 
 	var _description2 = _interopRequireDefault(_description);
 
-	var _preview = __webpack_require__(24);
+	var _preview = __webpack_require__(27);
 
 	var _preview2 = _interopRequireDefault(_preview);
 
@@ -13069,7 +13218,7 @@
 	    // Title
 	    this.attachChild(_title2.default, this.select('titleField'), {
 	      fieldName: 'search_results_title',
-	      changedContentTitleEvent: 'fieldChanged_content_title'
+	      changedContentTitle: 'fieldChanged_content_title'
 	    });
 
 	    // Description
@@ -13094,7 +13243,7 @@
 	searchResultsFeature.attachTo('.feature.search-results');
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13103,7 +13252,7 @@
 	  value: true
 	});
 
-	var _textField = __webpack_require__(17);
+	var _textField = __webpack_require__(21);
 
 	var _textField2 = _interopRequireDefault(_textField);
 
@@ -13111,11 +13260,11 @@
 
 	exports.default = _textField2.default.mixin(function searchPreview() {
 	  this.attributes({
-	    changedContentTitleEvent: null
+	    changedContentTitle: null
 	  });
 
 	  this.after('initialize', function initialize() {
-	    this.on(document, this.attr.changedContentTitleEvent, this.changeTitlePlaceholder.bind(this));
+	    this.on(document, this.attr.changedContentTitle, this.changeTitlePlaceholder.bind(this));
 	  });
 
 	  this.changeTitlePlaceholder = function changeTitlePlaceholder(event, _ref) {
@@ -13130,7 +13279,7 @@
 	});
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13139,7 +13288,7 @@
 	  value: true
 	});
 
-	var _textField = __webpack_require__(17);
+	var _textField = __webpack_require__(21);
 
 	var _textField2 = _interopRequireDefault(_textField);
 
@@ -13166,7 +13315,7 @@
 	});
 
 /***/ }),
-/* 24 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13211,7 +13360,7 @@
 	});
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13220,15 +13369,15 @@
 
 	var _baseBox2 = _interopRequireDefault(_baseBox);
 
-	var _textField = __webpack_require__(17);
+	var _textField = __webpack_require__(21);
 
 	var _textField2 = _interopRequireDefault(_textField);
 
-	var _selectGroupField = __webpack_require__(26);
+	var _selectGroupField = __webpack_require__(29);
 
 	var _selectGroupField2 = _interopRequireDefault(_selectGroupField);
 
-	var _urlField = __webpack_require__(27);
+	var _urlField = __webpack_require__(30);
 
 	var _urlField2 = _interopRequireDefault(_urlField);
 
@@ -13310,7 +13459,7 @@
 	mailingList.attachTo('.feature.mailing-list');
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13319,7 +13468,7 @@
 	  value: true
 	});
 
-	var _selectField = __webpack_require__(19);
+	var _selectField = __webpack_require__(14);
 
 	var _selectField2 = _interopRequireDefault(_selectField);
 
@@ -13350,7 +13499,7 @@
 	});
 
 /***/ }),
-/* 27 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13361,15 +13510,15 @@
 
 	var _flightjs = __webpack_require__(5);
 
-	var _focus = __webpack_require__(14);
+	var _focus = __webpack_require__(15);
 
 	var _focus2 = _interopRequireDefault(_focus);
 
-	var _flightWithState = __webpack_require__(15);
+	var _flightWithState = __webpack_require__(16);
 
 	var _flightWithState2 = _interopRequireDefault(_flightWithState);
 
-	var _validation = __webpack_require__(16);
+	var _validation = __webpack_require__(20);
 
 	var _validation2 = _interopRequireDefault(_validation);
 
@@ -13425,7 +13574,7 @@
 	});
 
 /***/ }),
-/* 28 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13434,15 +13583,15 @@
 
 	var _baseBox2 = _interopRequireDefault(_baseBox);
 
-	var _selectField = __webpack_require__(19);
+	var _selectField = __webpack_require__(14);
 
 	var _selectField2 = _interopRequireDefault(_selectField);
 
-	var _datepickerField = __webpack_require__(29);
+	var _datepickerField = __webpack_require__(32);
 
 	var _datepickerField2 = _interopRequireDefault(_datepickerField);
 
-	var _urlField = __webpack_require__(27);
+	var _urlField = __webpack_require__(30);
 
 	var _urlField2 = _interopRequireDefault(_urlField);
 
@@ -13481,7 +13630,7 @@
 	countDownFeature.attachTo('.feature.countdown');
 
 /***/ }),
-/* 29 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13492,19 +13641,19 @@
 
 	var _flightjs = __webpack_require__(5);
 
-	__webpack_require__(30);
+	__webpack_require__(33);
 
-	__webpack_require__(31);
+	__webpack_require__(34);
 
-	var _focus = __webpack_require__(14);
+	var _focus = __webpack_require__(15);
 
 	var _focus2 = _interopRequireDefault(_focus);
 
-	var _flightWithState = __webpack_require__(15);
+	var _flightWithState = __webpack_require__(16);
 
 	var _flightWithState2 = _interopRequireDefault(_flightWithState);
 
-	var _validation = __webpack_require__(16);
+	var _validation = __webpack_require__(20);
 
 	var _validation2 = _interopRequireDefault(_validation);
 
@@ -13593,7 +13742,7 @@
 	});
 
 /***/ }),
-/* 30 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*** IMPORTS FROM imports-loader ***/
@@ -13604,7 +13753,7 @@
 
 
 /***/ }),
-/* 31 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	/*** IMPORTS FROM imports-loader ***/
@@ -13625,7 +13774,7 @@
 
 
 /***/ }),
-/* 32 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -13634,11 +13783,11 @@
 
 	var _baseBox2 = _interopRequireDefault(_baseBox);
 
-	var _selectField = __webpack_require__(19);
+	var _selectField = __webpack_require__(14);
 
 	var _selectField2 = _interopRequireDefault(_selectField);
 
-	var _urlField = __webpack_require__(27);
+	var _urlField = __webpack_require__(30);
 
 	var _urlField2 = _interopRequireDefault(_urlField);
 
@@ -13697,14 +13846,14 @@
 	socialLinksFeature.attachTo('.feature.social-links');
 
 /***/ }),
-/* 33 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	var _flightjs = __webpack_require__(5);
 
-	var _flightWithState = __webpack_require__(15);
+	var _flightWithState = __webpack_require__(16);
 
 	var _flightWithState2 = _interopRequireDefault(_flightWithState);
 
