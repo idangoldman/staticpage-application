@@ -47,7 +47,7 @@ export default component(withFocus, withState, function textField() {
   };
 
   this.resetSelectedIndex = function resetSelectedIndex() {
-    this.select('field').children('option').each(function(index) {
+    this.select('field').children('option').each(function (index) {
       $(this).prop('selected', index === 0);
     });
 

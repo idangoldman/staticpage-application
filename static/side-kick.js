@@ -12156,7 +12156,6 @@
 	  });
 
 	  this.after('initialize', function initialize() {
-
 	    // Page List
 	    this.attachChild(_pages2.default, this.select('pagesField'), {
 	      fieldName: 'manage_pages_pages'
@@ -12788,12 +12787,14 @@
 	  });
 
 	  this.fieldChanged = function fieldChanged(event) {
+	    var _this = this;
+
 	    var file = this.setFile(event.currentTarget);
 
 	    if (file.name !== 'empty') {
-	      this.getFileContent(file).then(function callback(rawFile) {
-	        this.setChoosenFileName(file.name);
-	        this.mergeState({
+	      this.getFileContent(file).then(function (rawFile) {
+	        _this.setChoosenFileName(file.name);
+	        _this.mergeState({
 	          base64: rawFile,
 	          value: file
 	        });
@@ -12839,11 +12840,13 @@
 	    return file;
 	  };
 
-	  this.getFileContent = function (file) {
-	    return new Promise(function callback(resolve, reject) {
+	  this.getFileContent = function getFileContent(file) {
+	    var _this2 = this;
+
+	    return new Promise(function (resolve, reject) {
 	      var fileReader = new FileReader();
 
-	      if (!this.validate(file)) {
+	      if (!_this2.validate(file)) {
 	        reject();
 	      } else {
 	        fileReader.onload = function onload(event) {

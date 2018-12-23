@@ -33,7 +33,7 @@ export default component(withFocus, withState, withValidation, function fileFiel
 
     if (file.name !== 'empty') {
       this.getFileContent(file)
-        .then(function callback(rawFile) {
+        .then((rawFile) => {
           this.setChoosenFileName(file.name);
           this.mergeState({
             base64: rawFile,
@@ -81,17 +81,19 @@ export default component(withFocus, withState, withValidation, function fileFiel
     return file;
   };
 
-  this.getFileContent = file => new Promise((function callback(resolve, reject) {
-    const fileReader = new FileReader();
+  this.getFileContent = function getFileContent(file) {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
 
-    if (!this.validate(file)) {
-      reject();
-    } else {
-      fileReader.onload = function onload(event) {
-        resolve(event.target.result);
-      };
+      if (!this.validate(file)) {
+        reject();
+      } else {
+        fileReader.onload = function onload(event) {
+          resolve(event.target.result);
+        };
 
-      fileReader.readAsDataURL(file);
-    }
-  }));
+        fileReader.readAsDataURL(file);
+      }
+    });
+  };
 });

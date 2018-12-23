@@ -201,7 +201,7 @@ function handleSocialLinksIconStyle({ value }) {
 function handleSocialLinksUpdateLink({ name, value }) {
   const socialLinkElement = document.querySelector(`a[name=${name}]`);
 
-  if ( value.trim().length ) {
+  if (value.trim().length) {
     socialLinkElement.classList.remove('none');
     socialLinkElement.setAttribute('href', value);
   } else {

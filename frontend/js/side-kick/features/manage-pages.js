@@ -8,11 +8,10 @@ import actionsFieldComponent from 'side-kick/features/components/manage-pages/ac
 const managePagesFeature = baseBox.mixin(function box() {
   this.attributes({
     pagesField: '.manage_pages_pages',
-    actionsField: '.manage_pages_actions'
+    actionsField: '.manage_pages_actions',
   });
 
   this.after('initialize', function initialize() {
-
     // Page List
     this.attachChild(pagesFieldComponent, this.select('pagesField'), {
       fieldName: 'manage_pages_pages',

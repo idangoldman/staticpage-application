@@ -3,7 +3,7 @@
   "version": "2.3.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/idangoldman/staticpage.git"
+    "url": "git@gitlab.com:idan.goldman/staticpage.git"
   },
   "scripts": {
     "start": "pipenv run sh start.sh",
