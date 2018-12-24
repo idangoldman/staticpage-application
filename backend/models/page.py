@@ -2,17 +2,15 @@ from flask import json, current_app
 from datetime import datetime
 
 from backend import db
-
+from backend.helpers import get_a_stub
 
 class Page(db.Model):
     __tablename__ = 'pages'
 
     id = db.Column('id', db.Integer, primary_key=True, index=True)
+    name = db.Column('name', db.String(128), default='index')
     user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column('created_at', db.DateTime(), default=datetime.utcnow)
-
-    file_type = db.Column('file_type', db.String(16), nullable=False, default='welcome')
-    file_name = db.Column('file_name', db.String(128), default='index')
 
     content_logo = db.Column('content_logo', db.String(128))
     content_title = db.Column('content_title', db.Text())
@@ -57,8 +55,7 @@ class Page(db.Model):
 
 
     def with_features(self):
-        with open('backend/stubs/features.json', 'r') as json_file:
-            features = json.load( json_file )
+        features = get_a_stub('features/all')
 
         page_dict = self.__dict__
 
@@ -89,8 +86,7 @@ class Page(db.Model):
 
 
     def with_defaults(self):
-        with open('backend/stubs/features.json', 'r') as json_file:
-            features = json.load( json_file )
+        features = get_a_stub('features/all')
 
         page_dict = self.__dict__
 

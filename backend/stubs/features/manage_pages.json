@@ -1,0 +1,29 @@
+{
+  "name": "manage-pages",
+  "title": "Manage Pages",
+  "fields": [
+    {
+      "id": "manage_pages_pages",
+      "name": "pages",
+      "label": "Pages",
+      "type": "select",
+      "message": "Browse between your pages.",
+      "default": "",
+      "options": []
+    },
+    {
+      "id": "manage_pages_actions",
+      "name": "actions",
+      "label": "Actions",
+      "type": "select",
+      "message": "Take an action for the currect page or create a new one.",
+      "default": "",
+      "options": [
+        {"key": "", "value": "Select an Action"},
+        {"key": "create_page", "value": "Create a new page"},
+        {"key": "rename_page", "value": "Rename the current page"},
+        {"key": "delete_page", "value": "Delete the current page"}
+      ]
+    }
+  ]
+}

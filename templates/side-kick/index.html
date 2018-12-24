@@ -27,6 +27,19 @@
   </nav>
 
   <ul class="features">
+    <li class="feature {{ manage_pages.name }} close">
+      <header class="header">
+        <h3 class="title">{{ manage_pages.title }}</h3>
+        <svg class="icon caret">
+          <use class="use" xlink:href="#caret-up"></use>
+        </svg>
+      </header>
+      <div class="body">
+        {% from 'macros/form/base.html' import base_form %}
+        {% call base_form(fields=manage_pages.fields, action='blah.php') %}{% endcall %}
+      </div>
+    </li>
+
     {% for feature in features %}
       <li class="feature {{ feature.name }} close">
         <header class="header">
@@ -37,7 +50,7 @@
         </header>
         <div class="body">
           {% from 'macros/form/base.html' import base_form %}
-          {% call base_form(fields=feature.fields, action='blah.php' ) %}{% endcall %}
+          {% call base_form(fields=feature.fields, action='blah.php') %}{% endcall %}
         </div>
       </li>
     {% endfor %}

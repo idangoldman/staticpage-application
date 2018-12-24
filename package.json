@@ -7,6 +7,9 @@
   },
   "scripts": {
     "start": "pipenv run sh start.sh",
+    "db:migrate": "pipenv run python manage.py db migrate",
+    "db:upgrade": "pipenv run python manage.py db upgrade",
+    "db:downgrade": "pipenv run python manage.py db downgrade",
     "watch": "gulp w",
     "lint": "eslint frontend/js",
     "lint-fix": "yarn lint --fix"

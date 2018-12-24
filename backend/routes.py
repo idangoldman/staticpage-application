@@ -1,7 +1,9 @@
+from pprint import pprint
 from flask import render_template, current_app, json, send_from_directory, make_response, request, redirect, url_for, flash
 from flask_login import login_required, current_user
+from sqlalchemy.orm import load_only
 
-from backend.helpers import path_builder, is_phone, get_page_stub
+from backend.helpers import path_builder, is_phone, get_page_stub, get_a_stub
 from backend.models.page import Page
 from backend.models.user import User
 from backend.third_party import mailchimp_subscribe
@@ -96,12 +98,22 @@ def home():
 def side_kick( page_id ):
     with open( 'static/images/side-kick-sprite.svg', 'r' ) as svg_file:
         svg_sprite = svg_file.read()
-    with open( 'backend/stubs/features.json', 'r' ) as json_file:
-        features = json.load( json_file )
 
+    features = get_a_stub('features/all')
     page_with_features = current_user.pages.first().with_features()
 
+    manage_pages = get_a_stub('features/manage_pages')
+    pages = current_user.pages.with_entities(Page.id, Page.name).all();
+    for field in manage_pages.get('fields'):
+      if field.get('id') == 'manage_pages_pages':
+        for page in pages:
+          field['options'].append({'key': page[0], 'value': page[1]})
+
+          if page[0] == page_id:
+            field['default'] = page[0]
+
     payload = {
+        'manage_pages': manage_pages,
         'features': page_with_features,
         'is_email_confirmed': current_user.email_confirmed,
         'on_phone': is_phone( request.user_agent ),

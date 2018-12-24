@@ -10,6 +10,5 @@ export default selectFieldComponent.mixin(function searchPreview() {
     }
   };
 
-  this.after('initialize', function initialize() {
-  });
+  this.after('initialize', function initialize() {});
 });
