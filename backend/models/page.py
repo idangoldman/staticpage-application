@@ -61,7 +61,7 @@ class Page(db.Model):
 
         for feature in features:
             for field in feature.get('fields'):
-                field['value'] = page_dict.get( field.get('id') ) or field.get('value') or ''
+                field['value'] = page_dict.get(field.get('id')) or field.get('value') or ''
 
                 if field.get('id') == 'search_results_title':
                     field['placeholder'] = page_dict.get('content_title') \
@@ -80,9 +80,12 @@ class Page(db.Model):
                                             or ''
                 if field.get('type') == 'fieldset':
                     for second_field in field.get('fields'):
-                        second_field['value'] = page_dict.get( second_field.get('id') ) or second_field.get('value') or ''
+                        second_field['value'] = page_dict.get(second_field.get('id')) or second_field.get('value') or ''
 
-        return features
+        return {
+          'page': page_dict,
+          'features': features
+        }
 
 
     def with_defaults(self):
@@ -93,8 +96,8 @@ class Page(db.Model):
         for feature in features:
             for field in feature.get('fields'):
 
-                if not page_dict.get( field.get('id') ):
-                    page_dict[ field.get('id') ] = field.get('default') or ''
+                if not page_dict.get(field.get('id')):
+                    page_dict[field.get('id')] = field.get('default') or ''
 
                 if field.get('id') == 'search_results_title':
                     page_dict['search_results_title'] = page_dict.get('search_results_title') \
@@ -107,15 +110,15 @@ class Page(db.Model):
 
                 if field.get('type') == 'fieldset':
                     for second_field in field.get('fields'):
-                        if not page_dict.get( second_field.get('id') ):
-                            page_dict[ second_field.get('id') ] = second_field.get('default') or ''
+                        if not page_dict.get(second_field.get('id')):
+                            page_dict[second_field.get('id')] = second_field.get('default') or ''
 
         if page_dict.get('countdown_timezone'):
-            page_dict['countdown_timezone'] = page_dict['countdown_timezone'].split('|')[ 1 ]
+            page_dict['countdown_timezone'] = page_dict['countdown_timezone'].split('|')[1]
 
         if page_dict.get('countdown_datetime'):
             page_dict['countdown_datetime_with_timezone'] = " ".join([
-                str( page_dict['countdown_datetime'] ),
+                str(page_dict['countdown_datetime']),
                 page_dict['countdown_timezone']
             ])
 
