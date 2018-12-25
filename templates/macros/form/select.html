@@ -1,7 +1,7 @@
 {% macro select( field ) -%}
     {% set selectedKey = field.value if field.value else field.default %}
 
-    <fieldset class="fieldset {{ field.id }}">
+    <fieldset class="fieldset {{ field.class or field.id }}">
         <label class="label" for="{{ field.id }}">{{ field.label }}</label>
         <div class="select-wrap">
             <select id="{{ field.id }}" name="{{ field.id }}" class="field">

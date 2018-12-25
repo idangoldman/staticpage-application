@@ -1,5 +1,5 @@
 {% macro search_preview( field ) -%}
-    <fieldset class="fieldset {{ field.id }}">
+    <fieldset class="fieldset {{ field.class or field.id }}">
         <label class="title">{{ field.title }}</label>
         <div class="search-preview-wrap">
             <a class="link-title" href="{{ field.link }}" target="_blank">{{ field.link_title }}</a>
