@@ -13,6 +13,7 @@
     },
     {
       "id": "manage_pages_actions",
+      "class": "manage_pages_actions",
       "name": "actions",
       "label": "Actions",
       "type": "select",

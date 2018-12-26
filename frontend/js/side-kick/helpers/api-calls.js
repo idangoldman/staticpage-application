@@ -3,6 +3,7 @@ import { component, utils } from 'flightjs';
 
 const PAGE_UPDATE_URL = window.page_update_url;
 const SITE_DOWNLOAD_URL = window.site_download_url;
+const PAGE_MANAGE_URL = window.page_manage_url;
 
 const setCsrfHeader = function setCsrfHeader() {
   // code from: https://flask-wtf.readthedocs.io/en/stable/csrf.html
@@ -76,11 +77,41 @@ const apiCalls = component(function apiCalls() {
     return config;
   };
 
+  this.pageManage = function pageManage(event, {type, id = null, name = undefined}) {
+    const url = PAGE_MANAGE_URL + (id ? `/${id}` : '');
+    const data = JSON.stringify({ name });
+
+    switch(type) {
+      case 'create':
+        type = 'POST';
+        break;
+      case 'rename':
+        type = 'PUT';
+        break;
+      default:
+      case 'delete':
+        type = 'DELETE';
+        break;
+    }
+    console.log('data before api call:', data);
+    $.ajax({
+      url, type, data,
+      contentType: 'application/json',
+      success: function requestSuccess(response) {
+        this.trigger(document, 'pageManage_success', response.data);
+      }.bind(this),
+      error: function requestError(jqXHR) {
+        this.trigger(document, 'pageManage_error', jqXHR.responseJSON);
+      }.bind(this),
+    });
+  },
+
   this.after('initialize', function initialize() {
     setCsrfHeader();
 
     this.on(document, 'updateField', this.updateField);
     this.on(document, 'siteDownload', this.siteDownload);
+    this.on(document, 'pageManage', this.pageManage);
   });
 });
 

@@ -10491,6 +10491,7 @@
 
 	var PAGE_UPDATE_URL = window.page_update_url;
 	var SITE_DOWNLOAD_URL = window.site_download_url;
+	var PAGE_MANAGE_URL = window.page_manage_url;
 
 	var setCsrfHeader = function setCsrfHeader() {
 	  // code from: https://flask-wtf.readthedocs.io/en/stable/csrf.html
@@ -10564,11 +10565,45 @@
 	    return config;
 	  };
 
-	  this.after('initialize', function initialize() {
+	  this.pageManage = function pageManage(event, _ref) {
+	    var type = _ref.type,
+	        _ref$id = _ref.id,
+	        id = _ref$id === undefined ? null : _ref$id,
+	        _ref$name = _ref.name,
+	        name = _ref$name === undefined ? undefined : _ref$name;
+
+	    var url = PAGE_MANAGE_URL + (id ? '/' + id : '');
+	    var data = JSON.stringify({ name: name });
+
+	    switch (type) {
+	      case 'create':
+	        type = 'POST';
+	        break;
+	      case 'rename':
+	        type = 'PUT';
+	        break;
+	      default:
+	      case 'delete':
+	        type = 'DELETE';
+	        break;
+	    }
+	    console.log('data before api call:', data);
+	    _jquery2.default.ajax({
+	      url: url, type: type, data: data,
+	      contentType: 'application/json',
+	      success: function requestSuccess(response) {
+	        this.trigger(document, 'pageManage_success', response.data);
+	      }.bind(this),
+	      error: function requestError(jqXHR) {
+	        this.trigger(document, 'pageManage_error', jqXHR.responseJSON);
+	      }.bind(this)
+	    });
+	  }, this.after('initialize', function initialize() {
 	    setCsrfHeader();
 
 	    this.on(document, 'updateField', this.updateField);
 	    this.on(document, 'siteDownload', this.siteDownload);
+	    this.on(document, 'pageManage', this.pageManage);
 	  });
 	});
 
@@ -12484,15 +12519,11 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _selectField2.default.mixin(function searchPreview() {
-	  this.attributes({});
-
 	  this.updateField = function updateField(state, previousState) {
 	    if (previousState.value !== state.value) {
 	      console.log('updateField', state.value);
 	    }
 	  };
-
-	  this.after('initialize', function initialize() {});
 	});
 
 /***/ }),
@@ -12627,6 +12658,10 @@
 	  value: true
 	});
 
+	var _jquery = __webpack_require__(1);
+
+	var _jquery2 = _interopRequireDefault(_jquery);
+
 	var _selectField = __webpack_require__(14);
 
 	var _selectField2 = _interopRequireDefault(_selectField);
@@ -12634,6 +12669,17 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _selectField2.default.mixin(function searchPreview() {
+	  this.attributes({
+	    pageId: undefined
+	  });
+
+	  this.after('initialize', function initialize() {
+	    this.attr.pageId = this.$node.find('label').attr('for').split('_').pop();
+
+	    this.on(document, 'pageManage_success', this.pageManageSuccess.bind(this));
+	    this.on(document, 'pageManage_error', this.pageManageError.bind(this));
+	  });
+
 	  this.updateField = function updateField(state, previousState) {
 	    switch (state.value) {
 	      case 'create_page':
@@ -12652,20 +12698,28 @@
 	  };
 
 	  this.createPage = function createPage() {
-	    var pageName = prompt('How you want to name your page?');
+	    var pageName = prompt('How you want to name your page? Only 128 charecters allowed using alphanumeric, dashes, and underscores charecters');
 
 	    if (pageName !== null && pageName.trim().length) {
-	      console.log('create page');
+	      this.trigger(document, 'pageManage', {
+	        'type': 'create',
+	        'name': pageName
+	      });
 	    }
 
 	    this.resetSelectedIndex();
 	  };
 
 	  this.renamePage = function renamePage() {
-	    var pageRename = prompt('How you want to rename your page?');
+	    var pageName = (0, _jquery2.default)('#manage_pages_pages option:selected').text();
+	    var pageRename = prompt('How you want to rename your page? Only 128 charecters allowed using alphanumeric, dashes, and underscores charecters', pageName);
 
-	    if (pageRename !== null && pageRename.trim().length) {
-	      console.log('rename page');
+	    if (pageRename !== null && pageRename.trim().length && pageRename != pageName) {
+	      this.trigger(document, 'pageManage', {
+	        'type': 'rename',
+	        'id': this.attr.pageId,
+	        'name': pageRename
+	      });
 	    }
 
 	    this.resetSelectedIndex();
@@ -12677,6 +12731,19 @@
 	    }
 
 	    this.resetSelectedIndex();
+	  };
+
+	  this.pageManageSuccess = function pageManageSuccess(event, _ref) {
+	    var redirect_url = _ref.redirect_url;
+
+	    window.top.location.href = redirect_url;
+	  };
+
+	  this.pageManageError = function pageManageError(event, _ref2) {
+	    var message = _ref2.message;
+
+	    alert(message);
+	    // this.renamePage();
 	  };
 	});
 

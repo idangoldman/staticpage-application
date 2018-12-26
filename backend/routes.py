@@ -21,7 +21,7 @@ def index_route():
 @current_app.route('/page_intervention/<int:page_id>', methods=['GET', 'POST'])
 @login_required
 def page_intervention(page_id):
-    payload = current_user.pages.first().with_defaults()
+    payload = current_user.pages.filter_by(id=page_id).first_or_404().with_defaults()
     payload['is_intervention'] = True
 
     form = NewsletterForm()
@@ -37,20 +37,18 @@ def page_intervention(page_id):
         if has_subscribed:
             if payload.get('mailing_list_successful_submission') == 'successful-submission-message' \
                 and payload.get('mailing_list_message'):
-                flash( payload.get('mailing_list_message') )
+                flash(payload.get('mailing_list_message'))
             elif payload.get('mailing_list_successful_submission') == 'successful-submission-redirect' \
                 and payload.get('mailing_list_redirect_url'):
-                return redirect( payload.get('mailing_list_redirect_url') )
+                return redirect(payload.get('mailing_list_redirect_url'))
 
     return render_template('page/index.html', **payload)
 
 
 @current_app.route('/preview/<site_name>/<page_name>')
+@login_required
 def page_preview(site_name, page_name):
-    payload = Page.query.join(Page.creator) \
-                     .filter(User.site_name == site_name, Page.name == page_name) \
-                     .first_or_404() \
-                     .with_defaults()
+    payload = current_user.pages.filter_by(name=page_name).first_or_404().with_defaults()
 
     form = NewsletterForm()
 
@@ -79,9 +77,7 @@ def page_preview(site_name, page_name):
 @login_required
 def home(site_name, page_name):
     if site_name is not None and page_name is not None:
-      page = Page.query.join(Page.creator) \
-                       .filter(User.site_name == site_name, Page.name == page_name) \
-                       .first_or_404()
+      page = current_user.pages.filter_by(name=page_name).first_or_404()
     else:
       page = current_user.pages.first()
 
@@ -107,17 +103,22 @@ def side_kick(page_id):
         svg_sprite = svg_file.read()
 
     features = get_a_stub('features/all')
-    page_with_features = current_user.pages.first().with_features()
+    page_with_features = current_user.pages.filter_by(id=page_id).first_or_404().with_features()
+
 
     manage_pages = get_a_stub('features/manage_pages')
     pages = current_user.pages.with_entities(Page.id, Page.name).all();
     for field in manage_pages.get('fields'):
       if field.get('id') == 'manage_pages_pages':
         for page in pages:
-          field['options'].append({'key': page[0], 'value': page[1]})
+          page_url = '/home/' + current_user.site_name + '/' + page[1]
+          field['options'].append({'key': page_url, 'value': page[1]})
 
           if page[0] == page_id:
-            field['default'] = page[0]
+            field['default'] = page_url
+
+      if field.get('id') == 'manage_pages_actions':
+        field['id'] = field.get('id') + '_' + str(page_id)
 
     payload = {
         'manage_pages': manage_pages,
@@ -126,6 +127,7 @@ def side_kick(page_id):
         'on_phone': is_phone(request.user_agent),
         'page_update_url': current_app.config['API_URL'] + '/page/update/' + str(page_id),
         'site_download_url': current_app.config['API_URL'] + '/download/' + current_user.site_name + '/' + page_with_features.get('page').get('name'),
+        'page_manage_url': current_app.config['API_URL'] + '/page_manage/' + current_user.site_name,
         'page_id': page_id,
         'page_name': page_with_features.get('page').get('name'),
         'site_name': current_user.site_name,
@@ -137,6 +139,7 @@ def side_kick(page_id):
 
 
 @current_app.route('/<user_hash>/uploads/<timestamp>/<file_name>')
+@login_required
 def user_uploads(user_hash, timestamp, file_name):
     upload_folder_path = path_builder(current_app.config['BASE_PATH'], \
                                 current_app.config['TMP_FOLDER'], \
@@ -147,6 +150,7 @@ def user_uploads(user_hash, timestamp, file_name):
 
 
 @current_app.route('/<hash>/<timestamp>/<file_name>')
+@login_required
 def user_downloads(hash, timestamp, file_name):
     donwload_folder_path = path_builder(current_app.config['BASE_PATH'], \
                                 current_app.config['TMP_FOLDER'], \
