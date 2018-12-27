@@ -3,18 +3,24 @@ import selectFieldComponent from 'side-kick/features/components/select-field';
 
 export default selectFieldComponent.mixin(function searchPreview() {
   this.attributes({
-      pageId: undefined
+      pageId: undefined,
+      pageName: undefined,
+      currentAction: undefined,
+      charectersRestriction: 'Only 128 charecters allowed using alphanumeric, dashes, and underscores charecters'
   });
 
   this.after('initialize', function initialize() {
     this.attr.pageId = this.$node.find('label').attr('for').split('_').pop();
+    this.attr.pageName = $('#manage_pages_pages option:selected').text();
 
     this.on(document, 'pageManage_success', this.pageManageSuccess.bind(this));
     this.on(document, 'pageManage_error', this.pageManageError.bind(this));
   });
 
-  this.updateField = function updateField(state, previousState) {
-    switch (state.value) {
+  this.updateField = function updateField({ value }) {
+    this.attr.currentAction = value;
+
+    switch (this.attr.currentAction) {
       case 'create_page':
         this.createPage();
         break;
@@ -31,12 +37,14 @@ export default selectFieldComponent.mixin(function searchPreview() {
   };
 
   this.createPage = function createPage() {
-    const pageName = prompt('How you want to name your page? Only 128 charecters allowed using alphanumeric, dashes, and underscores charecters');
+    const newPageName = prompt(
+      `How do you want to name your page?\n${this.attr.charectersRestriction}`
+    );
 
-    if (pageName !== null && pageName.trim().length) {
+    if (newPageName !== null && newPageName.trim().length) {
       this.trigger(document, 'pageManage', {
-        'type': 'create',
-        'name': pageName
+        'action': this.attr.currentAction,
+        'name': newPageName
       });
     }
 
@@ -44,14 +52,14 @@ export default selectFieldComponent.mixin(function searchPreview() {
   };
 
   this.renamePage = function renamePage() {
-    const pageName = $('#manage_pages_pages option:selected').text();
     const pageRename = prompt(
-      'How you want to rename your page? Only 128 charecters allowed using alphanumeric, dashes, and underscores charecters', pageName
+      `How do you want to rename your page?\n${this.attr.charectersRestriction}`,
+      this.attr.pageName
     );
 
-    if (pageRename !== null && pageRename.trim().length && pageRename != pageName) {
+    if (pageRename !== null && pageRename.trim().length && pageRename != this.attr.pageName) {
       this.trigger(document, 'pageManage', {
-        'type': 'rename',
+        'action': this.attr.currentAction,
         'id': this.attr.pageId,
         'name': pageRename
       });
@@ -61,19 +69,35 @@ export default selectFieldComponent.mixin(function searchPreview() {
   };
 
   this.deletePage = function deletePage() {
-    if (confirm('Are you sure?')) {
-      console.log('yes');
+    if (confirm(`Are you sure to delete "${this.attr.pageName}" page?`)) {
+      this.trigger(document, 'pageManage', {
+        'action': this.attr.currentAction,
+        'id': this.attr.pageId
+      });
     }
 
     this.resetSelectedIndex();
   };
 
   this.pageManageSuccess = function pageManageSuccess(event, { redirect_url }) {
-    window.top.location.href = redirect_url;
+    if (redirect_url.length) {
+      window.top.location.href = redirect_url;
+    }
   };
 
   this.pageManageError = function pageManageError(event, { message }) {
     alert(message);
-    // this.renamePage();
+
+    switch(this.attr.currentAction) {
+      case 'rename_page':
+        this.renamePage();
+        break;
+      case 'create_page':
+        this.createPage();
+        break;
+      default:
+        this.resetSelectedIndex();
+        break;
+    }
   };
 });

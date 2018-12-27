@@ -91,25 +91,50 @@ def page(id):
 @api.route('/page_manage/<site_name>/<int:id>', methods=['PUT','DELETE'])
 @login_required
 def page_manage(site_name, id):
-    request_data = request.get_json()
+  request_data = request.get_json()
+  redirect_url = ''
 
-    if re.match(r"^[A-Za-z0-9\_\-]{1,80}$", request_data['name']):
-      if request.method == 'POST':
-        try:
-          page = Page(user_id = current_user.id, name = request_data['name'])
-          db.session.add(page)
-          db.session.commit()
-        except Exception, e:
-            return errors.bad_request('Page was not created.')
-      elif request.method == 'PUT':
+  if request.method == 'DELETE':
+    pages_count = int(current_user.pages.count());
+
+    if pages_count > 1:
+      try:
         page = Page.query.get_or_404(id)
+        db.session.delete(page)
+        db.session.commit()
+      except Exception, e:
+        return errors.bad_request('Page was not deleted.')
 
-        try:
-            setattr(page, 'name', request_data['name'])
+      redirect_url = current_app.config['HTTP_HOST'] + '/home/'
+    else:
+      return errors.bad_request('Can\'t delete the last page.')
+
+  elif 'name' in request_data:
+    if re.match(r"^[A-Za-z0-9\_\-]{1,80}$", request_data.get('name')):
+      pages_count = int(current_user.pages.filter_by(name=request_data.get('name')).count())
+
+      if not pages_count:
+        if request.method == 'POST':
+          try:
+            page = Page(user_id = current_user.id, name = request_data.get('name'))
+            db.session.add(page)
             db.session.commit()
-        except Exception, e:
+          except Exception, e:
+            return errors.bad_request('Page was not created.')
+
+        elif request.method == 'PUT':
+          try:
+            page = Page.query.get_or_404(id)
+            setattr(page, 'name', request_data.get('name'))
+            db.session.commit()
+          except Exception, e:
             return errors.bad_request('Page name was not saved.')
+
+        redirect_url = current_app.config['HTTP_HOST'] + '/home/' + site_name + '/' + request_data.get('name')
+      else:
+        return errors.bad_request('Page name already exist.')
+
     else:
       return errors.bad_request('Page name is not allowed.')
 
-    return jsonify({'code': 200, 'status': 'ok', 'data': {'redirect_url': current_app.config['HTTP_HOST'] + '/home/' + site_name + '/' + request_data['name']}})
+  return jsonify({'code': 200, 'status': 'ok', 'data': {'redirect_url': redirect_url}})

@@ -77,23 +77,24 @@ const apiCalls = component(function apiCalls() {
     return config;
   };
 
-  this.pageManage = function pageManage(event, {type, id = null, name = undefined}) {
+  this.pageManage = function pageManage(event, {action, id = null, name = undefined}) {
     const url = PAGE_MANAGE_URL + (id ? `/${id}` : '');
     const data = JSON.stringify({ name });
+    let type = 'GET';
 
-    switch(type) {
-      case 'create':
+    switch(action) {
+      case 'create_page':
         type = 'POST';
         break;
-      case 'rename':
+      case 'rename_page':
         type = 'PUT';
         break;
       default:
-      case 'delete':
+      case 'delete_page':
         type = 'DELETE';
         break;
     }
-    console.log('data before api call:', data);
+
     $.ajax({
       url, type, data,
       contentType: 'application/json',
