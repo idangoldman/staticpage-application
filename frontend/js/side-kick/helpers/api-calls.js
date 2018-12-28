@@ -77,26 +77,26 @@ const apiCalls = component(function apiCalls() {
     return config;
   };
 
-  this.pageManage = function pageManage(event, {action, id = null, name = undefined}) {
+  this.pageManage = function pageManage(event, {action = 'GET', id = null, name = undefined}) {
     const url = PAGE_MANAGE_URL + (id ? `/${id}` : '');
     const data = JSON.stringify({ name });
-    let type = 'GET';
 
     switch(action) {
       case 'create_page':
-        type = 'POST';
+        action = 'POST';
         break;
       case 'rename_page':
-        type = 'PUT';
+        action = 'PUT';
         break;
       default:
       case 'delete_page':
-        type = 'DELETE';
+        action = 'DELETE';
         break;
     }
 
     $.ajax({
-      url, type, data,
+      url, data,
+      type: action,
       contentType: 'application/json',
       success: function requestSuccess(response) {
         this.trigger(document, 'pageManage_success', response.data);

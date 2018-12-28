@@ -10566,7 +10566,8 @@
 	  };
 	
 	  this.pageManage = function pageManage(event, _ref) {
-	    var action = _ref.action,
+	    var _ref$action = _ref.action,
+	        action = _ref$action === undefined ? 'GET' : _ref$action,
 	        _ref$id = _ref.id,
 	        id = _ref$id === undefined ? null : _ref$id,
 	        _ref$name = _ref.name,
@@ -10574,23 +10575,23 @@
 	
 	    var url = PAGE_MANAGE_URL + (id ? '/' + id : '');
 	    var data = JSON.stringify({ name: name });
-	    var type = 'GET';
 	
 	    switch (action) {
 	      case 'create_page':
-	        type = 'POST';
+	        action = 'POST';
 	        break;
 	      case 'rename_page':
-	        type = 'PUT';
+	        action = 'PUT';
 	        break;
 	      default:
 	      case 'delete_page':
-	        type = 'DELETE';
+	        action = 'DELETE';
 	        break;
 	    }
 	
 	    _jquery2.default.ajax({
-	      url: url, type: type, data: data,
+	      url: url, data: data,
+	      type: action,
 	      contentType: 'application/json',
 	      success: function requestSuccess(response) {
 	        this.trigger(document, 'pageManage_success', response.data);
@@ -12519,7 +12520,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _selectField2.default.mixin(function searchPreview() {
+	exports.default = _selectField2.default.mixin(function pagesList() {
 	  this.updateField = function updateField(state, previousState) {
 	    if (previousState.value !== state.value) {
 	      window.top.location.href = state.value;
@@ -12669,7 +12670,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	exports.default = _selectField2.default.mixin(function searchPreview() {
+	exports.default = _selectField2.default.mixin(function manageActions() {
 	  this.attributes({
 	    pageId: undefined,
 	    pageName: undefined,
@@ -12700,10 +12701,9 @@
 	      case 'delete_page':
 	        this.deletePage();
 	        break;
-	      default:
-	        this.resetSelectedIndex();
-	        break;
 	    }
+	
+	    this.resetSelectedIndex();
 	  };
 	
 	  this.createPage = function createPage() {
@@ -12715,8 +12715,6 @@
 	        'name': newPageName
 	      });
 	    }
-	
-	    this.resetSelectedIndex();
 	  };
 	
 	  this.renamePage = function renamePage() {
@@ -12729,8 +12727,6 @@
 	        'name': pageRename
 	      });
 	    }
-	
-	    this.resetSelectedIndex();
 	  };
 	
 	  this.deletePage = function deletePage() {
@@ -12740,8 +12736,6 @@
 	        'id': this.attr.pageId
 	      });
 	    }
-	
-	    this.resetSelectedIndex();
 	  };
 	
 	  this.pageManageSuccess = function pageManageSuccess(event, _ref2) {

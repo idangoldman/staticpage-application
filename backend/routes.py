@@ -1,7 +1,5 @@
-from pprint import pprint
 from flask import render_template, current_app, json, send_from_directory, make_response, request, redirect, url_for, flash
 from flask_login import login_required, current_user
-from sqlalchemy.orm import load_only
 
 from backend.helpers import path_builder, is_phone, get_page_stub, get_a_stub
 from backend.models.page import Page

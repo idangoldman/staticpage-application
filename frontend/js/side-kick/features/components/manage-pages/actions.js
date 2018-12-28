@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import selectFieldComponent from 'side-kick/features/components/select-field';
 
-export default selectFieldComponent.mixin(function searchPreview() {
+export default selectFieldComponent.mixin(function manageActions() {
   this.attributes({
       pageId: undefined,
       pageName: undefined,
@@ -30,10 +30,9 @@ export default selectFieldComponent.mixin(function searchPreview() {
       case 'delete_page':
         this.deletePage();
         break;
-      default:
-        this.resetSelectedIndex();
-        break;
     }
+
+    this.resetSelectedIndex();
   };
 
   this.createPage = function createPage() {
@@ -47,8 +46,6 @@ export default selectFieldComponent.mixin(function searchPreview() {
         'name': newPageName
       });
     }
-
-    this.resetSelectedIndex();
   };
 
   this.renamePage = function renamePage() {
@@ -64,8 +61,6 @@ export default selectFieldComponent.mixin(function searchPreview() {
         'name': pageRename
       });
     }
-
-    this.resetSelectedIndex();
   };
 
   this.deletePage = function deletePage() {
@@ -75,8 +70,6 @@ export default selectFieldComponent.mixin(function searchPreview() {
         'id': this.attr.pageId
       });
     }
-
-    this.resetSelectedIndex();
   };
 
   this.pageManageSuccess = function pageManageSuccess(event, { redirect_url }) {

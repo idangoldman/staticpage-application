@@ -1,4 +1,3 @@
-from pprint import pprint
 from datetime import datetime
 from flask import current_app, request, jsonify
 from flask_login import login_required, current_user
@@ -22,9 +21,7 @@ def download(site_name, page_name):
     except requests.exceptions.RequestException as e:
         return errors.bad_request('page can\'t be reached')
 
-    page = Page.query.join(Page.creator) \
-                     .filter(User.site_name == site_name, Page.name == page_name) \
-                     .first_or_404();
+    page = current_user.pages.filter_by(name = page_name).first_or_404();
 
     page_data = page.with_defaults()
     page_data['file_name'] = page.creator.site_name + '_' + page.name
@@ -43,8 +40,8 @@ def download(site_name, page_name):
 
 @api.route('/page/update/<int:id>', methods=['POST'])
 @login_required
-def page(id):
-    page = Page.query.get_or_404(id)
+def page_update(id):
+    page = current_user.pages.filter_by(id=id).first_or_404();
 
     if request.files:
         creator_email = page.creator.email
@@ -99,7 +96,7 @@ def page_manage(site_name, id):
 
     if pages_count > 1:
       try:
-        page = Page.query.get_or_404(id)
+        page = current_user.pages.filter_by(id=id).first_or_404();
         db.session.delete(page)
         db.session.commit()
       except Exception, e:
