@@ -44,10 +44,14 @@ def page_intervention(page_id):
 
 
 @current_app.route('/preview/<site_name>/<page_name>')
-@login_required
+# @login_required
 def page_preview(site_name, page_name):
-    payload = current_user.pages.filter_by(name=page_name).first_or_404().with_defaults()
+    payload = Page.query.join(Page.creator) \
+                     .filter(User.site_name == site_name, Page.name == page_name) \
+                     .first_or_404() \
+                     .with_defaults()
 
+    # payload = current_user.pages.filter_by(name=page_name).first_or_404().with_defaults()
     form = NewsletterForm()
 
     if form.validate_on_submit():

@@ -17,7 +17,7 @@ from backend.models.user import User
 @login_required
 def download(site_name, page_name):
     try:
-        page_response = requests.get( current_app.config['HTTP_HOST'] + '/preview/' + site_name + '/' + page_name, timeout = 10, verify = False );
+        page_response = requests.get(current_app.config['HTTP_HOST'] + '/preview/' + site_name + '/' + page_name, timeout = 10, verify = False);
     except requests.exceptions.RequestException as e:
         return errors.bad_request('page can\'t be reached')
 
@@ -25,8 +25,8 @@ def download(site_name, page_name):
 
     page_data = page.with_defaults()
     page_data['file_name'] = page.creator.site_name + '_' + page.name
-    download_folder_path = create_download_folder( page.creator.email )
-    zip_uri = zip_a_page( page_response.content, download_folder_path, page_data )
+    download_folder_path = create_download_folder(page.creator.email)
+    zip_uri = zip_a_page(page_response.content, download_folder_path, page_data)
 
 
     if zip_uri:
