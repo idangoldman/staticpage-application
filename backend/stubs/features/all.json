@@ -1,0 +1,590 @@
+[
+  {
+    "name": "content",
+    "title": "Content",
+    "fields": [
+      {
+        "id": "content_logo",
+        "name": "logo",
+        "label": "Logo",
+        "type": "file",
+        "accepted": {
+          "formats": [
+            "image/png",
+            "image/gif",
+            "image/jpg",
+            "image/jpeg",
+            "image/webp"
+          ],
+          "size": 1024000
+        },
+        "placeholder": "logo.png",
+        "message": "Upload gif, jpg, png, and webp up to 1MB.",
+        "validation": {
+          "file_format": "File type doesn't supported.",
+          "file_size": "File size greater than supported"
+        }
+      },
+      {
+        "id": "content_title",
+        "name": "title",
+        "label": "Title",
+        "type": "text"
+      },
+      {
+        "id": "content_sub_title",
+        "name": "sub_title",
+        "label": "Sub Title",
+        "type": "textarea"
+      },
+      {
+        "id": "content_description",
+        "name": "description",
+        "label": "Description",
+        "type": "textarea"
+      }
+    ]
+  },
+  {
+    "name": "design",
+    "title": "Design",
+    "fields": [
+      {
+        "id": "design_background_image",
+        "name": "background_image",
+        "label": "Background image",
+        "type": "file",
+        "accepted": {
+          "formats": [
+            "image/png",
+            "image/gif",
+            "image/jpg",
+            "image/jpeg",
+            "image/webp"
+          ],
+          "size": 1024000
+        },
+        "placeholder": "background.png",
+        "message": "Upload gif, jpg, png, and webp, up to 1MB.",
+        "validation": {
+          "file_format": "File type doesn't supported.",
+          "file_size": "File size greater than supported"
+        }
+      },
+      {
+        "id": "design_background_color",
+        "name": "background_color",
+        "label": "Background color",
+        "type": "text",
+        "default": "#fff",
+        "validation": {
+          "hex_color":  "Not a valid Hex color"
+        }
+      },
+      {
+        "id": "design_background_repeat",
+        "name": "background_repeat",
+        "label": "Background repeat",
+        "type": "select",
+        "default": "no-repeat",
+        "options": [
+          { "key": "no-repeat", "value": "No repeat" },
+          { "key": "repeat", "value": "Repeat" }
+        ]
+      },
+      {
+        "id": "design_font_family",
+        "name": "font_family",
+        "label": "Font family",
+        "type": "select",
+        "default": "Open Sans, helvetica neue, helvetica, arial, sans-serif",
+        "groups": [
+          {
+            "label": "System Fonts",
+            "options": [
+              { "value": "Arial", "key": "arial, helvetica neue, helvetica, sans-serif" },
+              { "value": "Comic Sans MS", "key": "comic sans ms, marker felt-thin, arial, sans-serif" },
+              { "value": "Courier New", "key": "courier new, courier, lucida sans typewriter, lucida typewriter, monospace" },
+              { "value": "Georgia", "key": "georgia, times, times new roman, serif" },
+              { "value": "Helvetica", "key": "helvetica neue, helvetica, arial, verdana, sans-serif" },
+              { "value": "Lucida", "key": "lucida sans unicode, lucida grande, sans-serif" },
+              { "value": "Tahoma", "key": "tahoma, verdana, segoe, sans-serif" },
+              { "value": "Times New Roman", "key": "times new roman, times, baskerville, georgia, serif" },
+              { "value": "Trebuchet MS", "key": "trebuchet ms, lucida grande, lucida sans unicode, lucida sans, tahoma, sans-serif" },
+              { "value": "Verdana", "key": "verdana, geneva, sans-serif" }
+            ]
+          },
+          {
+            "label": "Google Fonts",
+            "options": [
+              { "value": "Arvo", "key": "Arvo, courier, georgia, serif" },
+              { "value": "Lato", "key": "Lato, helvetica neue, helvetica, arial, sans-serif" },
+              { "value": "Lora", "key": "Lora, georgia, times new roman, serif" },
+              { "value": "Merriweather", "key": "Merriweather, georgia, times new roman, serif" },
+              { "value": "Merriweather Sans", "key": "Merriweather Sans, helvetica neue, helvetica, arial, sans-serif" },
+              { "value": "Noticia Text", "key": "Noticia Text, georgia, times new roman, serif" },
+              { "value": "Open Sans", "key": "Open Sans, helvetica neue, helvetica, arial, sans-serif" },
+              { "value": "Playfair Display", "key": "Playfair Display, georgia, times new roman, serif" },
+              { "value": "Roboto", "key": "Roboto, helvetica neue, helvetica, arial, sans-serif" },
+              { "value": "Source Sans Pro", "key": "Source Sans Pro, helvetica neue, helvetica, arial, sans-serif" }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "design_font_color",
+        "name": "font_color",
+        "label": "Font color",
+        "type": "text",
+        "default": "#fff",
+        "validation": {
+          "hex_color":  "Not a valid Hex color"
+        }
+      },
+      {
+        "id": "design_content_alignment",
+        "name": "content_alignment",
+        "label": "Content alignment",
+        "type": "select",
+        "default": "center",
+        "options": [
+          { "key": "left", "value": "Left" },
+          { "key": "center", "value": "Center" },
+          { "key": "right", "value": "Right" }
+        ]
+      },
+      {
+        "id": "design_content_direction",
+        "name": "content_direction",
+        "label": "Content direction",
+        "type": "select",
+        "default": "ltr",
+        "options": [
+          { "key": "ltr", "value": "Left to Right" },
+          { "key": "rtl", "value": "Right to Left" }
+        ]
+      },
+      {
+        "id": "design_additional_styles",
+        "name": "additional_styles",
+        "label": "Additional styles",
+        "message": "Show your CSS Kong Fu skills.",
+        "type": "textarea",
+        "placeholder": "#element { ... }",
+        "validation": {
+          "css": "Not a valid CSS"
+        }
+      }
+    ]
+  },
+  {
+    "name": "mailing-list",
+    "title": "Mailing List",
+    "fields": [
+      {
+        "id": "mailing_list_service",
+        "name": "service",
+        "label": "Service",
+        "type": "select",
+        "default": "",
+        "options": [
+          { "key": "", "value": "Select a service" },
+          { "key": "mailchimp", "value": "MailChimp" }
+        ]
+      },
+      {
+        "id": "mailing_list_mailchimp",
+        "name": "mailchimp",
+        "type": "fieldset",
+        "fields": [
+          {
+            "id": "mailing_list_mailchimp_username",
+            "name": "mailing-list-mailchimp-username",
+            "label": "Username",
+            "type": "text"
+          },
+          {
+            "id": "mailing_list_mailchimp_api_key",
+            "name": "mailing-list-mailchimp-api-key",
+            "label": "API Key",
+            "type": "text"
+          },
+          {
+            "id": "mailing_list_mailchimp_list_id",
+            "name": "mailing-list-mailchimp-list-id",
+            "label": "List Id",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "id": "mailing_list_successful_submission",
+        "name": "successful-submission",
+        "label": "On Successful Submission",
+        "type": "select",
+        "default": "successful-submission-message",
+        "options": [
+          { "key": "successful-submission-message", "value": "Message" },
+          { "key": "successful-submission-redirect", "value": "Redirect URL" }
+        ]
+      },
+      {
+        "id": "mailing_list_message_fieldset",
+        "name": "successful-submission-message",
+        "type": "fieldset",
+        "fields": [
+          {
+            "id": "mailing_list_message",
+            "name": "mailing-list-message",
+            "label": "Message",
+            "type": "text",
+            "default": "Thank you!",
+            "placeholder": "Thank you!"
+          }
+        ]
+      },
+      {
+        "id": "mailing_list_redirect_url_fieldset",
+        "name": "successful-submission-redirect",
+        "type": "fieldset",
+        "fields": [
+          {
+            "id": "mailing_list_redirect_url",
+            "name": "mailing_list-redirect-url",
+            "label": "Redirect URL",
+            "type": "url",
+            "placeholder": "https://...",
+            "message": "After form submission redirect to this url.",
+            "validation": {
+              "url": "Not a valid URL."
+            }
+          }
+        ]
+      },
+      {
+        "id": "mailing_list_cta_color",
+        "name": "mailing-list-cta-color",
+        "label": "CTA background color",
+        "type": "text",
+        "default": "#000",
+        "validation": {
+          "hex_color":  "Not a valid Hex color"
+        }
+      },
+      {
+        "id": "mailing_list_cta_text",
+        "name": "mailing-list-cta-text",
+        "label": "CTA button text",
+        "type": "text",
+        "default": "Submit"
+      },
+      {
+        "id": "mailing_list_placeholder_text",
+        "name": "mailing-list-placeholer-text",
+        "label": "Placeholder text",
+        "type": "text",
+        "default": "your@email.work"
+      }
+    ]
+  },
+  {
+    "name": "countdown",
+    "title": "Countdown Clock",
+    "fields": [
+      {
+        "id": "countdown_timezone",
+        "name": "timezone",
+        "label": "Timezone",
+        "type": "select",
+        "default": "UTC|GMT+00:00",
+        "options": [
+          { "key": "American Samoa|GMT-11:00", "value": "GMT-11:00 | American Samoa" },
+          { "key": "International Date Line West|GMT-11:00", "value": "GMT-11:00 | International Date Line West" },
+          { "key": "Midway Island|GMT-11:00", "value": "GMT-11:00 | Midway Island" },
+          { "key": "Samoa|GMT-11:00", "value": "GMT-11:00 | Samoa" },
+          { "key": "Hawaii|GMT-10:00", "value": "GMT-10:00 | Hawaii" },
+          { "key": "Alaska|GMT-09:00", "value": "GMT-09:00 | Alaska" },
+          { "key": "Pacific Time (US &amp; Canada)|GMT-08:00", "value": "GMT-08:00 | Pacific Time (US &amp; Canada)" },
+          { "key": "Tijuana|GMT-08:00", "value": "GMT-08:00 | Tijuana" },
+          { "key": "Arizona|GMT-07:00", "value": "GMT-07:00 | Arizona" },
+          { "key": "Chihuahua|GMT-07:00", "value": "GMT-07:00 | Chihuahua" },
+          { "key": "Mazatlan|GMT-07:00", "value": "GMT-07:00 | Mazatlan" },
+          { "key": "Mountain Time (US &amp; Canada)|GMT-07:00", "value": "GMT-07:00 | Mountain Time (US &amp; Canada)" },
+          { "key": "Central America|GMT-06:00", "value": "GMT-06:00 | Central America" },
+          { "key": "Central Time (US &amp; Canada)|GMT-06:00", "value": "GMT-06:00 | Central Time (US &amp; Canada)" },
+          { "key": "Guadalajara|GMT-06:00", "value": "GMT-06:00 | Guadalajara" },
+          { "key": "Mexico City|GMT-06:00", "value": "GMT-06:00 | Mexico City" },
+          { "key": "Monterrey|GMT-06:00", "value": "GMT-06:00 | Monterrey" },
+          { "key": "Saskatchewan|GMT-06:00", "value": "GMT-06:00 | Saskatchewan" },
+          { "key": "Bogota|GMT-05:00", "value": "GMT-05:00 | Bogota" },
+          { "key": "Eastern Time (US &amp; Canada)|GMT-05:00", "value": "GMT-05:00 | Eastern Time (US &amp; Canada)" },
+          { "key": "Indiana (East)|GMT-05:00", "value": "GMT-05:00 | Indiana (East)" },
+          { "key": "Lima|GMT-05:00", "value": "GMT-05:00 | Lima" },
+          { "key": "Quito|GMT-05:00", "value": "GMT-05:00 | Quito" },
+          { "key": "Caracas|GMT-04:30", "value": "GMT-04:30 | Caracas" },
+          { "key": "Atlantic Time (Canada)|GMT-04:00", "value": "GMT-04:00 | Atlantic Time (Canada)" },
+          { "key": "Georgetown|GMT-04:00", "value": "GMT-04:00 | Georgetown" },
+          { "key": "La Paz|GMT-04:00", "value": "GMT-04:00 | La Paz" },
+          { "key": "Santiago|GMT-04:00", "value": "GMT-04:00 | Santiago" },
+          { "key": "Montevideo|GMT-03:30", "value": "GMT-03:30 | Montevideo" },
+          { "key": "Newfoundland|GMT-03:30", "value": "GMT-03:30 | Newfoundland" },
+          { "key": "Brasilia|GMT-03:00", "value": "GMT-03:00 | Brasilia" },
+          { "key": "Buenos Aires|GMT-03:00", "value": "GMT-03:00 | Buenos Aires" },
+          { "key": "Greenland|GMT-03:00", "value": "GMT-03:00 | Greenland" },
+          { "key": "Mid-Atlantic|GMT-02:00", "value": "GMT-02:00 | Mid-Atlantic" },
+          { "key": "Azores|GMT-01:00", "value": "GMT-01:00 | Azores" },
+          { "key": "Cape Verde Is.|GMT-01:00", "value": "GMT-01:00 | Cape Verde Is." },
+          { "key": "Casablanca|GMT+00:00", "value": "GMT+00:00 | Casablanca" },
+          { "key": "Dublin|GMT+00:00", "value": "GMT+00:00 | Dublin" },
+          { "key": "Edinburgh|GMT+00:00", "value": "GMT+00:00 | Edinburgh" },
+          { "key": "Lisbon|GMT+00:00", "value": "GMT+00:00 | Lisbon" },
+          { "key": "London|GMT+00:00", "value": "GMT+00:00 | London" },
+          { "key": "Monrovia|GMT+00:00", "value": "GMT+00:00 | Monrovia" },
+          { "key": "UTC|GMT+00:00", "value": "GMT+00:00 | UTC" },
+          { "key": "Amsterdam|GMT+01:00", "value": "GMT+01:00 | Amsterdam" },
+          { "key": "Belgrade|GMT+01:00", "value": "GMT+01:00 | Belgrade" },
+          { "key": "Berlin|GMT+01:00", "value": "GMT+01:00 | Berlin" },
+          { "key": "Bern|GMT+01:00", "value": "GMT+01:00 | Bern" },
+          { "key": "Bratislava|GMT+01:00", "value": "GMT+01:00 | Bratislava" },
+          { "key": "Brussels|GMT+01:00", "value": "GMT+01:00 | Brussels" },
+          { "key": "Budapest|GMT+01:00", "value": "GMT+01:00 | Budapest" },
+          { "key": "Copenhagen|GMT+01:00", "value": "GMT+01:00 | Copenhagen" },
+          { "key": "Ljubljana|GMT+01:00", "value": "GMT+01:00 | Ljubljana" },
+          { "key": "Madrid|GMT+01:00", "value": "GMT+01:00 | Madrid" },
+          { "key": "Paris|GMT+01:00", "value": "GMT+01:00 | Paris" },
+          { "key": "Prague|GMT+01:00", "value": "GMT+01:00 | Prague" },
+          { "key": "Rome|GMT+01:00", "value": "GMT+01:00 | Rome" },
+          { "key": "Sarajevo|GMT+01:00", "value": "GMT+01:00 | Sarajevo" },
+          { "key": "Skopje|GMT+01:00", "value": "GMT+01:00 | Skopje" },
+          { "key": "Stockholm|GMT+01:00", "value": "GMT+01:00 | Stockholm" },
+          { "key": "Vienna|GMT+01:00", "value": "GMT+01:00 | Vienna" },
+          { "key": "Warsaw|GMT+01:00", "value": "GMT+01:00 | Warsaw" },
+          { "key": "West Central Africa|GMT+01:00", "value": "GMT+01:00 | West Central Africa" },
+          { "key": "Zagreb|GMT+01:00", "value": "GMT+01:00 | Zagreb" },
+          { "key": "Athens|GMT+02:00", "value": "GMT+02:00 | Athens" },
+          { "key": "Bucharest|GMT+02:00", "value": "GMT+02:00 | Bucharest" },
+          { "key": "Cairo|GMT+02:00", "value": "GMT+02:00 | Cairo" },
+          { "key": "Harare|GMT+02:00", "value": "GMT+02:00 | Harare" },
+          { "key": "Helsinki|GMT+02:00", "value": "GMT+02:00 | Helsinki" },
+          { "key": "Istanbul|GMT+02:00", "value": "GMT+02:00 | Istanbul" },
+          { "key": "Jerusalem|GMT+02:00", "value": "GMT+02:00 | Jerusalem" },
+          { "key": "Kyiv|GMT+02:00", "value": "GMT+02:00 | Kyiv" },
+          { "key": "Pretoria|GMT+02:00", "value": "GMT+02:00 | Pretoria" },
+          { "key": "Riga|GMT+02:00", "value": "GMT+02:00 | Riga" },
+          { "key": "Sofia|GMT+02:00", "value": "GMT+02:00 | Sofia" },
+          { "key": "Tallinn|GMT+02:00", "value": "GMT+02:00 | Tallinn" },
+          { "key": "Vilnius|GMT+02:00", "value": "GMT+02:00 | Vilnius" },
+          { "key": "Baghdad|GMT+03:00", "value": "GMT+03:00 | Baghdad" },
+          { "key": "Kaliningrad|GMT+03:00", "value": "GMT+03:00 | Kaliningrad" },
+          { "key": "Kuwait|GMT+03:00", "value": "GMT+03:00 | Kuwait" },
+          { "key": "Minsk|GMT+03:00", "value": "GMT+03:00 | Minsk" },
+          { "key": "Nairobi|GMT+03:00", "value": "GMT+03:00 | Nairobi" },
+          { "key": "Riyadh|GMT+03:00", "value": "GMT+03:00 | Riyadh" },
+          { "key": "Tehran|GMT+03:30", "value": "GMT+03:30 | Tehran" },
+          { "key": "Abu Dhabi|GMT+04:00", "value": "GMT+04:00 | Abu Dhabi" },
+          { "key": "Baku|GMT+04:00", "value": "GMT+04:00 | Baku" },
+          { "key": "Moscow|GMT+04:00", "value": "GMT+04:00 | Moscow" },
+          { "key": "Muscat|GMT+04:00", "value": "GMT+04:00 | Muscat" },
+          { "key": "Samara|GMT+04:00", "value": "GMT+04:00 | Samara" },
+          { "key": "St. Petersburg|GMT+04:00", "value": "GMT+04:00 | St. Petersburg" },
+          { "key": "Tbilisi|GMT+04:00", "value": "GMT+04:00 | Tbilisi" },
+          { "key": "Volgograd|GMT+04:00", "value": "GMT+04:00 | Volgograd" },
+          { "key": "Yerevan|GMT+04:00", "value": "GMT+04:00 | Yerevan" },
+          { "key": "Kabul|GMT+04:30", "value": "GMT+04:30 | Kabul" },
+          { "key": "Islamabad|GMT+05:00", "value": "GMT+05:00 | Islamabad" },
+          { "key": "Karachi|GMT+05:00", "value": "GMT+05:00 | Karachi" },
+          { "key": "Tashkent|GMT+05:00", "value": "GMT+05:00 | Tashkent" },
+          { "key": "Chennai|GMT+05:30", "value": "GMT+05:30 | Chennai" },
+          { "key": "Kolkata|GMT+05:30", "value": "GMT+05:30 | Kolkata" },
+          { "key": "Mumbai|GMT+05:30", "value": "GMT+05:30 | Mumbai" },
+          { "key": "New Delhi|GMT+05:30", "value": "GMT+05:30 | New Delhi" },
+          { "key": "Sri Jayawardenepura|GMT+05:30", "value": "GMT+05:30 | Sri Jayawardenepura" },
+          { "key": "Kathmandu|GMT+05:45", "value": "GMT+05:45 | Kathmandu" },
+          { "key": "Almaty|GMT+06:00", "value": "GMT+06:00 | Almaty" },
+          { "key": "Astana|GMT+06:00", "value": "GMT+06:00 | Astana" },
+          { "key": "Dhaka|GMT+06:00", "value": "GMT+06:00 | Dhaka" },
+          { "key": "Ekaterinburg|GMT+06:00", "value": "GMT+06:00 | Ekaterinburg" },
+          { "key": "Rangoon|GMT+06:30", "value": "GMT+06:30 | Rangoon" },
+          { "key": "Bangkok|GMT+07:00", "value": "GMT+07:00 | Bangkok" },
+          { "key": "Hanoi|GMT+07:00", "value": "GMT+07:00 | Hanoi" },
+          { "key": "Jakarta|GMT+07:00", "value": "GMT+07:00 | Jakarta" },
+          { "key": "Novosibirsk|GMT+07:00", "value": "GMT+07:00 | Novosibirsk" },
+          { "key": "Beijing|GMT+08:00", "value": "GMT+08:00 | Beijing" },
+          { "key": "Chongqing|GMT+08:00", "value": "GMT+08:00 | Chongqing" },
+          { "key": "Hong Kong|GMT+08:00", "value": "GMT+08:00 | Hong Kong" },
+          { "key": "Krasnoyarsk|GMT+08:00", "value": "GMT+08:00 | Krasnoyarsk" },
+          { "key": "Kuala Lumpur|GMT+08:00", "value": "GMT+08:00 | Kuala Lumpur" },
+          { "key": "Perth|GMT+08:00", "value": "GMT+08:00 | Perth" },
+          { "key": "Singapore|GMT+08:00", "value": "GMT+08:00 | Singapore" },
+          { "key": "Taipei|GMT+08:00", "value": "GMT+08:00 | Taipei" },
+          { "key": "Ulaanbaatar|GMT+08:00", "value": "GMT+08:00 | Ulaanbaatar" },
+          { "key": "Urumqi|GMT+08:00", "value": "GMT+08:00 | Urumqi" },
+          { "key": "Irkutsk|GMT+09:00", "value": "GMT+09:00 | Irkutsk" },
+          { "key": "Osaka|GMT+09:00", "value": "GMT+09:00 | Osaka" },
+          { "key": "Sapporo|GMT+09:00", "value": "GMT+09:00 | Sapporo" },
+          { "key": "Seoul|GMT+09:00", "value": "GMT+09:00 | Seoul" },
+          { "key": "Tokyo|GMT+09:00", "value": "GMT+09:00 | Tokyo" },
+          { "key": "Adelaide|GMT+09:30", "value": "GMT+09:30 | Adelaide" },
+          { "key": "Darwin|GMT+09:30", "value": "GMT+09:30 | Darwin" },
+          { "key": "Brisbane|GMT+10:00", "value": "GMT+10:00 | Brisbane" },
+          { "key": "Canberra|GMT+10:00", "value": "GMT+10:00 | Canberra" },
+          { "key": "Guam|GMT+10:00", "value": "GMT+10:00 | Guam" },
+          { "key": "Hobart|GMT+10:00", "value": "GMT+10:00 | Hobart" },
+          { "key": "Melbourne|GMT+10:00", "value": "GMT+10:00 | Melbourne" },
+          { "key": "Port Moresby|GMT+10:00", "value": "GMT+10:00 | Port Moresby" },
+          { "key": "Sydney|GMT+10:00", "value": "GMT+10:00 | Sydney" },
+          { "key": "Yakutsk|GMT+10:00", "value": "GMT+10:00 | Yakutsk" },
+          { "key": "New Caledonia|GMT+11:00", "value": "GMT+11:00 | New Caledonia" },
+          { "key": "Solomon Is.|GMT+11:00", "value": "GMT+11:00 | Solomon Is." },
+          { "key": "Vladivostok|GMT+11:00", "value": "GMT+11:00 | Vladivostok" },
+          { "key": "Auckland|GMT+12:00", "value": "GMT+12:00 | Auckland" },
+          { "key": "Fiji|GMT+12:00", "value": "GMT+12:00 | Fiji" },
+          { "key": "Kamchatka|GMT+12:00", "value": "GMT+12:00 | Kamchatka" },
+          { "key": "Magadan|GMT+12:00", "value": "GMT+12:00 | Magadan" },
+          { "key": "Marshall Is.|GMT+12:00", "value": "GMT+12:00 | Marshall Is." },
+          { "key": "Wellington|GMT+12:00", "value": "GMT+12:00 | Wellington" },
+          { "key": "Chatham Is.|GMT+12:45", "value": "GMT+12:45 | Chatham Is." },
+          { "key": "Nuku'alofa|GMT+13:00", "value": "GMT+13:00 | Nuku'alofa" },
+          { "key": "Tokelau Is.|GMT+13:00", "value": "GMT+13:00 | Tokelau Is." }
+        ]
+      },
+      {
+        "id": "countdown_datetime",
+        "name": "datetime",
+        "label": "Date and Time",
+        "type": "datetime",
+        "readonly": true
+      },
+      {
+        "id": "countdown_redirect_url",
+        "name": "redirect_url",
+        "label": "Redirect URL",
+        "type": "url",
+        "placeholder": "https://...",
+        "message": "After countdown is done redirect to this url.",
+        "validation": {
+          "url": "Not a valid URL."
+        }
+      }
+    ]
+  },
+  {
+    "name": "social-links",
+    "title": "Social Links",
+    "fields": [
+      {
+        "id": "social_links_icon_style",
+        "name": "icon_style",
+        "label": "Icon Style",
+        "type": "select",
+        "default": "colored",
+        "options": [
+          { "key": "none", "value": "None" },
+          { "key": "black", "value": "Black" },
+          { "key": "black-circle", "value": "Black Circle" },
+          { "key": "black-hollow-circle", "value": "Black Hollow Circle" },
+          { "key": "black-square", "value": "Black Square" },
+          { "key": "colored", "value": "Colored" },
+          { "key": "white", "value": "White" },
+          { "key": "white-circle", "value": "White Circle" },
+          { "key": "white-hollow-circle", "value": "White Hollow Circle" },
+          { "key": "white-square", "value": "White Square" }
+        ]
+      },
+      {
+        "id": "social_links_facebook_link",
+        "name": "facebook_link",
+        "label": "Facebook Link",
+        "type": "url",
+        "placeholder": "https://facebook...",
+        "validation": {
+          "url": "Not a valid URL."
+        }
+      },
+      {
+        "id": "social_links_instagram_link",
+        "name": "instagram_link",
+        "label": "Instagram Link",
+        "type": "url",
+        "placeholder": "https://instagram...",
+        "validation": {
+          "url": "Not a valid URL."
+        }
+      },
+      {
+        "id": "social_links_linkedin_link",
+        "name": "linkedin_link",
+        "label": "LinkedIn Link",
+        "type": "url",
+        "placeholder": "https://linkedin...",
+        "validation": {
+          "url": "Not a valid URL."
+        }
+      },
+      {
+        "id": "social_links_twitter_link",
+        "name": "twitter_link",
+        "label": "Twitter Link",
+        "type": "url",
+        "placeholder": "https://twitter...",
+        "validation": {
+          "url": "Not a valid URL."
+        }
+      },
+      {
+        "id": "social_links_youtube_link",
+        "name": "youtube_link",
+        "label": "Youtube Link",
+        "type": "url",
+        "placeholder": "https://youtube...",
+        "validation": {
+          "url": "Not a valid URL."
+        }
+      }
+    ]
+  },
+  {
+    "name": "search-results",
+    "title": "Search Results",
+    "fields": [
+      {
+        "id": "search_results_title",
+        "name": "title",
+        "label": "Title",
+        "type": "text",
+        "message": "Recommended **70** characters."
+      },
+      {
+        "id": "search_results_description",
+        "name": "description",
+        "label": "Description",
+        "type": "textarea",
+        "message": "Recommended **156** characters."
+      },
+      {
+        "id": "search_results_preview",
+        "label": "Preview",
+        "type": "search_preview",
+        "description": "",
+        "link": "",
+        "link_title": ""
+      }
+    ]
+  },
+  {
+    "name": "google-analytics",
+    "title": "Google Analytics",
+    "fields": [
+      {
+        "id": "google_analytics_code",
+        "name": "code",
+        "label": "Code",
+        "type": "text",
+        "placeholder": "UA-12345-1",
+        "validation": {
+          "ua_code": "Not a valid Google Analytics code"
+        }
+      }
+    ]
+  }
+]

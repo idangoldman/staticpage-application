@@ -1,7 +1,7 @@
 from flask import render_template, current_app, json, send_from_directory, make_response, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 
-from backend.helpers import path_builder, is_phone, get_page_stub
+from backend.helpers import path_builder, is_phone, get_page_stub, get_a_stub
 from backend.models.page import Page
 from backend.models.user import User
 from backend.third_party import mailchimp_subscribe
@@ -11,15 +11,15 @@ from backend.website.forms import NewsletterForm
 @current_app.route('/')
 def index_route():
     if current_user.is_authenticated:
-        return redirect( url_for('home') )
+        return redirect(url_for('home'))
     else:
-        return redirect( url_for('website.welcome') )
+        return redirect(url_for('website.welcome'))
 
 
-@current_app.route( '/page_intervention/<int:page_id>', methods=['GET', 'POST'] )
+@current_app.route('/page_intervention/<int:page_id>', methods=['GET', 'POST'])
 @login_required
-def page_intervention( page_id ):
-    payload = current_user.pages.first().with_defaults()
+def page_intervention(page_id):
+    payload = current_user.pages.filter_by(id=page_id).first_or_404().with_defaults()
     payload['is_intervention'] = True
 
     form = NewsletterForm()
@@ -35,21 +35,23 @@ def page_intervention( page_id ):
         if has_subscribed:
             if payload.get('mailing_list_successful_submission') == 'successful-submission-message' \
                 and payload.get('mailing_list_message'):
-                flash( payload.get('mailing_list_message') )
+                flash(payload.get('mailing_list_message'))
             elif payload.get('mailing_list_successful_submission') == 'successful-submission-redirect' \
                 and payload.get('mailing_list_redirect_url'):
-                return redirect( payload.get('mailing_list_redirect_url') )
+                return redirect(payload.get('mailing_list_redirect_url'))
 
-    return render_template( 'page/index.html', **payload )
+    return render_template('page/index.html', **payload)
 
 
-@current_app.route('/page/<site_name>')
-def page_view( site_name ):
-    payload = Page.query.join( Page.creator ) \
-                     .filter( User.site_name == site_name ) \
+@current_app.route('/preview/<site_name>/<page_name>')
+# @login_required
+def page_preview(site_name, page_name):
+    payload = Page.query.join(Page.creator) \
+                     .filter(User.site_name == site_name, Page.name == page_name) \
                      .first_or_404() \
                      .with_defaults()
 
+    # payload = current_user.pages.filter_by(name=page_name).first_or_404().with_defaults()
     form = NewsletterForm()
 
     if form.validate_on_submit():
@@ -66,16 +68,21 @@ def page_view( site_name ):
                 flash( payload.get('mailing_list_message') )
             elif payload.get('mailing_list_successful_submission') == 'successful-submission-redirect' \
                 and payload.get('mailing_list_redirect_url'):
-                return redirect( payload.get('mailing_list_redirect_url') )
+                return redirect(payload.get('mailing_list_redirect_url'))
 
 
     return render_template( 'page/index.html', **payload )
 
 
-@current_app.route('/home')
+@current_app.route('/home/', defaults={'site_name': None, 'page_name': None})
+@current_app.route('/home/<site_name>/<page_name>')
 @login_required
-def home():
-    page = current_user.pages.first()
+def home(site_name, page_name):
+    if site_name is not None and page_name is not None:
+      page = current_user.pages.filter_by(name=page_name).first_or_404()
+    else:
+      page = current_user.pages.first()
+
     payload = {
         'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone( request.user_agent ),
@@ -84,56 +91,75 @@ def home():
         'title': page.content_title
     }
 
-    response = make_response( render_template( 'home.html', **payload ) )
+    response = make_response(render_template('home.html', **payload))
     if not request.cookies.get('show_login_link'):
-        response.set_cookie( 'show_login_link', value='1', max_age=30585600 ) #one year expiration
+        response.set_cookie('show_login_link', value='1', max_age=30585600) #one year expiration
 
     return response
 
 
 @current_app.route('/side-kick/<int:page_id>')
 @login_required
-def side_kick( page_id ):
-    with open( 'static/images/side-kick-sprite.svg', 'r' ) as svg_file:
+def side_kick(page_id):
+    with open('static/images/side-kick-sprite.svg', 'r') as svg_file:
         svg_sprite = svg_file.read()
-    with open( 'backend/stubs/features.json', 'r' ) as json_file:
-        features = json.load( json_file )
 
-    page_with_features = current_user.pages.first().with_features()
+    features = get_a_stub('features/all')
+    page_with_features = current_user.pages.filter_by(id=page_id).first_or_404().with_features()
+
+
+    manage_pages = get_a_stub('features/manage_pages')
+    pages = current_user.pages.with_entities(Page.id, Page.name).all();
+    for field in manage_pages.get('fields'):
+      if field.get('id') == 'manage_pages_pages':
+        for page in pages:
+          page_url = '/home/' + current_user.site_name + '/' + page[1]
+          field['options'].append({'key': page_url, 'value': page[1]})
+
+          if page[0] == page_id:
+            field['default'] = page_url
+
+      if field.get('id') == 'manage_pages_actions':
+        field['id'] = field.get('id') + '_' + str(page_id)
 
     payload = {
-        'features': page_with_features,
+        'manage_pages': manage_pages,
+        'features': page_with_features.get('features'),
         'is_email_confirmed': current_user.email_confirmed,
-        'on_phone': is_phone( request.user_agent ),
-        'page_update_url': current_app.config['API_URL'] + '/page/update/' + str( page_id ),
-        'site_download_url': current_app.config['API_URL'] + '/download/' + current_user.site_name,
+        'on_phone': is_phone(request.user_agent),
+        'page_update_url': current_app.config['API_URL'] + '/page/update/' + str(page_id),
+        'site_download_url': current_app.config['API_URL'] + '/download/' + current_user.site_name + '/' + page_with_features.get('page').get('name'),
+        'page_manage_url': current_app.config['API_URL'] + '/page_manage/' + current_user.site_name,
         'page_id': page_id,
+        'page_name': page_with_features.get('page').get('name'),
         'site_name': current_user.site_name,
         'svg_sprite': svg_sprite,
         'user_id': current_user.id
     }
 
-    return render_template( 'side-kick/index.html', **payload )
+    return render_template('side-kick/index.html', **payload)
 
 
 @current_app.route('/<user_hash>/uploads/<timestamp>/<file_name>')
-def user_uploads( user_hash, timestamp, file_name ):
-    upload_folder_path = path_builder( current_app.config['BASE_PATH'], \
+@login_required
+def user_uploads(user_hash, timestamp, file_name):
+    upload_folder_path = path_builder(current_app.config['BASE_PATH'], \
                                 current_app.config['TMP_FOLDER'], \
                                 user_hash, \
                                 'uploads', \
-                                timestamp )
-    return send_from_directory( upload_folder_path, file_name )
+                                timestamp)
+    return send_from_directory(upload_folder_path, file_name)
 
 
 @current_app.route('/<hash>/<timestamp>/<file_name>')
-def user_downloads( hash, timestamp, file_name ):
-    donwload_folder_path = path_builder( current_app.config['BASE_PATH'], \
+@login_required
+def user_downloads(hash, timestamp, file_name):
+    donwload_folder_path = path_builder(current_app.config['BASE_PATH'], \
                                 current_app.config['TMP_FOLDER'], \
                                 hash, \
                                 '/', \
-                                timestamp )
-    return send_from_directory( donwload_folder_path, file_name )
+                                timestamp)
+    return send_from_directory(donwload_folder_path, file_name)
 
 
 @current_app.errorhandler(401)

@@ -1,51 +1,65 @@
 {% extends 'side-kick/_base.html' %}
 
 {% block content %}
-    {{ super() }}
+  {{ super() }}
 
-    <nav class="devices">
-        <a href="/page/{{ site_name }}" class="link" target="_blank">
-            <svg class="icon">
-                <use class="use" xlink:href="#preview"></use>
-            </svg>
-            <span class="title">Page</span>
-        </a>
+  <nav class="devices">
+    <a href="/preview/{{ site_name }}/{{ page_name }}" class="link" target="_blank">
+      <svg class="icon">
+        <use class="use" xlink:href="#preview"></use>
+      </svg>
+      <span class="title">Preview </span>
+    </a>
 
-        <a href="/mobile" class="device {{ 'none' if on_phone }}">
-            <svg class="icon">
-                <use class="use" xlink:href="#mobile"></use>
-            </svg>
-            <span class="title">Mobile</span>
-        </a>
+    <a href="/mobile" class="device {{ 'none' if on_phone }}">
+      <svg class="icon">
+        <use class="use" xlink:href="#mobile"></use>
+      </svg>
+      <span class="title">Mobile</span>
+    </a>
 
-        <a href="/desktop" class="device current {{ 'none' if on_phone }}">
-            <svg class="icon">
-                <use class="use" xlink:href="#desktop"></use>
-            </svg>
-            <span class="title">Desktop</span>
-        </a>
-    </nav>
+    <a href="/desktop" class="device current {{ 'none' if on_phone }}">
+      <svg class="icon">
+        <use class="use" xlink:href="#desktop"></use>
+      </svg>
+      <span class="title">Desktop</span>
+    </a>
+  </nav>
 
-    <ul class="features">
-        {% for feature in features %}
-            <li class="feature {{ feature.name }} close">
-                <header class="header">
-                    <h3 class="title">{{ feature.title }}</h3>
-                    <svg class="icon caret">
-                        <use class="use" xlink:href="#caret-up"></use>
-                    </svg>
-                </header>
-
-                {% from 'macros/form/base.html' import base_form %}
-                {% call base_form( class='body', fields=feature.fields, action='blah.php' ) %}{% endcall %}
-            </li>
-        {% endfor %}
-    </ul>
-
-    <button id="download-button" class="button" type="button">
-        <span class="title">Download</span>
-        <svg class="icon">
-            <use class="use" xlink:href="#spinner"></use>
+  <ul class="features">
+    <li class="feature {{ manage_pages.name }} close">
+      <header class="header">
+        <h3 class="title">{{ manage_pages.title }}</h3>
+        <svg class="icon caret">
+          <use class="use" xlink:href="#caret-up"></use>
         </svg>
-    </button>
+      </header>
+      <div class="body">
+        {% from 'macros/form/base.html' import base_form %}
+        {% call base_form(fields=manage_pages.fields, action='blah.php') %}{% endcall %}
+      </div>
+    </li>
+
+    {% for feature in features %}
+      <li class="feature {{ feature.name }} close">
+        <header class="header">
+          <h3 class="title">{{ feature.title }}</h3>
+          <svg class="icon caret">
+            <use class="use" xlink:href="#caret-up"></use>
+          </svg>
+        </header>
+        <div class="body">
+          {% from 'macros/form/base.html' import base_form %}
+          {% call base_form(fields=feature.fields, action='blah.php') %}{% endcall %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <button id="download-button" class="button" type="button">
+    <span class="title">Download</span>
+    <svg class="icon">
+      <use class="use" xlink:href="#spinner"></use>
+    </svg>
+  </button>
 {% endblock %}

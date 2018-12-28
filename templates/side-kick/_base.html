@@ -19,6 +19,7 @@
                 <a href="{{ url_for( 'auth.resend_confirm' ) }}">Resend email</a>.
             </p>
         {% endif %}
+
         {% block content %}{% endblock %}
 
         <footer class="footer">
@@ -28,7 +29,8 @@
 
     <script>
         var page_update_url = '{{ page_update_url }}',
-            site_download_url = '{{ site_download_url }}';
+            site_download_url = '{{ site_download_url }}',
+            page_manage_url = '{{ page_manage_url }}';
     </script>
     <script src="{{ url_for('static', filename='side-kick.js') }}"></script>
 

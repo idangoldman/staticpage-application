@@ -2,17 +2,15 @@ from flask import json, current_app
 from datetime import datetime
 
 from backend import db
-
+from backend.helpers import get_a_stub
 
 class Page(db.Model):
     __tablename__ = 'pages'
 
     id = db.Column('id', db.Integer, primary_key=True, index=True)
+    name = db.Column('name', db.String(128), default='index')
     user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column('created_at', db.DateTime(), default=datetime.utcnow)
-
-    file_type = db.Column('file_type', db.String(16), nullable=False, default='welcome')
-    file_name = db.Column('file_name', db.String(128), default='index')
 
     content_logo = db.Column('content_logo', db.String(128))
     content_title = db.Column('content_title', db.Text())
@@ -57,14 +55,13 @@ class Page(db.Model):
 
 
     def with_features(self):
-        with open('backend/stubs/features.json', 'r') as json_file:
-            features = json.load( json_file )
+        features = get_a_stub('features/all')
 
         page_dict = self.__dict__
 
         for feature in features:
             for field in feature.get('fields'):
-                field['value'] = page_dict.get( field.get('id') ) or field.get('value') or ''
+                field['value'] = page_dict.get(field.get('id')) or field.get('value') or ''
 
                 if field.get('id') == 'search_results_title':
                     field['placeholder'] = page_dict.get('content_title') \
@@ -83,22 +80,24 @@ class Page(db.Model):
                                             or ''
                 if field.get('type') == 'fieldset':
                     for second_field in field.get('fields'):
-                        second_field['value'] = page_dict.get( second_field.get('id') ) or second_field.get('value') or ''
+                        second_field['value'] = page_dict.get(second_field.get('id')) or second_field.get('value') or ''
 
-        return features
+        return {
+          'page': page_dict,
+          'features': features
+        }
 
 
     def with_defaults(self):
-        with open('backend/stubs/features.json', 'r') as json_file:
-            features = json.load( json_file )
+        features = get_a_stub('features/all')
 
         page_dict = self.__dict__
 
         for feature in features:
             for field in feature.get('fields'):
 
-                if not page_dict.get( field.get('id') ):
-                    page_dict[ field.get('id') ] = field.get('default') or ''
+                if not page_dict.get(field.get('id')):
+                    page_dict[field.get('id')] = field.get('default') or ''
 
                 if field.get('id') == 'search_results_title':
                     page_dict['search_results_title'] = page_dict.get('search_results_title') \
@@ -111,15 +110,15 @@ class Page(db.Model):
 
                 if field.get('type') == 'fieldset':
                     for second_field in field.get('fields'):
-                        if not page_dict.get( second_field.get('id') ):
-                            page_dict[ second_field.get('id') ] = second_field.get('default') or ''
+                        if not page_dict.get(second_field.get('id')):
+                            page_dict[second_field.get('id')] = second_field.get('default') or ''
 
         if page_dict.get('countdown_timezone'):
-            page_dict['countdown_timezone'] = page_dict['countdown_timezone'].split('|')[ 1 ]
+            page_dict['countdown_timezone'] = page_dict['countdown_timezone'].split('|')[1]
 
         if page_dict.get('countdown_datetime'):
             page_dict['countdown_datetime_with_timezone'] = " ".join([
-                str( page_dict['countdown_datetime'] ),
+                str(page_dict['countdown_datetime']),
                 page_dict['countdown_timezone']
             ])
 

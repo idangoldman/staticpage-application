@@ -4,187 +4,187 @@
 @import "frontend/scss/lib/reset";
 
 .background {
-    background-attachment: fixed;
-    background-position: 50% 50%;
-    display: flex;
+  background-attachment: fixed;
+  background-position: 50% 50%;
+  display: flex;
 
-    &:before {
-        background-color: rgba( #000, 0.15 );
-        bottom: 0;
-        content: "";
-        display: block;
-        left: 0;
-        position: fixed;
-        right: 0;
-        top: 0;
-        z-index: 1;
-    }
+  &:before {
+    background-color: rgba( #000, 0.15 );
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1;
+  }
 }
 
 .page {
-    margin: auto;
-    position: relative;
-    width: 90%;
-    z-index: 2;
+  margin: auto;
+  position: relative;
+  width: 90%;
+  z-index: 2;
 
-    & > * {
-        margin: 0 auto;
-        width: 100%;
-    }
+  & > * {
+    margin: 0 auto;
+    width: 100%;
+  }
 }
 
 .content {
-    margin-top: px2rem(50);
-    text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+  margin-top: px2rem(50);
+  text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
 
-    & > * {
-        &:not(.countdown-clock) {
-            @include text-break;
-        }
-
-        margin-bottom: px2rem(25);
+  & > * {
+    &:not(.countdown-clock) {
+      @include text-break;
     }
 
-    .logo {
-        display: block;
-        max-height: px2rem(300);
-        max-width: px2rem(400);
-    }
+    margin-bottom: px2rem(25);
+  }
 
-    .title {
-        font-size: 4em;
-        letter-spacing: px2rem(1);
-    }
+  .logo {
+    display: block;
+    max-height: px2rem(300);
+    max-width: px2rem(400);
+  }
 
-    .sub-title {
-        font-size: 2em;
-    }
+  .title {
+    font-size: 4em;
+    letter-spacing: px2rem(1);
+  }
 
-    .description {
-        font-size: 1.2em;
-        font-weight: 600;
-        line-height: 1.5em;
-    }
+  .sub-title {
+    font-size: 2em;
+  }
+
+  .description {
+    font-size: 1.2em;
+    font-weight: 600;
+    line-height: 1.5em;
+  }
 }
 
 .newsletter {
-    margin-bottom: px2rem(20);
+  margin-bottom: px2rem(20);
 
-    .email, .submit {
-        background-color: transparent;
-        border-radius: px2rem(5);
-        border: px2rem(1) solid #fff;
-        font-weight: 600;
-        outline: 0;
-        padding: px2rem(10) px2rem(12);
+  .email, .submit {
+    background-color: transparent;
+    border-radius: px2rem(5);
+    border: px2rem(1) solid #fff;
+    font-weight: 600;
+    outline: 0;
+    padding: px2rem(10) px2rem(12);
 
-        &:hover, &:focus {
-            box-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
-        }
+    &:hover, &:focus {
+      box-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+    }
+  }
+
+  .email {
+    margin-right: px2rem(5);
+
+    &, &::placeholder {
+      text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
     }
 
-    .email {
-        margin-right: px2rem(5);
-
-        &, &::placeholder {
-            text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
-        }
-
-        &::placeholder {
-            opacity: 0.8;
-        }
+    &::placeholder {
+      opacity: 0.8;
     }
+  }
 
-    .submit {
-        cursor: pointer;
-        text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
-    }
+  .submit {
+    cursor: pointer;
+    text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+  }
 
-    .message {
-        @include text-break;
+  .message {
+    @include text-break;
 
-        font-size: 1.5em;
-        font-weight: 600;
-        line-height: 1.5em;
-        text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
-    }
+    font-size: 1.5em;
+    font-weight: 600;
+    line-height: 1.5em;
+    text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+  }
 }
 
 .add-this {
-    height: 48px;
-    margin-bottom: px2rem(25);
+  height: 48px;
+  margin-bottom: px2rem(25);
 }
 
 .countdown-clock {
-    display: none;
-    align-items: top;
-    justify-content: center;
+  display: none;
+  align-items: top;
+  justify-content: center;
 
-    .time .unit,
-    .separator {
-        font-size: 4em;
-    }
+  .time .unit,
+  .separator {
+    font-size: 4em;
+  }
 
-    .time {
-        .label {
-            display: block;
-            font-size: 1em;
-            font-style: normal;
-            font-weight: 600;
-            text-align: center;
-        }
+  .time {
+    .label {
+      display: block;
+      font-size: 1em;
+      font-style: normal;
+      font-weight: 600;
+      text-align: center;
     }
-    .separator {
-        line-height: px2rem(80);
-        padding: 0 px2rem(10);
-    }
+  }
+  .separator {
+    line-height: px2rem(80);
+    padding: 0 px2rem(10);
+  }
 }
 
 #social-icons-svgs {
-    height: 0;
-    position: absolute;
-    visibility: hidden;
-    width: 0;
+  height: 0;
+  position: absolute;
+  visibility: hidden;
+  width: 0;
 }
 
 .social-links {
-    margin-top: px2rem(40);
+  margin-top: px2rem(40);
 
-    a {
-        display: inline-block;
-        margin-right: px2rem(15);
-        vertical-align: middle;
+  a {
+    display: inline-block;
+    margin-right: px2rem(15);
+    vertical-align: middle;
 
-        &:last-child {
-            margin-right: 0;
-        }
+    &:last-child {
+      margin-right: 0;
     }
+  }
 
-    svg {
-        height: 32px;
-        width: 32px;
-    }
+  svg {
+    height: 32px;
+    width: 32px;
+  }
 }
 
 // min Netbook
 @media ( min-width: 1024px ) {
-    .page > * {
-        width: 80%;
-    }
+  .page > * {
+    width: 80%;
+  }
 }
 
 @media ( max-width: 768px ) {
-    .newsletter {
-        & > div * {
-            display: block;
-            margin: 0 auto;
-            text-align: center;
-            width: 80%;
-        }
-
-        .email {
-            margin-right: auto;
-            margin-bottom: px2rem(20);
-        }
+  .newsletter {
+    & > div * {
+      display: block;
+      margin: 0 auto;
+      text-align: center;
+      width: 80%;
     }
+
+    .email {
+      margin-right: auto;
+      margin-bottom: px2rem(20);
+    }
+  }
 }

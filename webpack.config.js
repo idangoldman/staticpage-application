@@ -5,6 +5,7 @@ module.exports = {
   cache: false,
   debug: false,
   devtool: 'none',
+  // devtool: 'source-map',
   entry: {
     'page-intervention': './frontend/js/page/intervention.js',
     'side-kick': './frontend/js/side-kick/index.js',
