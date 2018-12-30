@@ -1,10 +1,10 @@
 // base component
-import baseBox from 'side-kick/features/components/base-box';
+import baseBox from 'side-kick/components/base-box';
 
 // child components
-import textFieldComponent from 'side-kick/features/components/text-field';
-import selectGroupFieldComponent from 'side-kick/features/components/select-group-field';
-import urlFieldComponent from 'side-kick/features/components/url-field';
+import textFieldComponent from 'side-kick/components/text-field';
+import selectGroupFieldComponent from 'side-kick/components/select-group-field';
+import urlFieldComponent from 'side-kick/components/url-field';
 
 
 const mailingList = baseBox.mixin(function box() {

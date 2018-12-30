@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import selectFieldComponent from 'side-kick/features/components/select-field';
+import selectFieldComponent from 'side-kick/components/select-field';
 
 export default selectFieldComponent.mixin(function manageActions() {
   this.attributes({

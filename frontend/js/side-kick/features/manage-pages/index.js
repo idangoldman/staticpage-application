@@ -1,9 +1,9 @@
 // base component
-import baseBox from 'side-kick/features/components/base-box';
+import baseBox from 'side-kick/components/base-box';
 
 // child components
-import pagesFieldComponent from 'side-kick/features/components/manage-pages/pages';
-import actionsFieldComponent from 'side-kick/features/components/manage-pages/actions';
+import pagesFieldComponent from 'side-kick/features/manage-pages/pages';
+import actionsFieldComponent from 'side-kick/features/manage-pages/actions';
 
 const managePagesFeature = baseBox.mixin(function box() {
   this.attributes({

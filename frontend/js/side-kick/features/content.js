@@ -1,9 +1,9 @@
 // base component
-import baseBox from 'side-kick/features/components/base-box';
+import baseBox from 'side-kick/components/base-box';
 
 // child components
-import fileFieldComponent from 'side-kick/features/components/file-field';
-import textFieldComponent from 'side-kick/features/components/text-field';
+import fileFieldComponent from 'side-kick/components/file-field';
+import textFieldComponent from 'side-kick/components/text-field';
 
 
 const contentFeature = baseBox.mixin(function box() {

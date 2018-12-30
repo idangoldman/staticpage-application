@@ -1,10 +1,10 @@
 import { component } from 'flightjs';
 
-import withFocus from 'side-kick/features/mixins/focus';
+import withFocus from 'side-kick/components/mixins/focus';
 import withState from 'flight-with-state';
-import withValidation from 'side-kick/features/mixins/validation';
+import withValidation from 'side-kick/components/mixins/validation';
 
-export default component(withFocus, withState, withValidation, function textField() {
+export default component(withFocus, withState, withValidation, function urlField() {
   this.attributes({
     field: '.field',
     message: '.message',
@@ -20,24 +20,19 @@ export default component(withFocus, withState, withValidation, function textFiel
   });
 
   this.after('initialize', function initialize() {
-    this.select('field').on('keyup keypress blur', this.fieldChanged.bind(this));
+    this.select('field').on('keyup keypress fieldChanged', this.fieldChanged.bind(this));
+    this.select('field').on('blur', this.fieldBlur.bind(this));
 
     this.after('stateChanged', this.updateField);
-    // this.on( document, 'updateField_' + this.attr.fieldName + '_success', console.log('Yay!'));
-    // this.on( document, 'updateField_' + this.attr.fieldName + '_error', console.log('Nay!'));
   });
 
   this.fieldChanged = function fieldChanged(event) {
     const value = event.currentTarget.value.trim();
 
     if (!this.validate(value)) {
+      // eslint-disable-next-line consistent-return
       return true;
     }
-
-    this.trigger(document, `fieldChanged_${this.attr.fieldName}`, {
-      placeholder: this.select('field').attr('placeholder'),
-      value,
-    });
 
     this.mergeState({ value });
   };
@@ -45,6 +40,17 @@ export default component(withFocus, withState, withValidation, function textFiel
   this.updateField = function updateField(state, previousState) {
     if (previousState.value !== state.value) {
       this.trigger(document, 'updateField', state);
+    }
+  };
+
+  this.fieldBlur = function fieldBlur(event) {
+    const value = event.currentTarget.value.trim();
+    const httpRegex = /^(https?:\/\/)/;
+
+    if (value.length && !httpRegex.test(value)) {
+      this.select('field')
+        .val(`http://${value}`)
+        .trigger('fieldChanged');
     }
   };
 });

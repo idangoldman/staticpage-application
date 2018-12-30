@@ -1,4 +1,4 @@
-import selectField from 'side-kick/features/components/select-field';
+import selectField from 'side-kick/components/select-field';
 
 export default selectField.mixin(function selectGroupField() {
   this.after('initialize', function initialize() {
