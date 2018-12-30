@@ -139,6 +139,24 @@ def side_kick(page_id):
 
     return render_template('side-kick/index.html', **payload)
 
+@current_app.route('/side-kick/new_page')
+@login_required
+def side_kick_new_page():
+    with open('static/images/side-kick-sprite.svg', 'r') as svg_file:
+        svg_sprite = svg_file.read()
+
+    new_page = get_a_stub('features/new-page')
+
+    payload = {
+        'svg_sprite': svg_sprite,
+        'page': new_page,
+        'is_email_confirmed': current_user.email_confirmed,
+        'on_phone': is_phone(request.user_agent),
+        'page_manage_url': current_app.config['API_URL'] + '/page_manage/' + current_user.site_name,
+    }
+
+    return render_template('side-kick/new-page.html', **payload)
+
 
 @current_app.route('/<user_hash>/uploads/<timestamp>/<file_name>')
 @login_required
