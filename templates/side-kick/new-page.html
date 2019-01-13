@@ -1,10 +1,11 @@
+{% set page_class = 'new-page' %}
 {% extends 'side-kick/_base.html' %}
 
 {% block content %}
   {{ super() }}
 
   <ul class="features">
-    <li class="feature {{ page.name }} close">
+    <li class="feature {{ page.name }}">
       <header class="header">
         <h3 class="title">{{ page.title }}</h3>
       </header>

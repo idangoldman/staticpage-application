@@ -36,16 +36,7 @@ export default selectFieldComponent.mixin(function manageActions() {
   };
 
   this.createPage = function createPage() {
-    const newPageName = prompt(
-      `How do you want to name your page?\n${this.attr.charectersRestriction}`
-    );
-
-    if (newPageName !== null && newPageName.trim().length) {
-      this.trigger(document, 'pageManage', {
-        'action': this.attr.currentAction,
-        'name': newPageName
-      });
-    }
+    window.location.href = '/side-kick/new_page/';
   };
 
   this.renamePage = function renamePage() {

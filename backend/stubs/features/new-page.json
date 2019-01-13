@@ -1,6 +1,6 @@
 {
-  "name": "new-page",
-  "title": "Create new page",
+  "name": "new-page-feature",
+  "title": "Create a new page",
   "fields": [
     {
       "id": "name",

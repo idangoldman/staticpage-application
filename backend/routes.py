@@ -139,7 +139,7 @@ def side_kick(page_id):
 
     return render_template('side-kick/index.html', **payload)
 
-@current_app.route('/side-kick/new_page')
+@current_app.route('/side-kick/new_page/')
 @login_required
 def side_kick_new_page():
     with open('static/images/side-kick-sprite.svg', 'r') as svg_file:
