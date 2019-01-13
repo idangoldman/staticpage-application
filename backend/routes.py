@@ -108,7 +108,7 @@ def side_kick(page_id):
     page_with_features = current_user.pages.filter_by(id=page_id).first_or_404().with_features()
 
 
-    manage_pages = get_a_stub('features/manage_pages')
+    manage_pages = get_a_stub('features/manage-pages')
     pages = current_user.pages.with_entities(Page.id, Page.name).all();
     for field in manage_pages.get('fields'):
       if field.get('id') == 'manage_pages_pages':
