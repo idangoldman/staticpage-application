@@ -5,6 +5,8 @@
     "type": "git",
     "url": "git@gitlab.com:idan.goldman/staticpage.git"
   },
+  "license": "UNLICENSED",
+  "private": true,
   "scripts": {
     "start": "pipenv run sh start.sh",
     "db:migrate": "pipenv run python manage.py db migrate",
