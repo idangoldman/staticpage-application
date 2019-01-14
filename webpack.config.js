@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     'page-intervention': './frontend/js/page/intervention.js',
     'side-kick': './frontend/js/side-kick/index.js',
+    'auth': './frontend/js/auth.js',
     'home': './frontend/js/home.js'
   },
   output: {
