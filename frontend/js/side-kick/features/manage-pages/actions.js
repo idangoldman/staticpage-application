@@ -36,7 +36,7 @@ export default selectFieldComponent.mixin(function manageActions() {
   };
 
   this.createPage = function createPage() {
-    window.location.href = '/side-kick/new_page/';
+    window.location.href = '/side-kick/new-page/';
   };
 
   this.renamePage = function renamePage() {
