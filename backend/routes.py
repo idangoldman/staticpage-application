@@ -22,6 +22,9 @@ def page_intervention(page_id):
     payload = current_user.pages.filter_by(id=page_id).first_or_404().with_defaults()
     payload['is_intervention'] = True
 
+    from pprint import pprint
+    pprint(payload);
+
     form = NewsletterForm()
 
     if form.validate_on_submit():
