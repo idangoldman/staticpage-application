@@ -14,7 +14,9 @@
     "db:downgrade": "pipenv run python manage.py db downgrade",
     "watch": "gulp w",
     "lint": "eslint frontend/js",
-    "lint-fix": "yarn lint --fix"
+    "lint-fix": "yarn lint --fix",
+    "back:reinstall": "pipenv --rm && pipenv install",
+    "front:reinstall": "rm -fr node_modules && yarn install"
   },
   "dependencies": {
     "air-datepicker": "2.2.3",

@@ -46,15 +46,15 @@
 
 	'use strict';
 
-	var _jquery = __webpack_require__(1);
+	var _jquery = __webpack_require__(2);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
-	var _constants = __webpack_require__(2);
+	var _constants = __webpack_require__(7);
 
 	var C = _interopRequireWildcard(_constants);
 
-	var _styles = __webpack_require__(3);
+	var _styles = __webpack_require__(8);
 
 	var _styles2 = _interopRequireDefault(_styles);
 
@@ -348,7 +348,8 @@
 	});
 
 /***/ }),
-/* 1 */
+/* 1 */,
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10718,7 +10719,11 @@
 
 
 /***/ }),
-/* 2 */
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -10752,7 +10757,7 @@
 	var UPDATE_SOCIAL_LINKS_YOUTUBE_LINK = exports.UPDATE_SOCIAL_LINKS_YOUTUBE_LINK = 'social_links_youtube_link';
 
 /***/ }),
-/* 3 */
+/* 8 */
 /***/ (function(module, exports) {
 
 	'use strict';
