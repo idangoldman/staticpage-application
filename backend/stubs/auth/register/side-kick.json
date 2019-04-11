@@ -20,7 +20,7 @@
           "name": "template",
           "label": "Choose template",
           "type": "select",
-          "message": "Pick a starting template your page.",
+          "message": "Pick a starting template for your page.",
           "default": "",
           "options": [
             {"key": "mailing_list", "value": "With a Mailing List"},
