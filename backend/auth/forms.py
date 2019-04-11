@@ -12,10 +12,10 @@ def unique_email(form, field):
         raise ValidationError('Email already exist, try another one.')
 
 def validate_page_template(form, field):
-    templates = ('mailing_list', 'countdown_clock', 'social_icons', 'all_combo', 'blank')
+    templates = ('mailing_list', 'countdown_clock', 'social_icons', 'all', 'blank')
 
     if not field.data in templates:
-        raise ValidationError('Template not exists.')
+        raise ValidationError('Template does not exists.')
 
 
 class RegisterForm(FlaskForm):
