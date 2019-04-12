@@ -1,17 +1,18 @@
 {
-    "content_logo": "",
-    "content_title": "",
-    "content_sub_title": "",
-    "content_description": "",
-    "design_background_image": "",
-    "design_background_color": "",
-    "design_font_family": "",
-    "design_font_color": "",
+    "content_logo": "https://hpcrdjpba3i8hu3.s3.amazonaws.com/1480362755b1338aa4b7353aa24e35bd/1555069774/LocalBar.png",
+    "content_title": "Grand Opening Next Week!",
+    "content_sub_title": "Saturday, January 28, 7-9pm.",
+    "content_description": "LocalBar, hottest new spot for great pub food, drinks and live entertainment, is celebrating its grand opening with a giant rocking block party featuring top notch musical entertainment, bites and complimentary cocktails.
+
+The evening kicks off with a set from legendary DJ — who blend electronic elements and turntables with Latin, funk, hip hop and dub to create a sound all of his own. Later on that evening legendary DJ, in a special appearance, will offer their rollicking brand of soulful blues.",
+    "design_background_image": "https://hpcrdjpba3i8hu3.s3.amazonaws.com/1480362755b1338aa4b7353aa24e35bd/1554997692/keith-misner-308-unsplash-size-min.jpg",
+    "design_font_family": "tahoma",
+    "design_font_color": "#F8B739",
     "design_content_alignment": "center",
-    "social_links_icon_style": "",
-    "social_links_facebook_link": "",
-    "social_links_instagram_link": "",
+    "social_links_icon_style": "black-square",
+    "social_links_facebook_link": "https://example.com",
+    "social_links_instagram_link": "https://example.com",
     "social_links_linkedin_link": "",
     "social_links_twitter_link": "",
-    "social_links_youtube_link": ""
+    "social_links_youtube_link": "https://example.com"
 }
