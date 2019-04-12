@@ -11,6 +11,9 @@ export default component(function actionButtons() {
   this.after('initialize', function initialize() {
     this.on(this.attr.createButton, 'click', this.create.bind(this));
     this.on(this.attr.cancelButton, 'click', this.cancel.bind(this));
+
+    this.on(document, 'pageManage_success', this.pageManageSuccess.bind(this));
+    this.on(document, 'pageManage_error', this.pageManageError.bind(this));
   });
 
   this.create = function() {
@@ -18,8 +21,12 @@ export default component(function actionButtons() {
     const templateValue = this.attr.templateField.val().trim();
 
     if (nameValue.length) {
-      if (templateValue) {
-        console.log(nameValue, templateValue);
+      if (templateValue.length) {
+        this.trigger(document, 'pageManage', {
+          'action': 'create_page',
+          'name': nameValue,
+          'template': templateValue
+        });
       } else {
         this.attr.templateField.focus();
       }
@@ -30,5 +37,40 @@ export default component(function actionButtons() {
 
   this.cancel = function() {
     window.history.back();
+  };
+
+  this.renamePage = function renamePage() {
+    const pageRename = prompt(
+      `How do you want to rename your page?\n${this.attr.charectersRestriction}`,
+      this.attr.pageName
+    );
+
+    if (pageRename !== null && pageRename.trim().length && pageRename != this.attr.pageName) {
+      this.trigger(document, 'pageManage', {
+        'action': this.attr.currentAction,
+        'id': this.attr.pageId,
+        'name': pageRename
+      });
+    }
+  };
+
+  this.deletePage = function deletePage() {
+    if (confirm(`Are you sure to delete "${this.attr.pageName}" page?`)) {
+      this.trigger(document, 'pageManage', {
+        'action': this.attr.currentAction,
+        'id': this.attr.pageId
+      });
+    }
+  };
+
+  this.pageManageSuccess = function pageManageSuccess(event, { redirect_url }) {
+    if (redirect_url.length) {
+      window.top.location.href = redirect_url;
+    }
+  };
+
+  this.pageManageError = function pageManageError(event, { message }) {
+    alert(message);
+    window.location.href = '/side-kick/new-page/';
   };
 });

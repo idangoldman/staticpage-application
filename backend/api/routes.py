@@ -112,6 +112,12 @@ def page_manage(site_name, id):
 
       if not pages_count:
         if request.method == 'POST':
+
+          from pprint import pprint
+          pprint('##### TEMPLATE #####')
+          pprint(request_data.get('template'))
+          pprint('##### TEMPLATE #####')
+
           try:
             page = Page(user_id = current_user.id, name = request_data.get('name'))
             db.session.add(page)
