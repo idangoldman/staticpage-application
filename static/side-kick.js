@@ -14139,7 +14139,6 @@
 	    var message = _ref2.message;
 
 	    alert(message);
-	    window.location.href = '/side-kick/new-page/';
 	  };
 	});
 
