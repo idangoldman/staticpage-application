@@ -4,6 +4,7 @@ from wtforms.validators import Required, Length, Email, Regexp, ValidationError
 import re
 
 from backend.models.user import User
+from backend.helpers.constants import TEMPLATE_NAMES
 
 
 def unique_email(form, field):
@@ -12,9 +13,7 @@ def unique_email(form, field):
         raise ValidationError('Email already exist, try another one.')
 
 def validate_page_template(form, field):
-    templates = ('mailing_list', 'countdown_clock', 'social_icons', 'all', 'blank')
-
-    if not field.data in templates:
+    if not field.data in TEMPLATE_NAMES:
         raise ValidationError('Template does not exists.')
 
 

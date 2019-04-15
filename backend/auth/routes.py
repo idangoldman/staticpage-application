@@ -6,7 +6,7 @@ import random
 from backend import db, mail
 from backend.auth import auth
 from backend.auth.forms import RegisterForm, LoginForm, ForgotPasswordForm, ResetPasswordForm
-from backend.helpers import get_a_stub, get_page_stub, is_phone, timed_url_safe, md5_identifier
+from backend.helpers import get_a_template, get_a_stub, get_page_stub, is_phone, timed_url_safe, md5_identifier
 from backend.models.page import Page
 from backend.models.user import User
 
@@ -16,33 +16,32 @@ def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
-        from pprint import pprint
-        pprint('############')
-        pprint(form.template.data)
-        pprint('############')
-        # user = User(email = form.email.data, \
-        #              site_name = md5_identifier(form.email.data), \
-        #              password = form.password.data)
-        # db.session.add(user)
-        # db.session.commit()
-        #
-        # user = User.query.filter_by(email=form.email.data).first()
-        # page = Page(user_id = user.id)
-        # db.session.add(page)
-        # db.session.commit()
-        #
-        # try:
-        #     token = timed_url_safe().dumps(user.email, salt='email-confirm-key')
-        #     confirm_url = url_for('auth.confirm_email', token=token, _external=True)
-        #     text = render_template('auth/emails/confirm.txt', confirm_url=confirm_url)
-        #     mail.send(Message("Confirmation of Successful Registration!", recipients=[user.email], body=text))
-        # except:
-        #     print "Shit."
-        #
-        # login_user(user)
-        #
-        # return redirect(url_for('home'))
-        return redirect(url_for('auth.register'))
+        user = User(email = form.email.data, \
+                     site_name = md5_identifier(form.email.data), \
+                     password = form.password.data)
+        db.session.add(user)
+        db.session.commit()
+
+        user = User.query.filter_by(email=form.email.data).first()
+
+        template_stub = get_a_template(form.template.data)
+        template_stub['user_id'] = user.id
+
+        page = Page(**template_stub)
+        db.session.add(page)
+        db.session.commit()
+
+        try:
+            token = timed_url_safe().dumps(user.email, salt='email-confirm-key')
+            confirm_url = url_for('auth.confirm_email', token=token, _external=True)
+            text = render_template('auth/emails/confirm.txt', confirm_url=confirm_url)
+            mail.send(Message("Confirmation of Successful Registration!", recipients=[user.email], body=text))
+        except:
+            print "Shit."
+
+        login_user(user)
+
+        return redirect(url_for('home'))
 
 
     with open('static/images/side-kick-sprite.svg', 'r') as svg_file:
