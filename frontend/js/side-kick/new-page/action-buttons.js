@@ -71,6 +71,5 @@ export default component(function actionButtons() {
 
   this.pageManageError = function pageManageError(event, { message }) {
     alert(message);
-    window.location.href = '/side-kick/new-page/';
   };
 });
