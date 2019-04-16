@@ -51,7 +51,7 @@ def is_phone(user_agent):
 
 
 def get_a_template(name):
-    if re.match(r"^[A-Za-z0-9\_\-]{1,80}$", name) and not name == 'blank' and name in TEMPLATE_NAMES:
+    if not name == 'blank' and name in TEMPLATE_NAMES:
       stub = get_a_stub('templates/' + name)
     else:
       stub = {}
