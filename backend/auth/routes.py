@@ -7,6 +7,7 @@ from backend import db, mail
 from backend.auth import auth
 from backend.auth.forms import RegisterForm, LoginForm, ForgotPasswordForm, ResetPasswordForm
 from backend.helpers import get_a_template, get_a_stub, get_page_stub, is_phone, timed_url_safe, md5_identifier
+from backend.helpers.constants import TEMPLATE_NAMES
 from backend.models.page import Page
 from backend.models.user import User
 
@@ -54,7 +55,7 @@ def register():
             field['value'] = form[field.get('id')].data
 
         if field.get('id') == 'template':
-            field['default'] = random.choice(('mailing_list', 'countdown_clock', 'social_icons', 'all'))
+            field['default'] = random.choice(TEMPLATE_NAMES)
 
         if form[field.get('id')]:
             field['errors'] = form[field.get('id')].errors
