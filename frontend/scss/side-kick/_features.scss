@@ -288,6 +288,17 @@
 
   .fine-print {
     font-size: 12px;
-    margin-bottom: 15px;
+    margin: 0 15px 15px;
+  }
+}
+
+
+.feature.new-page-feature {
+  .header {
+    cursor: default;
+  }
+
+  .body {
+    display: block;
   }
 }

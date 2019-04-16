@@ -1,3 +1,5 @@
+{% from 'macros/form/validation.html' import validation, wtf_errors %}
+
 {% macro select( field ) -%}
     {% set selectedKey = field.value if field.value else field.default %}
 
@@ -33,6 +35,8 @@
                 </svg>
             </div>
         </div>
+        {{ validation( field.validation ) }}
+        {{ wtf_errors( field.errors ) }}
         {% if field.message %}
             <span class="message">{{ field.message | markdown }}</span>
         {% endif %}

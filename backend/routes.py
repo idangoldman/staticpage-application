@@ -108,7 +108,7 @@ def side_kick(page_id):
     page_with_features = current_user.pages.filter_by(id=page_id).first_or_404().with_features()
 
 
-    manage_pages = get_a_stub('features/manage_pages')
+    manage_pages = get_a_stub('features/manage-pages')
     pages = current_user.pages.with_entities(Page.id, Page.name).all();
     for field in manage_pages.get('fields'):
       if field.get('id') == 'manage_pages_pages':
@@ -138,6 +138,24 @@ def side_kick(page_id):
     }
 
     return render_template('side-kick/index.html', **payload)
+
+@current_app.route('/side-kick/new-page/')
+@login_required
+def side_kick_new_page():
+    with open('static/images/side-kick-sprite.svg', 'r') as svg_file:
+        svg_sprite = svg_file.read()
+
+    new_page = get_a_stub('features/new-page')
+
+    payload = {
+        'svg_sprite': svg_sprite,
+        'page': new_page,
+        'is_email_confirmed': current_user.email_confirmed,
+        'on_phone': is_phone(request.user_agent),
+        'page_manage_url': current_app.config['API_URL'] + '/page_manage/' + current_user.site_name,
+    }
+
+    return render_template('side-kick/new-page.html', **payload)
 
 
 @current_app.route('/<user_hash>/uploads/<timestamp>/<file_name>')

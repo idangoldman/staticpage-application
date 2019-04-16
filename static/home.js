@@ -46,7 +46,7 @@
 
 	'use strict';
 
-	var _jquery = __webpack_require__(1);
+	var _jquery = __webpack_require__(2);
 
 	var _jquery2 = _interopRequireDefault(_jquery);
 
@@ -83,7 +83,8 @@
 	(0, _jquery2.default)(window).on('message onmessage', receiveMessage);
 
 /***/ }),
-/* 1 */
+/* 1 */,
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!

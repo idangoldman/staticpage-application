@@ -1,10 +1,10 @@
 // base component
-import baseBox from 'side-kick/features/components/base-box';
+import baseBox from 'side-kick/components/base-box';
 
 // child components
-import selectFieldComponent from 'side-kick/features/components/select-field';
-import datepickerFieldComponent from 'side-kick/features/components/datepicker-field';
-import urlFieldComponent from 'side-kick/features/components/url-field';
+import selectFieldComponent from 'side-kick/components/select-field';
+import datepickerFieldComponent from 'side-kick/components/datepicker-field';
+import urlFieldComponent from 'side-kick/components/url-field';
 
 
 const countDownFeature = baseBox.mixin(function box() {

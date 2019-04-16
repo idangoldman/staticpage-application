@@ -1,9 +1,9 @@
 // base component
-import baseBox from 'side-kick/features/components/base-box';
+import baseBox from 'side-kick/components/base-box';
 
 // child components
-import selectFieldComponent from 'side-kick/features/components/select-field';
-import urlFieldComponent from 'side-kick/features/components/url-field';
+import selectFieldComponent from 'side-kick/components/select-field';
+import urlFieldComponent from 'side-kick/components/url-field';
 
 
 const socialLinksFeature = baseBox.mixin(function box() {

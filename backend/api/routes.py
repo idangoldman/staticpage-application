@@ -5,7 +5,7 @@ import requests, re
 
 from backend import db
 from backend.api import api, errors
-from backend.helpers import path_builder
+from backend.helpers import path_builder, get_a_template
 from backend.helpers.folder_maker import create_uploads_folder, create_download_folder
 from backend.helpers.upload_file import upload_file
 from backend.helpers.download_file import zip_a_page
@@ -112,8 +112,13 @@ def page_manage(site_name, id):
 
       if not pages_count:
         if request.method == 'POST':
+
           try:
-            page = Page(user_id = current_user.id, name = request_data.get('name'))
+            template_stub = get_a_template(request_data.get('template'))
+            template_stub['user_id'] = current_user.id
+            template_stub['name'] = request_data.get('name')
+
+            page = Page(**template_stub)
             db.session.add(page)
             db.session.commit()
           except Exception, e:

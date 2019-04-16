@@ -1,0 +1,31 @@
+{
+  "name": "new-page-feature",
+  "title": "Create a new page",
+  "fields": [
+    {
+      "id": "name",
+      "name": "name",
+      "label": "Name",
+      "type": "text",
+      "placeholder": "index",
+      "message": "Only 128 charecters allowed using alphanumeric, dashes, and underscores charecters."
+    },
+    {
+      "id": "template",
+      "class": "template",
+      "name": "template",
+      "label": "Template",
+      "type": "select",
+      "message": "Choose your starting template.",
+      "default": "",
+      "options": [
+        {"key": "", "value": "Select a Template"},
+        {"key": "mailing_list", "value": "With a Mailing List"},
+        {"key": "countdown_clock", "value": "With a Countdown Clock"},
+        {"key": "social_icons", "value": "With a Social Icons List"},
+        {"key": "all", "value": "With All"},
+        {"key": "blank", "value": "Blank"}
+      ]
+    }
+  ]
+}

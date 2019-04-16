@@ -1,10 +1,10 @@
 // base component
-import baseBox from 'side-kick/features/components/base-box';
+import baseBox from 'side-kick/components/base-box';
 
 // child components
-import titleComponent from 'side-kick/features/components/search-results/title';
-import descriptionComponent from 'side-kick/features/components/search-results/description';
-import previewComponent from 'side-kick/features/components/search-results/preview';
+import titleComponent from 'side-kick/features/search-results/title';
+import descriptionComponent from 'side-kick/features/search-results/description';
+import previewComponent from 'side-kick/features/search-results/preview';
 
 
 const searchResultsFeature = baseBox.mixin(function box() {

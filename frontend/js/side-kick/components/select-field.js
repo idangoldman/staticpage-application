@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { component } from 'flightjs';
 
-import withFocus from 'side-kick/features/mixins/focus';
+import withFocus from 'side-kick/components/mixins/focus';
 import withState from 'flight-with-state';
 
 export default component(withFocus, withState, function textField() {

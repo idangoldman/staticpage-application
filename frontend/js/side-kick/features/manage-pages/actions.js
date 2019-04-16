@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import selectFieldComponent from 'side-kick/features/components/select-field';
+import selectFieldComponent from 'side-kick/components/select-field';
 
 export default selectFieldComponent.mixin(function manageActions() {
   this.attributes({
@@ -36,16 +36,7 @@ export default selectFieldComponent.mixin(function manageActions() {
   };
 
   this.createPage = function createPage() {
-    const newPageName = prompt(
-      `How do you want to name your page?\n${this.attr.charectersRestriction}`
-    );
-
-    if (newPageName !== null && newPageName.trim().length) {
-      this.trigger(document, 'pageManage', {
-        'action': this.attr.currentAction,
-        'name': newPageName
-      });
-    }
+    window.location.href = '/side-kick/new-page/';
   };
 
   this.renamePage = function renamePage() {

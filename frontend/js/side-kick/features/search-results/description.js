@@ -1,15 +1,19 @@
-import textFieldComponent from 'side-kick/features/components/text-field';
+import textFieldComponent from 'side-kick/components/text-field';
 
 export default textFieldComponent.mixin(function searchPreview() {
   this.attributes({
-    changedContentTitle: null,
+    changedContentSubTitle: null,
   });
 
   this.after('initialize', function initialize() {
-    this.on(document, this.attr.changedContentTitle, this.changeTitlePlaceholder.bind(this));
+    this.on(
+      document,
+      this.attr.changedContentSubTitle,
+      this.changeDescriptionPlaceholder.bind(this),
+    );
   });
 
-  this.changeTitlePlaceholder = function changeTitlePlaceholder(event, { value }) {
+  this.changeDescriptionPlaceholder = function changeDescriptionPlaceholder(event, { value }) {
     this.select('field').attr('placeholder', value);
 
     if (!this.select('field').val().length) {

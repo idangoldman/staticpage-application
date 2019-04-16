@@ -12,7 +12,7 @@
 </head><body>
     {{ svg_sprite | safe }}
 
-    <section class="side-kick">
+    <section class="side-kick {{ page_class or '' }}">
         {% if not is_email_confirmed %}
             <p class="message">
                 Please confirm your email address with the confirmation link that was sent to you.<br/>

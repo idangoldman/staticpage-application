@@ -68,6 +68,7 @@
 
     {% block head %}{% endblock %}
 </head><body>
+    {{ svg_sprite | safe }}
 
     {% if not on_phone %}
     <div class="page-view background">

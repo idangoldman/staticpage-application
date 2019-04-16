@@ -77,9 +77,14 @@ const apiCalls = component(function apiCalls() {
     return config;
   };
 
-  this.pageManage = function pageManage(event, {action = 'GET', id = null, name = undefined}) {
+  this.pageManage = function pageManage(event, {
+    action = 'GET',
+    id = null,
+    name = undefined,
+    template = undefined
+  }) {
     const url = PAGE_MANAGE_URL + (id ? `/${id}` : '');
-    const data = JSON.stringify({ name });
+    const data = JSON.stringify({ name, template });
 
     switch(action) {
       case 'create_page':

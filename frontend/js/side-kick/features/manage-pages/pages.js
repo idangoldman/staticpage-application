@@ -1,4 +1,4 @@
-import selectFieldComponent from 'side-kick/features/components/select-field';
+import selectFieldComponent from 'side-kick/components/select-field';
 
 export default selectFieldComponent.mixin(function pagesList() {
   this.updateField = function updateField(state, previousState) {

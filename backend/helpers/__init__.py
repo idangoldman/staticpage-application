@@ -2,6 +2,8 @@ from flask import json, current_app
 from itsdangerous import URLSafeTimedSerializer
 import os, hashlib, time, re
 
+from backend.helpers.constants import TEMPLATE_NAMES
+
 
 def timed_url_safe():
     return URLSafeTimedSerializer(current_app.config["SECRET_KEY"])
@@ -46,6 +48,14 @@ def is_phone(user_agent):
             break
 
     return bool(detected_phone)
+
+
+def get_a_template(name):
+    if not name == 'blank' and name in TEMPLATE_NAMES:
+      stub = get_a_stub('templates/' + name)
+    else:
+      stub = {}
+    return stub
 
 
 def get_a_stub(name):

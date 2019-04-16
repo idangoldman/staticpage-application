@@ -1,11 +1,13 @@
 from flask import render_template, request, redirect, url_for, flash, current_app, abort
 from flask_login import login_user, logout_user, login_required, current_user
 from flask_mail import Message
+import random
 
 from backend import db, mail
 from backend.auth import auth
 from backend.auth.forms import RegisterForm, LoginForm, ForgotPasswordForm, ResetPasswordForm
-from backend.helpers import get_a_stub, get_page_stub, is_phone, timed_url_safe, md5_identifier
+from backend.helpers import get_a_template, get_a_stub, get_page_stub, is_phone, timed_url_safe, md5_identifier
+from backend.helpers.constants import TEMPLATE_NAMES
 from backend.models.page import Page
 from backend.models.user import User
 
@@ -22,15 +24,19 @@ def register():
         db.session.commit()
 
         user = User.query.filter_by(email=form.email.data).first()
-        page = Page(user_id = user.id)
+
+        template_stub = get_a_template(form.template.data)
+        template_stub['user_id'] = user.id
+
+        page = Page(**template_stub)
         db.session.add(page)
         db.session.commit()
 
         try:
-            token = timed_url_safe().dumps( user.email, salt='email-confirm-key' )
-            confirm_url = url_for( 'auth.confirm_email', token=token, _external=True )
-            text = render_template( 'auth/emails/confirm.txt', confirm_url=confirm_url )
-            mail.send(Message("Confirmation of Successful Registration!", recipients=[ user.email ], body=text))
+            token = timed_url_safe().dumps(user.email, salt='email-confirm-key')
+            confirm_url = url_for('auth.confirm_email', token=token, _external=True)
+            text = render_template('auth/emails/confirm.txt', confirm_url=confirm_url)
+            mail.send(Message("Confirmation of Successful Registration!", recipients=[user.email], body=text))
         except:
             print "Shit."
 
@@ -39,14 +45,17 @@ def register():
         return redirect(url_for('home'))
 
 
+    with open('static/images/side-kick-sprite.svg', 'r') as svg_file:
+      svg_sprite = svg_file.read()
+
     side_kick = get_a_stub('auth/register/side-kick')
 
     for field in side_kick.get('fields'):
-        if field.get('id') == 'email' and request.args.get('email'):
-            field['value'] = request.args.get('email')
-
-        if field.get('id') == 'email' and form[field.get('id')].data:
+        if field.get('id') != 'password' and form[field.get('id')].data:
             field['value'] = form[field.get('id')].data
+
+        if field.get('id') == 'template':
+            field['default'] = random.choice(TEMPLATE_NAMES)
 
         if form[field.get('id')]:
             field['errors'] = form[field.get('id')].errors
@@ -56,7 +65,8 @@ def register():
         'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone(request.user_agent),
         'page': get_page_stub('auth/register/page'),
-        'side_kick': side_kick
+        'side_kick': side_kick,
+        'svg_sprite': svg_sprite
     }
 
     return render_template('auth/register.html', **payload)

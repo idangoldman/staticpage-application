@@ -12,15 +12,15 @@ class Page(db.Model):
     user_id = db.Column('user_id', db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column('created_at', db.DateTime(), default=datetime.utcnow)
 
-    content_logo = db.Column('content_logo', db.String(128))
+    content_logo = db.Column('content_logo', db.String(2083))
     content_title = db.Column('content_title', db.Text())
     content_sub_title = db.Column('content_sub_title', db.Text())
     content_description = db.Column('content_description', db.Text())
 
-    design_background_image = db.Column('design_background_image', db.String(128))
+    design_background_image = db.Column('design_background_image', db.String(2083))
     design_background_color = db.Column('design_background_color', db.String(8))
     design_background_repeat = db.Column('design_background_repeat', db.String(16))
-    design_font_family = db.Column('design_font_family', db.String(128))
+    design_font_family = db.Column('design_font_family', db.String(256))
     design_font_color = db.Column('design_font_color', db.String(8))
     design_content_alignment = db.Column('design_content_alignment', db.String(8))
     design_content_direction = db.Column('design_content_direction', db.String(3))
@@ -31,27 +31,27 @@ class Page(db.Model):
 
     google_analytics_code = db.Column('google_analytics_code', db.String(24))
 
-    countdown_timezone = db.Column('countdown_timezone', db.String(64))
+    countdown_timezone = db.Column('countdown_timezone', db.String(128))
     countdown_datetime = db.Column('countdown_datetime', db.DateTime())
-    countdown_redirect_url = db.Column('countdown_redirect_url', db.String(128))
+    countdown_redirect_url = db.Column('countdown_redirect_url', db.String(2083))
 
     mailing_list_service = db.Column('mailing_list_service', db.String(128))
     mailing_list_mailchimp_username = db.Column('mailing_list_mailchimp_username', db.String(128))
     mailing_list_mailchimp_api_key = db.Column('mailing_list_mailchimp_api_key', db.String(128))
     mailing_list_mailchimp_list_id = db.Column('mailing_list_mailchimp_list_id', db.String(128))
     mailing_list_successful_submission = db.Column('mailing_list_successful_submission', db.String(128), default='successful-submission-message')
-    mailing_list_message = db.Column('mailing_list_message', db.String(128))
-    mailing_list_redirect_url = db.Column('mailing_list_redirect_url', db.String(128))
+    mailing_list_message = db.Column('mailing_list_message', db.String(2083))
+    mailing_list_redirect_url = db.Column('mailing_list_redirect_url', db.String(2083))
     mailing_list_cta_color = db.Column('mailing_list_cta_color', db.String(8))
     mailing_list_cta_text = db.Column('mailing_list_cta_text', db.String(128))
     mailing_list_placeholder_text = db.Column('mailing_list_placeholder_text', db.String(128))
 
     social_links_icon_style = db.Column('social_links_icon_style', db.String(128), default='colored')
-    social_links_facebook_link = db.Column('social_links_facebook_link', db.String(128))
-    social_links_instagram_link = db.Column('social_links_instagram_link', db.String(128))
-    social_links_linkedin_link = db.Column('social_links_linkedin_link', db.String(128))
-    social_links_twitter_link = db.Column('social_links_twitter_link', db.String(128))
-    social_links_youtube_link = db.Column('social_links_youtube_link', db.String(128))
+    social_links_facebook_link = db.Column('social_links_facebook_link', db.String(2083))
+    social_links_instagram_link = db.Column('social_links_instagram_link', db.String(2083))
+    social_links_linkedin_link = db.Column('social_links_linkedin_link', db.String(2083))
+    social_links_twitter_link = db.Column('social_links_twitter_link', db.String(2083))
+    social_links_youtube_link = db.Column('social_links_youtube_link', db.String(2083))
 
 
     def with_features(self):

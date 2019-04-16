@@ -1,8 +1,8 @@
 // base component
-import baseBox from 'side-kick/features/components/base-box';
+import baseBox from 'side-kick/components/base-box';
 
 // child components
-import codeComponent from 'side-kick/features/components/text-field';
+import codeComponent from 'side-kick/components/text-field';
 
 
 const googleAnalyticsFeature = baseBox.mixin(function box() {

@@ -1,8 +1,8 @@
 import { component } from 'flightjs';
 
-import withFocus from 'side-kick/features/mixins/focus';
+import withFocus from 'side-kick/components/mixins/focus';
 import withState from 'flight-with-state';
-import withValidation from 'side-kick/features/mixins/validation';
+import withValidation from 'side-kick/components/mixins/validation';
 
 export default component(withFocus, withState, withValidation, function fileField() {
   this.attributes({

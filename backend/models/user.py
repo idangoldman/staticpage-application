@@ -9,7 +9,7 @@ class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
     id = db.Column('id', db.Integer, primary_key=True)
-    email = db.Column('email', db.String(64), nullable=False, unique=True, index=True)
+    email = db.Column('email', db.String(255), nullable=False, unique=True, index=True)
     site_name = db.Column('site_name', db.String(32), nullable=False, unique=True)
     password_hash = db.Column('password_hash', db.String(128), nullable=False)
     joined_at = db.Column('joined_at', db.DateTime(), default=datetime.utcnow)

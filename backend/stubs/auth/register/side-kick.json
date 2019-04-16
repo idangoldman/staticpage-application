@@ -15,6 +15,22 @@
             "required": true
         },
         {
+          "id": "template",
+          "class": "template",
+          "name": "template",
+          "label": "Choose template",
+          "type": "select",
+          "message": "Pick a starting template for your page.",
+          "default": "",
+          "options": [
+            {"key": "mailing_list", "value": "With a Mailing List"},
+            {"key": "countdown_clock", "value": "With a Countdown Clock"},
+            {"key": "social_icons", "value": "With a Social Icons List"},
+            {"key": "all", "value": "With All"},
+            {"key": "blank", "value": "Blank"}
+          ]
+        },
+        {
             "id": "submit",
             "label": "Join in",
             "type": "submit"

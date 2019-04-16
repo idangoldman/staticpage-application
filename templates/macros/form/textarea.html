@@ -1,4 +1,4 @@
-{% from 'macros/form/validation.html' import validation %}
+{% from 'macros/form/validation.html' import validation, wtf_errors %}
 
 {% macro textarea( field ) -%}
     <fieldset class="fieldset {{ field.class or field.id }}">
@@ -11,6 +11,7 @@
                 placeholder="{{ field.placeholder | default( field.default or '' ) }}">{{ field.value }}</textarea>
         </div>
         {{ validation( field.validation ) }}
+        {{ wtf_errors( field.errors ) }}
         {% if field.message %}
             <span class="message">{{ field.message | markdown }}</span>
         {% endif %}

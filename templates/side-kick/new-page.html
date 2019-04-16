@@ -1,0 +1,27 @@
+{% set page_class = 'new-page' %}
+{% extends 'side-kick/_base.html' %}
+
+{% block content %}
+  {{ super() }}
+
+  <ul class="features">
+    <li class="feature {{ page.name }}">
+      <header class="header">
+        <h3 class="title">{{ page.title }}</h3>
+      </header>
+      <div class="body">
+        {% from 'macros/form/base.html' import base_form %}
+        {% call base_form(fields=page.fields, action='blah.php') %}{% endcall %}
+      </div>
+    </li>
+  </ul>
+
+  <div class="action-buttons">
+    <button id="create-button" class="button-primary" type="button">
+      Create
+    </button>
+    <button id="cancel-button" class="button-secondary" type="button">
+      Cancel
+    </button>
+  </div>
+{% endblock %}
