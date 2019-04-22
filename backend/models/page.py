@@ -71,7 +71,7 @@ class Page(db.Model):
                                            or ''
 
                 if field.get('id') == 'search_results_preview':
-                    field['link'] = current_app.config['HTTP_HOST'] + '/page/' + self.creator.site_name
+                    field['link'] = current_app.config['HTTP_HOST'] + '/preview/' + self.creator.site_name + '/' + page_dict.get('name')
                     field['link_title'] = page_dict.get('search_results_title') \
                                             or page_dict.get('content_title') \
                                             or ''

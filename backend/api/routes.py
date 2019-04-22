@@ -17,7 +17,7 @@ from backend.models.user import User
 @login_required
 def download(site_name, page_name):
     try:
-        page_response = requests.get(current_app.config['HTTP_HOST'] + '/preview/' + site_name + '/' + page_name, timeout = 10, verify = False);
+        page_response = requests.get(current_app.config['HTTP_HOST'] + '/preview-download/' + site_name + '/' + page_name, timeout = 10, verify = False);
     except requests.exceptions.RequestException as e:
         return errors.bad_request('page can\'t be reached')
 
