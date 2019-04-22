@@ -23,9 +23,6 @@ def create_app( config_name ):
     mail.init_app(app)
 
     with app.app_context():
-        from backend.website import website as website_blueprint
-        app.register_blueprint( website_blueprint )
-
         from backend.helpers import jinja
         from backend import routes
 

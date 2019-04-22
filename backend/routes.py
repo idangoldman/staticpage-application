@@ -5,7 +5,7 @@ from backend.helpers import path_builder, is_phone, get_page_stub, get_a_stub
 from backend.models.page import Page
 from backend.models.user import User
 from backend.third_party import mailchimp_subscribe
-from backend.website.forms import NewsletterForm
+from backend.auth.forms import NewsletterForm
 
 
 @current_app.route('/')
@@ -13,7 +13,16 @@ def index_route():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     else:
-        return redirect(url_for('website.welcome'))
+        payload = {
+            'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
+            'page': get_page_stub('website')
+        }
+
+        return render_template('website.html', **payload)
+
+@current_app.route('/welcome')
+def welcome_route():
+    return redirect('/')
 
 
 @current_app.route('/page_intervention/<int:page_id>', methods=['GET', 'POST'])
@@ -51,7 +60,6 @@ def page_preview(site_name, page_name):
                      .first_or_404() \
                      .with_defaults()
 
-    # payload = current_user.pages.filter_by(name=page_name).first_or_404().with_defaults()
     form = NewsletterForm()
 
     if form.validate_on_submit():
@@ -80,7 +88,6 @@ def page_preview_download(site_name, page_name):
                      .first_or_404() \
                      .with_defaults()
 
-    # payload = current_user.pages.filter_by(name=page_name).first_or_404().with_defaults()
     form = NewsletterForm()
 
     if form.validate_on_submit():
@@ -120,11 +127,7 @@ def home(site_name, page_name):
         'title': page.content_title
     }
 
-    response = make_response(render_template('home.html', **payload))
-    if not request.cookies.get('show_login_link'):
-        response.set_cookie('show_login_link', value='1', max_age=30585600) #one year expiration
-
-    return response
+    return make_response(render_template('home.html', **payload))
 
 
 @current_app.route('/side-kick/<int:page_id>')
@@ -187,53 +190,31 @@ def side_kick_new_page():
     return render_template('side-kick/new-page.html', **payload)
 
 
-@current_app.route('/<user_hash>/uploads/<timestamp>/<file_name>')
-@login_required
-def user_uploads(user_hash, timestamp, file_name):
-    upload_folder_path = path_builder(current_app.config['BASE_PATH'], \
-                                current_app.config['TMP_FOLDER'], \
-                                user_hash, \
-                                'uploads', \
-                                timestamp)
-    return send_from_directory(upload_folder_path, file_name)
-
-
-@current_app.route('/<hash>/<timestamp>/<file_name>')
-@login_required
-def user_downloads(hash, timestamp, file_name):
-    donwload_folder_path = path_builder(current_app.config['BASE_PATH'], \
-                                current_app.config['TMP_FOLDER'], \
-                                hash, \
-                                '/', \
-                                timestamp)
-    return send_from_directory(donwload_folder_path, file_name)
-
-
 @current_app.errorhandler(401)
 def page_unauthorized(e):
-    return render_template('website/_base.html', \
+    return render_template('errors.html', \
                             page=get_page_stub('errors/500')), 401
 
 
 @current_app.errorhandler(403)
 def page_forbidden(e):
-    return render_template('website/_base.html', \
+    return render_template('errors.html', \
                             page=get_page_stub('errors/500')), 403
 
 
 @current_app.errorhandler(404)
 def page_not_found(e):
-    return render_template('website/_base.html', \
+    return render_template('errors.html', \
                             page=get_page_stub('errors/404')), 404
 
 
 @current_app.errorhandler(500)
 def page_internal_server_error(e):
-    return render_template('website/_base.html', \
+    return render_template('errors.html', \
                             page=get_page_stub('errors/500')), 500
 
 
 @current_app.errorhandler(503)
 def page_service_unavailable(e):
-    return render_template('website/_base.html', \
+    return render_template('errors.html', \
                             page=get_page_stub('errors/500')), 503

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html><head>
+    {% set title = page.search_results_title %}
+    {% set description = page.search_results_description %}
+    <meta charset="UTF-8" />
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="theme-color" content="#3D5E57">
+
+    {% from 'macros/favicon.html' import favicon %}
+    {{ favicon() }}
+
+    <link type="text/css" rel="stylesheet" class="css-page" href="{{ url_for('static', filename='page.css') }}" />
+
+</head><body>
+
+</body></html>
