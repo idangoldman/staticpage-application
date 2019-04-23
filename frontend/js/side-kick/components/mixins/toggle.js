@@ -8,15 +8,26 @@ const withToggle = function mixin() {
   });
 
   const toggle = function toggle(event) {
-    $(event.currentTarget)
-      .parent()
-      .toggleClass(this.attr.toggleClass)
-      .children(this.attr.toggleBox)
-      .slideToggle();
+    const $target = $(event.currentTarget);
+    const isClosed = $target.parent().hasClass('close');
+
+    $target
+      .parents('.features')
+        .children()
+          .addClass(this.attr.toggleClass)
+          .children(this.attr.toggleBox)
+            .slideUp();
+
+    if (isClosed) {
+      $target
+        .parent()
+          .removeClass(this.attr.toggleClass)
+          .children(this.attr.toggleBox)
+            .slideDown();
+    }
   };
 
   this.after('initialize', function initialize() {
-    // toggle feature box
     this.select('toggleClick').on('click', toggle.bind(this));
   });
 };

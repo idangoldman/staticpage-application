@@ -12597,11 +12597,17 @@
 	  });
 
 	  var toggle = function toggle(event) {
-	    (0, _jquery2.default)(event.currentTarget).parent().toggleClass(this.attr.toggleClass).children(this.attr.toggleBox).slideToggle();
+	    var $target = (0, _jquery2.default)(event.currentTarget);
+	    var isClosed = $target.parent().hasClass('close');
+
+	    $target.parents('.features').children().addClass(this.attr.toggleClass).children(this.attr.toggleBox).slideUp();
+
+	    if (isClosed) {
+	      $target.parent().removeClass(this.attr.toggleClass).children(this.attr.toggleBox).slideDown();
+	    }
 	  };
 
 	  this.after('initialize', function initialize() {
-	    // toggle feature box
 	    this.select('toggleClick').on('click', toggle.bind(this));
 	  });
 	};
