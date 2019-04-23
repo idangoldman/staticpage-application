@@ -10775,7 +10775,7 @@
 	// console.log( 'find rule\'s property:', css('.background', 'backgroundImage') );
 	// console.log( 'delete rule\'s property:', css('.background', 'backgroundImage', '') );
 	// console.log( 'set rule\'s property:', css('.background', 'backgroundImage',
-	// 'url("/static/images/backgrounds/001.jpeg")') );
+	// 'url("/images/backgrounds/001.jpeg")') );
 	// console.log( 'delete a rule:', css('.background', '') );
 	// console.log( 'set a rule with properties object:', css('.background', {
 	//     'backgroundColor': '#fff',

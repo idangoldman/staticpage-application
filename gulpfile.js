@@ -17,7 +17,7 @@ var destFolder = !! argv.dist ? 'dist' : 'static';
 // Default task with watch
 gulp.task('default');
 
-gulp.task('build', ['webpack', 'style', 'svg-sprite', 'images']);
+gulp.task('build', ['webpack', 'style', 'svg-sprite', 'images', 'favicon']);
 
 gulp.task('w', ['build'], function() {
     gulp.watch('frontend/scss/**/*.scss', ['style']);
@@ -27,9 +27,24 @@ gulp.task('w', ['build'], function() {
 
 // Move favicon and logo images to static/images folder
 gulp.task('images', function() {
-    return gulp.src('**/*.{png,jpg}', { cwd: 'frontend/images' })
-        .pipe( gulp.dest( destFolder + '/images'  ) );
+    const imageSources = [
+      '**/*',
+      '!icons/',
+      '!icons/**',
+      '!social-icons/',
+      '!social-icons/**',
+      '!favicon/',
+      '!favicon/**'
+    ];
+
+    return gulp.src(imageSources, { cwd: 'frontend/images' })
+        .pipe(gulp.dest(destFolder + '/images'));
 });
+
+gulp.task('favicon', function() {
+  return gulp.src('*', { cwd: 'frontend/images/favicon' })
+      .pipe(gulp.dest(destFolder));
+})
 
 // SVG sprite from set of icons
 gulp.task('svg-sprite', function() {
