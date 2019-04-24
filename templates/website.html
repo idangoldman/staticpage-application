@@ -44,7 +44,7 @@
 
     <div id="bulletins" class="row">
       {% for bulletin in page.content.bulletins %}
-        <div class="bulletin three column">
+        <div class="bulletin xsmall-12 small-6 medium-3 column">
           {% include 'bulletins/' + bulletin.image + '.svg' %}
           <p class="paragraph">{{ bulletin.paragraph }}</p>
         </div>
@@ -52,7 +52,7 @@
     </div>
 
     <div id="walkthrough" class="row">
-      <div class="ten column">
+      <div class="xsmall-12 column">
         <h2 class="title">
           {{ page.content.walkthrough.title }}
         </h2>
@@ -62,7 +62,7 @@
 
     <div id="services" class="row">
       {% for service in page.content.services %}
-        <div class="four column">
+        <div class="xsmall-12 small-6 large-4 column">
           <h2 class="title">{{ service.title }}</h2>
           <p class="paragraph">{{ service.paragraph }}</p>
           <a href="{{ service.link.url }}" class="btn-primary">
@@ -73,7 +73,7 @@
     </div>
 
     <div id="about" class="row">
-      <div class="eight column">
+      <div class="xsmall-10 large-8 column">
         <h2 class="title">
           {{ page.content.about.title }}
         </h2>
@@ -83,16 +83,16 @@
     </div>
 
     <div id="mailing-list" class="row">
-      <div class="eight column">
+      <div class="xsmall-10 large-8 column">
         <h2 class="title">
           {{ page.content.mailing_list.title }}
         </h2>
 
-        <div class="row without-gutters">
-          <div class="eight column">
+        <div class="row">
+          <div class="xsmall-12 small-8 column">
             <input type="email" placeholder="{{ page.content.mailing_list.placeholder }}">
           </div>
-          <div class="four column">
+          <div class="xsmall-12 small-4 column">
             <input type="submit" class="btn-primary" value="{{ page.content.mailing_list.submit }}">
           </div>
         </div>
@@ -101,7 +101,7 @@
     </div>
 
     <div id="credits" class="row">
-      <div class="six column">
+      <div class="xsmall-10 medium-6 column">
         <h2 class="title">
           {{ page.content.credits.title }}
         </h2>
