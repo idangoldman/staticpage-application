@@ -18,19 +18,19 @@
 
     {% for icon_type in social_icon_types if is_intervention or social_links_icon_style != 'none' %}
       {% if is_intervention or social_links_facebook_link %}
-        {% include icon_type + '/facebook.svg' %}
+        {% include 'social-icons/' + icon_type + '/facebook.svg' %}
       {% endif %}
       {% if is_intervention or social_links_instagram_link %}
-        {% include icon_type + '/instagram.svg' %}
+        {% include 'social-icons/' + icon_type + '/instagram.svg' %}
       {% endif %}
       {% if is_intervention or social_links_linkedin_link %}
-        {% include icon_type + '/linkedin.svg' %}
+        {% include 'social-icons/' + icon_type + '/linkedin.svg' %}
       {% endif %}
       {% if is_intervention or social_links_twitter_link %}
-        {% include icon_type + '/twitter.svg' %}
+        {% include 'social-icons/' + icon_type + '/twitter.svg' %}
       {% endif %}
       {% if is_intervention or social_links_youtube_link %}
-        {% include icon_type + '/youtube.svg' %}
+        {% include 'social-icons/' + icon_type + '/youtube.svg' %}
       {% endif %}
     {% endfor %}
   </svg>

@@ -16,7 +16,8 @@
     "lint": "eslint frontend/js",
     "lint-fix": "yarn lint --fix",
     "back:reinstall": "pipenv --rm && pipenv install",
-    "front:reinstall": "rm -fr node_modules && yarn install"
+    "front:reinstall": "rm -fr node_modules && yarn install",
+    "kit:reinstall": "yarn remove kit; yarn add --dev \"git+ssh://git@gitlab.com:idan.goldman/kit.git#new-version\""
   },
   "dependencies": {
     "air-datepicker": "2.2.3",
@@ -26,7 +27,6 @@
     "jquery": "^3.3.1"
   },
   "devDependencies": {
-    "kit": "git@gitlab.com:idan.goldman/kit.git#new-version",
     "autoprefixer": "6.7.2",
     "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
@@ -48,6 +48,7 @@
     "imagemin-mozjpeg": "6.0.0",
     "imports-loader": "^0.8.0",
     "install": "0.8.7",
+    "kit": "git+ssh://git@gitlab.com:idan.goldman/kit.git#new-version",
     "npm": "4.1.2",
     "npm-check-updates": "^3.1.4",
     "nunjucks": "3.0.0",
