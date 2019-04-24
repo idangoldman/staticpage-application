@@ -38,7 +38,7 @@
         <h1 class="title">
           {{ page.content.header.title }}
         </h1>
-        {{ page.content.header.sub_title | markdown }}
+        {{ page.content.header.paragraph | markdown }}
       </div>
     </div>
 
@@ -46,7 +46,7 @@
       {% for bulletin in page.content.bulletins %}
         <div class="three column">
           {% include 'bulletins/' + bulletin.image + '.svg' %}
-          <p class="text">{{ bulletin.text }}</p>
+          <p class="paragraph">{{ bulletin.paragraph }}</p>
         </div>
       {% endfor %}
     </div>
@@ -64,7 +64,7 @@
       {% for service in page.content.services %}
         <div class="four column">
           <h2 class="title">{{ service.title }}</h2>
-          <p class="text">{{ service.text }}</p>
+          <p class="paragraph">{{ service.paragraph }}</p>
           <a href="{{ service.link.url }}" class="btn-primary">
             {{ service.link.text }}
           </a>
@@ -78,7 +78,7 @@
           {{ page.content.about.title }}
         </h2>
         {% include page.content.about.image + '.svg' %}
-        {{ page.content.about.text | markdown }}
+        {{ page.content.about.paragraph | markdown }}
       </div>
     </div>
 
@@ -103,13 +103,13 @@
         <h2 class="title">
           {{ page.content.credits.title }}
         </h2>
-        <p class="text">
-          {{ page.content.credits.text }}
+        <p class="paragraph">
+          {{ page.content.credits.paragraph }}
         </p>
         {% for credit in page.content.credits.kudos %}
           <div class="credit">
             <h3 class="title">{{ credit.name }}</h3>
-            <p class="text">{{ credit.text }}</p>
+            <p class="paragraph">{{ credit.paragraph }}</p>
           </div>
         {% endfor %}
       </div>
