@@ -62,7 +62,7 @@
     },
     "credits": {
       "title": "♥ Credits.",
-      "paragraph": "“Give credit to whom Credit due” - Samuel Adams.\nMy friends and family deserve all the credit there is for helping and pushing me to create this product.",
+      "paragraph": "**\"Give credit to whom Credit due\"**\n– Samuel Adams.\n<br>My friends and family deserve all the credit there is for helping and pushing me to create this product.",
       "kudos": [{
         "name": "David Rappaport",
         "paragraph": "Brilliant Web and Product designer. Responsible for this clean landing page and awesome logo."
@@ -74,6 +74,6 @@
         "paragraph": "My amazing wife and partner in crime. Responsible for all of this happening and pushing me forward."
       }]
     },
-    "footer": "**StaticPage** is built with **love** out of an aprtment somewhere in **Tel Aviv**."
+    "footer": "**StaticPage** built with **love** out of an apartment somewhere in **Tel Aviv**."
   }
 }

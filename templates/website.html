@@ -44,7 +44,7 @@
 
     <div id="bulletins" class="row">
       {% for bulletin in page.content.bulletins %}
-        <div class="three column">
+        <div class="bulletin three column">
           {% include 'bulletins/' + bulletin.image + '.svg' %}
           <p class="paragraph">{{ bulletin.paragraph }}</p>
         </div>
@@ -55,8 +55,8 @@
       <div class="ten column">
         <h2 class="title">
           {{ page.content.walkthrough.title }}
-          {{ youtube(page.content.walkthrough.youtube_id) }}
         </h2>
+        {{ youtube(page.content.walkthrough.youtube_id) }}
       </div>
     </div>
 
@@ -83,7 +83,7 @@
     </div>
 
     <div id="mailing-list" class="row">
-      <div class="eight column with-no-gutters">
+      <div class="eight column">
         <div class="twelve column">
           <h2 class="title">
             {{ page.content.mailing_list.title }}
@@ -99,13 +99,11 @@
     </div>
 
     <div id="credits" class="row">
-      <div class="eight column">
+      <div class="six column">
         <h2 class="title">
           {{ page.content.credits.title }}
         </h2>
-        <p class="paragraph">
-          {{ page.content.credits.paragraph }}
-        </p>
+        {{ page.content.credits.paragraph | markdown }}
         {% for credit in page.content.credits.kudos %}
           <div class="credit">
             <h3 class="title">{{ credit.name }}</h3>
@@ -116,7 +114,7 @@
     </div>
 
     <footer id="footer" class="row">
-      <div class="eight column">
+      <div class="twelve column">
         {{ page.content.footer | markdown }}
       </div>
     </footer>

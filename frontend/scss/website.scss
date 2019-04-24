@@ -1,7 +1,92 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,500,700');
+// Google fonts
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,500');
+
+// Locals
+$base-background-color: #f7f7f7;
+$base-color: #071417;
+$base-link-color: $base-color;
+$primary-color: #802EFB;
+$base-font-family: Roboto, serif;
+$header-font-family: 'Roboto Slab', sans-serif;
+
+// Kit
 @import "node_modules/kit/src/index";
 
+// Code
 .container {
   margin-top: 30px;
   margin-bottom: 30px;
+
+  .row {
+    @extend .with-space-around;
+    @extend .text-center;
+
+    margin-bottom: 90px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.title {
+  @extend .h1;
+
+  margin-bottom: 20px;
+}
+
+a {
+  font-weight: 500;
+}
+
+p, .paragraph {
+  @include text-break;
+
+  line-height: 25px;
+}
+
+#header {
+  margin-bottom: 60px;
+
+  .title {
+    color: $primary-color;
+    font-size: 44px;
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 24px;
+    line-height: normal;
+  }
+}
+
+#bulletins .bulletin {
+  svg {
+    margin-bottom: 20px;
+  }
+}
+
+#about {
+  .title {
+    margin-bottom: 60px;
+  }
+
+  svg {
+    margin-bottom: 20px;
+  }
+}
+
+#credits {
+  .column > .title {
+    margin-top: 0;
+    margin-bottom: 60px;
+  }
+
+  .title {
+    margin-top: 30px;
+  }
+}
+
+#footer {
+  font-family: $header-font-family;
 }
