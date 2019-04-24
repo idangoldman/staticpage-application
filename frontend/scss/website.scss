@@ -35,6 +35,10 @@ $header-font-family: 'Roboto Slab', sans-serif;
   margin-bottom: 20px;
 }
 
+[class*="btn-"] {
+  max-width: 160px;
+}
+
 a {
   font-weight: 500;
 }
@@ -43,6 +47,10 @@ p, .paragraph {
   @include text-break;
 
   line-height: 25px;
+}
+
+#topbar {
+  @extend .is-aligned-items-center;
 }
 
 #header {
@@ -63,6 +71,13 @@ p, .paragraph {
 #bulletins .bulletin {
   svg {
     margin-bottom: 20px;
+    max-width: 160px;
+  }
+}
+
+#services {
+  .paragraph {
+    margin-bottom: 20px;
   }
 }
 
@@ -73,6 +88,22 @@ p, .paragraph {
 
   svg {
     margin-bottom: 20px;
+  }
+}
+
+#mailing-list {
+  input[type="email"] {
+    border-radius: $border-radius;
+    border: 1px solid rgba($base-color, 0.2);
+    font-size: 14px;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 10px;
+    width: 100%;
+
+    &:focus {
+      border-color: $base-color;
+    }
   }
 }
 

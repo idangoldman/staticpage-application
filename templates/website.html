@@ -84,17 +84,19 @@
 
     <div id="mailing-list" class="row">
       <div class="eight column">
-        <div class="twelve column">
-          <h2 class="title">
-            {{ page.content.mailing_list.title }}
-          </h2>
+        <h2 class="title">
+          {{ page.content.mailing_list.title }}
+        </h2>
+
+        <div class="row without-gutters">
+          <div class="eight column">
+            <input type="email" placeholder="{{ page.content.mailing_list.placeholder }}">
+          </div>
+          <div class="four column">
+            <input type="submit" class="btn-primary" value="{{ page.content.mailing_list.submit }}">
+          </div>
         </div>
-        <div class="seven column">
-          <input type="email" placeholder="{{ page.content.mailing_list.placeholder }}">
-        </div>
-        <div class="four column">
-          <input type="submit" value="{{ page.content.mailing_list.submit }}">
-        </div>
+
       </div>
     </div>
 
