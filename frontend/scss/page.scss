@@ -35,7 +35,7 @@
 
 .content {
   margin-top: px2rem(50);
-  text-shadow: 2px 2px 0 rgba(#000, 0.5);
+  text-shadow: 1px 1px 0 rgba(#000, 0.9);
 
   & > * {
     &:not(.countdown-clock) {
@@ -87,7 +87,7 @@
     margin-right: px2rem(5);
 
     &, &::placeholder {
-      text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+      text-shadow: 1px 1px 0 rgba(#000, 0.9);
     }
 
     &::placeholder {
@@ -97,7 +97,7 @@
 
   .submit {
     cursor: pointer;
-    text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+    text-shadow: 1px 1px 0 rgba(#000, 0.9);
   }
 
   .message {
@@ -106,7 +106,7 @@
     font-size: 1.5em;
     font-weight: 600;
     line-height: 1.5em;
-    text-shadow: px2rem(1) px2rem(1) px2rem(3) rgba(#000, 0.5);
+    text-shadow: 1px 1px 0 rgba(#000, 0.9);
   }
 }
 
@@ -140,8 +140,9 @@
   }
 }
 
-#social-icons-svgs {
+.svgs-container {
   height: 0;
+  overflow: hidden;
   position: absolute;
   visibility: hidden;
   width: 0;
@@ -149,6 +150,7 @@
 
 .social-links {
   margin-top: px2rem(40);
+  margin-bottom: px2rem(40);
 
   a {
     display: inline-block;
