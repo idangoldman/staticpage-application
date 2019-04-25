@@ -4615,7 +4615,7 @@ kind-of@^6.0.0, kind-of@^6.0.2:
 
 "kit@git+ssh://git@gitlab.com:idan.goldman/kit.git#new-version":
   version "1.0.0"
-  resolved "git+ssh://git@gitlab.com:idan.goldman/kit.git#a374c4f7e97dfff3c8e9b5526005fe7dd758c170"
+  resolved "git+ssh://git@gitlab.com:idan.goldman/kit.git#6b57818c9f4050f468af3a02d0ba0e31083468e4"
 
 klaw@^1.0.0:
   version "1.3.1"
