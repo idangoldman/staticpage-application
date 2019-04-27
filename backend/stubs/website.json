@@ -58,7 +58,13 @@
     "mailing_list": {
       "title": "Get updates on StaticPage growth:",
       "placeholder": "Your email...",
-      "submit": "Subscribe"
+      "submit": "Subscribe",
+      "mailchimp":{
+        "id": "e4e0ec1b54",
+        "user_id": "58204d8ae7b2829e497ffc955",
+        "url": "staticpage.us14.list-manage.com",
+        "text_field_name": "b_58204d8ae7b2829e497ffc955_e4e0ec1b54"
+      }
     },
     "credits": {
       "title": "♥ Credits.",

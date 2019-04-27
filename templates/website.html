@@ -1,5 +1,5 @@
 {% from 'macros/head.html' import favicon, app_info %}
-{% from 'macros/3rd-party.html' import youtube %}
+{% from 'macros/3rd-party/index.html' import youtube, mailchimp %}
 
 <!doctype html><html><head>
 
@@ -88,15 +88,7 @@
           {{ page.content.mailing_list.title }}
         </h2>
 
-        <div class="row">
-          <div class="xsmall-12 small-9 column">
-            <input type="email" class="email" placeholder="{{ page.content.mailing_list.placeholder }}">
-          </div>
-          <div class="xsmall-12 small-3 column">
-            <input type="submit" class="btn-primary with-full-width" value="{{ page.content.mailing_list.submit }}">
-          </div>
-        </div>
-
+        {{ mailchimp(page.content.mailing_list) }}
       </div>
     </div>
 
