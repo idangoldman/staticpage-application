@@ -15,18 +15,18 @@
 
 </head><body><div class="container">
 
-    <div id="topbar" class="row">
-      <div class="four column text-left">
+    <div id="topbar" class="xsmall-direction-column small-direction-row row">
+      <div class="text-left small-6 large-4 column">
         {% include 'logo.svg' %}
       </div>
 
-      <div class="auto-left one column">
+      <div class="auto-left small-2 large-1 column">
         <a href="{{ page.content.topbar.login.url }}" class="btn-link">
           {{ page.content.topbar.login.text }}
         </a>
       </div>
 
-      <div class="two column">
+      <div class="small-3 large-2 column">
         <a href="{{ page.content.topbar.register.url }}" class="btn-primary">
           {{ page.content.topbar.register.text }}
         </a>
@@ -90,10 +90,10 @@
 
         <div class="row">
           <div class="xsmall-12 small-9 column">
-            <input type="email" placeholder="{{ page.content.mailing_list.placeholder }}">
+            <input type="email" class="email" placeholder="{{ page.content.mailing_list.placeholder }}">
           </div>
           <div class="xsmall-12 small-3 column">
-            <input type="submit" class="btn-primary" value="{{ page.content.mailing_list.submit }}">
+            <input type="submit" class="btn-primary with-full-width" value="{{ page.content.mailing_list.submit }}">
           </div>
         </div>
 

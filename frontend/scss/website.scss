@@ -51,6 +51,12 @@ p, .paragraph {
 
 #topbar {
   @extend .is-aligned-items-center;
+
+  @include media-query('small', 'max') {
+    .column { text-align: center;}
+    .column > * { margin-bottom: 10px; }
+    .column:last-child > * { margin-bottom: 0; }
+  }
 }
 
 #header {
@@ -68,16 +74,36 @@ p, .paragraph {
   }
 }
 
-#bulletins .bulletin {
-  svg {
-    margin-bottom: 20px;
-    max-width: 160px;
+#bulletins {
+  margin-bottom: 60px;
+
+  .bulletin {
+    svg {
+      margin-bottom: 20px;
+      max-width: 160px;
+    }
+
+    .paragraph {
+      margin-bottom: 30px;
+    }
+
+    @include media-query('medium', 'max') {
+      svg {
+        max-width: 120px;
+      }
+    }
   }
 }
 
 #services {
+  margin-bottom: 60px;
+
   .paragraph {
     margin-bottom: 20px;
+  }
+
+  .btn-primary {
+    margin-bottom: 30px;
   }
 }
 
@@ -92,7 +118,13 @@ p, .paragraph {
 }
 
 #mailing-list {
-  input[type="email"] {
+  margin-bottom: 80px;
+
+  .column > * {
+    margin-bottom: 10px;
+  }
+
+  .email {
     border-radius: $border-radius;
     border: 1px solid rgba($base-color, 0.2);
     font-size: 14px;
