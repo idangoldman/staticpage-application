@@ -1,0 +1,21 @@
+{% macro google_analytics(id) -%}
+  {% with id=id %}
+    {% include "macros/3rd-party/google-analytics.html" %}
+  {% endwith %}
+{%- endmacro %}
+
+{% macro youtube(id) -%}
+  {% with id=id %}
+    {% include "macros/3rd-party/youtube.html" %}
+  {% endwith %}
+{%- endmacro %}
+
+{% macro mailchimp(content, details) -%}
+  {% with content=content, details=details %}
+    {% include "macros/3rd-party/mailchimp.html" %}
+  {% endwith %}
+{%- endmacro %}
+
+{% macro plausible() -%}
+  {% include "macros/3rd-party/plausible.html" %}
+{%- endmacro %}

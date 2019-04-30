@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html><head>
+{%- from 'macros/head.html' import favicon, app_info -%}
+{%- from 'macros/3rd-party/index.html' import plausible -%}
+<!doctype html><html><head>
+
     {% set title = page.search_results_title %}
     {% set description = page.search_results_description %}
     <meta charset="UTF-8" />
@@ -10,8 +12,8 @@
     <meta name="theme-color" content="#3D5E57">
 
     {% include 'macros/social.html' %}
-    {% from 'macros/favicon.html' import favicon %}
     {{ favicon() }}
+    {{ app_info() }}
 
     <link href="{{ url_for('static', filename='auth.css') }}" rel="stylesheet" type="text/css" />
 
@@ -67,6 +69,7 @@
     {% endif %}
 
     {% block head %}{% endblock %}
+    {{ plausible() }}
 </head><body>
     {{ svg_sprite | safe }}
 
@@ -102,8 +105,5 @@
         {% include 'shared/footer.html' %}
     </section>
 
-    {% block footer %}
-        {% from 'macros/3rd-party.html' import google_analytics %}
-        {{ google_analytics( ga_id ) }}
-    {% endblock %}
+    {% block footer %}{% endblock %}
 </body></html>

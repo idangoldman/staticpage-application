@@ -1,0 +1,21 @@
+<form action="https://{{ details.url }}/subscribe/post?u={{ details.user_id }}&amp;id={{ details.list_id }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="row validate" target="_blank" novalidate>
+  <div class="xsmall-12 small-9 column">
+    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="{{ content.placeholder }}">
+  </div>
+  <div class="xsmall-12 small-3 column">
+    <input type="submit" class="btn-primary with-full-width" value="{{ content.submit }}" name="subscribe" id="mc-embedded-subscribe">
+  </div>
+  <div class="xsmall-12 column">
+    <div id="mce-responses" class="clear">
+      <div class="response" id="mce-error-response" style="display:none"></div>
+      <div class="response" id="mce-success-response" style="display:none"></div>
+    </div>
+  </div>
+  <div class="dead-pixel" aria-hidden="true">
+    <input type="text" name="{{ details.antispam_field_name }}" tabindex="-1" value="">
+  </div>
+</form>
+
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+<script type='text/javascript'>(function($) {window.fnames = new Array();window.ftypes = new Array();fnames[0] = 'EMAIL';ftypes[0] = 'email';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+<!--End mc_embed_signup-->

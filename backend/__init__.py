@@ -12,7 +12,12 @@ login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 
 def create_app( config_name ):
-    app = Flask(__name__, template_folder='../templates', static_folder='../static')
+    app = Flask(
+      __name__,
+      template_folder='../templates',
+      static_url_path='',
+      static_folder='../static'
+    )
     app.config.from_object(config_name)
 
     CORS(app)
@@ -23,9 +28,6 @@ def create_app( config_name ):
     mail.init_app(app)
 
     with app.app_context():
-        from backend.website import website as website_blueprint
-        app.register_blueprint( website_blueprint )
-
         from backend.helpers import jinja
         from backend import routes
 

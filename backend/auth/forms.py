@@ -37,3 +37,7 @@ class ForgotPasswordForm(FlaskForm):
 class ResetPasswordForm(FlaskForm):
     new_password = PasswordField('New Password', validators=[Required()])
     submit = SubmitField('Reset Password')
+
+class NewsletterForm( FlaskForm ):
+    email = StringField('email', [ Required(), Email('Please enter your email address.') ])
+    submit = SubmitField('Keep me posted!')

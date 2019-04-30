@@ -1,0 +1,14 @@
+{% macro favicon() -%}
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+  <!-- favicon.ico placed in the root directory -->
+{%- endmacro %}
+
+
+{% macro app_info() -%}
+  {#
+    <meta name="msapplication-config" content="none"/>
+    <link rel="manifest" href="site.webmanifest">
+  #}
+  <meta name="theme-color" content="#802efb">
+{%- endmacro %}

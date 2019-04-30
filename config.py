@@ -14,9 +14,11 @@ class Config( object ):
 
     # 3rd Party
     # TODO: make them part of DB table - page
-    GOOGLE_ANALYTICS_ID = os.environ['GOOGLE_ANALYTICS_ID']
+    MAILCHIMP_ANTISPAM_FIELD_NAME = os.environ['MAILCHIMP_ANTISPAM_FIELD_NAME']
     MAILCHIMP_API_KEY = os.environ['MAILCHIMP_API_KEY']
+    MAILCHIMP_FORM_URL = os.environ['MAILCHIMP_FORM_URL']
     MAILCHIMP_LIST_ID = os.environ['MAILCHIMP_LIST_ID']
+    MAILCHIMP_USER_ID = os.environ['MAILCHIMP_USER_ID']
     MAILCHIMP_USERNAME = os.environ['MAILCHIMP_USERNAME']
 
     # MAIL

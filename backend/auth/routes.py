@@ -62,7 +62,6 @@ def register():
 
     payload = {
         'form': form,
-        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone(request.user_agent),
         'page': get_page_stub('auth/register/page'),
         'side_kick': side_kick,
@@ -97,7 +96,6 @@ def login():
 
     payload = {
         'form': form,
-        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone(request.user_agent),
         'page': get_page_stub('auth/login/page'),
         'side_kick': side_kick
@@ -110,7 +108,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('website.welcome'))
+    return redirect('/')
 
 
 @auth.route('/resend_confirm')
@@ -165,7 +163,6 @@ def forgot_password():
 
     payload = {
         'form': form,
-        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone(request.user_agent),
         'page': get_page_stub('auth/forgot-password/page'),
         'side_kick': side_kick
@@ -201,7 +198,6 @@ def reset_password(token):
     payload = {
         'form': form,
         'token': token,
-        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone(request.user_agent),
         'page': get_page_stub('auth/reset-password/page'),
         'side_kick': side_kick

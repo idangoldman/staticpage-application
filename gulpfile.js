@@ -1,6 +1,5 @@
 var argv = require('yargs').argv,
     autoprefixer = require('autoprefixer'),
-    del = require('del'),
     gulp = require('gulp'),
     imageMin = require('gulp-imagemin'),
     imageMinMozjpeg = require('imagemin-mozjpeg'),
@@ -18,7 +17,7 @@ var destFolder = !! argv.dist ? 'dist' : 'static';
 // Default task with watch
 gulp.task('default');
 
-gulp.task('build', ['webpack', 'style', 'svg-sprite', 'background-images', 'images']);
+gulp.task('build', ['webpack', 'style', 'svg-sprite', 'images', 'favicon']);
 
 gulp.task('w', ['build'], function() {
     gulp.watch('frontend/scss/**/*.scss', ['style']);
@@ -28,9 +27,20 @@ gulp.task('w', ['build'], function() {
 
 // Move favicon and logo images to static/images folder
 gulp.task('images', function() {
-    return gulp.src('**/*.{png,jpg}', { cwd: 'frontend/images' })
-        .pipe( gulp.dest( destFolder + '/images'  ) );
+    const imageSources = [
+      '**/*.{png,jpg,jpeg}',
+      '!favicon/',
+      '!favicon/**'
+    ];
+
+    return gulp.src(imageSources, { cwd: 'frontend/images' })
+        .pipe(gulp.dest(destFolder + '/images'));
 });
+
+gulp.task('favicon', function() {
+  return gulp.src('*', { cwd: 'frontend/images/favicon' })
+      .pipe(gulp.dest(destFolder));
+})
 
 // SVG sprite from set of icons
 gulp.task('svg-sprite', function() {
@@ -57,22 +67,6 @@ gulp.task('svg-sprite', function() {
         .pipe( gulp.dest( destFolder + '/images' ) );
 });
 
-//  Background images optimized
-gulp.task('background-images', function() {
-    var imageResizeConfig = {
-        width: 2000
-    };
-
-    var imageMinPlugins = [
-        imageMinMozjpeg()
-    ];
-
-    return gulp.src('*.jpeg', { cwd: 'frontend/images/backgrounds' })
-        // .pipe( imageResize( imageResizeConfig ) )
-        .pipe( imageMin( imageMinPlugins ) )
-        .pipe( gulp.dest( destFolder + '/images/backgrounds') );
-});
-
 // Sass with autoprefixer :)
 gulp.task('style', function() {
     var sassConfig = {
@@ -87,10 +81,6 @@ gulp.task('style', function() {
         .pipe( sass( sassConfig ).on('error', sass.logError) )
         .pipe( postcss( postCssConfig ) )
         .pipe( gulp.dest( destFolder + '/') )
-});
-
-gulp.task('clean', function() {
-    return del( ['static/**/*', 'dist'] );
 });
 
 //  webpack side kick script
