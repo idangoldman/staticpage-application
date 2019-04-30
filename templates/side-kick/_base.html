@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html><head>
+{%- from 'macros/3rd-party/index.html' import plausible -%}
+<!doctype html><html><head>
 
     <meta charset="UTF-8" />
     <title>It's your friendly side-kick!</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <link href="{{ url_for('static', filename='side-kick.css') }}" rel="stylesheet" type="text/css" />
 
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
-
     {% block head %}{% endblock %}
+    {{ plausible() }}
+
 </head><body>
     {{ svg_sprite | safe }}
 

@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html><head>
+{%- from 'macros/3rd-party/index.html' import plausible -%}
+<!doctype html><html><head>
+
     <meta charset="UTF-8" />
     <title>{{ title }}</title>
     <meta name="description" content="{{ description }}"/>
@@ -9,6 +10,8 @@
     <link type="text/css" rel="stylesheet" class="css-page" href="{{ url_for('static', filename='page.css') }}" />
 
     {% block head %}{% endblock %}
+    {{ plausible() }}
+
 </head><body class="background">
 
     <section class="page">

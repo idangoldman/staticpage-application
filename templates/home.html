@@ -1,18 +1,18 @@
-<!DOCTYPE html>
-<html><head>
+{%- from 'macros/head.html' import favicon, app_info -%}
+{%- from 'macros/3rd-party/index.html' import plausible -%}
+<!doctype html><html><head>
 
     <meta charset="UTF-8" />
     <title>Home > {{ title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <meta name="theme-color" content="#3D5E57">
 
-    {% from 'macros/head.html' import favicon, app_info %}
     {{ favicon() }}
     {{ app_info() }}
 
     <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet" type="text/css" />
 
+    {{ plausible() }}
 </head><body>
     {% if not on_phone %}
         <div class="page-view">
