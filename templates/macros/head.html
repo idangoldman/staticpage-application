@@ -12,3 +12,9 @@
   #}
   <meta name="theme-color" content="#802efb">
 {%- endmacro %}
+
+{% macro social(title, description) -%}
+  {% with title=title, description=description %}
+    {% include "macros/social.html" %}
+  {% endwith %}
+{%- endmacro %}
