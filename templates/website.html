@@ -1,4 +1,4 @@
-{%- from 'macros/head.html' import favicon, app_info -%}
+{%- from 'macros/head.html' import favicon, app_info, social -%}
 {%- from 'macros/3rd-party/index.html' import plausible, youtube, mailchimp -%}
 <!doctype html><html><head>
 
@@ -7,11 +7,11 @@
   <meta name="description" content="{{ page.meta.description }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  {{ favicon() }}
-  {{ app_info() }}
-
   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='website.css') }}" />
 
+  {{ favicon() }}
+  {{ app_info() }}
+  {{ social(page.meta.title, page.meta.description) }}
   {{ plausible() }}
 
 </head><body><div class="container">
