@@ -1,9 +1,9 @@
-<form action="https://{{ mailing_list.mailchimp.url }}/subscribe/post?u={{ mailing_list.mailchimp.user_id }}&amp;id={{ mailing_list.mailchimp.id }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="row validate" target="_blank" novalidate>
+<form action="https://{{ details.url }}/subscribe/post?u={{ details.user_id }}&amp;id={{ details.list_id }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="row validate" target="_blank" novalidate>
   <div class="xsmall-12 small-9 column">
-    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="{{ mailing_list.placeholder }}">
+    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="{{ content.placeholder }}">
   </div>
   <div class="xsmall-12 small-3 column">
-    <input type="submit" class="btn-primary with-full-width" value="{{ mailing_list.submit }}" name="subscribe" id="mc-embedded-subscribe">
+    <input type="submit" class="btn-primary with-full-width" value="{{ content.submit }}" name="subscribe" id="mc-embedded-subscribe">
   </div>
   <div class="xsmall-12 column">
     <div id="mce-responses" class="clear">
@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="dead-pixel" aria-hidden="true">
-    <input type="text" name="{{ mailing_list.mailchimp.text_field_name }}" tabindex="-1" value="">
+    <input type="text" name="{{ details.antispam_field_name }}" tabindex="-1" value="">
   </div>
 </form>
 

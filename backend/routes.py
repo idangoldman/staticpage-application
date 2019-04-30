@@ -14,8 +14,13 @@ def index_route():
         return redirect(url_for('home'))
     else:
         payload = {
-            'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
-            'page': get_page_stub('website')
+            'page': get_page_stub('website'),
+            'mailchimp_details': {
+              "list_id": current_app.config['MAILCHIMP_LIST_ID'],
+              "user_id": current_app.config['MAILCHIMP_USER_ID'],
+              "url": current_app.config['MAILCHIMP_FORM_URL'],
+              "antispam_field_name": current_app.config['MAILCHIMP_ANTISPAM_FIELD_NAME']
+            }
         }
 
         return render_template('website.html', **payload)
@@ -120,7 +125,6 @@ def home(site_name, page_name):
       page = current_user.pages.first()
 
     payload = {
-        'ga_id': current_app.config['GOOGLE_ANALYTICS_ID'],
         'on_phone': is_phone( request.user_agent ),
         'page_id': page.id,
         'site_name': current_user.site_name,

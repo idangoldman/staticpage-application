@@ -10,8 +10,8 @@
   {% endwith %}
 {%- endmacro %}
 
-{% macro mailchimp(mailing_list) -%}
-  {% with mailing_list=mailing_list %}
+{% macro mailchimp(content, details) -%}
+  {% with content=content, details=details %}
     {% include "macros/3rd-party/mailchimp.html" %}
   {% endwith %}
 {%- endmacro %}
