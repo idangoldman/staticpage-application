@@ -4613,9 +4613,9 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
-"kit@git+ssh://git@gitlab.com:idan.goldman/kit.git#new-version":
-  version "1.0.0"
-  resolved "git+ssh://git@gitlab.com:idan.goldman/kit.git#e6e91ea714ef683e4a795b01afaf18fed1280b44"
+"kit@git+ssh://git@gitlab.com:idan.goldman/kit.git#0.0.2":
+  version "0.0.2"
+  resolved "git+ssh://git@gitlab.com:idan.goldman/kit.git#9904d15287444b5ba83cd48b8db7f52b1317a281"
 
 klaw@^1.0.0:
   version "1.3.1"
