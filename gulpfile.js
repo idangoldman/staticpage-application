@@ -1,13 +1,9 @@
 var argv = require('yargs').argv,
     autoprefixer = require('autoprefixer'),
     gulp = require('gulp'),
-    imageMin = require('gulp-imagemin'),
-    imageMinMozjpeg = require('imagemin-mozjpeg'),
-    imageResize = require('gulp-image-resize'),
     postcss = require('gulp-postcss'),
     rename = require('gulp-rename'),
     sass = require('gulp-sass'),
-    size = require('gulp-size'),
     svgSprite = require('gulp-svg-sprite'),
     webpack = require('webpack-stream'),
     webpackConfig = require('./webpack.config.js');
