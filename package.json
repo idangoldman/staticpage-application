@@ -11,7 +11,7 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "start": "pipenv run sh start.sh",
+    "start": "pipenv run sh python manage.py runserver",
     "db:migrate": "pipenv run python manage.py db migrate",
     "db:upgrade": "pipenv run python manage.py db upgrade",
     "db:downgrade": "pipenv run python manage.py db downgrade",
