@@ -40,7 +40,7 @@ def zip_a_page( markup, dest_path, page ):
 
         link['href'] = new_path
         file_paths.append({
-            'original': path_builder( current_app.config['BASE_PATH'], original_path ),
+            'original': path_builder( current_app.config['BASE_PATH'], 'static', original_path ),
             'new': path_builder( archive_root, new_path )
         })
 
