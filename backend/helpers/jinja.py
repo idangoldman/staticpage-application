@@ -1,7 +1,9 @@
-from flask import current_app
+from flask import current_app, request
 from jinja2 import evalcontextfilter, Markup, escape
 import markdown as markdown_lib
 import re, jinja2, os
+
+from backend.helpers import is_phone
 
 
 # images
@@ -10,6 +12,14 @@ images = jinja2.ChoiceLoader([
     jinja2.FileSystemLoader('frontend/images')
 ])
 current_app.jinja_loader = images
+
+# template variables
+@current_app.context_processor
+def template_variables():
+  return dict(
+    sentry_dsn = os.environ['SENTRY_DSN_JAVASCRIPT'],
+    on_phone = is_phone(request.user_agent)
+  )
 
 # markdown
 @current_app.template_filter()

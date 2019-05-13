@@ -48,6 +48,7 @@ WTForms = "==2.1"
 "psycopg2-binary" = "==2.7.5"
 gunicorn = "*"
 "boto3" = "*"
+sentry-sdk = {extras = ["flask"],version = "==0.7.14"}
 
 [dev-packages]
 

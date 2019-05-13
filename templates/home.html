@@ -1,5 +1,5 @@
 {%- from 'macros/head.html' import favicon, app_info -%}
-{%- from 'macros/3rd-party/index.html' import plausible -%}
+{%- from 'macros/3rd-party/index.html' import plausible, sentry -%}
 <!doctype html><html><head>
 
     <meta charset="UTF-8" />
@@ -12,6 +12,7 @@
 
     <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet" type="text/css" />
 
+    {{ sentry(sentry_dsn) }}
     {{ plausible() }}
 </head><body>
     {% if not on_phone %}

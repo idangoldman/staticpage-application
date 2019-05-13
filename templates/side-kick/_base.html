@@ -1,4 +1,4 @@
-{%- from 'macros/3rd-party/index.html' import plausible -%}
+{%- from 'macros/3rd-party/index.html' import plausible, sentry -%}
 <!doctype html><html><head>
 
     <meta charset="UTF-8" />
@@ -7,6 +7,7 @@
 
     <link href="{{ url_for('static', filename='side-kick.css') }}" rel="stylesheet" type="text/css" />
 
+    {{ sentry(sentry_dsn) }}
     {% block head %}{% endblock %}
     {{ plausible() }}
 

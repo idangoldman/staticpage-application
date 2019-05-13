@@ -1,5 +1,5 @@
 {%- from 'macros/head.html' import favicon, app_info, social -%}
-{%- from 'macros/3rd-party/index.html' import plausible -%}
+{%- from 'macros/3rd-party/index.html' import plausible, sentry -%}
 <!doctype html><html><head>
 
     {% set title = page.search_results_title %}
@@ -69,6 +69,7 @@
     </style>
     {% endif %}
 
+    {{ sentry(sentry_dsn) }}
     {% block head %}{% endblock %}
     {{ plausible() }}
 </head><body>

@@ -19,3 +19,9 @@
 {% macro plausible() -%}
   {% include "macros/3rd-party/plausible.html" %}
 {%- endmacro %}
+
+{% macro sentry(dsn) -%}
+  {% with dsn=dsn %}
+    {% include "macros/3rd-party/sentry.html" %}
+  {% endwith %}
+{%- endmacro %}
