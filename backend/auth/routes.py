@@ -6,7 +6,7 @@ import random
 from backend import db, mail
 from backend.auth import auth
 from backend.auth.forms import RegisterForm, LoginForm, ForgotPasswordForm, ResetPasswordForm
-from backend.helpers import get_a_template, get_a_stub, get_page_stub, is_phone, timed_url_safe, md5_identifier
+from backend.helpers import get_a_template, get_a_stub, get_page_stub, timed_url_safe, md5_identifier
 from backend.helpers.constants import TEMPLATE_NAMES
 from backend.models.page import Page
 from backend.models.user import User
@@ -62,7 +62,6 @@ def register():
 
     payload = {
         'form': form,
-        'on_phone': is_phone(request.user_agent),
         'page': get_page_stub('auth/register/page'),
         'side_kick': side_kick,
         'svg_sprite': svg_sprite
@@ -96,7 +95,6 @@ def login():
 
     payload = {
         'form': form,
-        'on_phone': is_phone(request.user_agent),
         'page': get_page_stub('auth/login/page'),
         'side_kick': side_kick
     }
@@ -163,7 +161,6 @@ def forgot_password():
 
     payload = {
         'form': form,
-        'on_phone': is_phone(request.user_agent),
         'page': get_page_stub('auth/forgot-password/page'),
         'side_kick': side_kick
     }
@@ -198,7 +195,6 @@ def reset_password(token):
     payload = {
         'form': form,
         'token': token,
-        'on_phone': is_phone(request.user_agent),
         'page': get_page_stub('auth/reset-password/page'),
         'side_kick': side_kick
     }

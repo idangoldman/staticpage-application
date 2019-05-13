@@ -1,4 +1,4 @@
-{%- from 'macros/3rd-party/index.html' import plausible -%}
+{%- from 'macros/3rd-party/index.html' import plausible, sentry -%}
 <!doctype html><html><head>
 
     <meta charset="UTF-8" />
@@ -9,6 +9,7 @@
 
     <link type="text/css" rel="stylesheet" class="css-page" href="{{ url_for('static', filename='page.css') }}" />
 
+    {{ sentry(sentry_dsn) }}
     {% block head %}{% endblock %}
     {{ plausible() }}
 

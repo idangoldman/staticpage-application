@@ -1,7 +1,7 @@
 from flask import render_template, current_app, json, send_from_directory, make_response, request, redirect, url_for, flash
 from flask_login import login_required, current_user
 
-from backend.helpers import path_builder, is_phone, get_page_stub, get_a_stub
+from backend.helpers import path_builder, get_page_stub, get_a_stub
 from backend.models.page import Page
 from backend.models.user import User
 from backend.third_party import mailchimp_subscribe
@@ -125,7 +125,6 @@ def home(site_name, page_name):
       page = current_user.pages.first()
 
     payload = {
-        'on_phone': is_phone( request.user_agent ),
         'page_id': page.id,
         'site_name': current_user.site_name,
         'title': page.content_title
@@ -162,7 +161,6 @@ def side_kick(page_id):
         'manage_pages': manage_pages,
         'features': page_with_features.get('features'),
         'is_email_confirmed': current_user.email_confirmed,
-        'on_phone': is_phone(request.user_agent),
         'page_update_url': current_app.config['API_URL'] + '/page/update/' + str(page_id),
         'site_download_url': current_app.config['API_URL'] + '/download/' + current_user.site_name + '/' + page_with_features.get('page').get('name'),
         'page_manage_url': current_app.config['API_URL'] + '/page_manage/' + current_user.site_name,
@@ -187,7 +185,6 @@ def side_kick_new_page():
         'svg_sprite': svg_sprite,
         'page': new_page,
         'is_email_confirmed': current_user.email_confirmed,
-        'on_phone': is_phone(request.user_agent),
         'page_manage_url': current_app.config['API_URL'] + '/page_manage/' + current_user.site_name,
     }
 

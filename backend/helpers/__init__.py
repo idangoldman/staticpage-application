@@ -35,10 +35,7 @@ def path_slicer(path, slice_path):
 
 
 def is_phone(user_agent):
-    with open('backend/stubs/ua_detect.json', 'r') as json_file:
-        ua_stub = json.load( json_file )
-        ua_phone = ua_stub['uaMatch']['phones']
-
+    ua_phone = get_a_stub('ua_detect')['uaMatch']['phones']
     detected_phone = None
 
     for phone, regex in ua_phone.iteritems():

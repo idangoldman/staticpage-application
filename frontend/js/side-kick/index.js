@@ -1,5 +1,3 @@
-// import 'side-kick/storage';
-
 import './helpers/api-calls';
 import './helpers/post-messaging';
 
