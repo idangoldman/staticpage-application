@@ -1,23 +1,23 @@
 {
   "name": "staticpage",
-  "version": "2.5.9",
+  "version": "2.6.0",
   "repository": {
     "type": "git",
     "url": "git@gitlab.com:idan.goldman/staticpage.git"
   },
   "license": "UNLICENSED",
   "private": true,
+  "engines": {
+    "node": "10.16.0"
+  },
   "scripts": {
     "start": "pipenv run sh start.sh",
     "db:migrate": "pipenv run python manage.py db migrate",
     "db:upgrade": "pipenv run python manage.py db upgrade",
     "db:downgrade": "pipenv run python manage.py db downgrade",
     "watch": "gulp w",
-    "lint": "eslint frontend/js",
-    "lint-fix": "yarn lint --fix",
     "back:reinstall": "pipenv --rm && pipenv install",
-    "front:reinstall": "rm -fr node_modules && yarn install",
-    "kit:reinstall": "yarn remove kit; yarn add --dev \"git+ssh://git@gitlab.com:idan.goldman/kit.git#0.0.2\""
+    "front:reinstall": "rm -fr node_modules && yarn install"
   },
   "dependencies": {
     "air-datepicker": "2.2.3",
@@ -31,24 +31,15 @@
     "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
     "babel-preset-es2015": "6.22.0",
-    "eslint": "^5.9.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-import-resolver-webpack": "^0.10.1",
-    "eslint-plugin-import": "^2.14.0",
     "exports-loader": "0.6.3",
     "gulp": "3.9.1",
-    "gulp-image-resize": "0.12.0",
-    "gulp-imagemin": "3.1.1",
     "gulp-postcss": "6.3.0",
     "gulp-rename": "1.2.2",
     "gulp-sass": "3.1.0",
-    "gulp-size": "2.1.0",
     "gulp-svg-sprite": "1.3.6",
     "gulp-uglify": "2.0.1",
-    "imagemin-mozjpeg": "6.0.0",
     "imports-loader": "^0.8.0",
     "install": "0.8.7",
-    "kit": "git+ssh://git@gitlab.com:idan.goldman/kit.git#0.0.2",
     "npm": "4.1.2",
     "npm-check-updates": "^3.1.4",
     "nunjucks": "3.0.0",
