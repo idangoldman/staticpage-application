@@ -9,25 +9,12 @@ from backend.auth.forms import NewsletterForm
 
 
 @current_app.route('/')
-def index_route():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    else:
-        payload = {
-            'page': get_page_stub('website'),
-            'mailchimp_details': {
-              "list_id": current_app.config['MAILCHIMP_LIST_ID'],
-              "user_id": current_app.config['MAILCHIMP_USER_ID'],
-              "url": current_app.config['MAILCHIMP_FORM_URL'],
-              "antispam_field_name": current_app.config['MAILCHIMP_ANTISPAM_FIELD_NAME']
-            }
-        }
-
-        return render_template('website.html', **payload)
-
 @current_app.route('/welcome')
 def welcome_route():
-    return redirect('/')
+  if current_user.is_authenticated:
+    return redirect(url_for('home'))
+  else:
+    return redirect('/login')
 
 
 @current_app.route('/page_intervention/<int:page_id>', methods=['GET', 'POST'])
@@ -55,7 +42,6 @@ def page_intervention(page_id):
                 return redirect(payload.get('mailing_list_redirect_url'))
 
     return render_template('page/index.html', **payload)
-
 
 @current_app.route('/preview/<site_name>/<page_name>')
 @login_required
@@ -114,7 +100,6 @@ def page_preview_download(site_name, page_name):
 
     return render_template( 'page/index.html', **payload )
 
-
 @current_app.route('/home/', defaults={'site_name': None, 'page_name': None})
 @current_app.route('/home/<site_name>/<page_name>')
 @login_required
@@ -131,7 +116,6 @@ def home(site_name, page_name):
     }
 
     return make_response(render_template('home.html', **payload))
-
 
 @current_app.route('/side-kick/<int:page_id>')
 @login_required
@@ -196,24 +180,20 @@ def page_unauthorized(e):
     return render_template('errors.html', \
                             page=get_page_stub('errors/500')), 401
 
-
 @current_app.errorhandler(403)
 def page_forbidden(e):
     return render_template('errors.html', \
                             page=get_page_stub('errors/500')), 403
-
 
 @current_app.errorhandler(404)
 def page_not_found(e):
     return render_template('errors.html', \
                             page=get_page_stub('errors/404')), 404
 
-
 @current_app.errorhandler(500)
 def page_internal_server_error(e):
     return render_template('errors.html', \
                             page=get_page_stub('errors/500')), 500
-
 
 @current_app.errorhandler(503)
 def page_service_unavailable(e):
